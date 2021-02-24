@@ -115,7 +115,7 @@
                             FontFamily="DIN Pro Regular"
                             FontSize="14"
                             ItemsSource="{Binding TargetTypeWithCaptions}"
-                            SelectedValue="{Binding TargetValue}"
+                            SelectedValue="{Binding Target}"
                             SelectedValuePath="Key" />
                     </Grid>
                 </Border>

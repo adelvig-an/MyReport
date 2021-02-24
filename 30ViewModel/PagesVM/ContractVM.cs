@@ -22,8 +22,7 @@ namespace _30ViewModel.PagesVM
         #region Properties (Нужны для валидации данных)
         private string number;
         private DateTime contractDate = DateTime.Today;
-        private string target;
-        private TargetType targetValue;
+        private TargetType target;
         private string intendedUse;
         public int Id { get; set; }
         [Required(ErrorMessage = "Требуется указать номер договора")]
@@ -33,10 +32,8 @@ namespace _30ViewModel.PagesVM
         [Required(ErrorMessage = "Требуется указать дату договора")]
         public DateTime ContractDate { get => contractDate;
             set { ValidateProperty(value); SetProperty(ref contractDate, value); } }
-        public string Target { get => target;
+        public TargetType Target { get => target;
             set { ValidateProperty(value); SetProperty(ref target, value); } }
-        public TargetType TargetValue { get => targetValue;
-            set { ValidateProperty(value); SetProperty(ref targetValue, value); } }
         [Required(ErrorMessage = "Требуется указать предполагаемое использование результатов оценки")]
         public string IntendedUse { get => intendedUse;
             set { ValidateProperty(value); SetProperty(ref intendedUse, value); } }
@@ -48,7 +45,7 @@ namespace _30ViewModel.PagesVM
                 { TargetType.MarketValue, "Рыночная стоимость" },
                 { TargetType.MarketAndLiquidationValue, "Рыночная и ликвидационная стоимость" },
                 { TargetType.LiquidationValue, "Ликвидационная стоимость" },
-                { TargetType.InvestmentValue, "Инвистиционная стоимость" }
+                { TargetType.InvestmentValue, "Инвестиционная стоимость" }
             };
 
         private readonly ApplicationContext context;
@@ -64,7 +61,7 @@ namespace _30ViewModel.PagesVM
                 Id = Id,
                 Number = Number,
                 ContractDate = ContractDate,
-                Target = (_10Model.TargetType)TargetValue,
+                Target = (_10Model.TargetType)Target,
                 IntendedUse = IntendedUse
             };
             return contract;

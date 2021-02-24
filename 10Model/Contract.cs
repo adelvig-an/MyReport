@@ -13,7 +13,7 @@ namespace _10Model
         MarketAndLiquidationValue = 1,
         [Description("Ликвидационная стоимость")]
         LiquidationValue = 2,
-        [Description("Инвистиционная стоимость")]
+        [Description("Инвестиционная стоимость")]
         InvestmentValue = 3,
     }
     public class Contract
