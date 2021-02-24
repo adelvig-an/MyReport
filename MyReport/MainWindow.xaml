@@ -1,0 +1,25 @@
+﻿<Window
+    x:Class="MyReport.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyReport"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="clr-namespace:MyReport.Ui"
+    xmlns:vm="clr-namespace:_30ViewModel.PagesVM;assembly=30ViewModel"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:ReportVM}">
+            <ui:ReportUi />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ContractVM}">
+            <ui:ContractUi />
+        </DataTemplate>
+    </Window.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ContentControl Content="{Binding CurrentPage}" />
+    </ScrollViewer>
+</Window>

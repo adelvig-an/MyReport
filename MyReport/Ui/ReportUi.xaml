@@ -1,0 +1,179 @@
+﻿<UserControl
+    x:Class="MyReport.Ui.ReportUi"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyReport.Ui"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border
+            Grid.Row="0"
+            Height="98"
+            Margin="0,8"
+            Background="Black">
+            <Border Margin="16,0">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Style="{StaticResource ResourceKey=StyleDesignHeadline6TextBlock}"
+                    Text="Реквизиты отчета об оценке" />
+            </Border>
+        </Border>
+        <Border Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="8,0"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ResourceKey=StyleDesignSubtitle2TextBlock}"
+                            Text="Номер отчета" />
+                        <TextBox
+                            Grid.Column="1"
+                            Height="32"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14"
+                            Text="{Binding Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <StackPanel
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Margin="8">
+                                    <TextBlock
+                                        Margin="0,0,0,4"
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource ResourceKey=StyleDesignTextBlock}"
+                                        Text="Дата оценки" />
+                                    <DatePicker
+                                        Width="120"
+                                        Height="32"
+                                        Margin="0,4,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalContentAlignment="Center"
+                                        FontFamily="DIN Pro Regular"
+                                        FontSize="14"
+                                        SelectedDate="{Binding VulationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Margin="8">
+                                    <TextBlock
+                                        Margin="0,0,0,4"
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource ResourceKey=StyleDesignTextBlock}"
+                                        Text="Дата составления отчета" />
+                                    <DatePicker
+                                        Width="120"
+                                        Height="32"
+                                        Margin="0,4,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalContentAlignment="Center"
+                                        FontFamily="DIN Pro Regular"
+                                        FontSize="14"
+                                        SelectedDate="{Binding CompilationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="8">
+                                    <TextBlock
+                                        Margin="0,0,0,4"
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource ResourceKey=StyleDesignTextBlock}"
+                                        Text="Дата осмотра" />
+                                    <DatePicker
+                                        Width="120"
+                                        Height="32"
+                                        Margin="0,4,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalContentAlignment="Center"
+                                        FontFamily="DIN Pro Regular"
+                                        FontSize="14"
+                                        SelectedDate="{Binding InspectionDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="8,0"
+                            VerticalAlignment="Top"
+                            Style="{StaticResource ResourceKey=StyleDesignTextBlock}"
+                            Text="Особенности проведения осмотра"
+                            TextWrapping="Wrap" />
+                        <TextBox
+                            Grid.Column="1"
+                            Height="92"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Top"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14"
+                            Text="{Binding InspectionFeaures, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                            TextWrapping="Wrap" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Row="2" Margin="0,8">
+            <Button
+                Padding="16,8"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding DataContext.SaveData, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                Content="Сохранить"
+                FontFamily="DIN Pro Medium"
+                FontSize="16" />
+        </Border>
+    </Grid>
+</UserControl>
