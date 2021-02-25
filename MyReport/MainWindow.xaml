@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:MyReport"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="clr-namespace:MyReport.Ui"
+    xmlns:uiCust="clr-namespace:MyReport.Ui.CustomerUi"
     xmlns:vm="clr-namespace:_30ViewModel.PagesVM;assembly=30ViewModel"
     Title="MainWindow"
     Width="800"
@@ -17,6 +18,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:ContractVM}">
             <ui:ContractUi />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PrivatePersonVM}">
+            <uiCust:PrivatePersonUi />
         </DataTemplate>
     </Window.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">

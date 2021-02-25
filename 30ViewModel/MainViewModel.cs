@@ -23,7 +23,10 @@ namespace _30ViewModel
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
             db.Reports.Load();
-            CurrentPage = new ContractVM();
+            db.Contracts.Load();
+            db.People.Load();
+            db.PrivatePeople.Load();
+            CurrentPage = new PrivatePersonVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
         }
         /// <summary>

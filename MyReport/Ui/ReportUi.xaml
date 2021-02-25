@@ -37,7 +37,7 @@
                 <Border Grid.Row="0" Margin="0,8">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="200" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock
@@ -61,7 +61,7 @@
                 <Border Grid.Row="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="200" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
@@ -140,7 +140,7 @@
                 <Border Grid.Row="2" Margin="0,8">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="200" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock
@@ -166,6 +166,7 @@
             </Grid>
         </Border>
         <Border Grid.Row="2" Margin="0,8">
+            <!--  Только для теста! Удалить!  -->
             <Button
                 Padding="16,8"
                 HorizontalAlignment="Center"

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using _10Model;
+using _10Model.Customer;
 
 namespace _20DbLayer
 {
@@ -10,6 +11,8 @@ namespace _20DbLayer
     {
         public DbSet<Report> Reports { get; set; }
         public DbSet<Contract> Contracts { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<PrivatePerson> PrivatePeople { get; set; }
 
         protected override void OnConfiguring (DbContextOptionsBuilder options)
         {
@@ -20,6 +23,9 @@ namespace _20DbLayer
 
         protected override void OnModelCreating(ModelBuilder model)
         {
+            model.Entity<Person>().ToTable("People");
+            model.Entity<PrivatePerson>().ToTable("PrivatePersons");
+
             model.Entity<Contract>()
                .Property(e => e.Target)
                .HasConversion(v => v.ToString(),
