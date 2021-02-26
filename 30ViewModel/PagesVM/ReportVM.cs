@@ -39,6 +39,8 @@ namespace _30ViewModel.PagesVM
         {
             context = new ApplicationContext();
         }
+
+        #region DataBase (Методы и свойства взаимодействующие с Базой данных)
         /// <summary>
         /// Метод преобразования свойст класса ReportVM в свойства Model.Report
         /// </summary>
@@ -94,5 +96,6 @@ namespace _30ViewModel.PagesVM
                 return false;
             }
         }
+        #endregion DataBase
     }
 }
