@@ -9,20 +9,11 @@ using System.Text;
 
 namespace _30ViewModel.PagesVM
 {
-    public enum TargetType
-    {
-        MarketValue = 0,
-        MarketAndLiquidationValue = 1,
-        LiquidationValue = 2,
-        InvestmentValue = 3,
-    }
-
     public class ContractVM : PageViewModel
     {
         #region Properties (Нужны для валидации данных)
         private string number;
         private DateTime contractDate = DateTime.Today;
-        private TargetType target;
         private string intendedUse;
         public int Id { get; set; }
         [Required(ErrorMessage = "Требуется указать номер договора")]
@@ -32,21 +23,10 @@ namespace _30ViewModel.PagesVM
         [Required(ErrorMessage = "Требуется указать дату договора")]
         public DateTime ContractDate { get => contractDate;
             set { ValidateProperty(value); SetProperty(ref contractDate, value); } }
-        public TargetType Target { get => target;
-            set { ValidateProperty(value); SetProperty(ref target, value); } }
         [Required(ErrorMessage = "Требуется указать предполагаемое использование результатов оценки")]
         public string IntendedUse { get => intendedUse;
             set { ValidateProperty(value); SetProperty(ref intendedUse, value); } }
         #endregion Properties
-
-        public Dictionary<TargetType, string> TargetTypeWithCaptions { get; } =
-            new Dictionary<TargetType, string>()
-            {
-                { TargetType.MarketValue, "Рыночная стоимость" },
-                { TargetType.MarketAndLiquidationValue, "Рыночная и ликвидационная стоимость" },
-                { TargetType.LiquidationValue, "Ликвидационная стоимость" },
-                { TargetType.InvestmentValue, "Инвестиционная стоимость" }
-            };
 
         private readonly ApplicationContext context;
         public ContractVM()
@@ -61,7 +41,7 @@ namespace _30ViewModel.PagesVM
                 Id = Id,
                 Number = Number,
                 ContractDate = ContractDate,
-                Target = (_10Model.TargetType)Target,
+                
                 IntendedUse = IntendedUse
             };
             return contract;
