@@ -2,9 +2,13 @@
     x:Class="MyReport.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convEmun="clr-namespace:MyReport.Converters"
     xmlns:local="clr-namespace:MyReport"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
+
+        <convEmun:EnumConverter x:Key="EnumConverter"/>
+
         <Style x:Key="StyleDesignTextBlock" TargetType="TextBlock">
             <Setter Property="Padding" Value="0,4" />
             <Setter Property="FontSize" Value="14" />
