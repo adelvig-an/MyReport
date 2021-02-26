@@ -26,7 +26,7 @@ namespace _30ViewModel
             db.Contracts.Load();
             db.People.Load();
             db.PrivatePeople.Load();
-            CurrentPage = new PrivatePersonVM();
+            CurrentPage = new ContractVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
         }
         /// <summary>
