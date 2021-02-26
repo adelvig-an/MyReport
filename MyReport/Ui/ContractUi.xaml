@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MyReport.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:conv="clr-namespace:MyReport.Converters"
     xmlns:model="clr-namespace:_10Model;assembly=10Model"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -115,8 +116,8 @@
                             DisplayMemberPath="Value"
                             FontFamily="DIN Pro Regular"
                             FontSize="14"
-                            ItemsSource="{Binding Target}"
-                            SelectedValue="{Binding model.TargetType, Converter={StaticResource EnumConverter}, ConverterParameter={Binding}}" />
+                            ItemsSource="{Binding Source={conv:EnumToItemsSource {x:Type model:TargetType}}}"
+                            SelectedValue="{Binding Target, Converter={StaticResource EnumConverter}}" />
                     </Grid>
                 </Border>
                 <Border Grid.Row="3" Margin="8">
