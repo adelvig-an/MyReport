@@ -131,10 +131,14 @@ namespace _30ViewModel.PagesVM
         #endregion DataBase
 
         #region AutoCompleteAddress (Подсказки адреса)
-        private Address selectedAddress;
-        public Address SelectedAddress { get => selectedAddress;
-            set { if (SetProperty(ref selectedAddress, value))
-                    FillAddressRegistration(selectedAddress); } }
+        private Address selectedAddressRegistration;
+        private Address selectedAddressActual;
+        public Address SelectedAddressRegistration { get => selectedAddressRegistration;
+            set { if (SetProperty(ref selectedAddressRegistration, value))
+                    FillAddressRegistration(selectedAddressRegistration); } }
+        public Address SelectedAddressActual { get => selectedAddressActual; 
+            set { if (SetProperty(ref selectedAddressActual, value))
+                    FillAddressActual(selectedAddressActual); } }
         public void FillAddressRegistration(Address address) => AddressRegistration = address?.AddressFull;
         public void FillAddressActual(Address address) => AddressActual = address?.AddressFull;
         #endregion AutoCompleteAddress
