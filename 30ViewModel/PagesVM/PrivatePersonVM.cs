@@ -93,7 +93,9 @@ namespace _30ViewModel.PagesVM
                 Serial = Serial,
                 Number = Number,
                 Division = Division,
-                DivisionDate = DivisionDate
+                DivisionDate = DivisionDate,
+                AddressRegistration = SelectedAddressRegistration,
+                AddressActual = SelectedAddressActual
             };
             return privatePerson;
         }
@@ -130,7 +132,7 @@ namespace _30ViewModel.PagesVM
         }
         #endregion DataBase
 
-        #region AutoCompleteAddress (Подсказки адреса)
+        #region AutoCompleteAddress (Подсказки заполнения адреса)
         private Address selectedAddressRegistration;
         private Address selectedAddressActual;
         public Address SelectedAddressRegistration { get => selectedAddressRegistration;

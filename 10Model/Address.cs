@@ -1,4 +1,8 @@
-﻿namespace _10Model
+﻿using _10Model.Customer;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace _10Model
 {
     public class Address
     {
@@ -48,5 +52,10 @@
         public string FlatType { get; set; } //Тип квартиры (сокращенный)
         public string FlatTypeFull { get; set; } //Тип квартиры
         public string Flat { get; set; } //Квартиры
+
+        [InverseProperty("AddressRegistration")]
+        public virtual ICollection<PrivatePerson> AddressesRegistrationPrivatePerson { get; set; }
+        [InverseProperty("AddressActual")]
+        public virtual ICollection<PrivatePerson> AddressesActualPrivatePerson { get; set; }
     }
 }

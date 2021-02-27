@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MyReport.Ui.CustomerUi"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="650"
+    d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.Resources>
@@ -226,7 +226,7 @@
                             FontSize="14"
                             ItemTemplate="{StaticResource ResourceKey=AddressItemTemplate}"
                             Provider="{StaticResource ResourceKey=AddressSuggestionProvider}"
-                            SelectedItem="{Binding SelectedAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding SelectedAddressRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Text="{Binding AddressRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                         <CheckBox
                             Margin="0,8"
@@ -252,7 +252,7 @@
                             IsEnabled="{Binding IsAddressMatch, Converter={StaticResource InverseBooleanConverter}}"
                             ItemTemplate="{StaticResource ResourceKey=AddressItemTemplate}"
                             Provider="{StaticResource ResourceKey=AddressSuggestionProvider}"
-                            SelectedItem="{Binding SelectedAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding SelectedAddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Text="{Binding AddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                     </StackPanel>
                 </Border>

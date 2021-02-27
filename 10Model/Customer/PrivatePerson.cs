@@ -11,5 +11,7 @@ namespace _10Model.Customer
         public string Division { get; set; } //Кем выдан документ
         //public string DivisionCode { get; set; } //Код подразделения
         public DateTime DivisionDate { get; set; } //Дата выдачи
+        public virtual Address AddressRegistration { get; set; }
+        public virtual Address AddressActual { get; set; }
     }
 }

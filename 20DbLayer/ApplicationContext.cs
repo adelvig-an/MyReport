@@ -13,6 +13,7 @@ namespace _20DbLayer
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<PrivatePerson> PrivatePeople { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         protected override void OnConfiguring (DbContextOptionsBuilder options)
         {
