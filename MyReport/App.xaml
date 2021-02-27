@@ -4,11 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:conv="clr-namespace:MyReport.Converters"
     xmlns:local="clr-namespace:MyReport"
+    xmlns:providers="clr-namespace:MyReport.Providers"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!--  Подключение конвертеров  -->
         <conv:EnumConverter x:Key="EnumConverter" />
         <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+
+        <!--  Подключение провайдеров  -->
+        <providers:AddressSuggestionProvider x:Key="AddressSuggestionProvider" />
         <!--  Стили (Будут перенесены в свой файл)  -->
         <!--  TextBlock  -->
         <Style x:Key="StyleDesignTextBlock" TargetType="TextBlock">

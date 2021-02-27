@@ -1,4 +1,5 @@
-﻿using _10Model.Customer;
+﻿using _10Model;
+using _10Model.Customer;
 using _20DbLayer;
 using System;
 using System.Collections.Generic;
@@ -128,5 +129,14 @@ namespace _30ViewModel.PagesVM
             }
         }
         #endregion DataBase
+
+        #region AutoCompleteAddress (Подсказки адреса)
+        private Address selectedAddress;
+        public Address SelectedAddress { get => selectedAddress;
+            set { if (SetProperty(ref selectedAddress, value))
+                    FillAddressRegistration(selectedAddress); } }
+        public void FillAddressRegistration(Address address) => AddressRegistration = address?.AddressFull;
+        public void FillAddressActual(Address address) => AddressActual = address?.AddressFull;
+        #endregion AutoCompleteAddress
     }
 }

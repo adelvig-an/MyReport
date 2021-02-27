@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoCompleteTextBox" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\10Model\10Model.csproj" />
     <ProjectReference Include="..\20DbLayer\20DbLayer.csproj" />
     <ProjectReference Include="..\30ViewModel\30ViewModel.csproj" />
