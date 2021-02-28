@@ -82,8 +82,13 @@
                                 Margin="0,0,0,4"
                                 Style="{StaticResource StyleDesignTextBlock}"
                                 Text="ИНН" />
-                            <DockPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
                                 <TextBox
+                                    Grid.Column="0"
                                     Height="32"
                                     MinWidth="240"
                                     Margin="0,4,0,0"
@@ -92,8 +97,7 @@
                                     FontSize="14"
                                     Text="{Binding Inn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                 <Viewbox
-                                    Width="18"
-                                    Height="18"
+                                    Grid.Column="1"
                                     Margin="6,0,0,0"
                                     VerticalAlignment="Center"
                                     ToolTip="Поиск организации по ИНН">
@@ -108,7 +112,7 @@
                                             Text="!" />
                                     </Grid>
                                 </Viewbox>
-                            </DockPanel>
+                            </Grid>
                         </StackPanel>
                         <StackPanel Grid.Column="2" Margin="8,0">
                             <TextBlock
@@ -285,7 +289,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
@@ -295,9 +299,10 @@
                                 Style="{StaticResource StyleDesignTextBlock}"
                                 Text="Номер доверенности" />
                             <TextBox
+                                Width="240"
                                 Height="32"
-                                MinWidth="240"
                                 Margin="0,4,0,0"
+                                HorizontalAlignment="Left"
                                 VerticalContentAlignment="Center"
                                 FontFamily="DIN Pro Regular"
                                 FontSize="14"

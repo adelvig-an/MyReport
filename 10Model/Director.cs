@@ -6,11 +6,11 @@ namespace _10Model
 {
     public enum PowerOfAttorneyType
     {
-        [Description("Устав компаниии")]
+        [Description("Устава компании")]
         ArticlesOfAssociation = 0, //Устав компаниии
-        [Description("Доверенность")]
+        [Description("Доверенности")]
         Attorney = 1, //Доверенность
-        [Description("Законоательство")]
+        [Description("Законоательства")]
         Legislation = 2 //Законоательство
     }
     public class Director : Person

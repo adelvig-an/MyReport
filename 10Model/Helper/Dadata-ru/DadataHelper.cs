@@ -1,4 +1,5 @@
-﻿using Dadata;
+﻿using _10Model.Customer;
+using Dadata;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 
@@ -30,7 +31,6 @@ namespace _10Model.Helper.Dadata_ru
                 return false;
             }
         }
-
         public static Address ToAddress(Dadata.Model.Address address)
         {
             return new Address
@@ -80,12 +80,67 @@ namespace _10Model.Helper.Dadata_ru
                 Flat = address.flat
             };
         }
-
         public static Address ToAddress(Dadata.Model.Suggestion<Dadata.Model.Address> suggestion)
         {
             // ToDo: проверить что содержится в suggestion.data.result изначально
             suggestion.data.result = suggestion.value;
             return ToAddress(suggestion.data);
+        }
+        
+
+        public static bool GetSuggestions(string query, out Organization[] organizations)
+        {
+            var configuration = new ConfigurationBuilder().AddJsonFile("Config.json");
+
+            IConfigurationRoot configurationRoot = configuration.Build();
+
+            DadataConf dadataConf = new DadataConf();
+            configurationRoot.GetSection(nameof(DadataConf)).Bind(dadataConf);
+
+            var token = dadataConf.Token;
+
+            var client = new SuggestClientSync(token);
+            try
+            {
+                var org = client.SuggestParty(query);
+                organizations = org.suggestions.Select(party => ToOrganization(party)).ToArray();
+                return true;
+            }
+            catch
+            {
+                organizations = null;
+                return false;
+            }
+        }
+        public static Organization ToOrganization(Dadata.Model.Party party)
+        {
+            return new Organization
+            {
+                NameFullOpf = party.name.full_with_opf,
+                NameShortOpf = party.name.short_with_opf,
+                Opf = party.opf.@short,
+                Ogrn = long.Parse(party.ogrn),
+                OgrnDate = (System.DateTime)party.ogrn_date,
+                Inn = int.Parse(party.inn),
+                Kpp = int.Parse(party.kpp)
+            };
+        }
+        public static Organization ToOrganization(Dadata.Model.Suggestion<Dadata.Model.Party> suggestion)
+        {
+            suggestion.value = suggestion.value;
+            return ToOrganization(suggestion.data);
+        }
+        public static Director ToDirector(Dadata.Model.Party party)
+        {
+            return new Director
+            {
+                FullName = party.management.name,
+                Position = party.management.post
+            };
+        }
+        public static Address ToAddressRegistration(Dadata.Model.Party party)
+        {
+            return new Address { AddressFull = party.address.unrestricted_value };
         }
     }
 }

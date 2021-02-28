@@ -10,7 +10,7 @@
         <!--  Подключение конвертеров  -->
         <conv:EnumConverter x:Key="EnumConverter" />
         <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
         <!--  Подключение провайдеров  -->
         <providers:AddressSuggestionProvider x:Key="AddressSuggestionProvider" />

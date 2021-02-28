@@ -98,6 +98,7 @@ namespace _30ViewModel.PagesVM
             context = new ApplicationContext();
         }
 
+        #region Visibility
         private bool isAttorneyValue;
         public bool IsAttorneyValue
         {
@@ -105,7 +106,6 @@ namespace _30ViewModel.PagesVM
             set =>
                 SetProperty(ref isAttorneyValue, value);
         }
-
         public bool ToVisibl()
         {
             if (PowerOfAttorney == PowerOfAttorneyType.Attorney)
@@ -113,6 +113,7 @@ namespace _30ViewModel.PagesVM
             else
                 return IsAttorneyValue = false;
         }
+        #endregion
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
         public Organization ToOrganization()
