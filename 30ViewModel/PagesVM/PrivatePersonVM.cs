@@ -99,20 +99,17 @@ namespace _30ViewModel.PagesVM
             };
             return privatePerson;
         }
-        public int AddPrivatePerson()
+        public void AddPrivatePerson()
         {
             try
             {
                 PrivatePerson privatePerson = ToPrivatePerson();
                 context.Add(privatePerson);
                 context.SaveChanges();
-                int newId = ToPrivatePerson().Id;
-                return newId;
             }
             catch (Exception exp)
             {
                 Debug.WriteLine(exp.ToString());
-                return -1;
             }
         }
         public bool UpdatePrivatePerson()

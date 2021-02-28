@@ -50,20 +50,17 @@ namespace _30ViewModel.PagesVM
             };
             return contract;
         }
-        public int AddContract()
+        public void AddContract()
         {
             try
             {
                 Contract contract = ToContract();
                 context.Add(contract);
                 context.SaveChanges();
-                int newId = ToContract().Id;
-                return newId;
             }
             catch (Exception exp)
             {
                 Debug.WriteLine(exp.ToString());
-                return -1;
             }
         }
         public bool UpdateContract()

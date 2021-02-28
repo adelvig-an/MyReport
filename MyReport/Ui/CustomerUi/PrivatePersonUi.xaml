@@ -50,11 +50,15 @@
                     Margin="0,8">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="17*" />
+                            <ColumnDefinition Width="72*" />
+                            <ColumnDefinition Width="89*" />
+                            <ColumnDefinition Width="89*" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Margin="8,0">
+                        <StackPanel
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="8,0,8,0">
                             <TextBlock
                                 Margin="0,0,0,4"
                                 Style="{StaticResource StyleDesignTextBlock}"
@@ -68,7 +72,7 @@
                                 FontSize="14"
                                 Text="{Binding SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                         </StackPanel>
-                        <StackPanel Grid.Column="1" Margin="8,0">
+                        <StackPanel Grid.Column="2" Margin="8,0,8,0">
                             <TextBlock
                                 Margin="0,0,0,4"
                                 Style="{StaticResource StyleDesignTextBlock}"
@@ -82,7 +86,7 @@
                                 FontSize="14"
                                 Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                         </StackPanel>
-                        <StackPanel Grid.Column="2" Margin="8,0">
+                        <StackPanel Grid.Column="3" Margin="8,0,8,0">
                             <TextBlock
                                 Margin="0,0,0,4"
                                 Style="{StaticResource StyleDesignTextBlock}"
@@ -210,7 +214,7 @@
                     Margin="0,8">
                     <StackPanel Margin="8,0">
                         <TextBlock
-                            Margin="0,0,0,4"
+                            Margin="0,8,0,4"
                             Style="{StaticResource StyleDesignTextBlock}"
                             Text="Адрес регистрации" />
                         <acb:AutoCompleteTextBox
@@ -241,7 +245,7 @@
                         <acb:AutoCompleteTextBox
                             Height="32"
                             MinWidth="240"
-                            Margin="0,4,0,0"
+                            Margin="0,4,0,8"
                             VerticalContentAlignment="Center"
                             Background="#ffffff"
                             BorderBrush="#000000"

@@ -57,5 +57,9 @@ namespace _10Model
         public virtual ICollection<PrivatePerson> AddressesRegistrationPrivatePerson { get; set; }
         [InverseProperty("AddressActual")]
         public virtual ICollection<PrivatePerson> AddressesActualPrivatePerson { get; set; }
+        [InverseProperty("AddressRegistration")]
+        public virtual ICollection<Organization> AddressesRegistrationOrganization { get; set; }
+        [InverseProperty("AddressActual")]
+        public virtual ICollection<Organization> AddressesActualOrganization { get; set; }
     }
 }

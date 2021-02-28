@@ -1,0 +1,507 @@
+﻿<UserControl
+    x:Class="MyReport.Ui.CustomerUi.OrganizationUi"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:acb="http://wpfcontrols.com/"
+    xmlns:conv="clr-namespace:MyReport.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyReport.Ui.CustomerUi"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:_10Model;assembly=10Model"
+    d:DesignHeight="1070"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="AddressItemTemplate">
+            <TextBlock Margin="6,0,6,0" Text="{Binding AddressFull}" />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Margin="0,8">
+            <DockPanel>
+                <TextBlock
+                    Margin="8,0"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource StyleDesignSubtitle1TextBlock}"
+                    Text="Организация" />
+                <Button
+                    Margin="8,0"
+                    Padding="16,8"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Выбрать заказчика"
+                    FontFamily="DIN Pro Medium"
+                    FontSize="16" />
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Height="32"
+                            Margin="8,0"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="Наименование" />
+                        <TextBox
+                            Grid.Column="1"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalContentAlignment="Center"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14"
+                            Text="{Binding NameShortOpf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1" Margin="8,0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                Style="{StaticResource StyleDesignTextBlock}"
+                                Text="ИНН" />
+                            <DockPanel>
+                                <TextBox
+                                    Height="32"
+                                    MinWidth="240"
+                                    Margin="0,4,0,0"
+                                    VerticalContentAlignment="Center"
+                                    FontFamily="DIN Pro Regular"
+                                    FontSize="14"
+                                    Text="{Binding Inn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                <Viewbox
+                                    Width="18"
+                                    Height="18"
+                                    Margin="6,0,0,0"
+                                    VerticalAlignment="Center"
+                                    ToolTip="Поиск организации по ИНН">
+                                    <Grid Width="18" Height="18">
+                                        <Ellipse Fill="Blue" Stroke="Blue" />
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontFamily="DIN Pro Bold"
+                                            FontSize="18"
+                                            Foreground="White"
+                                            Text="!" />
+                                    </Grid>
+                                </Viewbox>
+                            </DockPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="8,0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                Style="{StaticResource StyleDesignTextBlock}"
+                                Text="КПП" />
+                            <TextBox
+                                Height="32"
+                                MinWidth="240"
+                                Margin="0,4,0,0"
+                                VerticalContentAlignment="Center"
+                                FontFamily="DIN Pro Regular"
+                                FontSize="14"
+                                Text="{Binding Kpp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1" Margin="8,0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                Style="{StaticResource StyleDesignTextBlock}"
+                                Text="ОГРН" />
+                            <TextBox
+                                Height="32"
+                                MinWidth="240"
+                                Margin="0,4,0,0"
+                                VerticalContentAlignment="Center"
+                                FontFamily="DIN Pro Regular"
+                                FontSize="14"
+                                Text="{Binding Ogrn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="8,0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                Style="{StaticResource StyleDesignTextBlock}"
+                                Text="Дата выдачи" />
+                            <DatePicker
+                                Width="120"
+                                Height="32"
+                                Margin="0,4,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                FontFamily="DIN Pro Regular"
+                                FontSize="14"
+                                SelectedDate="{Binding OgrnDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Row="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Margin="0,8">
+                    <TextBlock
+                        Margin="8,0"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource StyleDesignSubtitle1TextBlock}"
+                        Text="Руководитель" />
+                </Border>
+                <Border Grid.Row="1" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="8,0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                Style="{StaticResource StyleDesignTextBlock}"
+                                Text="Фамилия" />
+                            <TextBox
+                                Height="32"
+                                MinWidth="240"
+                                Margin="0,4,0,0"
+                                VerticalContentAlignment="Center"
+                                FontFamily="DIN Pro Regular"
+                                FontSize="14"
+                                Text="{Binding SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="8,0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                Style="{StaticResource StyleDesignTextBlock}"
+                                Text="Имя" />
+                            <TextBox
+                                Height="32"
+                                MinWidth="240"
+                                Margin="0,4,0,0"
+                                VerticalContentAlignment="Center"
+                                FontFamily="DIN Pro Regular"
+                                FontSize="14"
+                                Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="8,0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                Style="{StaticResource StyleDesignTextBlock}"
+                                Text="Отчество" />
+                            <TextBox
+                                Height="32"
+                                MinWidth="240"
+                                Margin="0,4,0,0"
+                                VerticalContentAlignment="Center"
+                                FontFamily="DIN Pro Regular"
+                                FontSize="14"
+                                Text="{Binding MiddleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Height="32"
+                            Margin="8,0"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="Должность руководителя" />
+                        <TextBox
+                            Grid.Column="1"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalContentAlignment="Center"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14"
+                            Text="{Binding Position, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="3" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Height="32"
+                            Margin="8,0"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="Действующий на основании" />
+                        <ComboBox
+                            Grid.Column="1"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalContentAlignment="Center"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14"
+                            ItemsSource="{Binding Source={conv:EnumToItemsSource {x:Type model:PowerOfAttorneyType}}}"
+                            SelectedValue="{Binding PowerOfAttorney, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type model:PowerOfAttorneyType}}" />
+                    </Grid>
+                </Border>
+                <Border
+                    Grid.Row="4"
+                    Margin="0,8"
+                    Visibility="{Binding IsAttorneyValue, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1" Margin="8,0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                Style="{StaticResource StyleDesignTextBlock}"
+                                Text="Номер доверенности" />
+                            <TextBox
+                                Height="32"
+                                MinWidth="240"
+                                Margin="0,4,0,0"
+                                VerticalContentAlignment="Center"
+                                FontFamily="DIN Pro Regular"
+                                FontSize="14"
+                                Text="{Binding PowerOfAttorneyNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="8,0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                Style="{StaticResource StyleDesignTextBlock}"
+                                Text="Дата доверения" />
+                            <DatePicker
+                                Width="120"
+                                Height="32"
+                                Margin="0,4,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                FontFamily="DIN Pro Regular"
+                                FontSize="14"
+                                SelectedDate="{Binding PowerOfAttorneyDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="3" Margin="8,0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                Style="{StaticResource StyleDesignTextBlock}"
+                                Text="Дата окончания" />
+                            <DatePicker
+                                Width="120"
+                                Height="32"
+                                Margin="0,4,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                FontFamily="DIN Pro Regular"
+                                FontSize="14"
+                                SelectedDate="{Binding PowerOfAttorneyDateBefore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Row="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Margin="0,8">
+                    <TextBlock
+                        Margin="8,0"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource StyleDesignSubtitle1TextBlock}"
+                        Text="Банковские реквизиты" />
+                </Border>
+                <Border Grid.Row="1" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Height="32"
+                            Margin="8,0"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="Наименование банка" />
+                        <TextBox
+                            Grid.Column="1"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalContentAlignment="Center"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Height="32"
+                            Margin="8,0"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="БИК" />
+                        <TextBox
+                            Grid.Column="1"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalContentAlignment="Center"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="3" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Height="32"
+                            Margin="8,0"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="Расчетный счет" />
+                        <TextBox
+                            Grid.Column="1"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalContentAlignment="Center"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="4" Margin="0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Height="32"
+                            Margin="8,0"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="Корреспондентский счет" />
+                        <TextBox
+                            Grid.Column="1"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalContentAlignment="Center"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14" />
+                    </Grid>
+                </Border>
+                <Border
+                    x:Name="border_Address"
+                    Grid.Row="5"
+                    Margin="0,8">
+                    <StackPanel Margin="8,0">
+                        <TextBlock
+                            Margin="0,8,0,4"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="Адрес регистрации" />
+                        <acb:AutoCompleteTextBox
+                            Height="32"
+                            MinWidth="240"
+                            Margin="0,4,0,8"
+                            VerticalContentAlignment="Center"
+                            Background="#ffffff"
+                            BorderBrush="#000000"
+                            CharacterCasing="Upper"
+                            DisplayMember="AddressFull"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14"
+                            ItemTemplate="{StaticResource ResourceKey=AddressItemTemplate}"
+                            Provider="{StaticResource ResourceKey=AddressSuggestionProvider}"
+                            SelectedItem="{Binding SelectedAddressRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding AddressRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        <CheckBox
+                            Margin="0,8"
+                            Content="Адрес проживания совподает с адресом регистрации"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14"
+                            IsChecked="{Binding IsAddressMatch}" />
+                        <TextBlock
+                            Margin="0,8,0,4"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="Адрес проживания" />
+                        <acb:AutoCompleteTextBox
+                            Height="32"
+                            MinWidth="240"
+                            Margin="0,4,0,8"
+                            VerticalContentAlignment="Center"
+                            Background="#ffffff"
+                            BorderBrush="#000000"
+                            CharacterCasing="Upper"
+                            DisplayMember="AddressFull"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14"
+                            IsEnabled="{Binding IsAddressMatch, Converter={StaticResource InverseBooleanConverter}}"
+                            ItemTemplate="{StaticResource ResourceKey=AddressItemTemplate}"
+                            Provider="{StaticResource ResourceKey=AddressSuggestionProvider}"
+                            SelectedItem="{Binding SelectedAddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding AddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+        <!--  Только для теста! Удалить!  -->
+        <Button
+            Grid.Row="4"
+            Margin="16,0"
+            Padding="16,8"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{Binding DataContext.SaveData, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+            Content="Сохранить"
+            FontFamily="DIN Pro Medium"
+            FontSize="16" />
+    </Grid>
+</UserControl>

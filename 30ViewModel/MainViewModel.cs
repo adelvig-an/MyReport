@@ -26,8 +26,10 @@ namespace _30ViewModel
             db.Contracts.Load();
             db.People.Load();
             db.PrivatePeople.Load();
+            db.Directors.Load();
+            db.Organizations.Load();
             db.Addresses.Load();
-            CurrentPage = new PrivatePersonVM();
+            CurrentPage = new OrganizationVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
         }
         /// <summary>
@@ -39,9 +41,9 @@ namespace _30ViewModel
         /// </summary>
         public void SaveDataAction()
         {
-            if (CurrentPage is PrivatePersonVM privatePerson)
+            if (CurrentPage is OrganizationVM organization)
             {
-                privatePerson.AddPrivatePerson();
+                organization.AddOrganization();
             }
         }
     }

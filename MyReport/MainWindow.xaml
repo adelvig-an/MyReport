@@ -22,6 +22,9 @@
         <DataTemplate DataType="{x:Type vm:PrivatePersonVM}">
             <uiCust:PrivatePersonUi />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:OrganizationVM}">
+            <uiCust:OrganizationUi />
+        </DataTemplate>
     </Window.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <ContentControl Content="{Binding CurrentPage}" />
