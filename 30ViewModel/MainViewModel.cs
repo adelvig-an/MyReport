@@ -55,8 +55,12 @@ namespace _30ViewModel
         }
         public void NextBackPageAction()
         {
-            if (CurrentPage is ReportVM)
+            if (CurrentPage is ReportVM report)
+            { 
+                report.AddReport();
                 CurrentPage = new ContractVM();
+            }    
+                
             else if (CurrentPage is ContractVM)
             {
                 CurrentPage = new ReportVM();

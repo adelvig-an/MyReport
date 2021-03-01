@@ -171,7 +171,7 @@
                     Padding="16,8"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Command="{Binding DataContext.NextPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                    Command="{Binding DataContext.NextBackPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                     Content="Вернуться назад"
                     FontFamily="DIN Pro Medium"
                     FontSize="16" />
