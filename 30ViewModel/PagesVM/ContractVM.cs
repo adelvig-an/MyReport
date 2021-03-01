@@ -1,11 +1,9 @@
 ﻿using _10Model;
 using _20DbLayer;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace _30ViewModel.PagesVM
 {
@@ -79,5 +77,17 @@ namespace _30ViewModel.PagesVM
             }
         }
         #endregion DataBase
+
+        #region CBOR
+        public override byte[] GetCBOR()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetCBOR(byte[] b)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion CBOR
     }
 }

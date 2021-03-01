@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MyReport.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
+    d:DesignHeight="550"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -30,6 +30,7 @@
         <Border Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -163,6 +164,31 @@
                             TextWrapping="Wrap" />
                     </Grid>
                 </Border>
+                <Border
+                    Grid.Row="3"
+                    Margin="0,8"
+                    Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="8,0"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="Оценщик" />
+                        <ComboBox
+                            Grid.Column="1"
+                            Height="32"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalContentAlignment="Center"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14" />
+                    </Grid>
+                </Border>
             </Grid>
         </Border>
         <Border Grid.Row="2" Margin="0,8">
@@ -171,8 +197,8 @@
                 Padding="16,8"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Command="{Binding DataContext.SaveData, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
-                Content="Сохранить"
+                Command="{Binding DataContext.NextPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                Content="Далее"
                 FontFamily="DIN Pro Medium"
                 FontSize="16" />
         </Border>

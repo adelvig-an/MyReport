@@ -141,5 +141,17 @@ namespace _30ViewModel.PagesVM
         public void FillAddressRegistration(Address address) => AddressRegistration = address?.AddressFull;
         public void FillAddressActual(Address address) => AddressActual = address?.AddressFull;
         #endregion AutoCompleteAddress
+
+        #region CBOR
+        public override byte[] GetCBOR()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetCBOR(byte[] b)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion CBOR
     }
 }

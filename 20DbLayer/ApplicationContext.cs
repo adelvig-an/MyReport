@@ -9,6 +9,7 @@ namespace _20DbLayer
 {
     public class ApplicationContext : DbContext
     {
+        public DbSet<TempData> TempDatas { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Person> People { get; set; }

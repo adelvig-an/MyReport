@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="PeterO.Cbor" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\10Model\10Model.csproj" />
     <ProjectReference Include="..\20DbLayer\20DbLayer.csproj" />
   </ItemGroup>

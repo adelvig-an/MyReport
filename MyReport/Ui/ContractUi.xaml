@@ -145,7 +145,8 @@
                     Margin="8,0,16,0"
                     VerticalAlignment="Center"
                     Style="{StaticResource StyleDesignSubtitle2TextBlock}"
-                    Text="Заказчик" />
+                    Text="Заказчик"
+                    Visibility="Collapsed" />
                 <ListBox
                     Margin="16,0"
                     HorizontalAlignment="Left"
@@ -154,7 +155,8 @@
                     BorderThickness="0"
                     FontFamily="DIN Pro Medium"
                     FontSize="16"
-                    ToolTip="Продолжение следует...">
+                    ToolTip="Продолжение следует..."
+                    Visibility="Collapsed">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal" />
@@ -169,8 +171,8 @@
                     Padding="16,8"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Command="{Binding DataContext.SaveData, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
-                    Content="Сохранить"
+                    Command="{Binding DataContext.NextPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                    Content="Вернуться назад"
                     FontFamily="DIN Pro Medium"
                     FontSize="16" />
             </DockPanel>

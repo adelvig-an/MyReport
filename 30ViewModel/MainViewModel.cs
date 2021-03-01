@@ -14,7 +14,11 @@ namespace _30ViewModel
         public PageViewModel CurrentPage
         {
             get => currentPage;
-            set => SetProperty(ref currentPage, value);
+            set 
+            {
+                CurrentPage?.WriteCBOR();
+                SetProperty(ref currentPage, value); 
+            }
         }
         private readonly ApplicationContext db = new ApplicationContext();
 
@@ -29,21 +33,34 @@ namespace _30ViewModel
             db.Directors.Load();
             db.Organizations.Load();
             db.Addresses.Load();
-            CurrentPage = new OrganizationVM();
+            db.TempDatas.Load();
+            CurrentPage = new ReportVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
+            NextBackPage = new RelayCommand(_ => NextBackPageAction());
         }
         /// <summary>
         /// Команда сохранения в БД
         /// </summary>
         public ICommand SaveData { get; }
+        public ICommand NextBackPage { get; }
         /// <summary>
         /// Метод реализации сохранения данных в БД
         /// </summary>
         public void SaveDataAction()
         {
-            if (CurrentPage is OrganizationVM organization)
+            if (CurrentPage is ReportVM report)
             {
-                organization.AddOrganization();
+                report.AddReport();
+            }
+        }
+        public void NextBackPageAction()
+        {
+            if (CurrentPage is ReportVM)
+                CurrentPage = new ContractVM();
+            else if (CurrentPage is ContractVM)
+            {
+                CurrentPage = new ReportVM();
+                CurrentPage.ReadCBOR();
             }
         }
     }
