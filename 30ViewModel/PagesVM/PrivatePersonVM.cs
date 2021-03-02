@@ -87,6 +87,7 @@ namespace _30ViewModel.PagesVM
             var privatePerson = new PrivatePerson
             {
                 Id = Id,
+                FullName = SecondName + " " + FirstName + " " + MiddleName, 
                 SecondName = SecondName,
                 FirstName = FirstName,
                 MiddleName = MiddleName,

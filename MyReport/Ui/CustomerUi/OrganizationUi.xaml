@@ -189,52 +189,24 @@
                 <Border Grid.Row="1" Margin="0,8">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="200" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Margin="8,0">
-                            <TextBlock
-                                Margin="0,0,0,4"
-                                Style="{StaticResource StyleDesignTextBlock}"
-                                Text="Фамилия" />
-                            <TextBox
-                                Height="32"
-                                MinWidth="240"
-                                Margin="0,4,0,0"
-                                VerticalContentAlignment="Center"
-                                FontFamily="DIN Pro Regular"
-                                FontSize="14"
-                                Text="{Binding SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Margin="8,0">
-                            <TextBlock
-                                Margin="0,0,0,4"
-                                Style="{StaticResource StyleDesignTextBlock}"
-                                Text="Имя" />
-                            <TextBox
-                                Height="32"
-                                MinWidth="240"
-                                Margin="0,4,0,0"
-                                VerticalContentAlignment="Center"
-                                FontFamily="DIN Pro Regular"
-                                FontSize="14"
-                                Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
-                        </StackPanel>
-                        <StackPanel Grid.Column="2" Margin="8,0">
-                            <TextBlock
-                                Margin="0,0,0,4"
-                                Style="{StaticResource StyleDesignTextBlock}"
-                                Text="Отчество" />
-                            <TextBox
-                                Height="32"
-                                MinWidth="240"
-                                Margin="0,4,0,0"
-                                VerticalContentAlignment="Center"
-                                FontFamily="DIN Pro Regular"
-                                FontSize="14"
-                                Text="{Binding MiddleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
-                        </StackPanel>
+                        <TextBlock
+                            Grid.Column="0"
+                            Height="32"
+                            Margin="8,0"
+                            Style="{StaticResource StyleDesignTextBlock}"
+                            Text="ФИО руководителя" />
+                        <TextBox
+                            Grid.Column="1"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalContentAlignment="Center"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14"
+                            Text="{Binding FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+
                     </Grid>
                 </Border>
                 <Border Grid.Row="2" Margin="0,8">

@@ -21,9 +21,7 @@ namespace _30ViewModel.PagesVM
         private string payAccount;
         private string corrAccount;
         //Свойства для директора
-        private string secondName;
-        private string firstName;
-        private string middleName;
+        private string fullName;
         private string position;
         private PowerOfAttorneyType powerOfAttorney;
         private string powerOfAttorneyNumber;
@@ -52,12 +50,8 @@ namespace _30ViewModel.PagesVM
         public string CorrAccount { get => corrAccount; 
             set { ValidateProperty(value); SetProperty(ref corrAccount, value); } }
         //Свойства для директора
-        public string SecondName { get => secondName;
-            set { ValidateProperty(value); SetProperty(ref secondName, value); } }
-        public string FirstName { get => firstName;
-            set { ValidateProperty(value); SetProperty(ref firstName, value); } }
-        public string MiddleName { get => middleName;
-            set { ValidateProperty(value); SetProperty(ref middleName, value); } }
+        public string FullName { get => fullName;
+            set { ValidateProperty(value); SetProperty(ref fullName, value); } }
         public string Position { get => position;
             set { ValidateProperty(value); SetProperty(ref position, value); } }
         public PowerOfAttorneyType PowerOfAttorney { get => powerOfAttorney;
@@ -141,9 +135,7 @@ namespace _30ViewModel.PagesVM
             var director = new Director
             {
                 Id = Id,
-                SecondName = SecondName,
-                FirstName = FirstName,
-                MiddleName = MiddleName,
+                FullName = FullName,
                 Position = Position,
                 PowerOfAttorney = PowerOfAttorney,
                 PowerOfAttorneyNumber = PowerOfAttorneyNumber,

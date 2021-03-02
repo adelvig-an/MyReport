@@ -16,7 +16,7 @@ namespace _30ViewModel
             get => currentPage;
             set 
             {
-                CurrentPage?.WriteCBOR();
+                CurrentPage?.WriteCBOR(); //Сохранение в CBOR
                 SetProperty(ref currentPage, value); 
             }
         }
@@ -64,7 +64,7 @@ namespace _30ViewModel
             else if (CurrentPage is ContractVM)
             {
                 CurrentPage = new ReportVM();
-                CurrentPage.ReadCBOR();
+                CurrentPage.ReadCBOR(); //Чтение из CBOR
             }
         }
     }
