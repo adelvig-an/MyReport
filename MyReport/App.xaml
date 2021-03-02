@@ -81,7 +81,6 @@
         </Style>
 
         <!--  TextBox  -->
-
         <Style TargetType="TextBox">
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">

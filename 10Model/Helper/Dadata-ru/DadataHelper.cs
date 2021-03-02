@@ -131,7 +131,7 @@ namespace _10Model.Helper.Dadata_ru
         }
         public static Organization ToOrganization(Dadata.Model.Suggestion<Dadata.Model.Party> suggestion)
         {
-            suggestion.value = suggestion.value;
+            suggestion.data.name.full_with_opf = suggestion.value;
             return ToOrganization(suggestion.data);
         }
         public static Director ToDirector(Dadata.Model.Party party)
@@ -144,7 +144,7 @@ namespace _10Model.Helper.Dadata_ru
         }
         public static Director ToDirector(Dadata.Model.Suggestion<Dadata.Model.Party> suggestion)
         {
-            suggestion.value = suggestion.value;
+            suggestion.data.management.name = suggestion.value;
             return ToDirector(suggestion.data);
         }
     }
