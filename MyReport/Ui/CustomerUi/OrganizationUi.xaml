@@ -15,6 +15,9 @@
         <DataTemplate x:Key="AddressItemTemplate">
             <TextBlock Margin="6,0,6,0" Text="{Binding AddressFull}" />
         </DataTemplate>
+        <DataTemplate x:Key="OrganizationItemTemplate">
+            <TextBlock Margin="6,0,6,0" Text="{Binding NameShortOpf}" />
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -60,14 +63,30 @@
                             Margin="8,0"
                             Style="{StaticResource StyleDesignTextBlock}"
                             Text="Наименование" />
-                        <TextBox
+                        <acb:AutoCompleteTextBox
+                            Grid.Column="1"
+                            Height="32"
+                            MinWidth="240"
+                            Margin="8,0"
+                            VerticalContentAlignment="Center"
+                            Background="#ffffff"
+                            BorderBrush="#000000"
+                            CharacterCasing="Upper"
+                            DisplayMember="AddressFull"
+                            FontFamily="DIN Pro Regular"
+                            FontSize="14"
+                            ItemTemplate="{StaticResource ResourceKey=OrganizationItemTemplate}"
+                            Provider="{StaticResource ResourceKey=OrganizationSuggestionProvider}"
+                            SelectedItem="{Binding SelectedAddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding AddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        <!--<TextBox
                             Grid.Column="1"
                             MinWidth="240"
                             Margin="8,0"
                             VerticalContentAlignment="Center"
                             FontFamily="DIN Pro Regular"
                             FontSize="14"
-                            Text="{Binding NameShortOpf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                            Text="{Binding NameShortOpf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />-->
                     </Grid>
                 </Border>
                 <Border Grid.Row="1" Margin="0,8">

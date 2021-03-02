@@ -174,6 +174,20 @@ namespace _30ViewModel.PagesVM
         }
         #endregion DataBase
 
+        #region AutoCompleteOrganization
+        private Organization selectedOrganization;
+        public Organization SelectedOrganization
+        {
+            get => selectedOrganization;
+            set
+            {
+                if (SetProperty(ref selectedOrganization, value))
+                    FillOrganization(selectedOrganization);
+            }
+        }
+        public void FillOrganization(Organization organization) => NameShortOpf = organization?.NameShortOpf;
+        #endregion AutoCompleteOrganization
+
         #region AutoCompleteAddress (Подсказки заполнения адреса)
         private Address selectedAddressRegistration;
         private Address selectedAddressActual;

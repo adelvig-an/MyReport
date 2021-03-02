@@ -34,7 +34,7 @@ namespace _30ViewModel
             db.Organizations.Load();
             db.Addresses.Load();
             db.TempDatas.Load();
-            CurrentPage = new ReportVM();
+            CurrentPage = new OrganizationVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextBackPage = new RelayCommand(_ => NextBackPageAction());
         }

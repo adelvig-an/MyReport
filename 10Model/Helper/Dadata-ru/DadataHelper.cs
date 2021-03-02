@@ -88,7 +88,7 @@ namespace _10Model.Helper.Dadata_ru
         }
         
 
-        public static bool GetSuggestions(string query, out Organization[] organizations)
+        public static bool GetSuggestions(string query, out Organization[] organizations, out Director[] directors, out Address[] addresses)
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("Config.json");
 
@@ -104,11 +104,15 @@ namespace _10Model.Helper.Dadata_ru
             {
                 var org = client.SuggestParty(query);
                 organizations = org.suggestions.Select(party => ToOrganization(party)).ToArray();
+                directors = org.suggestions.Select(party => ToDirector(party)).ToArray();
+                addresses = org.suggestions.Select(party => ToAddress(party.data.address)).ToArray();
                 return true;
             }
             catch
             {
                 organizations = null;
+                directors = null;
+                addresses = null;
                 return false;
             }
         }
@@ -138,9 +142,10 @@ namespace _10Model.Helper.Dadata_ru
                 Position = party.management.post
             };
         }
-        public static Address ToAddressRegistration(Dadata.Model.Party party)
+        public static Director ToDirector(Dadata.Model.Suggestion<Dadata.Model.Party> suggestion)
         {
-            return new Address { AddressFull = party.address.unrestricted_value };
+            suggestion.value = suggestion.value;
+            return ToDirector(suggestion.data);
         }
     }
 }

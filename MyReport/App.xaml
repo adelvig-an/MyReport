@@ -14,6 +14,7 @@
 
         <!--  Подключение провайдеров  -->
         <providers:AddressSuggestionProvider x:Key="AddressSuggestionProvider" />
+        <providers:OrganizationSuggestionProvider x:Key="OrganizationSuggestionProvider" />
         <!--  Стили (Будут перенесены в свой файл)  -->
         <!--  TextBlock  -->
         <Style x:Key="StyleDesignTextBlock" TargetType="TextBlock">

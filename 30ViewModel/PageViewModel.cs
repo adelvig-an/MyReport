@@ -1,17 +1,24 @@
 ﻿using _10Model;
 using _20DbLayer;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace _30ViewModel
 {
     public abstract class PageViewModel : ValidationBase
     {
+        #region Abstract methods CBOR
+        /// <summary>
+        /// Абстрактный метод преобразования данных в формат cbor
+        /// </summary>
         public abstract byte[] GetCBOR();
+        /// <summary>
+        /// Абстрактный метод преобразования данных из формата cbor
+        /// </summary>
+        /// <param name="b"></param>
         public abstract void SetCBOR(byte[] b);
+        #endregion Abstract methods CBOR
 
         private readonly ApplicationContext context;
         public PageViewModel()
@@ -19,6 +26,11 @@ namespace _30ViewModel
             context = new ApplicationContext();
         }
 
+        #region Methods CBOR
+        /// <summary>
+        /// Метод временного сохранения
+        /// Сохранение данных в формате cbor
+        /// </summary>
         public bool WriteCBOR()
         {
             try
@@ -40,6 +52,9 @@ namespace _30ViewModel
                 return false;
             }
         }
+        /// <summary>
+        /// Метод чтения сохраненных данных из формата cbor
+        /// </summary>
         public void ReadCBOR()
         {
             try
@@ -53,5 +68,6 @@ namespace _30ViewModel
                 Debug.WriteLine(exp.ToString());
             }
         }
+        #endregion Methods CBOR
     }
 }
