@@ -134,8 +134,8 @@ namespace _10Model.Helper.Dadata_ru
         {
             return new Director
             {
-                FullName = party.management.name,
-                Position = party.management.post
+                FullName = party.management?.name,
+                Position = party.management?.post
             };
         }
     }

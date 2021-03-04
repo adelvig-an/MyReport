@@ -83,7 +83,7 @@ namespace _30ViewModel.PagesVM
             }
         }
         public void ActualToRegistration() => AddressActual = AddressRegistration;
-        public void ActualToActual() => AddressActual = "";
+        public void ActualToActual() => AddressActual = null;
         #endregion AddressMatch
 
         private readonly ApplicationContext context;
@@ -115,7 +115,9 @@ namespace _30ViewModel.PagesVM
             var organization = new Organization
             {
                 Id = Id,
+                NameFullOpf = SelectedOrganization.NameFullOpf,
                 NameShortOpf = NameShortOpf,
+                Opf = SelectedOrganization.Opf,
                 Ogrn = ulong.Parse(Ogrn),
                 OgrnDate = OgrnDate,
                 Inn = ulong.Parse(Inn),
@@ -125,7 +127,7 @@ namespace _30ViewModel.PagesVM
                 PayAccount = ulong.Parse(PayAccount),
                 CorrAccount = ulong.Parse(CorrAccount),
                 Director = ToDirector(),
-                AddressRegistration = SelectedAddressRegistration,
+                AddressRegistration = SelectedAddressRegistration ?? SelectedOrganization.AddressRegistration,
                 AddressActual = SelectedAddressActual
             };
             return organization;
@@ -194,7 +196,7 @@ namespace _30ViewModel.PagesVM
             OgrnDate = organization?.OgrnDate;
             FullName = organization?.Director.FullName;
             Position = organization?.Director.Position;
-            AddressRegistration = organization.AddressRegistration.AddressFull;
+            AddressRegistration = organization?.AddressRegistration.AddressFull;
         }
         #endregion AutoCompleteOrganization
 

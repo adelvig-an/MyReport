@@ -48,9 +48,9 @@ namespace _30ViewModel
         /// </summary>
         public void SaveDataAction()
         {
-            if (CurrentPage is ReportVM report)
+            if (CurrentPage is OrganizationVM organization)
             {
-                report.AddReport();
+                organization.AddOrganization();
             }
         }
         public void NextBackPageAction()
