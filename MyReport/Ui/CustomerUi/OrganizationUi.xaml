@@ -16,7 +16,13 @@
             <TextBlock Margin="6,0,6,0" Text="{Binding AddressFull}" />
         </DataTemplate>
         <DataTemplate x:Key="OrganizationItemTemplate">
-            <TextBlock Margin="6,0,6,0" Text="{Binding NameShortOpf}" />
+            <StackPanel>
+                <TextBlock Margin="6,0,6,2" Text="{Binding NameShortOpf}" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="6,0,6,0" Text="{Binding Inn}" />
+                    <TextBlock Margin="6,0,6,0" Text="{Binding AddressFull}" />
+                </StackPanel>
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
@@ -82,7 +88,7 @@
                                 ItemTemplate="{StaticResource ResourceKey=OrganizationItemTemplate}"
                                 Provider="{StaticResource ResourceKey=OrganizationSuggestionProvider}"
                                 SelectedItem="{Binding SelectedOrganization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Text="{Binding NameShortOpf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                Text="{Binding NameShortOpf, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                         </StackPanel>
                         <!--<TextBox
                             Grid.Column="1"
