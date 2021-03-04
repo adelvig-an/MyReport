@@ -86,9 +86,8 @@ namespace _10Model.Helper.Dadata_ru
             suggestion.data.result = suggestion.value;
             return ToAddress(suggestion.data);
         }
-        
 
-        public static bool GetSuggestions(string query, out Organization[] organizations, out Director[] directors, out Address[] addresses)
+        public static bool GetSuggestions(string query, out Organization[] organizations)
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("Config.json");
 
@@ -104,15 +103,11 @@ namespace _10Model.Helper.Dadata_ru
             {
                 var org = client.SuggestParty(query);
                 organizations = org.suggestions.Select(party => ToOrganization(party)).ToArray();
-                directors = org.suggestions.Select(party => ToDirector(party)).ToArray();
-                addresses = org.suggestions.Select(party => ToAddress(party.data.address)).ToArray();
                 return true;
             }
             catch
             {
                 organizations = null;
-                directors = null;
-                addresses = null;
                 return false;
             }
         }
@@ -131,7 +126,7 @@ namespace _10Model.Helper.Dadata_ru
         }
         public static Organization ToOrganization(Dadata.Model.Suggestion<Dadata.Model.Party> suggestion)
         {
-            suggestion.data.name.full_with_opf = suggestion.value;
+            suggestion.value = suggestion.value;
             return ToOrganization(suggestion.data);
         }
         public static Director ToDirector(Dadata.Model.Party party)
@@ -141,11 +136,6 @@ namespace _10Model.Helper.Dadata_ru
                 FullName = party.management.name,
                 Position = party.management.post
             };
-        }
-        public static Director ToDirector(Dadata.Model.Suggestion<Dadata.Model.Party> suggestion)
-        {
-            suggestion.data.management.name = suggestion.value;
-            return ToDirector(suggestion.data);
         }
     }
 }

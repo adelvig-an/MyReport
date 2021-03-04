@@ -10,20 +10,12 @@ namespace MyReport.Providers
     {
         public IEnumerable GetSuggestions(string filter)
         {
-            var isCorrect = DadataHelper.GetSuggestions(filter, out Organization[] organizations, out Director[] directors, out Address[] addresses);
+            var isCorrect = DadataHelper.GetSuggestions(filter, out Organization[] organizations);
             if (isCorrect != false)
             {
                 foreach (var org in organizations)
                 {
                     yield return org;
-                }
-                foreach (var dir in directors)
-                {
-                    yield return directors;
-                }
-                foreach (var adr in addresses)
-                {
-                    yield return adr;
                 }
             }
         }
