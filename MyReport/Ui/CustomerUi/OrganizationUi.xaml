@@ -72,13 +72,13 @@
                             Background="#ffffff"
                             BorderBrush="#000000"
                             CharacterCasing="Upper"
-                            DisplayMember="AddressFull"
+                            DisplayMember="NameShortOpf"
                             FontFamily="DIN Pro Regular"
                             FontSize="14"
                             ItemTemplate="{StaticResource ResourceKey=OrganizationItemTemplate}"
                             Provider="{StaticResource ResourceKey=OrganizationSuggestionProvider}"
-                            SelectedItem="{Binding SelectedAddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Text="{Binding AddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                            SelectedItem="{Binding SelectedOrganization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding NameShortOpf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                         <!--<TextBox
                             Grid.Column="1"
                             MinWidth="240"

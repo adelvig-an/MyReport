@@ -9,7 +9,7 @@ namespace _10Model.Customer
         public string NameShortOpf { get; set; } //Сокращенное наименование
         public string Opf { get; set; } //Организационно-правовая форма
         public ulong Ogrn { get; set; } //ОГРН
-        public DateTime OgrnDate { get; set; } //Дата регистрации
+        public DateTime? OgrnDate { get; set; } //Дата регистрации
         public ulong Inn { get; set; } //ИНН
         public ulong Kpp { get; set; } //КПП
         public string Bank { get; set; } //Название банка

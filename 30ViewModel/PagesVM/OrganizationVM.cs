@@ -13,7 +13,7 @@ namespace _30ViewModel.PagesVM
         //Свойства для организации
         private string nameShortOpf;
         private string ogrn;
-        private DateTime ogrnDate = DateTime.Today;
+        private DateTime? ogrnDate = DateTime.Today;
         private string inn;
         private string kpp;
         private string bank;
@@ -25,8 +25,8 @@ namespace _30ViewModel.PagesVM
         private string position;
         private PowerOfAttorneyType powerOfAttorney;
         private string powerOfAttorneyNumber;
-        private DateTime powerOfAttorneyDate = DateTime.Today;
-        private DateTime powerOfAttorneyDateBefore = DateTime.Today;
+        private DateTime? powerOfAttorneyDate = DateTime.Today;
+        private DateTime? powerOfAttorneyDateBefore = DateTime.Today;
         private string addressRegistration;
         private string addresActual;
         public int Id { get; set; }
@@ -35,7 +35,7 @@ namespace _30ViewModel.PagesVM
             set { ValidateProperty(value); SetProperty(ref nameShortOpf, value); } }
         public string Ogrn { get => ogrn;
             set { ValidateProperty(value); SetProperty(ref ogrn, value); } }
-        public DateTime OgrnDate { get => ogrnDate;
+        public DateTime? OgrnDate { get => ogrnDate;
             set { ValidateProperty(value); SetProperty(ref ogrnDate, value); } }
         public string Inn { get => inn;
             set { ValidateProperty(value); SetProperty(ref inn, value); } }
@@ -58,9 +58,9 @@ namespace _30ViewModel.PagesVM
             set { ValidateProperty(value); SetProperty(ref powerOfAttorney, value); ToVisibl(); } }
         public string PowerOfAttorneyNumber { get => powerOfAttorneyNumber;
             set { ValidateProperty(value); SetProperty(ref powerOfAttorneyNumber, value); } }
-        public DateTime PowerOfAttorneyDate { get => powerOfAttorneyDate;
+        public DateTime? PowerOfAttorneyDate { get => powerOfAttorneyDate;
             set { ValidateProperty(value); SetProperty(ref powerOfAttorneyDate, value); } }
-        public DateTime PowerOfAttorneyDateBefore { get => powerOfAttorneyDateBefore;
+        public DateTime? PowerOfAttorneyDateBefore { get => powerOfAttorneyDateBefore;
             set { ValidateProperty(value); SetProperty(ref powerOfAttorneyDateBefore, value); } }
         public string AddressRegistration { get => addressRegistration;
             set { ValidateProperty(value); SetProperty(ref addressRegistration, value); } }
@@ -185,7 +185,17 @@ namespace _30ViewModel.PagesVM
                     FillOrganization(selectedOrganization);
             }
         }
-        public void FillOrganization(Organization organization) => NameShortOpf = organization?.NameShortOpf;
+        public void FillOrganization(Organization organization) 
+        {
+            NameShortOpf = organization?.NameShortOpf;
+            Inn = organization?.Inn.ToString();
+            Kpp = organization?.Kpp.ToString();
+            Ogrn = organization?.Ogrn.ToString();
+            OgrnDate = organization?.OgrnDate;
+            FullName = organization?.Director.FullName;
+            Position = organization?.Director.Position;
+            AddressRegistration = organization.AddressRegistration.AddressFull;
+        }
         #endregion AutoCompleteOrganization
 
         #region AutoCompleteAddress (Подсказки заполнения адреса)

@@ -118,9 +118,11 @@ namespace _10Model.Helper.Dadata_ru
                 NameShortOpf = party.name.short_with_opf,
                 Opf = party.opf.@short,
                 Ogrn = ulong.Parse(party.ogrn),
-                OgrnDate = (System.DateTime)party.ogrn_date,
+                OgrnDate = party.ogrn_date,
                 Inn = ulong.Parse(party.inn),
-                Kpp = ulong.Parse(party.kpp)
+                Kpp = ulong.Parse(party.kpp),
+                Director = ToDirector(party),
+                AddressRegistration = ToAddress(party.address)
             };
         }
         public static Organization ToOrganization(Dadata.Model.Suggestion<Dadata.Model.Party> suggestion)
