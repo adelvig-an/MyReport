@@ -20,7 +20,7 @@
                 <TextBlock Margin="6,0,6,2" Text="{Binding NameShortOpf}" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="6,0,6,0" Text="{Binding Inn}" />
-                    <TextBlock Margin="6,0,6,0" Text="{Binding AddressFull}" />
+                    <TextBlock Margin="6,0,6,0" Text="{Binding AddressRegistration.AddressFull}" />
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -449,7 +449,7 @@
                             ItemTemplate="{StaticResource ResourceKey=AddressItemTemplate}"
                             Provider="{StaticResource ResourceKey=AddressSuggestionProvider}"
                             SelectedItem="{Binding SelectedAddressRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Text="{Binding AddressRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                            Text="{Binding AddressRegistration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                         <CheckBox
                             Margin="0,8"
                             Content="Адрес проживания совподает с адресом регистрации"
@@ -475,7 +475,7 @@
                             ItemTemplate="{StaticResource ResourceKey=AddressItemTemplate}"
                             Provider="{StaticResource ResourceKey=AddressSuggestionProvider}"
                             SelectedItem="{Binding SelectedAddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Text="{Binding AddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                            Text="{Binding AddressActual, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                     </StackPanel>
                 </Border>
             </Grid>

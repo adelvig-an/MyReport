@@ -16,7 +16,10 @@ namespace _30ViewModel
             get => currentPage;
             set 
             {
-                CurrentPage?.WriteCBOR(); //Сохранение в CBOR
+                if (CurrentPage?.UpdateCBOR() == true)
+                    CurrentPage.UpdateCBOR(); //Редактирование в CBOR уже созданной записи
+                else
+                    CurrentPage?.WriteCBOR(); //Сохранение в CBOR
                 SetProperty(ref currentPage, value); 
             }
         }
@@ -34,7 +37,7 @@ namespace _30ViewModel
             db.Organizations.Load();
             db.Addresses.Load();
             db.TempDatas.Load();
-            CurrentPage = new OrganizationVM();
+            CurrentPage = new ReportVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextBackPage = new RelayCommand(_ => NextBackPageAction());
         }

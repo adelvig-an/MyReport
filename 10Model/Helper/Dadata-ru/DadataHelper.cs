@@ -117,10 +117,10 @@ namespace _10Model.Helper.Dadata_ru
                 NameFullOpf = party.name.full_with_opf,
                 NameShortOpf = party.name.short_with_opf,
                 Opf = party.opf.@short,
-                Ogrn = ulong.Parse(party.ogrn),
+                Ogrn = party.ogrn,
                 OgrnDate = party.ogrn_date,
-                Inn = ulong.Parse(party.inn),
-                Kpp = ulong.Parse(party.kpp),
+                Inn = party.inn,
+                Kpp = party.kpp,
                 Director = ToDirector(party),
                 AddressRegistration = ToAddress(party.address)
             };

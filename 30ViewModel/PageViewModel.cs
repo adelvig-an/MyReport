@@ -28,7 +28,6 @@ namespace _30ViewModel
 
         #region Methods CBOR
         /// <summary>
-        /// Метод временного сохранения
         /// Сохранение данных в формате cbor
         /// </summary>
         public bool WriteCBOR()
@@ -44,6 +43,24 @@ namespace _30ViewModel
                     CBOR = cbor
                 };
                 context.Add(tempData);
+                context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// Метод сохранения отредактированных данных в формате cbor
+        /// </summary>
+        public bool UpdateCBOR()
+        {
+            try
+            {
+                var tempData = context.TempDatas.First();
+                var cbor = GetCBOR();
+                tempData.CBOR = cbor;
                 context.SaveChanges();
                 return true;
             }

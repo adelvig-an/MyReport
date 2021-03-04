@@ -9,6 +9,5 @@ namespace _10Model
         public int Id { get; set; }
         public string Page { get; set; }
         public byte[] CBOR { get; set; }
-        public int ReportId { get; set; }
     }
 }

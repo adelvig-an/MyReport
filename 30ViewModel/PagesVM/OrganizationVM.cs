@@ -118,14 +118,14 @@ namespace _30ViewModel.PagesVM
                 NameFullOpf = SelectedOrganization.NameFullOpf,
                 NameShortOpf = NameShortOpf,
                 Opf = SelectedOrganization.Opf,
-                Ogrn = ulong.Parse(Ogrn),
+                Ogrn = Ogrn,
                 OgrnDate = OgrnDate,
-                Inn = ulong.Parse(Inn),
-                Kpp = ulong.Parse(Kpp),
+                Inn = Inn,
+                Kpp = Kpp,
                 Bank = Bank,
-                Bik = ulong.Parse(Bik),
-                PayAccount = ulong.Parse(PayAccount),
-                CorrAccount = ulong.Parse(CorrAccount),
+                Bik = Bik,
+                PayAccount = PayAccount,
+                CorrAccount = CorrAccount,
                 Director = ToDirector(),
                 AddressRegistration = SelectedAddressRegistration ?? SelectedOrganization.AddressRegistration,
                 AddressActual = SelectedAddressActual
@@ -191,7 +191,7 @@ namespace _30ViewModel.PagesVM
         {
             NameShortOpf = organization?.NameShortOpf;
             Inn = organization?.Inn.ToString();
-            Kpp = organization?.Kpp.ToString();
+            Kpp = organization?.Kpp?.ToString();
             Ogrn = organization?.Ogrn.ToString();
             OgrnDate = organization?.OgrnDate;
             FullName = organization?.Director.FullName;
