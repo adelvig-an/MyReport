@@ -82,7 +82,6 @@ namespace _10Model.Helper.Dadata_ru
         }
         public static Address ToAddress(Dadata.Model.Suggestion<Dadata.Model.Address> suggestion)
         {
-            // ToDo: проверить что содержится в suggestion.data.result изначально
             suggestion.data.result = suggestion.value;
             return ToAddress(suggestion.data);
         }
@@ -118,10 +117,10 @@ namespace _10Model.Helper.Dadata_ru
                 NameFullOpf = party.name.full_with_opf,
                 NameShortOpf = party.name.short_with_opf,
                 Opf = party.opf.@short,
-                Ogrn = long.Parse(party.ogrn),
+                Ogrn = ulong.Parse(party.ogrn),
                 OgrnDate = (System.DateTime)party.ogrn_date,
-                Inn = int.Parse(party.inn),
-                Kpp = int.Parse(party.kpp)
+                Inn = ulong.Parse(party.inn),
+                Kpp = ulong.Parse(party.kpp)
             };
         }
         public static Organization ToOrganization(Dadata.Model.Suggestion<Dadata.Model.Party> suggestion)
