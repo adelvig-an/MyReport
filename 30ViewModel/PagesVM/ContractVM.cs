@@ -14,7 +14,7 @@ namespace _30ViewModel.PagesVM
         private string number;
         private DateTime? contractDate = DateTime.Today;
         private TargetType target;
-        private string intendedUse = "Сообщение";
+        private string intendedUse;
         public int Id { get; set; }
         [Required(ErrorMessage = "Требуется указать номер договора")]
         [StringLength(20, ErrorMessage = "Длина номера договора превышает максимально возможное количество символов")]
@@ -98,7 +98,7 @@ namespace _30ViewModel.PagesVM
             ContractDate = cbor[2][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[2][1].ToObject<long>()))
             : null;
-            Target = (TargetType) Enum.Parse(typeof(TargetType), cbor[3].AsString());
+            Target = (TargetType)Enum.Parse(typeof(TargetType), cbor[3].ToString(), true);
             IntendedUse = cbor[4].AsString();
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
