@@ -4,9 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:conv="clr-namespace:MyReport.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:MyReport.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:_10Model;assembly=10Model"
+    xmlns:pagesvm="clr-namespace:_30ViewModel.PagesVM;assembly=30ViewModel"
+    d:DataContext="{d:DesignInstance Type=pagesvm:ContractVM}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">

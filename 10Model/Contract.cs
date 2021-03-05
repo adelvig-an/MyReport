@@ -20,7 +20,7 @@ namespace _10Model
     {
         public int Id { get; set; }
         public string Number { get; set; } //Номер договора
-        public DateTime ContractDate { get; set; } //Дата договора
+        public DateTime? ContractDate { get; set; } //Дата договора
         public TargetType Target { get; set; }
         public string IntendedUse { get; set; } //Предполагаемый вид использования
     }

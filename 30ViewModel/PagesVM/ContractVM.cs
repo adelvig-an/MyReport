@@ -1,5 +1,6 @@
 ﻿using _10Model;
 using _20DbLayer;
+using PeterO.Cbor;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
@@ -11,16 +12,16 @@ namespace _30ViewModel.PagesVM
     {
         #region Properties (Нужны для валидации данных)
         private string number;
-        private DateTime contractDate = DateTime.Today;
+        private DateTime? contractDate = DateTime.Today;
         private TargetType target;
-        private string intendedUse;
+        private string intendedUse = "Сообщение";
         public int Id { get; set; }
         [Required(ErrorMessage = "Требуется указать номер договора")]
         [StringLength(20, ErrorMessage = "Длина номера договора превышает максимально возможное количество символов")]
         public string Number { get => number;
             set { ValidateProperty(value); SetProperty(ref number, value); } }
         [Required(ErrorMessage = "Требуется указать дату договора")]
-        public DateTime ContractDate { get => contractDate;
+        public DateTime? ContractDate { get => contractDate;
             set { ValidateProperty(value); SetProperty(ref contractDate, value); } }
         public TargetType Target { get => target; 
             set { ValidateProperty(value); SetProperty(ref target, value); } }
@@ -79,15 +80,29 @@ namespace _30ViewModel.PagesVM
         #endregion DataBase
 
         #region CBOR
-        public override byte[] GetCBOR()
+        static CBORObject ToCBOR(ContractVM contractVM)
         {
-            throw new NotImplementedException();
+            return CBORObject.NewArray()
+                .Add(contractVM.Id)
+                .Add(contractVM.Number)
+                .Add(contractVM.ContractDate.HasValue
+                ? CBORObject.NewArray().Add(true).Add(contractVM.ContractDate.Value.ToBinary())
+                : CBORObject.NewArray().Add(false))
+                .Add(contractVM.Target)
+                .Add(contractVM.IntendedUse);
         }
-
-        public override void SetCBOR(byte[] b)
+        void FromCBOR(CBORObject cbor)
         {
-            throw new NotImplementedException();
+            Id = cbor[0].AsInt32();
+            Number = cbor[1].AsString();
+            ContractDate = cbor[2][0].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[2][1].ToObject<long>()))
+            : null;
+            Target = (TargetType) Enum.Parse(typeof(TargetType), cbor[3].AsString());
+            IntendedUse = cbor[4].AsString();
         }
+        public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
+        public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
         #endregion CBOR
     }
 }

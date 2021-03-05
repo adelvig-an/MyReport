@@ -58,7 +58,8 @@ namespace _30ViewModel
         {
             try
             {
-                var tempData = context.TempDatas.First();
+                var primaryKey = GetType().Name;
+                var tempData = context.TempDatas.First(t => t.Page == primaryKey);
                 var cbor = GetCBOR();
                 tempData.CBOR = cbor;
                 context.SaveChanges();

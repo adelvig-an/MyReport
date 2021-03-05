@@ -122,7 +122,7 @@ namespace _30ViewModel.PagesVM
             Id = cbor[0].AsInt32();
             Number = cbor[1].AsString();
             VulationDate = cbor[2][0].AsBoolean()
-                ? new DateTime?(DateTime.FromBinary(cbor[3][1].ToObject<long>()))
+                ? new DateTime?(DateTime.FromBinary(cbor[2][1].ToObject<long>()))
                 : null;
             CompilationDate = cbor[3][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[3][1].ToObject<long>()))
@@ -132,15 +132,8 @@ namespace _30ViewModel.PagesVM
             : null;
             InspectionFeaures = cbor[5].AsString();
         }
-        public override byte[] GetCBOR()
-        {
-            return ToCBOR(this).EncodeToBytes();
-        }
-
-        public override void SetCBOR(byte[] b)
-        {
-            FromCBOR(CBORObject.DecodeFromBytes(b));
-        }
+        public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
+        public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
         #endregion CBOR
     }
 }

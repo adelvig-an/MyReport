@@ -17,7 +17,7 @@ namespace _30ViewModel
             set 
             {
                 if (CurrentPage?.UpdateCBOR() == true)
-                    CurrentPage.UpdateCBOR(); //Редактирование в CBOR уже созданной записи
+                    CurrentPage?.UpdateCBOR(); //Редактирование в CBOR уже созданной записи
                 else
                     CurrentPage?.WriteCBOR(); //Сохранение в CBOR
                 SetProperty(ref currentPage, value); 
@@ -58,10 +58,10 @@ namespace _30ViewModel
         }
         public void NextBackPageAction()
         {
-            if (CurrentPage is ReportVM report)
+            if (CurrentPage is ReportVM)
             { 
-                report.AddReport();
                 CurrentPage = new ContractVM();
+                CurrentPage?.ReadCBOR();
             }    
                 
             else if (CurrentPage is ContractVM)
