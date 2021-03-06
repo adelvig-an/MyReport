@@ -1,6 +1,7 @@
 ﻿using _10Model;
 using _10Model.Customer;
 using _20DbLayer;
+using PeterO.Cbor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +20,7 @@ namespace _30ViewModel.PagesVM
         private string serial;
         private string number;
         private string division;
-        private DateTime divisionDate = DateTime.Today;
+        private DateTime? divisionDate = DateTime.Today;
         private string addressRegistration;
         private string addresActual;
         public int Id { get; set; }
@@ -49,7 +50,7 @@ namespace _30ViewModel.PagesVM
         public string Division { get => division;
             set { ValidateProperty(value); SetProperty(ref division, value); } }
         [Required(ErrorMessage = "Требуется указать дату выдачи паспорта")]
-        public DateTime DivisionDate { get => divisionDate;
+        public DateTime? DivisionDate { get => divisionDate;
             set { ValidateProperty(value); SetProperty(ref divisionDate, value); } }
         [Required(ErrorMessage = "Требуется указать адрес регистрации")]
         [StringLength(255, ErrorMessage = "Привышение максимально допустимого количества символов")]
@@ -144,15 +145,41 @@ namespace _30ViewModel.PagesVM
         #endregion AutoCompleteAddress
 
         #region CBOR
-        public override byte[] GetCBOR()
+        static CBORObject ToCBOR(PrivatePersonVM privatePersonVM)
         {
-            throw new NotImplementedException();
+            return CBORObject.NewArray()
+                .Add(privatePersonVM.Id)
+                .Add(privatePersonVM.SecondName)
+                .Add(privatePersonVM.FirstName)
+                .Add(privatePersonVM.MiddleName)
+                .Add(privatePersonVM.Serial)
+                .Add(privatePersonVM.Number)
+                .Add(privatePersonVM.Division)
+                .Add(privatePersonVM.DivisionDate.HasValue
+                ? CBORObject.NewArray().Add(true).Add(privatePersonVM.DivisionDate.Value.ToBinary())
+                : CBORObject.NewArray().Add(false))
+                .Add(privatePersonVM.AddressRegistration)
+                .Add(privatePersonVM.IsAddressMatch)
+                .Add(privatePersonVM.AddressActual);
         }
-
-        public override void SetCBOR(byte[] b)
+        void FromCBOR(CBORObject cbor)
         {
-            throw new NotImplementedException();
+            Id = cbor[0].AsInt32();
+            SecondName = cbor[1].AsString();
+            FirstName = cbor[2].AsString();
+            MiddleName = cbor[3].AsString();
+            Serial = cbor[4].AsString();
+            Number = cbor[5].AsString();
+            Division = cbor[6].AsString();
+            DivisionDate = cbor[7][0].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[7][1].ToObject<long>()))
+            : null;
+            AddressRegistration = cbor[8].AsString();
+            IsAddressMatch = cbor[9].AsBoolean();
+            AddressActual = cbor[10].AsString();
         }
+        public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
+        public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
         #endregion CBOR
     }
 }

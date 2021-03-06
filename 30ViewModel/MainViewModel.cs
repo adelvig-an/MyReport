@@ -25,6 +25,17 @@ namespace _30ViewModel
         }
         private readonly ApplicationContext db = new ApplicationContext();
 
+        private bool isVisibl;
+        public bool IsVisibl { get => isVisibl; 
+            set
+            {
+                if (CurrentPage is ReportVM)
+                    isVisibl = false;
+                SetProperty(ref isVisibl, value);
+            }
+        }
+        
+
         public MainViewModel()
         {
             db.Database.EnsureDeleted();
@@ -37,15 +48,17 @@ namespace _30ViewModel
             db.Organizations.Load();
             db.Addresses.Load();
             db.TempDatas.Load();
-            CurrentPage = new ReportVM();
+            CurrentPage = new OrganizationVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
-            NextBackPage = new RelayCommand(_ => NextBackPageAction());
+            NextPage = new RelayCommand(_ => NextPageAction());
+            BackPage = new RelayCommand(_ => BackPageAction());
         }
         /// <summary>
         /// Команда сохранения в БД
         /// </summary>
         public ICommand SaveData { get; }
-        public ICommand NextBackPage { get; }
+        public ICommand NextPage { get; }
+        public ICommand BackPage { get; }
         /// <summary>
         /// Метод реализации сохранения данных в БД
         /// </summary>
@@ -56,7 +69,7 @@ namespace _30ViewModel
                 organization.AddOrganization();
             }
         }
-        public void NextBackPageAction()
+        public void NextPageAction()
         {
             if (CurrentPage is ReportVM)
             { 
@@ -66,7 +79,20 @@ namespace _30ViewModel
                 
             else if (CurrentPage is ContractVM)
             {
+                CurrentPage = new PrivatePersonVM();
+                CurrentPage?.ReadCBOR(); //Чтение из CBOR
+            }
+        }
+        public void BackPageAction()
+        {
+            if (CurrentPage is ContractVM)
+            {
                 CurrentPage = new ReportVM();
+                CurrentPage.ReadCBOR(); //Чтение из CBOR
+            }
+            else if (CurrentPage is PrivatePersonVM)
+            {
+                CurrentPage = new ContractVM();
                 CurrentPage.ReadCBOR(); //Чтение из CBOR
             }
         }

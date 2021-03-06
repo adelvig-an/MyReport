@@ -193,14 +193,16 @@
         </Border>
         <Border Grid.Row="2" Margin="0,8">
             <!--  Только для теста! Удалить!  -->
-            <Button
-                Padding="16,8"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Command="{Binding DataContext.NextBackPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
-                Content="Далее"
-                FontFamily="DIN Pro Medium"
-                FontSize="16" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button
+                    Margin="8,0"
+                    Padding="16,8"
+                    VerticalAlignment="Center"
+                    Command="{Binding DataContext.NextPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                    Content="Далее"
+                    FontFamily="DIN Pro Medium"
+                    FontSize="16" />
+            </StackPanel>
         </Border>
     </Grid>
 </UserControl>

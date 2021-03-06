@@ -2,6 +2,7 @@
 using _10Model.Customer;
 using _20DbLayer;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 
@@ -12,6 +13,7 @@ namespace _30ViewModel.PagesVM
         #region Properties (Нужны для валидации данных)
         //Свойства для организации
         private string nameShortOpf;
+        private string opf;
         private string ogrn;
         private DateTime? ogrnDate = DateTime.Today;
         private string inn;
@@ -31,39 +33,77 @@ namespace _30ViewModel.PagesVM
         private string addresActual;
         public int Id { get; set; }
         //Свойства для организации
+        [Required(ErrorMessage = "Требуется указать название организации")]
         public string NameShortOpf { get => nameShortOpf;
             set { ValidateProperty(value); SetProperty(ref nameShortOpf, value); } }
+        public string Opf { get => opf; 
+            set { ValidateProperty(value); SetProperty(ref opf, value); } }
+        [Required(ErrorMessage = "Требуется указать ОГРН")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "В ОГРН только цифры")]
+        //[StringLength(13, MinimumLength = 13, ErrorMessage = "Не верное количество символов в ОГРН для ООО, ПАО, АО")]
+        [LengthOnOtherPropertyValue("Opf", "ИП", 15, 13, ErrorMessage = "Не верное количество символов для ОГРН")]
+        //Если ООО, ПАО, АО = 13
+        //Если ИП = 15
         public string Ogrn { get => ogrn;
             set { ValidateProperty(value); SetProperty(ref ogrn, value); } }
+        [Required(ErrorMessage = "Требуется указать дату регистрации")]
         public DateTime? OgrnDate { get => ogrnDate;
             set { ValidateProperty(value); SetProperty(ref ogrnDate, value); } }
+        [Required(ErrorMessage = "Требуется указать ИНН")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "В ИНН только цифры")]
+        [LengthOnOtherPropertyValue("Opf","ИП",12,10,ErrorMessage = "Не верное количество символов для ИНН")]
+        //Если ООО, ПАО, АО = 10
+        //Если ИП = 12
         public string Inn { get => inn;
             set { ValidateProperty(value); SetProperty(ref inn, value); } }
+        //[Required(ErrorMessage = "Требуется указать КПП")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "В КПП только цифры")]
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "Не верное количество символов в КПП")]
+        //У ИП КПП нет!!! 
         public string Kpp { get => kpp;
         set { ValidateProperty(value); SetProperty(ref kpp, value); } }
+        [Required(ErrorMessage = "Требуется указать название банка")]
         public string Bank { get => bank; 
             set { ValidateProperty(value); SetProperty(ref bank, value); } }
+        [Required(ErrorMessage = "Требуется указать БИК банка")]
+        [Range(0, int.MaxValue, ErrorMessage = "В БИК банка только цифры")]
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "Не верное количество символов в БИК банка")]
         public string Bik { get => bik; 
             set { ValidateProperty(value); SetProperty(ref bik, value); } }
+        [Required(ErrorMessage = "Требуется указать расчетный счет")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "В расчетном счете только цифры")]
+        [StringLength(20, MinimumLength = 20, ErrorMessage = "Не верное количество символов в расчетном счете")]
         public string PayAccount { get => payAccount;
             set { ValidateProperty(value); SetProperty(ref payAccount, value); } }
+        [Required(ErrorMessage = "Требуется указать корреспондентский счет")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "В корреспондентском счете только цифры")]
+        [StringLength(20, MinimumLength = 20, ErrorMessage = "Не верное количество символов в корреспондентском счете")]
         public string CorrAccount { get => corrAccount; 
             set { ValidateProperty(value); SetProperty(ref corrAccount, value); } }
         //Свойства для директора
+        [Required(ErrorMessage = "Требуется указать ФИО руководителя")]
         public string FullName { get => fullName;
             set { ValidateProperty(value); SetProperty(ref fullName, value); } }
+        [Required(ErrorMessage = "Требуется указать должность руководителя")]
         public string Position { get => position;
             set { ValidateProperty(value); SetProperty(ref position, value); } }
         public PowerOfAttorneyType PowerOfAttorney { get => powerOfAttorney;
             set { ValidateProperty(value); SetProperty(ref powerOfAttorney, value); ToVisibl(); } }
+        [Required(ErrorMessage = "Требуется указать номер доверенности")]
         public string PowerOfAttorneyNumber { get => powerOfAttorneyNumber;
             set { ValidateProperty(value); SetProperty(ref powerOfAttorneyNumber, value); } }
+        [Required(ErrorMessage = "Требуется указать дату доверения")]
         public DateTime? PowerOfAttorneyDate { get => powerOfAttorneyDate;
             set { ValidateProperty(value); SetProperty(ref powerOfAttorneyDate, value); } }
+        [Required(ErrorMessage = "Требуется указать дату окончания действия доверенности")]
         public DateTime? PowerOfAttorneyDateBefore { get => powerOfAttorneyDateBefore;
             set { ValidateProperty(value); SetProperty(ref powerOfAttorneyDateBefore, value); } }
+        [Required(ErrorMessage = "Требуется указать адрес регистрации")]
+        [StringLength(255, ErrorMessage = "Привышение максимально допустимого количества символов")]
         public string AddressRegistration { get => addressRegistration;
             set { ValidateProperty(value); SetProperty(ref addressRegistration, value); } }
+        [Required(ErrorMessage = "Требуется указать адрес проживания")]
+        [StringLength(255, ErrorMessage = "Привышение максимально допустимого количества символов")]
         public string AddressActual { get => addresActual;
             set { ValidateProperty(value); SetProperty(ref addresActual, value); } }
         #endregion Properties
@@ -190,6 +230,7 @@ namespace _30ViewModel.PagesVM
         public void FillOrganization(Organization organization) 
         {
             NameShortOpf = organization?.NameShortOpf;
+            Opf = organization?.Opf;
             Inn = organization?.Inn.ToString();
             Kpp = organization?.Kpp?.ToString();
             Ogrn = organization?.Ogrn.ToString();
