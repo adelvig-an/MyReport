@@ -83,5 +83,14 @@ namespace _30ViewModel
                 OnErrorsChanged(prop.Key);
             }
         }
+
+        public void ClearValidation([CallerMemberName] string propertyName = null)
+        {
+            if (_errors.ContainsKey(propertyName))
+            {
+                _errors.Remove(propertyName);
+            }
+            OnErrorsChanged(propertyName);
+        }
     }
 }

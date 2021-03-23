@@ -41,7 +41,6 @@ namespace _30ViewModel.PagesVM
             set { ValidateProperty(value); SetProperty(ref opf, value); } }
         [Required(ErrorMessage = "Требуется указать ОГРН")]
         [Range(0, ulong.MaxValue, ErrorMessage = "В ОГРН только цифры")]
-        //[StringLength(13, MinimumLength = 13, ErrorMessage = "Не верное количество символов в ОГРН для ООО, ПАО, АО")]
         [LengthOnOtherPropertyValue("Opf", "ИП", 15, 13, ErrorMessage = "Не верное количество символов для ОГРН")]
         //Если ИП = 15
         //Иначе = 13
@@ -61,13 +60,17 @@ namespace _30ViewModel.PagesVM
         [Range(0, ulong.MaxValue, ErrorMessage = "В КПП только цифры")]
         [StringLength(9, MinimumLength = 9, ErrorMessage = "Не верное количество символов в КПП")]
         //У ИП КПП нет!!! 
-        public string Kpp { get => kpp;
-        set {
-                if (Opf != "ИП")
-                {
+        public string Kpp { 
+            get => kpp;
+            set 
+            {
+                if (Opf == "ИП")
+                    ClearValidation();
+                else
                     ValidateProperty(value);
-                }; 
-                SetProperty(ref kpp, value); } }
+                SetProperty(ref kpp, value); 
+            } 
+        }
         [Required(ErrorMessage = "Требуется указать название банка")]
         public string Bank { get => bank; 
             set { ValidateProperty(value); SetProperty(ref bank, value); } }
@@ -148,12 +151,12 @@ namespace _30ViewModel.PagesVM
             set =>
                 SetProperty(ref isAttorneyValue, value);
         }
-        public bool ToVisibl()
+        public void ToVisibl()
         {
             if (PowerOfAttorney == PowerOfAttorneyType.Attorney)
-                return IsAttorneyValue = true;
+                IsAttorneyValue = true;
             else
-                return IsAttorneyValue = false;
+                IsAttorneyValue = false;
         }
         #endregion
 

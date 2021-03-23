@@ -11,7 +11,8 @@ namespace _30ViewModel
         private readonly int lengthOnMatch; //ИП
         private readonly int length; //Иначе
 
-        public LengthOnOtherPropertyValueAttribute(string propertyNameToCheck, string propertyValueToCheck, int lengthOnMatch, int length)
+        public LengthOnOtherPropertyValueAttribute(string propertyNameToCheck, string propertyValueToCheck, 
+            int lengthOnMatch, int length)
         {
             this.propertyValueToCheck = propertyValueToCheck;
             this.lengthOnMatch = lengthOnMatch;
