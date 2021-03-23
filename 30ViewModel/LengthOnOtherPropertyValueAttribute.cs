@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Text;
 
 namespace _30ViewModel
 {
@@ -10,30 +8,31 @@ namespace _30ViewModel
     {
         private readonly string propertyNameToCheck;
         private readonly string propertyValueToCheck;
-        private readonly int maxLengthOnMatch;
-        private readonly int maxLength;
+        private readonly int lengthOnMatch; //ИП
+        private readonly int length; //Иначе
 
-        public LengthOnOtherPropertyValueAttribute(string propertyNameToCheck, string propertyValueToCheck, int maxLengthOnMatch, int maxLength)
+        public LengthOnOtherPropertyValueAttribute(string propertyNameToCheck, string propertyValueToCheck, int lengthOnMatch, int length)
         {
             this.propertyValueToCheck = propertyValueToCheck;
-            this.maxLengthOnMatch = maxLengthOnMatch;
-            this.maxLength = maxLength;
+            this.lengthOnMatch = lengthOnMatch;
+            this.length = length;
             this.propertyNameToCheck = propertyNameToCheck;
         }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var propertyName = validationContext.ObjectType.GetProperty(propertyNameToCheck);
-            if (propertyName == null)
-                return new ValidationResult(string.Format(CultureInfo.CurrentCulture, "Unknown property {0}", new[] { propertyNameToCheck }));
+            var propertyInfo = validationContext.ObjectType.GetProperty(propertyNameToCheck); //получение значения свойства
+            if (propertyInfo == null)
+                return new ValidationResult(string.Format(CultureInfo.CurrentCulture, "Unknown property {0}", new[] { propertyNameToCheck }),
+                    new[] { validationContext.MemberName });
 
-            var propertyValue = propertyName.GetValue(validationContext.ObjectInstance, null) as string;
+            var propertyValue = propertyInfo.GetValue(validationContext.ObjectInstance) as string;
 
-            if (propertyValueToCheck.Equals(propertyValue, StringComparison.InvariantCultureIgnoreCase) && value != null && ((string)value).Length > maxLengthOnMatch)
-                return new ValidationResult(string.Format(ErrorMessageString, validationContext.DisplayName, maxLengthOnMatch));
+            if (propertyValueToCheck.Equals(propertyValue, StringComparison.InvariantCultureIgnoreCase) && value != null && ((string)value).Length != lengthOnMatch)
+                return new ValidationResult(string.Format(ErrorMessageString, validationContext.DisplayName, lengthOnMatch), new[] { validationContext.MemberName });
 
-            if (value != null && ((string)value).Length > maxLength)
-                return new ValidationResult(string.Format(ErrorMessageString, validationContext.DisplayName, maxLength));
+            if (value != null && ((string)value).Length != length)
+                return new ValidationResult(string.Format(ErrorMessageString, validationContext.DisplayName, length), new[] { validationContext.MemberName });
 
             return ValidationResult.Success;
         }

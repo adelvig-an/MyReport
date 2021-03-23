@@ -36,14 +36,15 @@ namespace _30ViewModel.PagesVM
         [Required(ErrorMessage = "Требуется указать название организации")]
         public string NameShortOpf { get => nameShortOpf;
             set { ValidateProperty(value); SetProperty(ref nameShortOpf, value); } }
+        [Required(ErrorMessage = "Требуется указать организационно-правовую форму")]
         public string Opf { get => opf; 
             set { ValidateProperty(value); SetProperty(ref opf, value); } }
         [Required(ErrorMessage = "Требуется указать ОГРН")]
         [Range(0, ulong.MaxValue, ErrorMessage = "В ОГРН только цифры")]
         //[StringLength(13, MinimumLength = 13, ErrorMessage = "Не верное количество символов в ОГРН для ООО, ПАО, АО")]
         [LengthOnOtherPropertyValue("Opf", "ИП", 15, 13, ErrorMessage = "Не верное количество символов для ОГРН")]
-        //Если ООО, ПАО, АО = 13
         //Если ИП = 15
+        //Иначе = 13
         public string Ogrn { get => ogrn;
             set { ValidateProperty(value); SetProperty(ref ogrn, value); } }
         [Required(ErrorMessage = "Требуется указать дату регистрации")]
@@ -51,9 +52,9 @@ namespace _30ViewModel.PagesVM
             set { ValidateProperty(value); SetProperty(ref ogrnDate, value); } }
         [Required(ErrorMessage = "Требуется указать ИНН")]
         [Range(0, ulong.MaxValue, ErrorMessage = "В ИНН только цифры")]
-        [LengthOnOtherPropertyValue("Opf","ИП",12,10,ErrorMessage = "Не верное количество символов для ИНН")]
-        //Если ООО, ПАО, АО = 10
         //Если ИП = 12
+        //Иначе = 10
+        [LengthOnOtherPropertyValue("Opf", "ИП", 12, 10, ErrorMessage = "Не верное количество символов для ИНН")]
         public string Inn { get => inn;
             set { ValidateProperty(value); SetProperty(ref inn, value); } }
         //[Required(ErrorMessage = "Требуется указать КПП")]
@@ -102,7 +103,7 @@ namespace _30ViewModel.PagesVM
         [StringLength(255, ErrorMessage = "Привышение максимально допустимого количества символов")]
         public string AddressRegistration { get => addressRegistration;
             set { ValidateProperty(value); SetProperty(ref addressRegistration, value); } }
-        [Required(ErrorMessage = "Требуется указать адрес проживания")]
+        [Required(ErrorMessage = "Требуется указать адрес местонахождения")]
         [StringLength(255, ErrorMessage = "Привышение максимально допустимого количества символов")]
         public string AddressActual { get => addresActual;
             set { ValidateProperty(value); SetProperty(ref addresActual, value); } }

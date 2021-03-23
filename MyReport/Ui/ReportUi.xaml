@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="550"
     d:DesignWidth="800"
+    FontFamily="DIN Pro Regular"
+    FontSize="14"
     mc:Ignorable="d">
     <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
         <Grid.RowDefinitions>
@@ -23,7 +25,6 @@
                 <TextBlock
                     VerticalAlignment="Center"
                     Foreground="White"
-                    Style="{StaticResource ResourceKey=StyleDesignHeadline6TextBlock}"
                     Text="Реквизиты отчета об оценке" />
             </Border>
         </Border>
@@ -45,7 +46,6 @@
                             Grid.Column="0"
                             Margin="8,0"
                             VerticalAlignment="Center"
-                            Style="{StaticResource ResourceKey=StyleDesignSubtitle2TextBlock}"
                             Text="Номер отчета" />
                         <TextBox
                             Grid.Column="1"
@@ -83,7 +83,6 @@
                                     <TextBlock
                                         Margin="0,0,0,4"
                                         VerticalAlignment="Center"
-                                        Style="{StaticResource ResourceKey=StyleDesignTextBlock}"
                                         Text="Дата оценки" />
                                     <DatePicker
                                         Width="120"
@@ -102,7 +101,6 @@
                                     <TextBlock
                                         Margin="0,0,0,4"
                                         VerticalAlignment="Center"
-                                        Style="{StaticResource ResourceKey=StyleDesignTextBlock}"
                                         Text="Дата составления отчета" />
                                     <DatePicker
                                         Width="120"
@@ -121,7 +119,6 @@
                                     <TextBlock
                                         Margin="0,0,0,4"
                                         VerticalAlignment="Center"
-                                        Style="{StaticResource ResourceKey=StyleDesignTextBlock}"
                                         Text="Дата осмотра" />
                                     <DatePicker
                                         Width="120"
@@ -148,7 +145,6 @@
                             Grid.Column="0"
                             Margin="8,0"
                             VerticalAlignment="Top"
-                            Style="{StaticResource ResourceKey=StyleDesignTextBlock}"
                             Text="Особенности проведения осмотра"
                             TextWrapping="Wrap" />
                         <TextBox

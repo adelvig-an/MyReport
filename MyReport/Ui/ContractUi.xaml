@@ -10,6 +10,8 @@
     d:DataContext="{d:DesignInstance Type=pagesvm:ContractVM}"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    FontFamily="DIN Pro Regular"
+    FontSize="14"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -21,7 +23,6 @@
             <TextBlock
                 Margin="8,0"
                 VerticalAlignment="Center"
-                Style="{StaticResource StyleDesignHeadline6TextBlock}"
                 Text="Договор об оценке" />
         </Border>
         <Border Grid.Row="1">
@@ -42,7 +43,6 @@
                             Grid.Column="0"
                             Margin="8,0"
                             VerticalAlignment="Center"
-                            Style="{StaticResource StyleDesignSubtitle2TextBlock}"
                             Text="Номер договора" />
                         <Border Grid.Column="1">
                             <Grid>
@@ -82,7 +82,6 @@
                             Grid.Column="0"
                             Margin="8,0"
                             VerticalAlignment="Center"
-                            Style="{StaticResource StyleDesignTextBlock}"
                             Text="Дата договора" />
                         <DatePicker
                             Grid.Column="1"
@@ -106,7 +105,6 @@
                             Grid.Column="0"
                             Margin="8,0"
                             VerticalAlignment="Center"
-                            Style="{StaticResource StyleDesignTextBlock}"
                             Text="Цель оценки" />
                         <ComboBox
                             Grid.Column="1"
@@ -122,10 +120,7 @@
                 </Border>
                 <Border Grid.Row="3" Margin="8">
                     <StackPanel>
-                        <TextBlock
-                            Margin="0,0,0,4"
-                            Style="{StaticResource StyleDesignTextBlock}"
-                            Text="Предпологаемое использование результатов оценки" />
+                        <TextBlock Margin="0,0,0,4" Text="Предпологаемое использование результатов оценки" />
                         <TextBox
                             Height="92"
                             MinWidth="240"
@@ -145,7 +140,6 @@
                 <TextBlock
                     Margin="8,0,16,0"
                     VerticalAlignment="Center"
-                    Style="{StaticResource StyleDesignSubtitle2TextBlock}"
                     Text="Заказчик"
                     Visibility="Collapsed" />
                 <ListBox

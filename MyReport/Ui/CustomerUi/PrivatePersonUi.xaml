@@ -8,6 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    FontFamily="DIN Pro Regular"
+    FontSize="14"
     mc:Ignorable="d">
     <UserControl.Resources>
         <DataTemplate x:Key="AddressItemTemplate">
@@ -25,7 +27,6 @@
                 <TextBlock
                     Margin="8,0"
                     VerticalAlignment="Center"
-                    Style="{StaticResource StyleDesignSubtitle1TextBlock}"
                     Text="Частное лицо" />
                 <Button
                     Margin="8,0"
@@ -50,19 +51,12 @@
                     Margin="0,8">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="17*" />
-                            <ColumnDefinition Width="72*" />
-                            <ColumnDefinition Width="89*" />
-                            <ColumnDefinition Width="89*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel
-                            Grid.Column="0"
-                            Grid.ColumnSpan="2"
-                            Margin="8,0,8,0">
-                            <TextBlock
-                                Margin="0,0,0,4"
-                                Style="{StaticResource StyleDesignTextBlock}"
-                                Text="Фамилия" />
+                        <StackPanel Grid.Column="0" Margin="8,0,8,0">
+                            <TextBlock Margin="0,0,0,4" Text="Фамилия" />
                             <TextBox
                                 Height="32"
                                 MinWidth="240"
@@ -72,11 +66,8 @@
                                 FontSize="14"
                                 Text="{Binding SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                         </StackPanel>
-                        <StackPanel Grid.Column="2" Margin="8,0,8,0">
-                            <TextBlock
-                                Margin="0,0,0,4"
-                                Style="{StaticResource StyleDesignTextBlock}"
-                                Text="Имя" />
+                        <StackPanel Grid.Column="1" Margin="8,0,8,0">
+                            <TextBlock Margin="0,0,0,4" Text="Имя" />
                             <TextBox
                                 Height="32"
                                 MinWidth="240"
@@ -86,11 +77,8 @@
                                 FontSize="14"
                                 Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                         </StackPanel>
-                        <StackPanel Grid.Column="3" Margin="8,0,8,0">
-                            <TextBlock
-                                Margin="0,0,0,4"
-                                Style="{StaticResource StyleDesignTextBlock}"
-                                Text="Отчество" />
+                        <StackPanel Grid.Column="2" Margin="8,0,8,0">
+                            <TextBlock Margin="0,0,0,4" Text="Отчество" />
                             <TextBox
                                 Height="32"
                                 MinWidth="240"
@@ -123,7 +111,6 @@
                                     Grid.Column="0"
                                     Height="32"
                                     Margin="8,0"
-                                    Style="{StaticResource StyleDesignTextBlock}"
                                     Text="Серия паспорта" />
                                 <TextBox
                                     Grid.Column="1"
@@ -147,7 +134,6 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Margin="8,0"
-                                    Style="{StaticResource StyleDesignTextBlock}"
                                     Text="Номер паспорта" />
                                 <TextBox
                                     Grid.Column="1"
@@ -172,7 +158,6 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Margin="8,0"
-                                    Style="{StaticResource StyleDesignTextBlock}"
                                     Text="Дата выдачи" />
                                 <DatePicker
                                     Grid.Column="1"
@@ -192,10 +177,7 @@
                             Grid.Row="3"
                             Margin="0,8">
                             <StackPanel Margin="8,0">
-                                <TextBlock
-                                    Margin="0,0,0,4"
-                                    Style="{StaticResource StyleDesignTextBlock}"
-                                    Text="Кем выдан паспорт" />
+                                <TextBlock Margin="0,0,0,4" Text="Кем выдан паспорт" />
                                 <TextBox
                                     Height="32"
                                     MinWidth="240"
@@ -213,10 +195,7 @@
                     Grid.Row="2"
                     Margin="0,8">
                     <StackPanel Margin="8,0">
-                        <TextBlock
-                            Margin="0,8,0,4"
-                            Style="{StaticResource StyleDesignTextBlock}"
-                            Text="Адрес регистрации" />
+                        <TextBlock Margin="0,8,0,4" Text="Адрес регистрации" />
                         <acb:AutoCompleteTextBox
                             Height="32"
                             MinWidth="240"
@@ -238,10 +217,7 @@
                             FontFamily="DIN Pro Regular"
                             FontSize="14"
                             IsChecked="{Binding IsAddressMatch}" />
-                        <TextBlock
-                            Margin="0,8,0,4"
-                            Style="{StaticResource StyleDesignTextBlock}"
-                            Text="Адрес проживания" />
+                        <TextBlock Margin="0,8,0,4" Text="Адрес проживания" />
                         <acb:AutoCompleteTextBox
                             Height="32"
                             MinWidth="240"

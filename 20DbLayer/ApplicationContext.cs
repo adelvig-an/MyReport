@@ -17,6 +17,7 @@ namespace _20DbLayer
         public DbSet<PrivatePerson> PrivatePeople { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Appraiser> Appraisers { get; set; }
 
         protected override void OnConfiguring (DbContextOptionsBuilder options)
         {
@@ -30,6 +31,7 @@ namespace _20DbLayer
             model.Entity<Person>().ToTable("People");
             model.Entity<PrivatePerson>().ToTable("PrivatePersons");
             model.Entity<Director>().ToTable("Directors");
+            model.Entity<Appraiser>().ToTable("Appraisers");
 
             model.Entity<Contract>()
                .Property(e => e.Target)
