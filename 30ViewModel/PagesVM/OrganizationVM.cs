@@ -57,12 +57,17 @@ namespace _30ViewModel.PagesVM
         [LengthOnOtherPropertyValue("Opf", "ИП", 12, 10, ErrorMessage = "Не верное количество символов для ИНН")]
         public string Inn { get => inn;
             set { ValidateProperty(value); SetProperty(ref inn, value); } }
-        //[Required(ErrorMessage = "Требуется указать КПП")]
+        [Required(ErrorMessage = "Требуется указать КПП")]
         [Range(0, ulong.MaxValue, ErrorMessage = "В КПП только цифры")]
         [StringLength(9, MinimumLength = 9, ErrorMessage = "Не верное количество символов в КПП")]
         //У ИП КПП нет!!! 
         public string Kpp { get => kpp;
-        set { ValidateProperty(value); SetProperty(ref kpp, value); } }
+        set {
+                if (Opf != "ИП")
+                {
+                    ValidateProperty(value);
+                }; 
+                SetProperty(ref kpp, value); } }
         [Required(ErrorMessage = "Требуется указать название банка")]
         public string Bank { get => bank; 
             set { ValidateProperty(value); SetProperty(ref bank, value); } }
@@ -108,6 +113,8 @@ namespace _30ViewModel.PagesVM
         public string AddressActual { get => addresActual;
             set { ValidateProperty(value); SetProperty(ref addresActual, value); } }
         #endregion Properties
+
+
 
         #region AddressMatch (Совпадение адресов регистрации и проживания)
         private bool isAddressMatch;
