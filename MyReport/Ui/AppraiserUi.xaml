@@ -137,7 +137,8 @@
                                         Margin="0,4,0,0"
                                         VerticalContentAlignment="Center"
                                         FontFamily="DIN Pro Regular"
-                                        FontSize="14" />
+                                        FontSize="14"
+                                        Text="{Binding Universety, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                 </StackPanel>
                                 <Border Grid.Row="1" Margin="0,8">
                                     <Grid>
@@ -157,7 +158,8 @@
                                             Margin="8,0"
                                             VerticalContentAlignment="Center"
                                             FontFamily="DIN Pro Regular"
-                                            FontSize="14" />
+                                            FontSize="14"
+                                            Text="{Binding Specialization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                     </Grid>
                                 </Border>
                                 <Border Grid.Row="2" Margin="0,8">
@@ -178,7 +180,8 @@
                                             Margin="8,0"
                                             VerticalContentAlignment="Center"
                                             FontFamily="DIN Pro Regular"
-                                            FontSize="14" />
+                                            FontSize="14"
+                                            Text="{Binding Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                     </Grid>
                                 </Border>
                                 <Border Grid.Row="3" Margin="0,8">
@@ -254,155 +257,166 @@
                     <TextBlock Margin="8,0" Text="Квалификационный аттестат" />
                 </Border>
                 <Border Grid.Row="1">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Border Grid.Row="0" Margin="0,8">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="200" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock
-                                            Grid.Column="0"
-                                            Margin="8,0"
+                    <ItemsControl ItemsSource="{Binding Certificates}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Border Grid.Row="0" Margin="0,8">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="200" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        Margin="8,0"
+                                                        VerticalAlignment="Center"
+                                                        Text="Направление" />
+                                                    <ComboBox
+                                                        Grid.Column="1"
+                                                        Height="32"
+                                                        MinWidth="240"
+                                                        Margin="8,0"
+                                                        VerticalContentAlignment="Center"
+                                                        FontFamily="DIN Pro Regular"
+                                                        FontSize="14" />
+                                                </Grid>
+                                            </Border>
+                                            <Border Grid.Row="1" Margin="0,8">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="200" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        Margin="8,0"
+                                                        VerticalAlignment="Center"
+                                                        Text="Номер аттестата" />
+                                                    <TextBox
+                                                        Grid.Column="1"
+                                                        Height="32"
+                                                        MinWidth="240"
+                                                        Margin="8,0"
+                                                        VerticalContentAlignment="Center"
+                                                        FontFamily="DIN Pro Regular"
+                                                        FontSize="14"
+                                                        Text="{Binding CertificateNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+
+                                                </Grid>
+                                            </Border>
+                                            <Border Grid.Row="2" Margin="0,8">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="200" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        Margin="8,0"
+                                                        VerticalAlignment="Center"
+                                                        Text="Дата выдачи" />
+                                                    <DatePicker
+                                                        Grid.Column="1"
+                                                        Width="120"
+                                                        Height="32"
+                                                        Margin="8,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalContentAlignment="Center"
+                                                        FontFamily="DIN Pro Regular"
+                                                        FontSize="14" />
+                                                </Grid>
+                                            </Border>
+                                            <Border Grid.Row="3" Margin="0,8">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="200" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        Margin="8,0"
+                                                        VerticalAlignment="Center"
+                                                        Text="Дата окончания" />
+                                                    <DatePicker
+                                                        Grid.Column="1"
+                                                        Width="120"
+                                                        Height="32"
+                                                        Margin="8,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalContentAlignment="Center"
+                                                        FontFamily="DIN Pro Regular"
+                                                        FontSize="14" />
+                                                </Grid>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                    <Border Grid.Column="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Border
+                                                Grid.Row="0"
+                                                Margin="8"
+                                                BorderBrush="Yellow"
+                                                BorderThickness="1">
+                                                <TextBlock
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Text="Изображение загруженного *.jpg/*.png"
+                                                    TextAlignment="Center"
+                                                    TextWrapping="Wrap" />
+                                            </Border>
+                                            <Border Grid.Row="1" Margin="0,8">
+                                                <Button
+                                                    Margin="8,0"
+                                                    Padding="16,4"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Content="Выбрать"
+                                                    FontFamily="DIN Pro Medium"
+                                                    FontSize="16" />
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                    <Border Grid.Column="2">
+                                        <Button
+                                            Margin="8"
+                                            HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            Text="Направление" />
-                                        <ComboBox
-                                            Grid.Column="1"
-                                            Height="32"
-                                            MinWidth="240"
-                                            Margin="8,0"
-                                            VerticalContentAlignment="Center"
-                                            FontFamily="DIN Pro Regular"
-                                            FontSize="14" />
-                                    </Grid>
-                                </Border>
-                                <Border Grid.Row="1" Margin="0,8">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="200" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock
-                                            Grid.Column="0"
-                                            Margin="8,0"
-                                            VerticalAlignment="Center"
-                                            Text="Номер аттестата" />
-                                        <TextBox
-                                            Grid.Column="1"
-                                            Height="32"
-                                            MinWidth="240"
-                                            Margin="8,0"
-                                            VerticalContentAlignment="Center"
-                                            FontFamily="DIN Pro Regular"
-                                            FontSize="14" />
-                                    </Grid>
-                                </Border>
-                                <Border Grid.Row="2" Margin="0,8">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="200" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock
-                                            Grid.Column="0"
-                                            Margin="8,0"
-                                            VerticalAlignment="Center"
-                                            Text="Дата выдачи" />
-                                        <DatePicker
-                                            Grid.Column="1"
-                                            Width="120"
-                                            Height="32"
-                                            Margin="8,0"
-                                            HorizontalAlignment="Left"
-                                            VerticalContentAlignment="Center"
-                                            FontFamily="DIN Pro Regular"
-                                            FontSize="14" />
-                                    </Grid>
-                                </Border>
-                                <Border Grid.Row="3" Margin="0,8">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="200" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock
-                                            Grid.Column="0"
-                                            Margin="8,0"
-                                            VerticalAlignment="Center"
-                                            Text="Дата окончания" />
-                                        <DatePicker
-                                            Grid.Column="1"
-                                            Width="120"
-                                            Height="32"
-                                            Margin="8,0"
-                                            HorizontalAlignment="Left"
-                                            VerticalContentAlignment="Center"
-                                            FontFamily="DIN Pro Regular"
-                                            FontSize="14" />
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </Border>
-                        <Border Grid.Column="1">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Border
-                                    Grid.Row="0"
-                                    Margin="8"
-                                    BorderBrush="Yellow"
-                                    BorderThickness="1">
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Text="Изображение загруженного *.jpg/*.png"
-                                        TextAlignment="Center"
-                                        TextWrapping="Wrap" />
-                                </Border>
-                                <Border Grid.Row="1" Margin="0,8">
-                                    <Button
-                                        Margin="8,0"
-                                        Padding="16,4"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Content="Выбрать"
-                                        FontFamily="DIN Pro Medium"
-                                        FontSize="16" />
-                                </Border>
-                            </Grid>
-                        </Border>
-                        <Border Grid.Column="2">
-                            <Button
-                                Margin="8"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Content="X"
-                                FontFamily="DIN Pro Bold"
-                                FontSize="16"
-                                Foreground="Red"
-                                ToolTip="Удалить" />
-                        </Border>
-                    </Grid>
+                                            Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"
+                                            CommandParameter="{Binding}"
+                                            Content="X"
+                                            FontFamily="DIN Pro Bold"
+                                            FontSize="16"
+                                            Foreground="Red"
+                                            ToolTip="Удалить" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Border>
                 <Button
                     Grid.Row="2"
                     Margin="8"
                     Padding="16,4"
+                    Command="{Binding AddCommand}"
                     Content="Добавить"
                     FontFamily="DIN Pro Medium"
                     FontSize="16" />
@@ -433,7 +447,7 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="48" />
                                 </Grid.RowDefinitions>
                                 <Border Grid.Row="0" Margin="0,8">
                                     <Grid>
@@ -452,7 +466,8 @@
                                                 MinWidth="240"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                Text="{Binding Sro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -473,32 +488,13 @@
                                                 MinWidth="240"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                Text="{Binding SroNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+
                                         </Border>
                                     </Grid>
                                 </Border>
                                 <Border Grid.Row="2" Margin="0,8">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="200" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock
-                                            Grid.Column="0"
-                                            Margin="8,0"
-                                            VerticalAlignment="Center"
-                                            Text="Номер свидетельства" />
-                                        <Border Grid.Column="1" Margin="8,0">
-                                            <TextBox
-                                                Height="32"
-                                                MinWidth="240"
-                                                VerticalContentAlignment="Center"
-                                                FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
-                                        </Border>
-                                    </Grid>
-                                </Border>
-                                <Border Grid.Row="3" Margin="0,8">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="200" />

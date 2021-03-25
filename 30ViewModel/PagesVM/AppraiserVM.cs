@@ -93,7 +93,10 @@ namespace _30ViewModel.PagesVM
         }
         public void AddCertificate()
         {
-            Certificates.Add(new QualificationCertificate());
+            if (Certificates.Count < 3)
+            {
+                Certificates.Add(new QualificationCertificate());
+            }
         }
         public void RemoveCertificate(QualificationCertificate certificate)
         {
