@@ -46,7 +46,11 @@ namespace _30ViewModel
             db.PrivatePeople.Load();
             db.Directors.Load();
             db.Organizations.Load();
+            db.AppraiserOrganizations.Load();
+            db.Appraisers.Load();
             db.Addresses.Load();
+            db.InsurancePolicies.Load();
+            db.QualificationCertificates.Load();
             db.TempDatas.Load();
             CurrentPage = new OrganizationVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
