@@ -140,7 +140,7 @@ namespace _30ViewModel.PagesVM
             };
             return insurancePolicie;
         }
-        public QualificationCertificate ToQualificationCertificate()
+        public QualificationCertificate ToCertificate()
         {
             var qualificationCertificate = new QualificationCertificate
             {
