@@ -32,11 +32,6 @@ namespace _30ViewModel.PagesVM
         private decimal insuranceMoney;
         private DateTime? insuranceDateFrom;
         private DateTime? insuranceDateBefore;
-        //Свойства Квалификационного аттестата
-        private int certificateNumber;
-        private DateTime? certificateDateFrom;
-        private DateTime? certificateDateBefore;
-        private SpecialityType speciality;
         //Свойства Оценщика
         public int Id { get; set; }
         public string SecondName { get => secondName;
@@ -72,39 +67,30 @@ namespace _30ViewModel.PagesVM
             set { ValidateProperty(value); SetProperty(ref insuranceDateFrom, value); } }
         public DateTime? InsuranceDateBefore { get => insuranceDateBefore;
             set { ValidateProperty(value); SetProperty(ref insuranceDateBefore, value); } }
-        //Свойства Квалификационного аттестата
-        public int CertificateNumber { get => certificateNumber;
-            set { ValidateProperty(value); SetProperty(ref certificateNumber, value); } }
-        public DateTime? CertificateDateFrom { get => certificateDateFrom;
-            set { ValidateProperty(value); SetProperty(ref certificateDateFrom, value); } }
-        public DateTime? CertificateDateBefore { get => certificateDateBefore;
-            set { ValidateProperty(value); SetProperty(ref certificateDateBefore, value); } }
-        public SpecialityType Speciality { get => speciality;
-            set { ValidateProperty(value); SetProperty(ref speciality, value); } }
         #endregion Properties
         
         private readonly ApplicationContext context;
         public AppraiserVM()
         {
             context = new ApplicationContext();
-            Certificates = new ObservableCollection<QualificationCertificate>();
+            Certificates = new ObservableCollection<QualificationCertificateVM>();
             AddCommand = new RelayCommand(_ => AddCertificate());
-            RemoveCommand = new RelayCommand(certificate => RemoveCertificate(certificate as QualificationCertificate));
+            RemoveCommand = new RelayCommand(certificate => RemoveCertificate(certificate as QualificationCertificateVM));
         }
         public void AddCertificate()
         {
             if (Certificates.Count < 3)
             {
-                Certificates.Add(new QualificationCertificate());
+                Certificates.Add(new QualificationCertificateVM());
             }
         }
-        public void RemoveCertificate(QualificationCertificate certificate)
+        public void RemoveCertificate(QualificationCertificateVM certificate)
         {
             Certificates.Remove(certificate);
         }
         public ICommand AddCommand { get; }
         public ICommand RemoveCommand { get; }
-        public ObservableCollection<QualificationCertificate> Certificates { get; private set; }
+        public ObservableCollection<QualificationCertificateVM> Certificates { get; private set; }
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
         public Appraiser ToAppraiser()
@@ -124,6 +110,7 @@ namespace _30ViewModel.PagesVM
                 SroNumber = SroNumber,
                 SroDate = SroDate,
                 InsurancePolicie = ToInsurancePolicie(),
+                QualificationCertificates = (ICollection<QualificationCertificate>)Certificates
             };
             return appraiser;
         }
@@ -139,18 +126,6 @@ namespace _30ViewModel.PagesVM
                 DateBefore = InsuranceDateBefore
             };
             return insurancePolicie;
-        }
-        public QualificationCertificate ToCertificate()
-        {
-            var qualificationCertificate = new QualificationCertificate
-            {
-                Id = Id,
-                Number = CertificateNumber,
-                DateFrom = CertificateDateFrom,
-                DateBefore = CertificateDateBefore,
-                Speciality = Speciality
-            };
-            return qualificationCertificate;
         }
         public void AddAppraiser()
         {
@@ -212,15 +187,7 @@ namespace _30ViewModel.PagesVM
                 : CBORObject.NewArray().Add(false))
                 .Add(appraiserVM.InsuranceDateBefore.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.InsuranceDateBefore.Value.ToBinary())
-                : CBORObject.NewArray().Add(false))
-                .Add(appraiserVM.CertificateNumber)
-                .Add(appraiserVM.CertificateDateFrom.HasValue
-                ? CBORObject.NewArray().Add(true).Add(appraiserVM.CertificateDateFrom.Value.ToBinary())
-                : CBORObject.NewArray().Add(false))
-                .Add(appraiserVM.CertificateDateBefore.HasValue
-                ? CBORObject.NewArray().Add(true).Add(appraiserVM.CertificateDateBefore.Value.ToBinary())
-                : CBORObject.NewArray().Add(false))
-                .Add(appraiserVM.Speciality);
+                : CBORObject.NewArray().Add(false));
         }
         void FromCBOR(CBORObject cbor)
         {
@@ -250,13 +217,6 @@ namespace _30ViewModel.PagesVM
             : null;
             InsuranceDateBefore = cbor[16][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[16][1].ToObject<long>()))
-            : null;
-            CertificateNumber = cbor[17].AsInt32();
-            CertificateDateFrom = cbor[18][0].AsBoolean()
-            ? new DateTime?(DateTime.FromBinary(cbor[18][1].ToObject<long>()))
-            : null;
-            CertificateDateBefore = cbor[19][0].AsBoolean()
-            ? new DateTime?(DateTime.FromBinary(cbor[19][1].ToObject<long>()))
             : null;
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
