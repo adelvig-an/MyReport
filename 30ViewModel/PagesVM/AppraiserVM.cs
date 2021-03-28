@@ -14,23 +14,23 @@ namespace _30ViewModel.PagesVM
     {
         #region Properties (Нужны для валидации данных)
         //Свойства Оценщика
-        private string secondName;
-        private string firstName;
-        private string middleName;
-        private DateTime? startedDate;
-        private string specialization;
-        private string number;
-        private DateTime? diplomDate;
-        private string universety;
-        private string sro;
-        private int sroNumber;
-        private DateTime? sroDate;
+        private string secondName = "Фамилия";
+        private string firstName = "Имя";
+        private string middleName = "Отчество";
+        private DateTime? startedDate = DateTime.Today;
+        private string specialization = "Оценка бизнеса";
+        private string number = "54 АЕ 000346";
+        private DateTime? diplomDate = DateTime.Today;
+        private string universety = "ЧОУ ВО «Сибирская академия финансов и банковского дела»";
+        private string sro = "НП СРО «Деловой Союз Оценщиков»";
+        private int sroNumber = 1069;
+        private DateTime? sroDate = DateTime.Today;
         //Свойства Страхового полиса
-        private string insuranceNumber;
-        private string insuranceCompany;
-        private decimal insuranceMoney;
-        private DateTime? insuranceDateFrom;
-        private DateTime? insuranceDateBefore;
+        private string insuranceNumber = "009-073-006214/21";
+        private string insuranceCompany = "ООО «Абсолют Страхование»";
+        private decimal insuranceMoney = 300000;
+        private DateTime? insuranceDateFrom = DateTime.Today;
+        private DateTime? insuranceDateBefore = DateTime.Today;
         //Свойства Оценщика
         public int Id { get; set; }
         public string SecondName { get => secondName;
@@ -40,7 +40,7 @@ namespace _30ViewModel.PagesVM
         public string MiddleName { get => middleName;
             set { ValidateProperty(value); SetProperty(ref middleName, value); } }
         public DateTime? StartedDate { get => startedDate;
-            set { ValidateProperty(value); SetProperty(ref startedDate, value); } }
+            set { ExperienceResult(); ValidateProperty(value); SetProperty(ref startedDate, value); } }
         public string Specialization { get => specialization;
             set { ValidateProperty(value); SetProperty(ref specialization, value); } }
         public string Number { get => number;
@@ -90,6 +90,21 @@ namespace _30ViewModel.PagesVM
         public ICommand AddCommand { get; }
         public ICommand RemoveCommand { get; }
         public ObservableCollection<QualificationCertificateVM> Certificates { get; private set; }
+
+        #region Расчет стажа работы от даты начала оценочной деательности
+        private int? experience;
+        public int? Experience
+        {
+            get => experience;
+            set { SetProperty(ref experience, value); }
+        }
+        public void ExperienceResult()
+        {
+                Experience = DateTime.Now.Year - StartedDate?.Year;
+                if (DateTime.Now.Month < StartedDate?.Month ||
+                   (DateTime.Now.Month == StartedDate?.Month && DateTime.Now.Day < StartedDate?.Day)) Experience--;
+        }
+        #endregion Расчет стажа работы
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
         public Appraiser ToAppraiser()

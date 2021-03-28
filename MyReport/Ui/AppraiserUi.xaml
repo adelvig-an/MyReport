@@ -2,9 +2,11 @@
     x:Class="MyReport.Ui.AppraiserUi"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:MyReport.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MyReport.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:_10Model;assembly=10Model" xmlns:pagesvm="clr-namespace:_30ViewModel.PagesVM;assembly=30ViewModel" d:DataContext="{d:DesignInstance Type=pagesvm:AppraiserVM}"
     d:DesignHeight="1250"
     d:DesignWidth="800"
     FontFamily="DIN Pro Regular"
@@ -98,7 +100,8 @@
                             VerticalAlignment="Center"
                             VerticalContentAlignment="Center"
                             FontFamily="DIN Pro Regular"
-                            FontSize="14" />
+                            FontSize="14"
+                            SelectedDate="{Binding StartedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                     </Grid>
                 </Border>
             </Grid>
@@ -204,7 +207,8 @@
                                             VerticalAlignment="Center"
                                             VerticalContentAlignment="Center"
                                             FontFamily="DIN Pro Regular"
-                                            FontSize="14" />
+                                            FontSize="14"
+                                            SelectedDate="{Binding DiplomDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                     </Grid>
                                 </Border>
                             </Grid>
@@ -292,7 +296,9 @@
                                                         Margin="8,0"
                                                         VerticalContentAlignment="Center"
                                                         FontFamily="DIN Pro Regular"
-                                                        FontSize="14" />
+                                                        FontSize="14"
+                                                        ItemsSource="{Binding Source={conv:EnumToItemsSource {x:Type model:SpecialityType}}}"
+                                                        SelectedValue="{Binding Speciality, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type model:SpecialityType}}" />
                                                 </Grid>
                                             </Border>
                                             <Border Grid.Row="1" Margin="0,8">
@@ -337,7 +343,8 @@
                                                         HorizontalAlignment="Left"
                                                         VerticalContentAlignment="Center"
                                                         FontFamily="DIN Pro Regular"
-                                                        FontSize="14" />
+                                                        FontSize="14"
+                                                        SelectedDate="{Binding CertificateDateFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                                 </Grid>
                                             </Border>
                                             <Border Grid.Row="3" Margin="0,8">
@@ -359,7 +366,8 @@
                                                         HorizontalAlignment="Left"
                                                         VerticalContentAlignment="Center"
                                                         FontFamily="DIN Pro Regular"
-                                                        FontSize="14" />
+                                                        FontSize="14"
+                                                        SelectedDate="{Binding CertificateDateBefore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                                 </Grid>
                                             </Border>
                                         </Grid>
@@ -512,7 +520,8 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                SelectedDate="{Binding SroDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -595,7 +604,8 @@
                                                 MinWidth="240"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                Text="{Binding InsuranceCompany, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -616,7 +626,8 @@
                                                 MinWidth="240"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                Text="{Binding InsuranceNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -638,7 +649,8 @@
                                                 MinWidth="240"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                Text="{Binding InsuranceMoney, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -666,7 +678,8 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                SelectedDate="{Binding InsuranceDateFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                             <TextBlock
                                                 Margin="8,0"
                                                 VerticalAlignment="Center"
@@ -678,7 +691,8 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                SelectedDate="{Binding InsuranceDateBefore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </DockPanel>
                                     </Grid>
                                 </Border>

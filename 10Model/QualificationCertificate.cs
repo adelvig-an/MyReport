@@ -13,7 +13,7 @@ namespace _10Model
     public class QualificationCertificate
     {
         public int Id { get; set; }
-        public int Number { get; set; } //Номер квалификационного аттестата
+        public string Number { get; set; } //Номер квалификационного аттестата
         public DateTime? DateFrom { get; set; } //Дата начала действия
         public DateTime? DateBefore { get; set; } //Дата окончания действия
         public SpecialityType Speciality { get; set; } //Направление оценочной деятельности

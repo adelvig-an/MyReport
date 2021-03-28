@@ -23,8 +23,8 @@ namespace _30ViewModel.PagesVM
         [Required(ErrorMessage = "Требуется указать дату договора")]
         public DateTime? ContractDate { get => contractDate;
             set { ValidateProperty(value); SetProperty(ref contractDate, value); } }
-        public TargetType Target { get => target; 
-            set { ValidateProperty(value); SetProperty(ref target, value); } }
+        public TargetType Target { get => target;
+            set => SetProperty(ref target, value); }
         [Required(ErrorMessage = "Требуется указать предполагаемое использование результатов оценки")]
         public string IntendedUse { get => intendedUse;
             set { ValidateProperty(value); SetProperty(ref intendedUse, value); } }
