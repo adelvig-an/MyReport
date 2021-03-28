@@ -11,6 +11,7 @@ namespace _30ViewModel
         private DateTime? certificateDateFrom;
         private DateTime? certificateDateBefore;
         private SpecialityType speciality;
+        private string pathImg;
         public int Id { get; set; }
         public int CertificateNumber
         {
@@ -32,5 +33,6 @@ namespace _30ViewModel
             get => speciality;
             set { ValidateProperty(value); SetProperty(ref speciality, value); }
         }
+        public string PathImg { get; set; }
     }
 }

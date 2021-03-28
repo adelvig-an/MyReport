@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace _30ViewModel.PagesVM
@@ -187,7 +186,8 @@ namespace _30ViewModel.PagesVM
                 : CBORObject.NewArray().Add(false))
                 .Add(appraiserVM.InsuranceDateBefore.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.InsuranceDateBefore.Value.ToBinary())
-                : CBORObject.NewArray().Add(false));
+                : CBORObject.NewArray().Add(false))
+                .Add(appraiserVM.Certificates);
         }
         void FromCBOR(CBORObject cbor)
         {
@@ -218,6 +218,8 @@ namespace _30ViewModel.PagesVM
             InsuranceDateBefore = cbor[16][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[16][1].ToObject<long>()))
             : null;
+            Certificates = (ObservableCollection<QualificationCertificateVM>)cbor[17]
+                .ToObject(typeof(ObservableCollection<QualificationCertificateVM>));
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
