@@ -30,7 +30,7 @@ namespace _30ViewModel.PagesVM
         private string insuranceCompany = "ООО «Абсолют Страхование»";
         private decimal insuranceMoney = 300000;
         private DateTime? insuranceDateFrom = DateTime.Today;
-        private DateTime? insuranceDateBefore = DateTime.Today;
+        private DateTime? insuranceDateBefore;
         //Свойства Оценщика
         public int Id { get; set; }
         public string SecondName { get => secondName;
@@ -63,11 +63,14 @@ namespace _30ViewModel.PagesVM
         public decimal InsuranceMoney { get => insuranceMoney;
             set { ValidateProperty(value); SetProperty(ref insuranceMoney, value); } }
         public DateTime? InsuranceDateFrom { get => insuranceDateFrom;
-            set { ValidateProperty(value); SetProperty(ref insuranceDateFrom, value); } }
+            set { ToInsuranceDateBefore(); ValidateProperty(value); SetProperty(ref insuranceDateFrom, value); } }
         public DateTime? InsuranceDateBefore { get => insuranceDateBefore;
             set { ValidateProperty(value); SetProperty(ref insuranceDateBefore, value); } }
         #endregion Properties
-        
+        public void ToInsuranceDateBefore()
+        {
+            InsuranceDateBefore = InsuranceDateFrom?.AddDays(-1).AddYears(+1);
+        }
         private readonly ApplicationContext context;
         public AppraiserVM()
         {

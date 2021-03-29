@@ -7,7 +7,7 @@ namespace _30ViewModel.PagesVM
     {
         private string certificateNumber = "010296-1";
         private DateTime? certificateDateFrom = DateTime.Today;
-        private DateTime? certificateDateBefore = DateTime.Today;
+        private DateTime? certificateDateBefore;
         private SpecialityType speciality;
         private string pathImg;
         public int Id { get; set; }
@@ -19,7 +19,7 @@ namespace _30ViewModel.PagesVM
         public DateTime? CertificateDateFrom
         {
             get => certificateDateFrom;
-            set { ValidateProperty(value); SetProperty(ref certificateDateFrom, value); }
+            set { ToCertificateDateBefore(); ValidateProperty(value); SetProperty(ref certificateDateFrom, value); }
         }
         public DateTime? CertificateDateBefore
         {
@@ -30,6 +30,11 @@ namespace _30ViewModel.PagesVM
             set => SetProperty(ref speciality, value); }
         public string PathImg { get => pathImg;
             set { ValidateProperty(value); SetProperty(ref pathImg, value); } }
+
+        public void ToCertificateDateBefore()
+        {
+            CertificateDateBefore = CertificateDateFrom?.AddDays(-1).AddYears(+3);
+        }
 
         public override byte[] GetCBOR()
         {
