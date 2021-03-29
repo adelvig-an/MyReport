@@ -157,7 +157,7 @@ namespace _30ViewModel.PagesVM
                 Debug.WriteLine(exp.ToString());
             }
         }
-        public bool UpdateContract()
+        public bool UpdateAppraiser()
         {
             try
             {
