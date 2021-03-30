@@ -71,6 +71,7 @@ namespace _30ViewModel.PagesVM
         {
             InsuranceDateBefore = InsuranceDateFrom?.AddDays(-1).AddYears(+1);
         }
+        
         private readonly ApplicationContext context;
         public AppraiserVM()
         {
@@ -205,7 +206,11 @@ namespace _30ViewModel.PagesVM
                 .Add(appraiserVM.InsuranceDateBefore.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.InsuranceDateBefore.Value.ToBinary())
                 : CBORObject.NewArray().Add(false))
-                .Add(appraiserVM.Certificates);
+                .Add(CBORObject.FromObject(appraiserVM.Certificates
+                    .Select(cvm => CBORObject.FromObject(cvm.GetCBOR()))
+                    .ToArray()
+                    )
+                );
         }
         void FromCBOR(CBORObject cbor)
         {
@@ -236,8 +241,14 @@ namespace _30ViewModel.PagesVM
             InsuranceDateBefore = cbor[16][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[16][1].ToObject<long>()))
             : null;
-            Certificates = (ObservableCollection<QualificationCertificateVM>)cbor[17]
-                .ToObject(typeof(ObservableCollection<QualificationCertificateVM>));
+            Certificates = new ObservableCollection<QualificationCertificateVM>(
+                cbor[17].Values.Select(cbor =>
+                {
+                    var qcvm = new QualificationCertificateVM();
+                    qcvm.SetCBOR(cbor.EncodeToBytes());
+                    return qcvm;
+                }
+                ));
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));

@@ -173,7 +173,6 @@
                             Grid.Column="0"
                             Margin="8,0"
                             VerticalAlignment="Center"
-                            Style="{StaticResource StyleDesignTextBlock}"
                             Text="Оценщик" />
                         <ComboBox
                             Grid.Column="1"

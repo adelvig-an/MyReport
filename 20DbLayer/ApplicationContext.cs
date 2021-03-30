@@ -43,6 +43,10 @@ namespace _20DbLayer
                .HasConversion(v => v.ToString(),
                v => (TargetType)Enum.Parse(typeof(TargetType), v));
             model.Entity<Report>();
+            model.Entity<QualificationCertificate>()
+                .Property(e => e.Speciality)
+                .HasConversion(v => v.ToString(),
+                v => (SpecialityType)Enum.Parse(typeof(SpecialityType), v));
         }
     }
 }

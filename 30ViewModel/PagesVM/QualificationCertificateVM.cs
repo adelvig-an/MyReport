@@ -1,4 +1,5 @@
 ﻿using _10Model;
+using PeterO.Cbor;
 using System;
 
 namespace _30ViewModel.PagesVM
@@ -36,13 +37,33 @@ namespace _30ViewModel.PagesVM
             CertificateDateBefore = CertificateDateFrom?.AddDays(-1).AddYears(+3);
         }
 
-        public override byte[] GetCBOR()
+
+        static CBORObject ToCBOR(QualificationCertificateVM certificateVM)
         {
-            throw new NotImplementedException();
+            return CBORObject.NewArray()
+                .Add(certificateVM.Id)
+                .Add(certificateVM.CertificateNumber)
+                .Add(certificateVM.CertificateDateFrom.HasValue
+                ? CBORObject.NewArray().Add(true).Add(certificateVM.CertificateDateFrom.Value.ToBinary())
+                : CBORObject.NewArray().Add(false))
+                .Add(certificateVM.CertificateDateBefore.HasValue
+                ? CBORObject.NewArray().Add(true).Add(certificateVM.CertificateDateBefore.Value.ToBinary())
+                : CBORObject.NewArray().Add(false))
+                .Add(certificateVM.Speciality);
         }
-        public override void SetCBOR(byte[] b)
+        void FromCBOR(CBORObject cbor)
         {
-            throw new NotImplementedException();
+            Id = cbor[0].AsInt32();
+            CertificateNumber = cbor[1].AsString();
+            CertificateDateFrom = cbor[2][0].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[2][1].ToObject<long>()))
+            : null;
+            CertificateDateBefore = cbor[3][0].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[3][1].ToObject<long>()))
+            : null;
+            Speciality = (SpecialityType)Enum.Parse(typeof(SpecialityType), cbor[4].ToString(), true);
         }
+        public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
+        public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
     }
 }

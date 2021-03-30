@@ -29,9 +29,9 @@ namespace _30ViewModel
         public bool IsVisibl { get => isVisibl; 
             set
             {
+                SetProperty(ref isVisibl, value);
                 if (CurrentPage is ReportVM)
                     isVisibl = false;
-                SetProperty(ref isVisibl, value);
             }
         }
         
@@ -77,13 +77,13 @@ namespace _30ViewModel
         {
             if (CurrentPage is ReportVM)
             { 
-                CurrentPage = new ContractVM();
+                CurrentPage = new AppraiserVM();
                 CurrentPage?.ReadCBOR();
             }    
                 
-            else if (CurrentPage is ContractVM)
+            else if (CurrentPage is AppraiserVM)
             {
-                CurrentPage = new PrivatePersonVM();
+                CurrentPage = new ReportVM();
                 CurrentPage?.ReadCBOR(); //Чтение из CBOR
             }
         }
