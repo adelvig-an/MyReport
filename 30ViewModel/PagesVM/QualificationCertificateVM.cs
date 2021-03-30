@@ -20,7 +20,7 @@ namespace _30ViewModel.PagesVM
         public DateTime? CertificateDateFrom
         {
             get => certificateDateFrom;
-            set { ToCertificateDateBefore(); ValidateProperty(value); SetProperty(ref certificateDateFrom, value); }
+            set { ValidateProperty(value); SetProperty(ref certificateDateFrom, value); ToCertificateDateBefore(); }
         }
         public DateTime? CertificateDateBefore
         {
@@ -54,7 +54,7 @@ namespace _30ViewModel.PagesVM
         void FromCBOR(CBORObject cbor)
         {
             Id = cbor[0].AsInt32();
-            CertificateNumber = cbor[1].AsString();
+            CertificateNumber = cbor[1].IsNull ? "" : cbor[1].AsString();
             CertificateDateFrom = cbor[2][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[2][1].ToObject<long>()))
             : null;

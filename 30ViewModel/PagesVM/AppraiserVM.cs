@@ -40,7 +40,7 @@ namespace _30ViewModel.PagesVM
         public string MiddleName { get => middleName;
             set { ValidateProperty(value); SetProperty(ref middleName, value); } }
         public DateTime? StartedDate { get => startedDate;
-            set { ExperienceResult(); ValidateProperty(value); SetProperty(ref startedDate, value); } }
+            set { ValidateProperty(value); SetProperty(ref startedDate, value); ExperienceResult(); } }
         public string Specialization { get => specialization;
             set { ValidateProperty(value); SetProperty(ref specialization, value); } }
         public string Number { get => number;
@@ -63,7 +63,7 @@ namespace _30ViewModel.PagesVM
         public decimal InsuranceMoney { get => insuranceMoney;
             set { ValidateProperty(value); SetProperty(ref insuranceMoney, value); } }
         public DateTime? InsuranceDateFrom { get => insuranceDateFrom;
-            set { ToInsuranceDateBefore(); ValidateProperty(value); SetProperty(ref insuranceDateFrom, value); } }
+            set { ValidateProperty(value); SetProperty(ref insuranceDateFrom, value); ToInsuranceDateBefore(); } }
         public DateTime? InsuranceDateBefore { get => insuranceDateBefore;
             set { ValidateProperty(value); SetProperty(ref insuranceDateBefore, value); } }
         #endregion Properties
@@ -207,7 +207,7 @@ namespace _30ViewModel.PagesVM
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.InsuranceDateBefore.Value.ToBinary())
                 : CBORObject.NewArray().Add(false))
                 .Add(CBORObject.FromObject(appraiserVM.Certificates
-                    .Select(cvm => CBORObject.FromObject(cvm.GetCBOR()))
+                    .Select(cvm => CBORObject.DecodeFromBytes(cvm.GetCBOR()))
                     .ToArray()
                     )
                 );
