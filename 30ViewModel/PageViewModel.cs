@@ -46,8 +46,9 @@ namespace _30ViewModel
                 context.SaveChanges();
                 return true;
             }
-            catch
+            catch (Exception exp)
             {
+                Debug.WriteLine(exp.ToString());
                 return false;
             }
         }
@@ -65,8 +66,9 @@ namespace _30ViewModel
                 context.SaveChanges();
                 return true;
             }
-            catch
+            catch (Exception exp)
             {
+                Debug.WriteLine(exp.ToString());
                 return false;
             }
         }

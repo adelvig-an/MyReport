@@ -6,8 +6,8 @@ namespace _30ViewModel.PagesVM
 {
     public class QualificationCertificateVM : PageViewModel
     {
-        private string certificateNumber = "010296-1";
-        private DateTime? certificateDateFrom = DateTime.Today;
+        private string certificateNumber;
+        private DateTime? certificateDateFrom;
         private DateTime? certificateDateBefore;
         private SpecialityType speciality;
         private string pathImg;
