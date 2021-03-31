@@ -3,10 +3,8 @@ using System.Collections;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using JetBrains.Annotations;
 
 namespace MyReport.ModalWindow
 {
