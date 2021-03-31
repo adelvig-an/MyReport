@@ -129,6 +129,7 @@ namespace _30ViewModel.PagesVM
                 SroDate = SroDate,
                 InsurancePolicie = ToInsurancePolicie(),
                 QualificationCertificates = (ICollection<QualificationCertificate>)Certificates
+                    .Select(cvm => context.Add(cvm.ToQualificationCertificate()))
             };
             return appraiser;
         }

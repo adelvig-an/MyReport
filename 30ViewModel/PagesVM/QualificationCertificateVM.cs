@@ -36,8 +36,20 @@ namespace _30ViewModel.PagesVM
         {
             CertificateDateBefore = CertificateDateFrom?.AddDays(-1).AddYears(+3);
         }
-
-
+        public QualificationCertificate ToQualificationCertificate()
+        {
+            var certificate = new QualificationCertificate
+            {
+                Id = Id,
+                Number = CertificateNumber,
+                DateFrom = CertificateDateFrom,
+                DateBefore = CertificateDateBefore,
+                Speciality = Speciality
+            };
+            return certificate;
+        }
+        
+        #region CBOR
         static CBORObject ToCBOR(QualificationCertificateVM certificateVM)
         {
             return CBORObject.NewArray()
@@ -65,5 +77,6 @@ namespace _30ViewModel.PagesVM
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
+        #endregion CBOR
     }
 }
