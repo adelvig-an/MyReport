@@ -28,6 +28,9 @@
         <DataTemplate DataType="{x:Type vm:AppraiserVM}">
             <ui:AppraiserUi />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AppraiserOrganizationVM}">
+            <ui:AppraiserOrganizationUi />
+        </DataTemplate>
     </Window.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <ContentControl Content="{Binding CurrentPage}" />

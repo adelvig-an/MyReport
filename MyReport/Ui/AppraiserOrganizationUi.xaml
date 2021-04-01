@@ -503,7 +503,8 @@
                                                 MinWidth="240"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                Text="{Binding InsuranceCompany, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -524,7 +525,8 @@
                                                 MinWidth="240"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                Text="{Binding InsuranceNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -546,7 +548,8 @@
                                                 MinWidth="240"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                Text="{Binding InsuranceMoney, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -574,7 +577,8 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                SelectedDate="{Binding InsuranceDateFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                             <TextBlock
                                                 Margin="8,0"
                                                 VerticalAlignment="Center"
@@ -586,7 +590,8 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalContentAlignment="Center"
                                                 FontFamily="DIN Pro Regular"
-                                                FontSize="14" />
+                                                FontSize="14"
+                                                SelectedDate="{Binding InsuranceDateBefore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </DockPanel>
                                     </Grid>
                                 </Border>
@@ -637,10 +642,10 @@
                     Content="Добавить оценщика"
                     FontFamily="DIN Pro Medium"
                     FontSize="16" />
-                <ListView Margin="0,8">
+                <ListView Margin="0,8" ItemsSource="{Binding Appraisers}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding}" Header="Фамилия Имя Отчетсво" />
+                            <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Фамилия Имя Отчетсво" />
                             <GridViewColumn DisplayMemberBinding="{Binding}" Header="Стаховой полис" />
                             <GridViewColumn DisplayMemberBinding="{Binding}" Header="Квалификационне аттестаты" />
                             <GridViewColumn Header="">

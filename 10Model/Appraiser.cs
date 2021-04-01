@@ -20,5 +20,7 @@ namespace _10Model
             = new ObservableCollection<QualificationCertificate>();
         public int InsurancePolicieId { get; set; }
         public virtual InsurancePolicie InsurancePolicie { get; set; }
+        public int AppraiserOrganizationId { get; set; }
+        public virtual AppraiserOrganization AppraiserOrganization { get; set; }
     }
 }

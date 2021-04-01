@@ -1,5 +1,6 @@
 ﻿using _10Model;
 using _20DbLayer;
+using Microsoft.EntityFrameworkCore;
 using PeterO.Cbor;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Text;
 
 namespace _30ViewModel.PagesVM
 {
-    class AppraiserOrganizationVM : OrganizationVM
+    public class AppraiserOrganizationVM : OrganizationVM
     {
         #region Properties (Нужны для валидации данных)
         //Свойства Страхового полиса
@@ -58,11 +59,17 @@ namespace _30ViewModel.PagesVM
         }
 
         private readonly ApplicationContext context;
-        public ObservableCollection<Appraiser> Appraisers { get; }
+        public ObservableCollection<Appraiser> Appraisers { get; set; }
         public AppraiserOrganizationVM()
         {
             context = new ApplicationContext();
-            Appraisers = new ObservableCollection<Appraiser>();
+            Appraisers = new ObservableCollection<Appraiser>
+            {
+                new Appraiser { FullName = "Дельвиг Антон Денисович" },
+                new Appraiser { FullName = "Шестаов Денис Александрович" },
+                new Appraiser { FullName = "Рошка Андрей Ильевич" }
+
+            };
         }
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
@@ -82,7 +89,7 @@ namespace _30ViewModel.PagesVM
                 PayAccount = PayAccount,
                 CorrAccount = CorrAccount,
                 Director = ToDirector(),
-                InsurancePolicie=ToInsurancePolicie(),
+                InsurancePolicie = ToInsurancePolicie(),
                 AddressRegistration = SelectedAddressRegistration ?? SelectedOrganization.AddressRegistration,
                 AddressActual = SelectedAddressActual
             };
@@ -115,7 +122,7 @@ namespace _30ViewModel.PagesVM
                 Debug.WriteLine(exp.ToString());
             }
         }
-        public bool UpdateAppraiser()
+        public bool UpdateAppraiserOrgganization()
         {
             try
             {
@@ -129,6 +136,10 @@ namespace _30ViewModel.PagesVM
                 Debug.WriteLine(exp.ToString());
                 return false;
             }
+        }
+        public void ReadAppraiser()
+        {
+           context.Appraisers.Include(appraiser => appraiser.AppraiserOrganization).ToList();
         }
         #endregion DataBase
 
