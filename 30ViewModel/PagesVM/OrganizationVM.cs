@@ -1,6 +1,7 @@
 ﻿using _10Model;
 using _10Model.Customer;
 using _20DbLayer;
+using PeterO.Cbor;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
@@ -116,8 +117,6 @@ namespace _30ViewModel.PagesVM
         public string AddressActual { get => addresActual;
             set { ValidateProperty(value); SetProperty(ref addresActual, value); } }
         #endregion Properties
-
-
 
         #region AddressMatch (Совпадение адресов регистрации и проживания)
         private bool isAddressMatch;
@@ -278,15 +277,66 @@ namespace _30ViewModel.PagesVM
         #endregion AutoCompleteAddress
 
         #region CBOR
-        public override byte[] GetCBOR()
+        static CBORObject ToCBOR(OrganizationVM organizationVM)
         {
-            throw new NotImplementedException();
+            return CBORObject.NewArray()
+                .Add(organizationVM.Id)
+                .Add(organizationVM.NameShortOpf)
+                .Add(organizationVM.Ogrn)
+                .Add(organizationVM.OgrnDate.HasValue
+                ? CBORObject.NewArray().Add(true).Add(organizationVM.OgrnDate.Value.ToBinary())
+                : CBORObject.NewArray().Add(false))
+                .Add(organizationVM.Inn)
+                .Add(organizationVM.Kpp)
+                .Add(organizationVM.Bank)
+                .Add(organizationVM.Bik)
+                .Add(organizationVM.PayAccount)
+                .Add(organizationVM.CorrAccount)
+                .Add(organizationVM.FullName)
+                .Add(organizationVM.Position)
+                .Add(organizationVM.PowerOfAttorney)
+                .Add(organizationVM.PowerOfAttorneyNumber)
+                .Add(organizationVM.PowerOfAttorneyDate.HasValue
+                ? CBORObject.NewArray().Add(true).Add(organizationVM.PowerOfAttorneyDate.Value.ToBinary())
+                : CBORObject.NewArray().Add(false))
+                .Add(organizationVM.PowerOfAttorneyDateBefore.HasValue
+                ? CBORObject.NewArray().Add(true).Add(organizationVM.PowerOfAttorneyDateBefore.Value.ToBinary())
+                : CBORObject.NewArray().Add(false))
+                .Add(organizationVM.AddressRegistration)
+                .Add(organizationVM.IsAddressMatch)
+                .Add(organizationVM.AddressActual);
         }
-
-        public override void SetCBOR(byte[] b)
+        void FromCBOR(CBORObject cbor)
         {
-            throw new NotImplementedException();
+            Id = cbor[0].AsInt32();
+            NameShortOpf = cbor[1].AsString();
+            Opf = cbor[2].AsString();
+            Ogrn = cbor[3].AsString();
+            OgrnDate = cbor[4].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[4][1].ToObject<long>()))
+            : null;
+            Inn = cbor[5].AsString();
+            Kpp = cbor[6].AsString();
+            Bank = cbor[7].AsString();
+            Bik = cbor[8].AsString();
+            PayAccount = cbor[9].AsString();
+            CorrAccount = cbor[10].AsString();
+            FullName = cbor[11].AsString();
+            Position = cbor[12].AsString();
+            PowerOfAttorney = (PowerOfAttorneyType)Enum.Parse(typeof(PowerOfAttorneyType), cbor[13].ToString(), true);
+            PowerOfAttorneyNumber = cbor[14].AsString();
+            PowerOfAttorneyDate = cbor[15].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[15][1].ToObject<long>()))
+            : null;
+            PowerOfAttorneyDateBefore = cbor[16].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[16][1].ToObject<long>()))
+            : null;
+            AddressRegistration = cbor[17].AsString();
+            IsAddressMatch = cbor[18].AsBoolean();
+            AddressActual = cbor[19].AsString();
         }
+        public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
+        public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
         #endregion CBOR
     }
 }

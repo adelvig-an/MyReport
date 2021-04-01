@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace _10Model
+﻿namespace _10Model
 {
     public class Person
     {
@@ -11,5 +7,6 @@ namespace _10Model
         public string SecondName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
+
     }
 }
