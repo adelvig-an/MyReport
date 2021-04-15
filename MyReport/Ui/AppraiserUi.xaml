@@ -22,8 +22,28 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0">
+        <Border Grid.Row="0" Background="#0d0d0d">
+            <DockPanel Margin="0,8">
+                <Button
+                    Margin="8,0"
+                    Padding="16,8"
+                    HorizontalAlignment="Left"
+                    Command="{Binding DataContext.BackPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                    Content="Вернуться"
+                    FontFamily="DIN Pro Medium"
+                    FontSize="16" />
+                <TextBlock
+                    Margin="8,0"
+                    VerticalAlignment="Center"
+                    FontFamily="DIN Pro Medium"
+                    FontSize="24"
+                    Foreground="White"
+                    Text="Данные оценщика" />
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -109,7 +129,7 @@
                 </Border>
             </Grid>
         </Border>
-        <Border Grid.Row="1">
+        <Border Grid.Row="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -250,7 +270,7 @@
                 </Border>
             </Grid>
         </Border>
-        <Border Grid.Row="2">
+        <Border Grid.Row="3">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -434,7 +454,7 @@
 
             </Grid>
         </Border>
-        <Border Grid.Row="3">
+        <Border Grid.Row="4">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -564,7 +584,7 @@
                 </Border>
             </Grid>
         </Border>
-        <Border Grid.Row="4">
+        <Border Grid.Row="5">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -736,11 +756,11 @@
             </Grid>
         </Border>
         <Button
-            Grid.Row="5"
+            Grid.Row="6"
             Margin="8,0"
             Padding="16,8"
             Command="{Binding DataContext.NextPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
-            Content="Проверка"
+            Content="ReportVM"
             FontFamily="DIN Pro Medium"
             FontSize="16" />
     </Grid>

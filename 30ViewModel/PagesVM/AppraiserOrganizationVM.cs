@@ -68,7 +68,6 @@ namespace _30ViewModel.PagesVM
                 new Appraiser { FullName = "Дельвиг Антон Денисович" },
                 new Appraiser { FullName = "Шестаов Денис Александрович" },
                 new Appraiser { FullName = "Рошка Андрей Ильевич" }
-
             };
         }
 

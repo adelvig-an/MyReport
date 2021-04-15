@@ -56,6 +56,7 @@ namespace _30ViewModel
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
+            AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
         }
         /// <summary>
         /// Команда сохранения в БД
@@ -63,6 +64,7 @@ namespace _30ViewModel
         public ICommand SaveData { get; }
         public ICommand NextPage { get; }
         public ICommand BackPage { get; }
+        public ICommand AppraiserPage { get; }
         /// <summary>
         /// Метод реализации сохранения данных в БД
         /// </summary>
@@ -99,6 +101,16 @@ namespace _30ViewModel
                 CurrentPage = new ContractVM();
                 CurrentPage.ReadCBOR(); //Чтение из CBOR
             }
+            else if (CurrentPage is AppraiserVM)
+            {
+                CurrentPage = new AppraiserOrganizationVM();
+                CurrentPage.ReadCBOR(); //Чтение из CBOR
+            }
+        }
+        public void AppraiserPageAction()
+        {
+            CurrentPage = new AppraiserVM();
+            CurrentPage.ReadCBOR();
         }
     }
 }
