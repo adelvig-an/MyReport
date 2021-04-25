@@ -2,10 +2,10 @@
 using _20DbLayer;
 using PeterO.Cbor;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows.Input;
 
 namespace _30ViewModel.PagesVM
 {
@@ -41,6 +41,14 @@ namespace _30ViewModel.PagesVM
         {
             context = new ApplicationContext();
         }
+
+        //Test MWindow
+        private ICommand ShowCustomDialog;
+        public void ShowCustomDialogAction()
+        {
+            CustomDialog.RunCustomFromVm(this);
+        }
+        internal CustomDialog CustomDialog = new CustomDialog();
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
         /// <summary>

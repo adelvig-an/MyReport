@@ -197,6 +197,14 @@
                     Content="Далее"
                     FontFamily="DIN Pro Medium"
                     FontSize="16" />
+                <Button
+                    Margin="8,0"
+                    Padding="16,8"
+                    VerticalAlignment="Center"
+                    Command="{Binding}"
+                    Content="Test MWindow"
+                    FontFamily="DIN Pro Medium"
+                    FontSize="16" />
             </StackPanel>
         </Border>
     </Grid>

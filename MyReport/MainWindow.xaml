@@ -1,7 +1,9 @@
-﻿<Window
+﻿<MWindow:MetroWindow
     x:Class="MyReport.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Dialog="clr-namespace:MWindowDialogLib.Dialogs;assembly=MWindowDialogLib"
+    xmlns:MWindow="clr-namespace:MWindowLib;assembly=MWindowLib"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MyReport"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,6 +13,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    Dialog:DialogParticipation.Register="{Binding CurrentPage}"
     mc:Ignorable="d">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:ReportVM}">
@@ -35,4 +38,4 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <ContentControl Content="{Binding CurrentPage}" />
     </ScrollViewer>
-</Window>
+</MWindow:MetroWindow>
