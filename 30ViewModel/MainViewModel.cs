@@ -56,6 +56,7 @@ namespace _30ViewModel
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
+            ShowCustomDialog = new RelayCommand(_ => ShowCustomDialogAction());
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
         }
         /// <summary>
@@ -112,5 +113,13 @@ namespace _30ViewModel
             CurrentPage = new AppraiserVM();
             CurrentPage.ReadCBOR();
         }
+
+        //Test MWindow
+        public ICommand ShowCustomDialog { get; }
+        public void ShowCustomDialogAction()
+        {
+            CustomDialog.RunCustomFromVm(this);
+        }
+        internal CustomDialog CustomDialog = new CustomDialog();
     }
 }
