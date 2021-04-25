@@ -1,5 +1,6 @@
 ﻿using _30ViewModel.MWindow.ViewModel;
 using MyReport.MWindow.Ui;
+using System.Diagnostics;
 
 namespace MyReport.MWindow
 {
@@ -11,14 +12,7 @@ namespace MyReport.MWindow
 
             var customDialog = new MWindowDialogLib.Dialogs.CustomDialog(new CustomDialogUi());
 
-            var customDialogViewModel = new CustomDialogViewModel(instance =>
-            {
-                coord.HideMetroDialogAsync(context, customDialog);
-
-                System.Diagnostics.Debug.WriteLine("Custom Dialog -" + instance.Title + "- VM Result: ");
-                System.Diagnostics.Debug.WriteLine("FirstName: " + instance.FirstName);
-                System.Diagnostics.Debug.WriteLine("LastName: " + instance.LastName);
-            })
+            var customDialogViewModel = new CustomDialogViewModel()
             {
                 Title = "Модальное окно",
                 FirstName = "Просто текст"
