@@ -1,5 +1,4 @@
-﻿using _30ViewModel.MWindow.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -22,7 +21,6 @@ namespace MyReport.MWindow.Ui
         public CustomDialogUi()
         {
             InitializeComponent();
-            DataContext = new CustomDialogViewModel();
         }
     }
 }

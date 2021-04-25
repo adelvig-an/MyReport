@@ -6,16 +6,16 @@ namespace _30ViewModel.MWindow.ViewModel
     public class CustomDialogViewModel : MsgViewModel
     {
         #region fields
-        public ICommand CloseCommand { get; }
+        private ICommand closeCommand;
         private Action<CustomDialogViewModel> closeHandler = null;
 
         private string firstName = null;
         private string lastName = null;
         #endregion fields
 
-        public CustomDialogViewModel()
+        public CustomDialogViewModel(Action<CustomDialogViewModel> closeHandler)
         {
-            CloseCommand = new RelayCommand(_ => CloseCommandAction());
+            this.closeHandler = closeHandler;
         }
         public string FirstName
         {
@@ -35,9 +35,16 @@ namespace _30ViewModel.MWindow.ViewModel
                 RaisePropertyChanged(() => this.LastName);
             }
         }
-        public void CloseCommandAction()
+        public override ICommand CloseCommand
         {
-            closeHandler(this);
+            get
+            {
+                if (closeCommand == null)
+                {
+                    closeCommand = new RelayCommand(_ => { closeHandler(this); });
+                }
+                return closeCommand;
+            }
         }
     }
 }
