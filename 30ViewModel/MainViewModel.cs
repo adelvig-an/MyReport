@@ -1,4 +1,6 @@
 ﻿using _20DbLayer;
+using _30ViewModel.MWindow;
+using _30ViewModel.MWindow.ViewModel;
 using _30ViewModel.PagesVM;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,7 +26,7 @@ namespace _30ViewModel
             }
         }
         private readonly ApplicationContext db = new ApplicationContext();
-
+        private readonly IDialogService dialogService;
         private bool isVisibl;
         public bool IsVisibl { get => isVisibl; 
             set
@@ -56,7 +58,7 @@ namespace _30ViewModel
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
-            ShowCustomDialog = new RelayCommand(_ => ShowCustomDialogAction());
+            ShowDialog = new RelayCommand(_ => ShowDialogAction());
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
         }
         /// <summary>
@@ -115,11 +117,10 @@ namespace _30ViewModel
         }
 
         //Test MWindow
-        public ICommand ShowCustomDialog { get; }
-        public void ShowCustomDialogAction()
+        public ICommand ShowDialog { get; }
+        public void ShowDialogAction()
         {
-            CustomDialog.RunCustomFromVm(this);
+            dialogService.Show(new CustomDialogViewModel());
         }
-        internal CustomDialog CustomDialog = new CustomDialog();
     }
 }
