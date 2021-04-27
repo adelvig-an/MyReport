@@ -57,7 +57,7 @@ namespace _30ViewModel
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
-            ShowDialog = new RelayCommand(_ => dialogService.Show(new CustomDialogViewModel()));
+            ShowDialog = new RelayCommand(_ => dialogService.Show(this));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
         }
         /// <summary>

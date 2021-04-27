@@ -13,7 +13,7 @@ namespace _30ViewModel.MWindow.ViewModel
         private string lastName = null;
         #endregion fields
 
-        public CustomDialogViewModel()
+        public CustomDialogViewModel(Action<CustomDialogViewModel> closeHandler)
         {
             this.closeHandler = closeHandler;
         }
@@ -46,5 +46,6 @@ namespace _30ViewModel.MWindow.ViewModel
                 return closeCommand;
             }
         }
+        
     }
 }

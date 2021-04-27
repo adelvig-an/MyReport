@@ -1,6 +1,5 @@
 ﻿using _30ViewModel;
 using MyReport.MWindow;
-using System.Windows;
 
 
 namespace MyReport

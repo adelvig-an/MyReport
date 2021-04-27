@@ -13,13 +13,20 @@ namespace MyReport.MWindow
 
             var customDialog = new MWindowDialogLib.Dialogs.CustomDialog(new CustomDialogUi());
 
-            context = new CustomDialogViewModel()
+            var customDialogViewModel = new CustomDialogViewModel(instance =>
+            {
+                coord.HideMetroDialogAsync(context, customDialog);
+
+                Debug.WriteLine("Custom Dialog -" + instance.Title + "- VM Result: ");
+                Debug.WriteLine("FirstName: " + instance.FirstName);
+                Debug.WriteLine(" LastName: " + instance.LastName);
+            })
             {
                 Title = "Модальное окно",
                 FirstName = "Тест открытия и закрытия Модального окна"
             };
 
-            customDialog.DataContext = context;
+            customDialog.DataContext = customDialogViewModel;
 
             coord.ShowMetroDialogAsync(context, customDialog);
         }
