@@ -13,7 +13,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    Dialog:DialogParticipation.Register="{Binding CurrentPage}"
+    Dialog:DialogParticipation.Register="{Binding}"
     mc:Ignorable="d">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:ReportVM}">

@@ -7,21 +7,21 @@ namespace MyReport.MWindow
 {
     public class CustomDialogs : IDialogService
     {
-        public void Show(MsgViewModel msgViewModel)
+        public void Show(object context)
         {
             var coord = MWindowDialogLib.ContentDialogService.Instance.Coordinator;
 
             var customDialog = new MWindowDialogLib.Dialogs.CustomDialog(new CustomDialogUi());
 
-            msgViewModel = new CustomDialogViewModel()
+            context = new CustomDialogViewModel()
             {
                 Title = "Модальное окно",
                 FirstName = "Тест открытия и закрытия Модального окна"
             };
 
-            customDialog.DataContext = msgViewModel;
+            customDialog.DataContext = context;
 
-            coord.ShowMetroDialogAsync(msgViewModel, customDialog);
+            coord.ShowMetroDialogAsync(context, customDialog);
         }
     }
 }

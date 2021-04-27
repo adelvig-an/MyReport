@@ -4,6 +4,6 @@ namespace _30ViewModel.MWindow
 {
     public interface IDialogService
     {
-        public void Show(MsgViewModel msgViewModel);
+        public void Show(object context);
     }
 }

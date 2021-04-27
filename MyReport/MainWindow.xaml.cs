@@ -15,7 +15,6 @@ namespace MyReport
             var dialogService = new CustomDialogs();
             InitializeComponent();
             DataContext = new MainViewModel(dialogService);
-            
         }
     }
 }

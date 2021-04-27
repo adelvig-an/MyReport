@@ -26,7 +26,6 @@ namespace _30ViewModel
             }
         }
         private readonly ApplicationContext db = new ApplicationContext();
-        private readonly IDialogService dialogService;
         private bool isVisibl;
         public bool IsVisibl { get => isVisibl; 
             set
@@ -118,6 +117,5 @@ namespace _30ViewModel
 
         //Test MWindow
         public ICommand ShowDialog { get; }
-        
     }
 }
