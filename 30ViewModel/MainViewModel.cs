@@ -38,7 +38,7 @@ namespace _30ViewModel
         }
         
 
-        public MainViewModel()
+        public MainViewModel(IDialogService dialogService)
         {
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
@@ -58,7 +58,7 @@ namespace _30ViewModel
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
-            ShowDialog = new RelayCommand(_ => ShowDialogAction());
+            ShowDialog = new RelayCommand(_ => dialogService.Show(new CustomDialogViewModel()));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
         }
         /// <summary>
@@ -118,9 +118,6 @@ namespace _30ViewModel
 
         //Test MWindow
         public ICommand ShowDialog { get; }
-        public void ShowDialogAction()
-        {
-            dialogService.Show(new CustomDialogViewModel());
-        }
+        
     }
 }

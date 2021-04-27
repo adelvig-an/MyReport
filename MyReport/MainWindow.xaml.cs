@@ -1,4 +1,5 @@
 ﻿using _30ViewModel;
+using MyReport.MWindow;
 using System.Windows;
 
 
@@ -11,8 +12,10 @@ namespace MyReport
     {
         public MainWindow()
         {
+            var dialogService = new CustomDialogs();
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new MainViewModel(dialogService);
+            
         }
     }
 }
