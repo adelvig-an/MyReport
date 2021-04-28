@@ -19,7 +19,7 @@ namespace MyReport.MWindow
 
                 Debug.WriteLine("Custom Dialog -" + instance.Title + "- VM Result: ");
                 Debug.WriteLine("FirstName: " + instance.FirstName);
-                Debug.WriteLine(" LastName: " + instance.LastName);
+                Debug.WriteLine("LastName: " + instance.LastName);
             })
             {
                 Title = "Модальное окно",
