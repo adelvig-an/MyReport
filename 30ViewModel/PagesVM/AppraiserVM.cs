@@ -17,6 +17,8 @@ namespace _30ViewModel.PagesVM
         private string secondName = "Фамилия";
         private string firstName = "Имя";
         private string middleName = "Отчество";
+        private string email = "e-mail@mail.ru";
+        private string phone = "+7 (999) 654-97-35";
         private DateTime? startedDate = DateTime.Today;
         private string specialization = "Оценка бизнеса";
         private string number = "54 АЕ 000346";
@@ -39,6 +41,10 @@ namespace _30ViewModel.PagesVM
             set { ValidateProperty(value); SetProperty(ref firstName, value); } }
         public string MiddleName { get => middleName;
             set { ValidateProperty(value); SetProperty(ref middleName, value); } }
+        public string Email { get => email;
+            set { ValidateProperty(value); SetProperty(ref email, value); } }
+        public string Phone { get=>phone;
+            set { ValidateProperty(value); SetProperty(ref phone, value); } }
         public DateTime? StartedDate { get => startedDate;
             set { ValidateProperty(value); SetProperty(ref startedDate, value); ExperienceResult(); } }
         public string Specialization { get => specialization;

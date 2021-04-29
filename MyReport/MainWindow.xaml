@@ -29,7 +29,7 @@
             <uiCust:OrganizationUi />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:AppraiserVM}">
-            <ui:IAppraiserUi />
+            <ui:AppraiserUi />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:AppraiserOrganizationVM}">
             <ui:AppraiserOrganizationUi />
