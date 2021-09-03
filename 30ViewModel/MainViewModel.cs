@@ -1,11 +1,7 @@
 ﻿using _20DbLayer;
 using _30ViewModel.MWindow;
-using _30ViewModel.MWindow.ViewModel;
 using _30ViewModel.PagesVM;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
 namespace _30ViewModel
