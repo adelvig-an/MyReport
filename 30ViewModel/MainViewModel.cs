@@ -1,11 +1,7 @@
 ﻿using _20DbLayer;
 using _30ViewModel.MWindow;
-using _30ViewModel.MWindow.ViewModel;
 using _30ViewModel.PagesVM;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
 namespace _30ViewModel
@@ -53,7 +49,7 @@ namespace _30ViewModel
             db.InsurancePolicies.Load();
             db.QualificationCertificates.Load();
             db.TempDatas.Load();
-            CurrentPage = new AppraiserVM();
+            CurrentPage = new AppraiserOrganizationVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
