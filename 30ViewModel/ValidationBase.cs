@@ -10,9 +10,9 @@ namespace _30ViewModel
 {
     public class ValidationBase : ViewModelBase, INotifyDataErrorInfo
     {
-        private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
+        private readonly Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-        private object _lock = new object();
+        private readonly object _lock = new object();
         public bool HasErrors { get { return _errors.Any(propErrors => propErrors.Value != null && propErrors.Value.Count > 0); } }
         public bool IsValid { get { return !HasErrors; } }
 
@@ -31,16 +31,17 @@ namespace _30ViewModel
 
         public void OnErrorsChanged(string propertyName)
         {
-            if (ErrorsChanged != null)
-                ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
         public void ValidateProperty(object value, [CallerMemberName] string propertyName = null)
         {
             lock (_lock)
             {
-                var validationContext = new ValidationContext(this, null, null);
-                validationContext.MemberName = propertyName;
+                var validationContext = new ValidationContext(this, null, null)
+                {
+                    MemberName = propertyName
+                };
                 var validationResults = new List<ValidationResult>();
                 Validator.TryValidateProperty(value, validationContext, validationResults);
 

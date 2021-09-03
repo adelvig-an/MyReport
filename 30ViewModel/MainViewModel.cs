@@ -68,7 +68,11 @@ namespace _30ViewModel
         /// </summary>
         public void SaveDataAction()
         {
-            if (CurrentPage is OrganizationVM organization)
+            if (CurrentPage is AppraiserOrganizationVM appraiserOrg)
+            {
+                appraiserOrg.AddAppraiserOrganization();
+            }
+            else if (CurrentPage is OrganizationVM organization)
             {
                 organization.AddOrganization();
             }
@@ -80,7 +84,6 @@ namespace _30ViewModel
                 CurrentPage = new AppraiserVM();
                 CurrentPage?.ReadCBOR();
             }    
-                
             else if (CurrentPage is AppraiserVM)
             {
                 CurrentPage = new ReportVM();

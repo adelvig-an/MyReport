@@ -108,7 +108,7 @@ namespace _30ViewModel.PagesVM
             };
             return police;
         }
-        public void AddAppraiserOrgganization()
+        public void AddAppraiserOrganization()
         {
             try
             {
