@@ -148,6 +148,7 @@ namespace _30ViewModel.PagesVM
             return CBORObject.NewArray()
                 .Add(appraiserOrgVM.Id)
                 .Add(appraiserOrgVM.NameShortOpf)
+                .Add(appraiserOrgVM.Opf)
                 .Add(appraiserOrgVM.Ogrn)
                 .Add(appraiserOrgVM.OgrnDate.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserOrgVM.OgrnDate.Value.ToBinary())
@@ -184,33 +185,33 @@ namespace _30ViewModel.PagesVM
         void FromCBOR(CBORObject cbor)
         {
             Id = cbor[0].AsInt32();
-            NameShortOpf = cbor[1].AsString();
-            Opf = cbor[2].AsString();
-            Ogrn = cbor[3].AsString();
+            NameShortOpf = cbor[1].AsStringSafe();
+            Opf = cbor[2].AsStringSafe();
+            Ogrn = cbor[3].AsStringSafe();
             OgrnDate = cbor[4].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[4][1].ToObject<long>()))
             : null;
-            Inn = cbor[5].AsString();
-            Kpp = cbor[6].AsString();
-            Bank = cbor[7].AsString();
-            Bik = cbor[8].AsString();
-            PayAccount = cbor[9].AsString();
-            CorrAccount = cbor[10].AsString();
-            FullName = cbor[11].AsString();
-            Position = cbor[12].AsString();
+            Inn = cbor[5].AsStringSafe();
+            Kpp = cbor[6].AsStringSafe();
+            Bank = cbor[7].AsStringSafe();
+            Bik = cbor[8].AsStringSafe();
+            PayAccount = cbor[9].AsStringSafe();
+            CorrAccount = cbor[10].AsStringSafe();
+            FullName = cbor[11].AsStringSafe();
+            Position = cbor[12].AsStringSafe();
             PowerOfAttorney = (PowerOfAttorneyType)Enum.Parse(typeof(PowerOfAttorneyType), cbor[13].ToString(), true);
-            PowerOfAttorneyNumber = cbor[14].AsString();
+            PowerOfAttorneyNumber = cbor[14].AsStringSafe();
             PowerOfAttorneyDate = cbor[15].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[15][1].ToObject<long>()))
             : null;
             PowerOfAttorneyDateBefore = cbor[16].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[16][1].ToObject<long>()))
             : null;
-            AddressRegistration = cbor[17].AsString();
+            AddressRegistration = cbor[17].AsStringSafe();
             IsAddressMatch = cbor[18].AsBoolean();
-            AddressActual = cbor[19].AsString();
-            InsuranceNumber = cbor[20].AsString();
-            InsuranceCompany = cbor[21].AsString();
+            AddressActual = cbor[19].AsStringSafe();
+            InsuranceNumber = cbor[20].AsStringSafe();
+            InsuranceCompany = cbor[21].AsStringSafe();
             InsuranceMoney = cbor[22].AsDecimal();
             InsuranceDateFrom = cbor[23].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[23][1].ToObject<long>()))

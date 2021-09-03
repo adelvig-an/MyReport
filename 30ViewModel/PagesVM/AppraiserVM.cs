@@ -222,25 +222,25 @@ namespace _30ViewModel.PagesVM
         void FromCBOR(CBORObject cbor)
         {
             Id = cbor[0].AsInt32();
-            SecondName = cbor[1].AsString();
-            FirstName = cbor[2].AsString();
-            MiddleName = cbor[3].AsString();
+            SecondName = cbor[1].AsStringSafe();
+            FirstName = cbor[2].AsStringSafe();
+            MiddleName = cbor[3].AsStringSafe();
             StartedDate = cbor[4][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[4][1].ToObject<long>()))
             : null;
-            Specialization = cbor[5].AsString();
-            Number = cbor[6].AsString();
+            Specialization = cbor[5].AsStringSafe();
+            Number = cbor[6].AsStringSafe();
             DiplomDate = cbor[7][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[7][1].ToObject<long>()))
             : null;
-            Universety = cbor[8].AsString();
-            Sro = cbor[9].AsString();
+            Universety = cbor[8].AsStringSafe();
+            Sro = cbor[9].AsStringSafe();
             SroNumber = cbor[10].AsInt32();
             SroDate = cbor[11][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[11][1].ToObject<long>()))
             : null;
-            InsuranceNumber = cbor[12].AsString();
-            InsuranceCompany = cbor[13].AsString();
+            InsuranceNumber = cbor[12].AsStringSafe();
+            InsuranceCompany = cbor[13].AsStringSafe();
             InsuranceMoney = cbor[14].AsDecimal();
             InsuranceDateFrom = cbor[15][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[15][1].ToObject<long>()))

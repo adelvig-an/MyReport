@@ -2,10 +2,18 @@
 using _30ViewModel.MWindow;
 using _30ViewModel.PagesVM;
 using Microsoft.EntityFrameworkCore;
+using PeterO.Cbor;
 using System.Windows.Input;
 
 namespace _30ViewModel
 {
+    public static class CBORHelper
+    {
+        public static string AsStringSafe(this CBORObject cbor)
+        {
+            return cbor.IsNull ? "" : cbor.AsString();
+        }
+    }
     public class MainViewModel : ViewModelBase
     {
         private PageViewModel currentPage;
@@ -14,9 +22,8 @@ namespace _30ViewModel
             get => currentPage;
             set 
             {
-                if (CurrentPage?.UpdateCBOR() == true)
-                    CurrentPage?.UpdateCBOR(); //Редактирование в CBOR уже созданной записи
-                else
+                //Редактирование в CBOR уже созданной записи
+                if (CurrentPage?.UpdateCBOR() == false)
                     CurrentPage?.WriteCBOR(); //Сохранение в CBOR
                 SetProperty(ref currentPage, value); 
             }
@@ -49,7 +56,7 @@ namespace _30ViewModel
             db.InsurancePolicies.Load();
             db.QualificationCertificates.Load();
             db.TempDatas.Load();
-            CurrentPage = new AppraiserOrganizationVM();
+            CurrentPage = new AppraiserVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
@@ -83,7 +90,7 @@ namespace _30ViewModel
                 
             else if (CurrentPage is AppraiserVM)
             {
-                CurrentPage = new ReportVM();
+                CurrentPage = new AppraiserOrganizationVM();
                 CurrentPage?.ReadCBOR(); //Чтение из CBOR
             }
         }
@@ -102,6 +109,11 @@ namespace _30ViewModel
             else if (CurrentPage is AppraiserVM)
             {
                 CurrentPage = new AppraiserOrganizationVM();
+                CurrentPage.ReadCBOR(); //Чтение из CBOR
+            }
+            else if (CurrentPage is AppraiserOrganizationVM)
+            {
+                CurrentPage = new AppraiserVM();
                 CurrentPage.ReadCBOR(); //Чтение из CBOR
             }
         }
