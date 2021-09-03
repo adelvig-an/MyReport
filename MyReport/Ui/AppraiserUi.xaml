@@ -833,8 +833,8 @@
                         HorizontalAlignment="Left"
                         Background="White"
                         BorderBrush="Blue"
-                        Command="{Binding DataContext.BackPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                         Content="Отмена"
+                        Command="{Binding DataContext.BackPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                         FontFamily="DIN Pro Medium"
                         Foreground="Blue" />
                 </Border>
