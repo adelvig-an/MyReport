@@ -165,9 +165,9 @@ namespace _30ViewModel.PagesVM
             var organization = new Organization
             {
                 Id = Id,
-                NameFullOpf = SelectedOrganization.NameFullOpf,
+                NameFullOpf = SelectedOrganization?.NameFullOpf,
                 NameShortOpf = NameShortOpf,
-                Opf = SelectedOrganization.Opf,
+                Opf = SelectedOrganization?.Opf,
                 Ogrn = Ogrn,
                 OgrnDate = OgrnDate,
                 Inn = Inn,
@@ -177,7 +177,7 @@ namespace _30ViewModel.PagesVM
                 PayAccount = PayAccount,
                 CorrAccount = CorrAccount,
                 Director = ToDirector(),
-                AddressRegistration = SelectedAddressRegistration ?? SelectedOrganization.AddressRegistration,
+                AddressRegistration = SelectedAddressRegistration ?? SelectedOrganization?.AddressRegistration,
                 AddressActual = SelectedAddressActual
             };
             return organization;
@@ -241,13 +241,13 @@ namespace _30ViewModel.PagesVM
         {
             NameShortOpf = organization?.NameShortOpf;
             Opf = organization?.Opf;
-            Inn = organization?.Inn.ToString();
-            Kpp = organization?.Kpp?.ToString();
-            Ogrn = organization?.Ogrn.ToString();
+            Inn = organization?.Inn;
+            Kpp = organization?.Kpp;
+            Ogrn = organization?.Ogrn;
             OgrnDate = organization?.OgrnDate;
-            FullName = organization?.Director.FullName;
-            Position = organization?.Director.Position;
-            AddressRegistration = organization?.AddressRegistration.AddressFull;
+            FullName = organization?.Director?.FullName;
+            Position = organization?.Director?.Position;
+            AddressRegistration = organization?.AddressRegistration?.AddressFull;
         }
         #endregion AutoCompleteOrganization
 
@@ -334,6 +334,7 @@ namespace _30ViewModel.PagesVM
             AddressRegistration = cbor[17].AsString();
             IsAddressMatch = cbor[18].AsBoolean();
             AddressActual = cbor[19].AsString();
+            SelectedOrganization = ToOrganization();
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));

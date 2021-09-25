@@ -1,4 +1,5 @@
 ﻿using _10Model;
+using _10Model.Customer;
 using _20DbLayer;
 using Microsoft.EntityFrameworkCore;
 using PeterO.Cbor;
@@ -89,7 +90,7 @@ namespace _30ViewModel.PagesVM
                 CorrAccount = CorrAccount,
                 Director = ToDirector(),
                 InsurancePolicie = ToInsurancePolicie(),
-                AddressRegistration = SelectedAddressRegistration ?? SelectedOrganization.AddressRegistration,
+                AddressRegistration = SelectedAddressRegistration ?? SelectedOrganization?.AddressRegistration,
                 AddressActual = SelectedAddressActual
             };
             return appraiserOgr;
@@ -219,6 +220,7 @@ namespace _30ViewModel.PagesVM
             InsuranceDateBefore = cbor[24].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[24][1].ToObject<long>()))
             : null;
+            SelectedOrganization = ToOrganization();
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));

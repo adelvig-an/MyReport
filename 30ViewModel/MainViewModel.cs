@@ -56,7 +56,7 @@ namespace _30ViewModel
             db.InsurancePolicies.Load();
             db.QualificationCertificates.Load();
             db.TempDatas.Load();
-            CurrentPage = new AppraiserVM();
+            CurrentPage = new AppraiserOrganizationVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
