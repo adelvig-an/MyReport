@@ -220,7 +220,7 @@ namespace _30ViewModel.PagesVM
             InsuranceDateBefore = cbor[24].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[24][1].ToObject<long>()))
             : null;
-            SelectedOrganization = ToOrganization();
+            SelectedOrganization = ToOrganization(); //Восстановление SelectedOrganization
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));

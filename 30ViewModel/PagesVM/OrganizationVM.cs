@@ -334,7 +334,7 @@ namespace _30ViewModel.PagesVM
             AddressRegistration = cbor[17].AsString();
             IsAddressMatch = cbor[18].AsBoolean();
             AddressActual = cbor[19].AsString();
-            SelectedOrganization = ToOrganization();
+            SelectedOrganization = ToOrganization(); //Восстановление SelectedOrganization
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
