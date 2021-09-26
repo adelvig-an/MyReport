@@ -14,6 +14,7 @@ namespace _30ViewModel.PagesVM
         #region Properties (Нужны для валидации данных)
         //Свойства для организации
         private string nameShortOpf;
+        private string nameFullOpf;
         private string opf;
         private string ogrn;
         private DateTime? ogrnDate = DateTime.Today;
@@ -33,8 +34,11 @@ namespace _30ViewModel.PagesVM
         private string addressRegistration;
         private string addresActual;
         public int Id { get; set; }
+        [Required(ErrorMessage = "Требуется указать полное название организации")]
+        public string NameFullOpf { get => nameFullOpf;
+            set { ValidateProperty(value); SetProperty(ref nameFullOpf, value); } }
         //Свойства для организации
-        [Required(ErrorMessage = "Требуется указать название организации")]
+        [Required(ErrorMessage = "Требуется указать сокращенное название организации")]
         public string NameShortOpf { get => nameShortOpf;
             set { ValidateProperty(value); SetProperty(ref nameShortOpf, value); } }
         [Required(ErrorMessage = "Требуется указать организационно-правовую форму")]
@@ -132,8 +136,8 @@ namespace _30ViewModel.PagesVM
                     ActualToActual();
             }
         }
-        public void ActualToRegistration() => AddressActual = AddressRegistration;
-        public void ActualToActual() => AddressActual = null;
+        public void ActualToRegistration() => SelectedAddressActual = SelectedAddressRegistration;
+        public void ActualToActual() => SelectedAddressActual = null;
         #endregion AddressMatch
 
         private readonly ApplicationContext context;
@@ -165,9 +169,9 @@ namespace _30ViewModel.PagesVM
             var organization = new Organization
             {
                 Id = Id,
-                NameFullOpf = SelectedOrganization?.NameFullOpf,
+                NameFullOpf = NameFullOpf,
                 NameShortOpf = NameShortOpf,
-                Opf = SelectedOrganization?.Opf,
+                Opf = Opf,
                 Ogrn = Ogrn,
                 OgrnDate = OgrnDate,
                 Inn = Inn,
@@ -312,7 +316,7 @@ namespace _30ViewModel.PagesVM
             NameShortOpf = cbor[1].AsString();
             Opf = cbor[2].AsString();
             Ogrn = cbor[3].AsString();
-            OgrnDate = cbor[4].AsBoolean()
+            OgrnDate = cbor[4][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[4][1].ToObject<long>()))
             : null;
             Inn = cbor[5].AsString();
@@ -325,15 +329,19 @@ namespace _30ViewModel.PagesVM
             Position = cbor[12].AsString();
             PowerOfAttorney = (PowerOfAttorneyType)Enum.Parse(typeof(PowerOfAttorneyType), cbor[13].ToString(), true);
             PowerOfAttorneyNumber = cbor[14].AsString();
-            PowerOfAttorneyDate = cbor[15].AsBoolean()
+            PowerOfAttorneyDate = cbor[15][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[15][1].ToObject<long>()))
             : null;
-            PowerOfAttorneyDateBefore = cbor[16].AsBoolean()
+            PowerOfAttorneyDateBefore = cbor[16][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[16][1].ToObject<long>()))
             : null;
             AddressRegistration = cbor[17].AsString();
             IsAddressMatch = cbor[18].AsBoolean();
             AddressActual = cbor[19].AsString();
+            SelectedAddressRegistration = new Address()
+            { AddressFull = AddressRegistration };
+            SelectedAddressActual = new Address()
+            { AddressFull = AddressActual };
             SelectedOrganization = ToOrganization(); //Восстановление SelectedOrganization
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();

@@ -189,7 +189,7 @@ namespace _30ViewModel.PagesVM
             NameShortOpf = cbor[1].AsStringSafe();
             Opf = cbor[2].AsStringSafe();
             Ogrn = cbor[3].AsStringSafe();
-            OgrnDate = cbor[4].AsBoolean()
+            OgrnDate = cbor[4][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[4][1].ToObject<long>()))
             : null;
             Inn = cbor[5].AsStringSafe();
@@ -202,10 +202,10 @@ namespace _30ViewModel.PagesVM
             Position = cbor[12].AsStringSafe();
             PowerOfAttorney = (PowerOfAttorneyType)Enum.Parse(typeof(PowerOfAttorneyType), cbor[13].ToString(), true);
             PowerOfAttorneyNumber = cbor[14].AsStringSafe();
-            PowerOfAttorneyDate = cbor[15].AsBoolean()
+            PowerOfAttorneyDate = cbor[15][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[15][1].ToObject<long>()))
             : null;
-            PowerOfAttorneyDateBefore = cbor[16].AsBoolean()
+            PowerOfAttorneyDateBefore = cbor[16][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[16][1].ToObject<long>()))
             : null;
             AddressRegistration = cbor[17].AsStringSafe();
@@ -214,12 +214,16 @@ namespace _30ViewModel.PagesVM
             InsuranceNumber = cbor[20].AsStringSafe();
             InsuranceCompany = cbor[21].AsStringSafe();
             InsuranceMoney = cbor[22].AsDecimal();
-            InsuranceDateFrom = cbor[23].AsBoolean()
+            InsuranceDateFrom = cbor[23][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[23][1].ToObject<long>()))
             : null;
-            InsuranceDateBefore = cbor[24].AsBoolean()
+            InsuranceDateBefore = cbor[24][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[24][1].ToObject<long>()))
             : null;
+            SelectedAddressRegistration = new Address()
+            { AddressFull = AddressRegistration };
+            SelectedAddressActual = new Address()
+            { AddressFull = AddressActual };
             SelectedOrganization = ToOrganization(); //Восстановление SelectedOrganization
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
