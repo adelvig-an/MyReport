@@ -2,6 +2,7 @@
 using _30ViewModel.MWindow;
 using _30ViewModel.PagesVM;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using PeterO.Cbor;
 using System.Windows.Input;
 
@@ -20,17 +21,17 @@ namespace _30ViewModel
         public PageViewModel CurrentPage
         {
             get => currentPage;
-            set 
+            set
             {
                 //Редактирование в CBOR уже созданной записи
                 if (CurrentPage?.UpdateCBOR() == false)
                     CurrentPage?.WriteCBOR(); //Сохранение в CBOR
-                SetProperty(ref currentPage, value); 
+                SetProperty(ref currentPage, value);
             }
         }
         private readonly ApplicationContext db = new ApplicationContext();
         private bool isVisibl;
-        public bool IsVisibl { get => isVisibl; 
+        public bool IsVisibl { get => isVisibl;
             set
             {
                 SetProperty(ref isVisibl, value);
@@ -38,7 +39,7 @@ namespace _30ViewModel
                     isVisibl = false;
             }
         }
-        
+
 
         public MainViewModel(IDialogService dialogService)
         {
@@ -62,6 +63,7 @@ namespace _30ViewModel
             BackPage = new RelayCommand(_ => BackPageAction());
             ShowDialog = new RelayCommand(_ => dialogService.Show(this));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
+            LoadFile = new RelayCommand(_ => LoadFileAction());
         }
         /// <summary>
         /// Команда сохранения в БД
@@ -87,10 +89,10 @@ namespace _30ViewModel
         public void NextPageAction()
         {
             if (CurrentPage is ReportVM)
-            { 
+            {
                 CurrentPage = new AppraiserVM();
                 CurrentPage?.ReadCBOR();
-            }    
+            }
             else if (CurrentPage is AppraiserVM)
             {
                 CurrentPage = new AppraiserOrganizationVM();
@@ -128,5 +130,18 @@ namespace _30ViewModel
 
         //Test MWindow
         public ICommand ShowDialog { get; }
+
+        //Добавление файлов *.jpg/*.png
+        OpenFileDialog OpenFileDialog = new OpenFileDialog();
+        public ICommand LoadFile {get;}
+        public void LoadFileAction()
+        {
+            OpenFileDialog.Filter = "Пользовательские файлы (*.jpg; *.png) |*.jpg; *.png";
+            if (true == OpenFileDialog.ShowDialog())
+            {
+                string filePath = OpenFileDialog.FileName;
+
+            }
+        }
     }
 }

@@ -251,7 +251,7 @@ namespace _30ViewModel.PagesVM
             OgrnDate = organization?.OgrnDate;
             FullName = organization?.Director?.FullName;
             Position = organization?.Director?.Position;
-            AddressRegistration = organization?.AddressRegistration?.AddressFull;
+            SelectedAddressRegistration = organization?.AddressRegistration;
         }
         #endregion AutoCompleteOrganization
 

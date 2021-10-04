@@ -612,6 +612,7 @@
                                     BorderBrush="Yellow"
                                     BorderThickness="1">
                                     <TextBlock
+                                        Margin="5,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Text="Изображение загруженного *.jpg/*.png"
@@ -624,6 +625,7 @@
                                         Padding="16,4"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
+                                        Command="{Binding DataContext.LoadFile, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                                         Content="Выбрать"
                                         FontFamily="DIN Pro Medium"
                                         FontSize="16" />
@@ -640,8 +642,8 @@
                 <ListView Margin="0,8" ItemsSource="{Binding Appraisers}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Фамилия Имя Отчетсво" />
-                            <GridViewColumn DisplayMemberBinding="{Binding}" Header="Стаховой полис" />
+                            <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Оценщик" />
+                            <GridViewColumn DisplayMemberBinding="{Binding}" Header="Стаж работы" />
                             <GridViewColumn DisplayMemberBinding="{Binding}" Header="Квалификационне аттестаты" />
                             <GridViewColumn Header="">
                                 <GridViewColumn.CellTemplate>
