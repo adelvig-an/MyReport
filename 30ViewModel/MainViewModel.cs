@@ -4,6 +4,7 @@ using _30ViewModel.PagesVM;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using PeterO.Cbor;
+using System.IO;
 using System.Windows.Input;
 
 namespace _30ViewModel
@@ -140,7 +141,7 @@ namespace _30ViewModel
             if (true == OpenFileDialog.ShowDialog())
             {
                 string filePath = OpenFileDialog.FileName;
-
+                File.Copy(filePath, "123.jpg");
             }
         }
     }
