@@ -478,12 +478,12 @@
                 <Border Grid.Row="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.7*" />
-                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0">
+                        <Border>
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
@@ -598,37 +598,64 @@
                                         </DockPanel>
                                     </Grid>
                                 </Border>
-                            </Grid>
-                        </Border>
-                        <Border Grid.Column="1">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Border
-                                    Grid.Row="0"
-                                    Margin="8"
-                                    BorderBrush="Yellow"
-                                    BorderThickness="1">
-                                    <TextBlock
-                                        Margin="5,0"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Text="Изображение загруженного *.jpg/*.png"
-                                        TextAlignment="Center"
-                                        TextWrapping="Wrap" />
-                                </Border>
-                                <Border Grid.Row="1" Margin="0,8">
-                                    <Button
-                                        Margin="8,0"
-                                        Padding="16,4"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Command="{Binding DataContext.LoadFile, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
-                                        Content="Выбрать"
-                                        FontFamily="DIN Pro Medium"
-                                        FontSize="16" />
+                                <Border Grid.Row="4" Margin="0,8">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Grid.Row="0"
+                                            Margin="8,0,0,8"
+                                            VerticalAlignment="Center"
+                                            Text="Страховой полис"
+                                            TextWrapping="Wrap" />
+                                        <Border
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            Margin="8,0">
+                                            <Border
+                                                Height="64"
+                                                MinWidth="240"
+                                                Padding="4"
+                                                Background="White"
+                                                BorderBrush="Black"
+                                                BorderThickness="1">
+                                                <WrapPanel VerticalAlignment="Top">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock VerticalAlignment="Center"><Hyperlink NavigateUri="IMAGE.JPG">IMAGE.JPG</Hyperlink></TextBlock>
+                                                        <Button
+                                                            Width="20"
+                                                            Height="20"
+                                                            Margin="8,0"
+                                                            Content="X" />
+                                                    </StackPanel>
+                                                    <StackPanel Margin="0,0,10,0" Orientation="Horizontal">
+                                                        <TextBlock VerticalAlignment="Center"><Hyperlink NavigateUri="IMAGE_2.JPG">IMAGE_2.JPG</Hyperlink></TextBlock>
+                                                        <Button
+                                                            Width="20"
+                                                            Height="20"
+                                                            Margin="8,0"
+                                                            Content="X" />
+                                                    </StackPanel>
+                                                </WrapPanel>
+                                            </Border>
+
+                                        </Border>
+                                        <Border Grid.Row="1" Grid.Column="1">
+                                            <Button
+                                                Margin="8,0"
+                                                Padding="16,4"
+                                                Command="{Binding DataContext.LoadFile, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                                                Content="Выбрать файл"
+                                                FontFamily="DIN Pro Medium"
+                                                FontSize="16" />
+                                        </Border>
+                                    </Grid>
                                 </Border>
                             </Grid>
                         </Border>
