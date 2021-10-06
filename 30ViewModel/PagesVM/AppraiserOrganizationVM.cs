@@ -9,7 +9,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.Win32;
+using System.IO;
 using System.Text;
+using System.Windows.Input;
 
 namespace _30ViewModel.PagesVM
 {
@@ -70,7 +73,35 @@ namespace _30ViewModel.PagesVM
                 new Appraiser { FullName = "Шестаов Денис Александрович" },
                 new Appraiser { FullName = "Рошка Андрей Ильевич" }
             };
+            InsurancePolicieImage = new RelayCommand(_ => InsurancePolicieImageAction());
         }
+        public ICommand InsurancePolicieImage { get; }
+        public static void InsurancePolicieImageAction()
+        {
+            OpenFileDialog OpenFileDialog = new OpenFileDialog();
+            OpenFileDialog.Filter = "Пользовательские файлы (*.jpg; *.png) |*.jpg; *.png";
+            if (true == OpenFileDialog.ShowDialog())
+            {
+                string filePath = OpenFileDialog.FileName;
+                string newFilePath;
+                string extension = Path.GetExtension(filePath);
+                if (extension == ".jpg")
+                {
+                    newFilePath = Path.GetRandomFileName() + ".jpg";
+                }
+                else if (extension == ".png")
+                {
+                    newFilePath = Path.GetRandomFileName() + ".png";
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+                File.Copy(filePath, newFilePath);
+            }
+        }
+
+
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
         public AppraiserOrganization ToAppraiserOrg()

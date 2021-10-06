@@ -64,7 +64,6 @@ namespace _30ViewModel
             BackPage = new RelayCommand(_ => BackPageAction());
             ShowDialog = new RelayCommand(_ => dialogService.Show(this));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
-            LoadFile = new RelayCommand(_ => LoadFileAction());
         }
         /// <summary>
         /// Команда сохранения в БД
@@ -132,12 +131,5 @@ namespace _30ViewModel
         //Test MWindow
         public ICommand ShowDialog { get; }
 
-        //Добавление файлов *.jpg/*.png
-        
-        public ICommand LoadFile {get;}
-        public void LoadFileAction()
-        {
-            ImageCopy.CopyringImg();
-        }
     }
 }

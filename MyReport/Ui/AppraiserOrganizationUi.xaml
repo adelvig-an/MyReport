@@ -650,7 +650,7 @@
                                             <Button
                                                 Margin="8,0"
                                                 Padding="16,4"
-                                                Command="{Binding DataContext.LoadFile, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                                                Command="{Binding InsurancePolicieImage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                                                 Content="Выбрать файл"
                                                 FontFamily="DIN Pro Medium"
                                                 FontSize="16" />
