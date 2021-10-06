@@ -133,26 +133,11 @@ namespace _30ViewModel
         public ICommand ShowDialog { get; }
 
         //Добавление файлов *.jpg/*.png
-        OpenFileDialog OpenFileDialog = new OpenFileDialog();
+        
         public ICommand LoadFile {get;}
         public void LoadFileAction()
         {
-            OpenFileDialog.Filter = "Пользовательские файлы (*.jpg; *.png) |*.jpg; *.png";
-            if (true == OpenFileDialog.ShowDialog())
-            {
-                string filePath = OpenFileDialog.FileName;
-                string newFilePath;
-                string extension = Path.GetExtension(filePath);
-                if (extension == ".jpg")
-                {
-                    newFilePath = Path.GetRandomFileName() + ".jpg";
-                }
-                else
-                {
-                    newFilePath = Path.GetRandomFileName() + ".png";
-                }
-                File.Copy(filePath, newFilePath);
-            }
+            ImageCopy.CopyringImg();
         }
     }
 }
