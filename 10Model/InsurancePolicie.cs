@@ -10,6 +10,7 @@ namespace _10Model
         public decimal InsuranceMoney { get; set; } //Страховое возмещение (Застрахованная сумма)
         public DateTime? DateFrom { get; set; } //Дата начала действия страхового полиса
         public DateTime? DateBefore { get; set; } //Дата окончания действия страхового полиса
+        public string PathInsurancePolicieImage { get; set; }
         public virtual Appraiser Appraiser { get; set; }
         public virtual AppraiserOrganization AppraiserOrganization { get; set; }
     }

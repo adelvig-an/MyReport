@@ -25,6 +25,7 @@ namespace _30ViewModel.PagesVM
         private decimal insuranceMoney;
         private DateTime? insuranceDateFrom;
         private DateTime? insuranceDateBefore;
+        private string pathInsurancePolicieImage;
         //Свойства Страхового полиса
         [Required(ErrorMessage = "Требуется указать номер страхового полиса")]
         public string InsuranceNumber
@@ -56,6 +57,9 @@ namespace _30ViewModel.PagesVM
             get => insuranceDateBefore;
             set { ValidateProperty(value); SetProperty(ref insuranceDateBefore, value); }
         }
+        public string PathInsurancePolicieImage { 
+            get => pathInsurancePolicieImage; 
+            set { ValidateProperty(value); SetProperty(ref pathInsurancePolicieImage, value); } }
         #endregion Properties
         public void ToInsuranceDateBefore()
         {
@@ -73,10 +77,10 @@ namespace _30ViewModel.PagesVM
                 new Appraiser { FullName = "Шестаов Денис Александрович" },
                 new Appraiser { FullName = "Рошка Андрей Ильевич" }
             };
-            InsurancePolicieImage = new RelayCommand(_ => InsurancePolicieImageAction());
+            InsurancePolicieImage = new RelayCommand(_ => InsurancePolicieImageAdd());
         }
         public ICommand InsurancePolicieImage { get; }
-        public static void InsurancePolicieImageAction()
+        public string InsurancePolicieImageAdd()
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "Пользовательские файлы (*.jpg; *.png) |*.jpg; *.png";
