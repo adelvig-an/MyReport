@@ -25,7 +25,7 @@ namespace _30ViewModel.PagesVM
         private decimal insuranceMoney;
         private DateTime? insuranceDateFrom;
         private DateTime? insuranceDateBefore;
-        private string pathInsurancePolicieImage;
+        public ObservableCollection<string> PathInsurancePolicieImage;
         //Свойства Страхового полиса
         [Required(ErrorMessage = "Требуется указать номер страхового полиса")]
         public string InsuranceNumber
@@ -57,9 +57,6 @@ namespace _30ViewModel.PagesVM
             get => insuranceDateBefore;
             set { ValidateProperty(value); SetProperty(ref insuranceDateBefore, value); }
         }
-        public string PathInsurancePolicieImage { 
-            get => pathInsurancePolicieImage; 
-            set { ValidateProperty(value); SetProperty(ref pathInsurancePolicieImage, value); } }
         #endregion Properties
         public void ToInsuranceDateBefore()
         {
@@ -80,7 +77,7 @@ namespace _30ViewModel.PagesVM
             InsurancePolicieImage = new RelayCommand(_ => InsurancePolicieImageAdd());
         }
         public ICommand InsurancePolicieImage { get; }
-        public string InsurancePolicieImageAdd()
+        public void InsurancePolicieImageAdd()
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "Пользовательские файлы (*.jpg; *.png) |*.jpg; *.png";
@@ -92,16 +89,17 @@ namespace _30ViewModel.PagesVM
                 if (extension == ".jpg")
                 {
                     newFilePath = Path.GetRandomFileName() + ".jpg";
+                    File.Copy(filePath, newFilePath);
                 }
                 else if (extension == ".png")
                 {
                     newFilePath = Path.GetRandomFileName() + ".png";
+                    File.Copy(filePath, newFilePath);
                 }
                 else
                 {
                     throw new NotImplementedException();
                 }
-                File.Copy(filePath, newFilePath);
             }
         }
 
