@@ -141,7 +141,17 @@ namespace _30ViewModel
             if (true == OpenFileDialog.ShowDialog())
             {
                 string filePath = OpenFileDialog.FileName;
-                File.Copy(filePath, "123.jpg");
+                string newFilePath;
+                string extension = Path.GetExtension(filePath);
+                if (extension == ".jpg")
+                {
+                    newFilePath = Path.GetRandomFileName() + ".jpg";
+                }
+                else
+                {
+                    newFilePath = Path.GetRandomFileName() + ".png";
+                }
+                File.Copy(filePath, newFilePath);
             }
         }
     }

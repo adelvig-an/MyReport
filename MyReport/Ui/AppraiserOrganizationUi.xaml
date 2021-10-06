@@ -618,7 +618,7 @@
                                             Grid.Row="1"
                                             Grid.Column="0"
                                             Margin="8,0">
-                                            <Border
+                                            <ItemsControl
                                                 Height="64"
                                                 MinWidth="240"
                                                 Padding="4"
@@ -643,7 +643,7 @@
                                                             Content="X" />
                                                     </StackPanel>
                                                 </WrapPanel>
-                                            </Border>
+                                            </ItemsControl>
 
                                         </Border>
                                         <Border Grid.Row="1" Grid.Column="1">
