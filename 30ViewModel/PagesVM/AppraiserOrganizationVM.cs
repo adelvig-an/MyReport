@@ -82,7 +82,7 @@ namespace _30ViewModel.PagesVM
             };
             PathInsurancePolicieCollection = new ObservableCollection<string>();
             AddInsurancePolicieImage = new RelayCommand(_ => AddInsurancePolicieImageAction());
-            RemoveInsurancePolicieImage = new RelayCommand(_ => RemoveInsurancePolicieImageAction());
+            RemoveInsurancePolicieImage = new RelayCommand(p => RemoveInsurancePolicieImageAction(p.ToString()));
         }
         public ICommand AddInsurancePolicieImage { get; }
         public void AddInsurancePolicieImageAction()
@@ -114,15 +114,9 @@ namespace _30ViewModel.PagesVM
             }
         }
         public ICommand RemoveInsurancePolicieImage { get; }
-        public void RemoveInsurancePolicieImageAction()
+        public void RemoveInsurancePolicieImageAction(string s)
         {
-            foreach(var insurancePolicie in PathInsurancePolicieCollection)
-            {
-                if(insurancePolicie != null)
-                {
-                    PathInsurancePolicieCollection.Remove(insurancePolicie);
-                }
-            }
+            PathInsurancePolicieCollection.Remove(s);
         }
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)

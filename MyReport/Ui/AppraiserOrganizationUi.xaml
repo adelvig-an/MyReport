@@ -632,7 +632,8 @@
                                                                     <TextBlock VerticalAlignment="Center">
                                                                         <Hyperlink NavigateUri="{Binding}">
                                                                             <TextBlock Text="{Binding}" />
-                                                                        </Hyperlink></TextBlock>
+                                                                        </Hyperlink>
+                                                                    </TextBlock>
                                                                     <Button
                                                                         Width="20"
                                                                         Height="20"
