@@ -25,7 +25,7 @@ namespace _30ViewModel.PagesVM
         private decimal insuranceMoney;
         private DateTime? insuranceDateFrom;
         private DateTime? insuranceDateBefore;
-        public ObservableCollection<string> PathInsurancePolicieImage;
+        private string pathInsurancePolicieImage;
         //Свойства Страхового полиса
         [Required(ErrorMessage = "Требуется указать номер страхового полиса")]
         public string InsuranceNumber
@@ -57,6 +57,11 @@ namespace _30ViewModel.PagesVM
             get => insuranceDateBefore;
             set { ValidateProperty(value); SetProperty(ref insuranceDateBefore, value); }
         }
+        public string PathInsurancePolicieImage 
+        { 
+            get => pathInsurancePolicieImage; 
+            set { SetProperty(ref pathInsurancePolicieImage, value); } 
+        }
         #endregion Properties
         public void ToInsuranceDateBefore()
         {
@@ -65,6 +70,7 @@ namespace _30ViewModel.PagesVM
 
         private readonly ApplicationContext context;
         public ObservableCollection<Appraiser> Appraisers { get; set; }
+        public ObservableCollection<string> PathInsurancePolicieCollection { get; set; }
         public AppraiserOrganizationVM()
         {
             context = new ApplicationContext();
@@ -90,11 +96,14 @@ namespace _30ViewModel.PagesVM
                 {
                     newFilePath = Path.GetRandomFileName() + ".jpg";
                     File.Copy(filePath, newFilePath);
+                    PathInsurancePolicieCollection.Add(newFilePath);
+                        
                 }
                 else if (extension == ".png")
                 {
                     newFilePath = Path.GetRandomFileName() + ".png";
                     File.Copy(filePath, newFilePath);
+                    PathInsurancePolicieCollection.Add(newFilePath);
                 }
                 else
                 {
@@ -102,8 +111,6 @@ namespace _30ViewModel.PagesVM
                 }
             }
         }
-
-
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
         public AppraiserOrganization ToAppraiserOrg()
