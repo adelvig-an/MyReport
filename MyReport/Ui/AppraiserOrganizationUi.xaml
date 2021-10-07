@@ -621,28 +621,28 @@
                                             <ItemsControl
                                                 Height="64"
                                                 MinWidth="240"
-                                                Padding="4"
                                                 Background="White"
                                                 BorderBrush="Black"
                                                 BorderThickness="1">
-                                                <WrapPanel VerticalAlignment="Top">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBlock VerticalAlignment="Center"><Hyperlink NavigateUri="IMAGE.JPG">IMAGE.JPG</Hyperlink></TextBlock>
-                                                        <Button
-                                                            Width="20"
-                                                            Height="20"
-                                                            Margin="8,0"
-                                                            Command="{Binding RemoveInsurancePolicieImage}"
-                                                            Content="X" />
-                                                    </StackPanel>
-                                                    <StackPanel Margin="0,0,10,0" Orientation="Horizontal">
-                                                        <TextBlock VerticalAlignment="Center"><Hyperlink NavigateUri="IMAGE_2.JPG">IMAGE_2.JPG</Hyperlink></TextBlock>
-                                                        <Button
-                                                            Width="20"
-                                                            Height="20"
-                                                            Margin="8,0"
-                                                            Content="X" />
-                                                    </StackPanel>
+                                                <WrapPanel Width="Auto" VerticalAlignment="Top">
+                                                    <ItemsControl ItemsSource="{Binding PathInsurancePolicieCollection}">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel Margin="4" Orientation="Horizontal">
+                                                                    <TextBlock VerticalAlignment="Center">
+                                                                        <Hyperlink NavigateUri="{Binding}">
+                                                                            <TextBlock Text="{Binding}" />
+                                                                        </Hyperlink></TextBlock>
+                                                                    <Button
+                                                                        Width="20"
+                                                                        Height="20"
+                                                                        Margin="8,0"
+                                                                        Command="{Binding DataContext.RemoveInsurancePolicieImage, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                                        Content="X" />
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
                                                 </WrapPanel>
                                             </ItemsControl>
 
@@ -651,7 +651,7 @@
                                             <Button
                                                 Margin="8,0"
                                                 Padding="16,4"
-                                                Command="{Binding DataContext.InsurancePolicieImage, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                Command="{Binding DataContext.AddInsurancePolicieImage, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
                                                 Content="Выбрать файл"
                                                 FontFamily="DIN Pro Medium"
                                                 FontSize="16" />
