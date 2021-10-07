@@ -80,10 +80,12 @@ namespace _30ViewModel.PagesVM
                 new Appraiser { FullName = "Шестаов Денис Александрович" },
                 new Appraiser { FullName = "Рошка Андрей Ильевич" }
             };
-            InsurancePolicieImage = new RelayCommand(_ => InsurancePolicieImageAdd());
+            PathInsurancePolicieCollection = new ObservableCollection<string>();
+            AddInsurancePolicieImage = new RelayCommand(_ => AddInsurancePolicieImageAction());
+            RemoveInsurancePolicieImage = new RelayCommand(_ => RemoveInsurancePolicieImageAction());
         }
-        public ICommand InsurancePolicieImage { get; }
-        public void InsurancePolicieImageAdd()
+        public ICommand AddInsurancePolicieImage { get; }
+        public void AddInsurancePolicieImageAction()
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "Пользовательские файлы (*.jpg; *.png) |*.jpg; *.png";
@@ -108,6 +110,17 @@ namespace _30ViewModel.PagesVM
                 else
                 {
                     throw new NotImplementedException();
+                }
+            }
+        }
+        public ICommand RemoveInsurancePolicieImage { get; }
+        public void RemoveInsurancePolicieImageAction()
+        {
+            foreach(var insurancePolicie in PathInsurancePolicieCollection)
+            {
+                if(insurancePolicie != null)
+                {
+                    PathInsurancePolicieCollection.Remove(insurancePolicie);
                 }
             }
         }
