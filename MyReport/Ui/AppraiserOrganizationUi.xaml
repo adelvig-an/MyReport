@@ -623,31 +623,29 @@
                                                 MinWidth="240"
                                                 Background="White"
                                                 BorderBrush="Black"
-                                                BorderThickness="1">
-                                                <WrapPanel Width="Auto" VerticalAlignment="Top">
-                                                    <ItemsControl ItemsSource="{Binding PathInsurancePolicieCollection}">
-                                                        <ItemsControl.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <StackPanel Margin="4" Orientation="Horizontal">
-                                                                    <TextBlock VerticalAlignment="Center">
-                                                                        <Hyperlink NavigateUri="{Binding}">
-                                                                            <TextBlock Text="{Binding}" />
-                                                                        </Hyperlink>
-                                                                    </TextBlock>
-                                                                    <Button
-                                                                        Width="20"
-                                                                        Height="20"
-                                                                        Margin="8,0"
-                                                                        Command="{Binding DataContext.RemoveInsurancePolicieImage, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
-                                                                        CommandParameter="{Binding}"
-                                                                        Content="X" />
-                                                                </StackPanel>
-                                                            </DataTemplate>
-                                                        </ItemsControl.ItemTemplate>
-                                                    </ItemsControl>
-                                                </WrapPanel>
+                                                BorderThickness="1"
+                                                ItemsSource="{Binding PathInsurancePolicieCollection}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel VerticalAlignment="Top">
+                                                            <StackPanel Margin="4" Orientation="Horizontal">
+                                                                <TextBlock VerticalAlignment="Center">
+                                                                    <Hyperlink NavigateUri="{Binding}">
+                                                                        <TextBlock Text="{Binding}" />
+                                                                    </Hyperlink>
+                                                                </TextBlock>
+                                                                <Button
+                                                                    Width="20"
+                                                                    Height="20"
+                                                                    Margin="8,0"
+                                                                    Command="{Binding DataContext.RemoveInsurancePolicieImage, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                                    CommandParameter="{Binding}"
+                                                                    Content="X" />
+                                                            </StackPanel>
+                                                        </WrapPanel>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
                                             </ItemsControl>
-
                                         </Border>
                                         <Border Grid.Row="1" Grid.Column="1">
                                             <Button
