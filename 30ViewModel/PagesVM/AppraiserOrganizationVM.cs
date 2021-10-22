@@ -84,6 +84,8 @@ namespace _30ViewModel.PagesVM
             AddInsurancePolicieImage = new RelayCommand(_ => AddInsurancePolicieImageAction());
             RemoveInsurancePolicieImage = new RelayCommand(p => RemoveInsurancePolicieImageAction(p.ToString()));
         }
+
+        #region Добавление и удаление файла
         public ICommand AddInsurancePolicieImage { get; }
         public void AddInsurancePolicieImageAction()
         {
@@ -92,20 +94,19 @@ namespace _30ViewModel.PagesVM
             if (true == OpenFileDialog.ShowDialog())
             {
                 string filePath = OpenFileDialog.FileName;
-                string newFilePath;
                 string extension = Path.GetExtension(filePath);
                 if (extension == ".jpg")
                 {
-                    newFilePath = Path.GetRandomFileName() + ".jpg";
-                    File.Copy(filePath, newFilePath);
-                    PathInsurancePolicieCollection.Add(newFilePath);
+                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".jpg";
+                    File.Copy(filePath, PathInsurancePolicieImage);
+                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
                         
                 }
                 else if (extension == ".png")
                 {
-                    newFilePath = Path.GetRandomFileName() + ".png";
-                    File.Copy(filePath, newFilePath);
-                    PathInsurancePolicieCollection.Add(newFilePath);
+                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".png";
+                    File.Copy(filePath, PathInsurancePolicieImage);
+                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
                 }
                 else
                 {
@@ -117,7 +118,9 @@ namespace _30ViewModel.PagesVM
         public void RemoveInsurancePolicieImageAction(string s)
         {
             PathInsurancePolicieCollection.Remove(s);
+            File.Delete(s);
         }
+        #endregion
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
         public AppraiserOrganization ToAppraiserOrg()
