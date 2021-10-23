@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Text;
 using System.Windows.Input;
+using Newtonsoft.Json;
 
 namespace _30ViewModel.PagesVM
 {
@@ -120,7 +121,7 @@ namespace _30ViewModel.PagesVM
             PathInsurancePolicieCollection.Remove(s);
             File.Delete(s);
         }
-        #endregion
+        #endregion Добавление и удаление файла
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
         public AppraiserOrganization ToAppraiserOrg()
@@ -154,8 +155,8 @@ namespace _30ViewModel.PagesVM
                 InsuranceCompany = InsuranceCompany,
                 InsuranceMoney = InsuranceMoney,
                 DateFrom = InsuranceDateFrom,
-                DateBefore = InsuranceDateBefore
-
+                DateBefore = InsuranceDateBefore,
+                PathInsurancePolicieImage = JsonConvert.SerializeObject(PathInsurancePolicieCollection)
             };
             return police;
         }
@@ -172,7 +173,7 @@ namespace _30ViewModel.PagesVM
                 Debug.WriteLine(exp.ToString());
             }
         }
-        public bool UpdateAppraiserOrgganization()
+        public bool UpdateAppraiserOrganization()
         {
             try
             {
@@ -231,7 +232,8 @@ namespace _30ViewModel.PagesVM
                 : CBORObject.NewArray().Add(false))
                 .Add(appraiserOrgVM.InsuranceDateBefore.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserOrgVM.InsuranceDateBefore.Value.ToBinary())
-                : CBORObject.NewArray().Add(false));
+                : CBORObject.NewArray().Add(false))
+                .Add(CBORObject.FromObject(appraiserOrgVM.PathInsurancePolicieCollection.ToArray()));
         }
         void FromCBOR(CBORObject cbor)
         {
@@ -270,6 +272,12 @@ namespace _30ViewModel.PagesVM
             InsuranceDateBefore = cbor[24][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[24][1].ToObject<long>()))
             : null;
+            PathInsurancePolicieCollection = new ObservableCollection<string>(
+                cbor[25].Values.Select(cbor =>
+                    {
+                        var pipi = PathInsurancePolicieImage;
+                        return pipi;
+                    }));
             SelectedAddressRegistration = new Address()
             { AddressFull = AddressRegistration };
             SelectedAddressActual = new Address()
