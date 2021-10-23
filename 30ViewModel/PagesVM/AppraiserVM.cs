@@ -241,7 +241,7 @@ namespace _30ViewModel.PagesVM
             : null;
             InsuranceNumber = cbor[12].AsStringSafe();
             InsuranceCompany = cbor[13].AsStringSafe();
-            InsuranceMoney = cbor[14].AsDecimal();
+            InsuranceMoney = cbor[14].ToObject<decimal>();
             InsuranceDateFrom = cbor[15][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[15][1].ToObject<long>()))
             : null;

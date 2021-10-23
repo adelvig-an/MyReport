@@ -233,7 +233,10 @@ namespace _30ViewModel.PagesVM
                 .Add(appraiserOrgVM.InsuranceDateBefore.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserOrgVM.InsuranceDateBefore.Value.ToBinary())
                 : CBORObject.NewArray().Add(false))
-                .Add(CBORObject.FromObject(appraiserOrgVM.PathInsurancePolicieCollection.ToArray()));
+                .Add(CBORObject.FromObject(appraiserOrgVM.PathInsurancePolicieCollection
+                    .Select(pip => CBORObject.FromObject(pip)).ToArray()
+                    )
+                );
         }
         void FromCBOR(CBORObject cbor)
         {
@@ -265,7 +268,7 @@ namespace _30ViewModel.PagesVM
             AddressActual = cbor[19].AsStringSafe();
             InsuranceNumber = cbor[20].AsStringSafe();
             InsuranceCompany = cbor[21].AsStringSafe();
-            InsuranceMoney = cbor[22].AsDecimal();
+            InsuranceMoney = cbor[22].ToObject<decimal>();
             InsuranceDateFrom = cbor[23][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[23][1].ToObject<long>()))
             : null;
@@ -275,7 +278,8 @@ namespace _30ViewModel.PagesVM
             PathInsurancePolicieCollection = new ObservableCollection<string>(
                 cbor[25].Values.Select(cbor =>
                     {
-                        var pipi = PathInsurancePolicieImage;
+                        var pipi = cbor.AsStringSafe();
+                        pipi.ToString();
                         return pipi;
                     }));
             SelectedAddressRegistration = new Address()
