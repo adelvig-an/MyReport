@@ -279,7 +279,6 @@ namespace _30ViewModel.PagesVM
                 cbor[25].Values.Select(cbor =>
                     {
                         var pipi = cbor.AsStringSafe();
-                        pipi.ToString();
                         return pipi;
                     }));
             SelectedAddressRegistration = new Address()
