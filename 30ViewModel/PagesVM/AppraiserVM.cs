@@ -7,7 +7,34 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
-
+////Валидация данных, проверка на корректность внесеных данных пользователем
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////Временное сохранение в CBOR +
+////Восстановление данных из CBOR +
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////Постоянное сохранение в БД +
+////Редактирование данных из БД +
+////Восстановление данных из БД
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////Добавление изображений для InsurancePolicie
+////Отображение наименования добавленного файла изображения для InsurancePolicie
+////Удаление изображений для InsurancePolicie
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////Добавление изображений для Appraiser.PathSroCertificateImage
+////Отображение наименования добавленного файла изображения для Appraiser.PathSroCertificateImage
+////Удаление изображений для Appraiser.PathSroCertificateImage
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////Добавление изображений для Appraiser.PatnDiplomImage
+////Отображение наименования добавленного файла изображения для Appraiser.PatnDiplomImage
+////Удаение изображений для Appraiser.PatnDiplomImage
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////Добавление полей QualificationCertificate (не более 3-х) +
+////Удаление полей QualificationCertificate +
+////Добавление изображений для QualificationCertificate
+////Отображение наименования добавленного файла изображения для QualificationCertificate
+////Удаление изображений для QualificationCertificate
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////Расчет стажа работы от даты начала оценочной деятельности +
 namespace _30ViewModel.PagesVM
 {
     public class AppraiserVM : PageViewModel
@@ -110,9 +137,9 @@ namespace _30ViewModel.PagesVM
         }
         public void ExperienceResult()
         {
-                Experience = DateTime.Now.Year - StartedDate?.Year;
-                if (DateTime.Now.Month < StartedDate?.Month ||
-                   (DateTime.Now.Month == StartedDate?.Month && DateTime.Now.Day < StartedDate?.Day)) Experience--;
+            Experience = DateTime.Now.Year - StartedDate?.Year;
+            if (DateTime.Now.Month < StartedDate?.Month ||
+                (DateTime.Now.Month == StartedDate?.Month && DateTime.Now.Day < StartedDate?.Day)) Experience--;
         }
         #endregion Расчет стажа работы
 
