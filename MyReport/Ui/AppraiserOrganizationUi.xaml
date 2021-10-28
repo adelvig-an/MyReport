@@ -619,7 +619,7 @@
                                             Grid.Column="0"
                                             Margin="8,0">
                                             <ItemsControl
-                                                Height="64"
+                                                Height="92"
                                                 MinWidth="240"
                                                 Background="White"
                                                 BorderBrush="Black"

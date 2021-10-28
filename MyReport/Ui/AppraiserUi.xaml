@@ -9,7 +9,7 @@
     xmlns:model="clr-namespace:_10Model;assembly=10Model"
     xmlns:pagesvm="clr-namespace:_30ViewModel.PagesVM;assembly=30ViewModel"
     d:DataContext="{d:DesignInstance Type=pagesvm:AppraiserVM}"
-    d:DesignHeight="1250"
+    d:DesignHeight="1450"
     d:DesignWidth="800"
     FontFamily="DIN Pro Regular"
     FontSize="14"
@@ -280,19 +280,41 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="80" />
                         </Grid.ColumnDefinitions>
-                        <Border
-                            Height="92"
-                            Margin="0,0,6,0"
-                            Padding="8"
-                            BorderBrush="Black"
-                            BorderThickness="1">
-                            <WrapPanel>
-                                <Label Width="120" Content="Image_1.jpg" />
-                                <Label Width="120" Content="Image_2.jpg" />
-                            </WrapPanel>
+                        <Border>
+                            <ItemsControl
+                                Height="92"
+                                MinWidth="240"
+                                Background="White"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                ItemsSource="{Binding PatnDiplomCollection}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel VerticalAlignment="Top" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="4" Orientation="Horizontal">
+                                            <TextBlock VerticalAlignment="Center">
+                                                <Hyperlink NavigateUri="{Binding}">
+                                                    <TextBlock Text="{Binding}" />
+                                                </Hyperlink>
+                                            </TextBlock>
+                                            <Button
+                                                Width="20"
+                                                Height="20"
+                                                Margin="8,0"
+                                                Command="{Binding DataContext.RemoveDiplomImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                CommandParameter="{Binding}"
+                                                Content="X" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Border>
                         <Border Grid.Column="1" Margin="6,0,0,0">
-                            <Button Content="Выбрать" />
+                            <Button Command="{Binding DataContext.AddDiplomImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" Content="Выбрать" />
                         </Border>
                     </Grid>
                 </Border>
@@ -404,19 +426,41 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="80" />
                         </Grid.ColumnDefinitions>
-                        <Border
-                            Height="92"
-                            Margin="0,0,6,0"
-                            Padding="8"
-                            BorderBrush="Black"
-                            BorderThickness="1">
-                            <WrapPanel>
-                                <Label Width="120" Content="Image_1.jpg" />
-                                <Label Width="120" Content="Image_2.jpg" />
-                            </WrapPanel>
+                        <Border>
+                            <ItemsControl
+                                Height="92"
+                                MinWidth="240"
+                                Background="White"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                ItemsSource="{Binding PathInsurancePolicieCollection}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel VerticalAlignment="Top" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="4" Orientation="Horizontal">
+                                            <TextBlock VerticalAlignment="Center">
+                                                <Hyperlink NavigateUri="{Binding}">
+                                                    <TextBlock Text="{Binding}" />
+                                                </Hyperlink>
+                                            </TextBlock>
+                                            <Button
+                                                Width="20"
+                                                Height="20"
+                                                Margin="8,0"
+                                                Command="{Binding DataContext.RemoveInsurancePolicieImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                CommandParameter="{Binding}"
+                                                Content="X" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Border>
                         <Border Grid.Column="1" Margin="6,0,0,0">
-                            <Button Content="Выбрать" />
+                            <Button Command="{Binding DataContext.AddInsurancePolicieImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" Content="Выбрать" />
                         </Border>
                     </Grid>
                 </Border>
@@ -512,19 +556,41 @@
                             <ColumnDefinition Width="80" />
                         </Grid.ColumnDefinitions>
 
-                        <Border
-                            Height="92"
-                            Margin="0,0,6,0"
-                            Padding="8"
-                            BorderBrush="Black"
-                            BorderThickness="1">
-                            <WrapPanel>
-                                <Label Width="120" Content="Image_1.jpg" />
-                                <Label Width="120" Content="Image_2.jpg" />
-                            </WrapPanel>
+                        <Border>
+                            <ItemsControl
+                                Height="92"
+                                MinWidth="240"
+                                Background="White"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                ItemsSource="{Binding PatnSroCertificateCollection}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel VerticalAlignment="Top" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="4" Orientation="Horizontal">
+                                            <TextBlock VerticalAlignment="Center">
+                                                <Hyperlink NavigateUri="{Binding}">
+                                                    <TextBlock Text="{Binding}" />
+                                                </Hyperlink>
+                                            </TextBlock>
+                                            <Button
+                                                Width="20"
+                                                Height="20"
+                                                Margin="8,0"
+                                                Command="{Binding DataContext.RemoveSroCertificateImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                CommandParameter="{Binding}"
+                                                Content="X" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Border>
                         <Border Grid.Column="1" Margin="6,0,0,0">
-                            <Button Content="Выбрать" />
+                            <Button Command="{Binding DataContext.AddSroCertificateCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" Content="Выбрать" />
                         </Border>
                     </Grid>
                 </Border>
@@ -640,19 +706,41 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="80" />
                         </Grid.ColumnDefinitions>
-                        <Border
-                            Height="92"
-                            Margin="0,0,6,0"
-                            Padding="8"
-                            BorderBrush="Black"
-                            BorderThickness="1">
-                            <WrapPanel>
-                                <Label Width="120" Content="Image_1.jpg" />
-                                <Label Width="120" Content="Image_2.jpg" />
-                            </WrapPanel>
+                        <Border>
+                            <ItemsControl
+                                Height="92"
+                                MinWidth="240"
+                                Background="White"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                ItemsSource="{Binding PatnQualificationCertificateCollection}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel VerticalAlignment="Top" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="4" Orientation="Horizontal">
+                                            <TextBlock VerticalAlignment="Center">
+                                                <Hyperlink NavigateUri="{Binding}">
+                                                    <TextBlock Text="{Binding}" />
+                                                </Hyperlink>
+                                            </TextBlock>
+                                            <Button
+                                                Width="20"
+                                                Height="20"
+                                                Margin="8,0"
+                                                Command="{Binding DataContext.RemoveQualificationCertificateImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                CommandParameter="{Binding}"
+                                                Content="X" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Border>
                         <Border Grid.Column="1" Margin="6,0,0,0">
-                            <Button Content="Выбрать" />
+                            <Button Command="{Binding DataContext.AddQualificationCertificateCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" Content="Выбрать" />
                         </Border>
                     </Grid>
                 </Border>
@@ -776,20 +864,41 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="80" />
                                         </Grid.ColumnDefinitions>
-
-                                        <Border
-                                            Height="92"
-                                            Margin="0,0,6,0"
-                                            Padding="8"
-                                            BorderBrush="Black"
-                                            BorderThickness="1">
-                                            <WrapPanel>
-                                                <Label Width="120" Content="Image_1.jpg" />
-                                                <Label Width="120" Content="Image_2.jpg" />
-                                            </WrapPanel>
+                                        <Border>
+                                            <ItemsControl
+                                                Height="92"
+                                                MinWidth="240"
+                                                Background="White"
+                                                BorderBrush="Black"
+                                                BorderThickness="1"
+                                                ItemsSource="{Binding PatnQualificationCertificateCollection}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel VerticalAlignment="Top" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Margin="4" Orientation="Horizontal">
+                                                            <TextBlock VerticalAlignment="Center">
+                                                                <Hyperlink NavigateUri="{Binding}">
+                                                                    <TextBlock Text="{Binding}" />
+                                                                </Hyperlink>
+                                                            </TextBlock>
+                                                            <Button
+                                                                Width="20"
+                                                                Height="20"
+                                                                Margin="8,0"
+                                                                Command="{Binding DataContext.RemoveQualificationCertificateImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                                CommandParameter="{Binding}"
+                                                                Content="X" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
                                         </Border>
                                         <Border Grid.Column="1" Margin="6,0,0,0">
-                                            <Button Content="Выбрать" />
+                                            <Button Command="{Binding DataContext.AddQualificationCertificateCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" Content="Выбрать" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -833,8 +942,8 @@
                         HorizontalAlignment="Left"
                         Background="White"
                         BorderBrush="Blue"
-                        Content="Отмена"
                         Command="{Binding DataContext.BackPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                        Content="Отмена"
                         FontFamily="DIN Pro Medium"
                         Foreground="Blue" />
                 </Border>

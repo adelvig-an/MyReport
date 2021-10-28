@@ -12,7 +12,7 @@ namespace _10Model
         public string Number { get; set; } //Номер диплома
         public DateTime? DiplomDate { get; set; } //Дата выдачи диплома
         public string Universety { get; set; } //Название Университета
-        public string PatnDiplomImage { get; set; } //Путь к изображениям диплома в JSON
+        public string PathDiplomImage { get; set; } //Путь к изображениям диплома в JSON
         //Информация о СРО
         public string Sro { get; set; } //Название СРО
         public int SroNumber { get; set; } //Регистрационный номер
