@@ -47,7 +47,7 @@ using System.IO;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////Расчет стажа работы от даты начала оценочной деятельности +
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-////Правила создания дериктрии для хранениия создаваемых/загружаемых файлов: data/IdUser/NameClass or IdEntity/NameProperties/...
+////Правила создания директории для хранениия создаваемых/загружаемых файлов: data/IdUser/NameClass or IdEntity/NameProperty/...
 
 namespace _30ViewModel.PagesVM
 {
@@ -78,11 +78,6 @@ namespace _30ViewModel.PagesVM
         private DateTime? insuranceDateBefore;
         private string pathInsurancePolicieImage;
         //Свойства Квалиффикационного аттестата
-        private string numberQualificationCertificate;
-        private DateTime? dateQualificationCertificateFrom;
-        private DateTime? dateQualificationCertificateBefore;
-        private SpecialityType specialityQualificationCertificate;
-        private string nameInstitutionQualificationCertificate = @"""ФБУ"" ""ФРЦ по организации подготовки управленческих кадров""";
         private string pathQualificationCertificateImage;
         //Свойства Оценщика
         public int Id { get; set; }
@@ -129,17 +124,7 @@ namespace _30ViewModel.PagesVM
             set { ValidateProperty(value); SetProperty(ref insuranceDateBefore, value); } }
         public string PathInsurancePolicieImage { get => pathInsurancePolicieImage;
             set { ValidateProperty(value); SetProperty(ref pathInsurancePolicieImage, value); } }
-        //Свойства Квалиффикационного аттестата
-        public string NumberQualificationCertificate { get => numberQualificationCertificate; 
-            set { ValidateProperty(value); SetProperty(ref numberQualificationCertificate, value); } }
-        public DateTime? DateQualificationCertificateFrom { get => dateQualificationCertificateFrom;
-            set { ValidateProperty(value); SetProperty(ref dateQualificationCertificateFrom, value); } }
-        public DateTime? DateQualificationCertificateBefore { get => dateQualificationCertificateBefore;
-            set { ValidateProperty(value); SetProperty(ref dateQualificationCertificateBefore, value); } }
-        public SpecialityType SpecialityQualificationCertificate { get => specialityQualificationCertificate;
-            set { ValidateProperty(value); SetProperty(ref specialityQualificationCertificate, value); } }
-        public string NameInstitutionQualificationCertificate { get => nameInstitutionQualificationCertificate;
-            set { ValidateProperty(value); SetProperty(ref nameInstitutionQualificationCertificate, value); } }
+        //Свойства Квалиффикационного аттестата размещенны в своей ViewModel
         public string PathQualificationCertificateImage { get => pathQualificationCertificateImage;
             set { ValidateProperty(value); SetProperty(ref pathQualificationCertificateImage, value); } }
         #endregion Properties

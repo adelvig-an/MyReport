@@ -642,7 +642,7 @@
                                                                 Width="20"
                                                                 Height="20"
                                                                 Margin="8,0"
-                                                                Command="{Binding DataContext.RemoveInsurancePolicieImage, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                                Command="{Binding DataContext.RemoveInsurancePolicieImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
                                                                 CommandParameter="{Binding}"
                                                                 Content="X" />
                                                         </StackPanel>
@@ -654,7 +654,7 @@
                                             <Button
                                                 Margin="8,0"
                                                 Padding="16,4"
-                                                Command="{Binding DataContext.AddInsurancePolicieImage, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                Command="{Binding DataContext.AddInsurancePolicieImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
                                                 Content="Выбрать файл"
                                                 FontFamily="DIN Pro Medium"
                                                 FontSize="16" />

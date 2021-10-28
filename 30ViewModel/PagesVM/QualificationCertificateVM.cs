@@ -10,7 +10,7 @@ namespace _30ViewModel.PagesVM
         private DateTime? certificateDateFrom;
         private DateTime? certificateDateBefore;
         private SpecialityType speciality;
-        private string pathImg;
+        private string pathQualificationCertificateImage;
         public int Id { get; set; }
         public string CertificateNumber
         {
@@ -29,8 +29,9 @@ namespace _30ViewModel.PagesVM
         }
         public SpecialityType Speciality { get => speciality;
             set => SetProperty(ref speciality, value); }
-        public string PathImg { get => pathImg;
-            set { ValidateProperty(value); SetProperty(ref pathImg, value); } }
+        public string PathQualificationCertificateImage
+        { get => pathQualificationCertificateImage;
+            set { ValidateProperty(value); SetProperty(ref pathQualificationCertificateImage, value); } }
 
         public void ToCertificateDateBefore()
         {

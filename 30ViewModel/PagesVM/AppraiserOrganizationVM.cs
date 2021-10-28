@@ -82,13 +82,13 @@ namespace _30ViewModel.PagesVM
                 new Appraiser { FullName = "Рошка Андрей Ильевич" }
             };
             PathInsurancePolicieCollection = new ObservableCollection<string>();
-            AddInsurancePolicieImage = new RelayCommand(_ => AddInsurancePolicieImageAction());
-            RemoveInsurancePolicieImage = new RelayCommand(p => RemoveInsurancePolicieImageAction(p.ToString()));
+            AddInsurancePolicieImageCommand = new RelayCommand(_ => AddInsurancePolicieImage());
+            RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));
         }
 
         #region Добавление и удаление файла
-        public ICommand AddInsurancePolicieImage { get; }
-        public void AddInsurancePolicieImageAction()
+        public ICommand AddInsurancePolicieImageCommand { get; }
+        public void AddInsurancePolicieImage()
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Filter = "Пользовательские файлы (*.jfif; *.pjpeg; *.jpeg; *.pjp; *.tiff; *.bmp; *.jpg; *.png) |*.jfif; *.pjpeg; *.jpeg; *.pjp; *.tiff; *.bmp; *.jpg; *.png";
@@ -156,8 +156,8 @@ namespace _30ViewModel.PagesVM
                 }
             }
         }
-        public ICommand RemoveInsurancePolicieImage { get; }
-        public void RemoveInsurancePolicieImageAction(string s)
+        public ICommand RemoveInsurancePolicieImageCommand { get; }
+        public void RemoveInsurancePolicieImage(string s)
         {
             PathInsurancePolicieCollection.Remove(s);
             File.Delete(s);
