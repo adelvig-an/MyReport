@@ -150,10 +150,14 @@ namespace _30ViewModel.PagesVM
             AddInsurancePolicieImageCommand = new RelayCommand(_ => AddInsurancePolicieImage());
             RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));
             RemoveCommand = new RelayCommand(certificate => RemoveCertificate(certificate as QualificationCertificateVM));
+            if (Certificates.Count == 0)
+            {
+                Certificates.Add(new QualificationCertificateVM());
+            }
         }
         public void AddCertificate()
         {
-            if (Certificates.Count < 2)
+            if (Certificates.Count < 3)
             {
                 Certificates.Add(new QualificationCertificateVM());
             }
@@ -398,6 +402,10 @@ namespace _30ViewModel.PagesVM
                     return qcvm;
                 }
                 ));
+            if (Certificates.Count == 0)
+            {
+                Certificates.Add(new QualificationCertificateVM());
+            }
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
