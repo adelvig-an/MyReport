@@ -141,7 +141,8 @@ namespace _30ViewModel.PagesVM
         public AppraiserVM()
         {
             context = new ApplicationContext();
-            Certificates = new ObservableCollection<QualificationCertificateVM>();
+            Certificates = new ObservableCollection<QualificationCertificateVM>()
+            { new QualificationCertificateVM() };
             PathInsurancePolicieCollection = new ObservableCollection<string>();
             PathSroCertificateCollection = new ObservableCollection<string>();
             PathDiplomCollection = new ObservableCollection<string>();
@@ -150,10 +151,6 @@ namespace _30ViewModel.PagesVM
             AddInsurancePolicieImageCommand = new RelayCommand(_ => AddInsurancePolicieImage());
             RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));
             RemoveCommand = new RelayCommand(certificate => RemoveCertificate(certificate as QualificationCertificateVM));
-            if (Certificates.Count == 0)
-            {
-                Certificates.Add(new QualificationCertificateVM());
-            }
         }
         public void AddCertificate()
         {
