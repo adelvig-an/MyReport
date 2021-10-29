@@ -137,20 +137,26 @@ namespace _30ViewModel.PagesVM
         public ObservableCollection<string> PathSroCertificateCollection { get; set; }
         public ObservableCollection<string> PathDiplomCollection { get; set; }
         public ObservableCollection<string> PathQualificationCertificateCollection { get; set; }
+
         private readonly ApplicationContext context;
         public AppraiserVM()
         {
             context = new ApplicationContext();
+
             Certificates = new ObservableCollection<QualificationCertificateVM>()
             { new QualificationCertificateVM() };
+
             PathInsurancePolicieCollection = new ObservableCollection<string>();
             PathSroCertificateCollection = new ObservableCollection<string>();
             PathDiplomCollection = new ObservableCollection<string>();
             PathQualificationCertificateCollection = new ObservableCollection<string>();
+
             AddCommand = new RelayCommand(_ => AddCertificate());
+            RemoveCommand = new RelayCommand(certificate => RemoveCertificate(certificate as QualificationCertificateVM));
+
             AddInsurancePolicieImageCommand = new RelayCommand(_ => AddInsurancePolicieImage());
             RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));
-            RemoveCommand = new RelayCommand(certificate => RemoveCertificate(certificate as QualificationCertificateVM));
+
         }
         public void AddCertificate()
         {
@@ -166,7 +172,7 @@ namespace _30ViewModel.PagesVM
         public ICommand AddCommand { get; }
         public ICommand RemoveCommand { get; }
 
-        #region Добавление и удаление файла
+        #region Добавление и удаление файла изображения
         public ICommand AddInsurancePolicieImageCommand { get; }
         public void AddInsurancePolicieImage()
         {
@@ -242,7 +248,7 @@ namespace _30ViewModel.PagesVM
             PathInsurancePolicieCollection.Remove(s);
             File.Delete(s);
         }
-        #endregion Добавление и удаление файла
+        #endregion Добавление и удаление файла изображения
 
         #region Расчет стажа работы от даты начала оценочной деательности
         private int? experience;

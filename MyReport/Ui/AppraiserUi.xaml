@@ -652,7 +652,7 @@
                                                         Content="Удалить"
                                                         FontSize="10"
                                                         Foreground="Red"
-                                                        Visibility="{Binding Converter={StaticResource HideShowConverter}}" />
+                                                        Visibility="{Binding DataContext.Certificates.Count, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Converter={StaticResource HideShowConverter}}" />
                                                 </Grid>
                                                 <TextBox
                                                     Height="40"

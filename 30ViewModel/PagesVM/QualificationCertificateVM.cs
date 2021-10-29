@@ -6,10 +6,11 @@ namespace _30ViewModel.PagesVM
 {
     public class QualificationCertificateVM : PageViewModel
     {
-        private string certificateNumber = "12645/8";
+        private string certificateNumber;
         private DateTime? certificateDateFrom;
         private DateTime? certificateDateBefore;
         private SpecialityType speciality;
+        private string nameInstitution = @"""ФБУ"" ""ФРЦ по организации подготовки управленческих кадров""";
         private string pathQualificationCertificateImage;
         public int Id { get; set; }
         public string CertificateNumber
@@ -29,6 +30,8 @@ namespace _30ViewModel.PagesVM
         }
         public SpecialityType Speciality { get => speciality;
             set => SetProperty(ref speciality, value); }
+        public string NameInstitution { get => nameInstitution; 
+            set { ValidateProperty(value); SetProperty(ref nameInstitution, value); } }
         public string PathQualificationCertificateImage
         { get => pathQualificationCertificateImage;
             set { ValidateProperty(value); SetProperty(ref pathQualificationCertificateImage, value); } }
@@ -45,11 +48,12 @@ namespace _30ViewModel.PagesVM
                 Number = CertificateNumber,
                 DateFrom = CertificateDateFrom,
                 DateBefore = CertificateDateBefore,
-                Speciality = Speciality
+                Speciality = Speciality,
+                NameInstitution = NameInstitution
             };
             return certificate;
         }
-        
+
         #region CBOR
         static CBORObject ToCBOR(QualificationCertificateVM certificateVM)
         {
