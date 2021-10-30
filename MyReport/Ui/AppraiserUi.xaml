@@ -287,7 +287,7 @@
                                 Background="White"
                                 BorderBrush="Black"
                                 BorderThickness="1"
-                                ItemsSource="{Binding PatnDiplomCollection}">
+                                ItemsSource="{Binding PathDiplomCollection}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel VerticalAlignment="Top" />
@@ -563,7 +563,7 @@
                                 Background="White"
                                 BorderBrush="Black"
                                 BorderThickness="1"
-                                ItemsSource="{Binding PatnSroCertificateCollection}">
+                                ItemsSource="{Binding PathSroCertificateCollection}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel VerticalAlignment="Top" />
@@ -590,7 +590,7 @@
                             </ItemsControl>
                         </Border>
                         <Border Grid.Column="1" Margin="6,0,0,0">
-                            <Button Command="{Binding DataContext.AddSroCertificateCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" Content="Выбрать" />
+                            <Button Command="{Binding DataContext.AddSroCertificateImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" Content="Выбрать" />
                         </Border>
                     </Grid>
                 </Border>
@@ -647,7 +647,7 @@
                                                         VerticalAlignment="Center"
                                                         Background="White"
                                                         BorderBrush="White"
-                                                        Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"
+                                                        Command="{Binding DataContext.RemoveCertificateCommand, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"
                                                         CommandParameter="{Binding}"
                                                         Content="Удалить"
                                                         FontSize="10"
@@ -743,7 +743,7 @@
                                                 Background="White"
                                                 BorderBrush="Black"
                                                 BorderThickness="1"
-                                                ItemsSource="{Binding PatnQualificationCertificateCollection}">
+                                                ItemsSource="{Binding PathQualificationCertificateCollection}">
                                                 <ItemsControl.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <WrapPanel VerticalAlignment="Top" />
@@ -761,7 +761,7 @@
                                                                 Width="20"
                                                                 Height="20"
                                                                 Margin="8,0"
-                                                                Command="{Binding DataContext.RemoveQualificationCertificateImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                                Command="{Binding RemoveQualificationCertificateImageCommand}"
                                                                 CommandParameter="{Binding}"
                                                                 Content="X" />
                                                         </StackPanel>
@@ -770,7 +770,7 @@
                                             </ItemsControl>
                                         </Border>
                                         <Border Grid.Column="1" Margin="6,0,0,0">
-                                            <Button Command="{Binding DataContext.AddQualificationCertificateCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" Content="Выбрать" />
+                                            <Button Command="{Binding AddQualificationCertificateImageCommand}" Content="Выбрать" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -781,7 +781,7 @@
                 <Border Grid.Row="2" Margin="0,8,0,0">
                     <Button
                         Padding="16,8"
-                        Command="{Binding AddCommand}"
+                        Command="{Binding AddCertificateCommand}"
                         Content="Добавить"
                         FontFamily="DIN Pro Medium" />
                 </Border>

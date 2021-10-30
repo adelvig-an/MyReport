@@ -90,71 +90,7 @@ namespace _30ViewModel.PagesVM
         public ICommand AddInsurancePolicieImageCommand { get; }
         public void AddInsurancePolicieImage()
         {
-            OpenFileDialog OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Filter = "Пользовательские файлы (*.jfif; *.pjpeg; *.jpeg; *.pjp; *.tiff; *.bmp; *.jpg; *.png) |*.jfif; *.pjpeg; *.jpeg; *.pjp; *.tiff; *.bmp; *.jpg; *.png";
-            if (true == OpenFileDialog.ShowDialog())
-            {
-                string filePath = OpenFileDialog.FileName;
-                string extension = Path.GetExtension(filePath);
-                if (extension == ".jfif")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".jfif";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-                }
-                else if (extension == ".pjpeg")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".pjpeg";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".jpeg")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".jpeg";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".pjp")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".pjp";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".tiff")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".tiff";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".bmp")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".bmp";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".jpg")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".jpg";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-                        
-                }
-                else if (extension == ".png")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".png";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
-            }
+            PathInsurancePolicieCollection.Add(GetAndCopyImage.CopyImage());
         }
         public ICommand RemoveInsurancePolicieImageCommand { get; }
         public void RemoveInsurancePolicieImage(string s)

@@ -15,69 +15,20 @@ namespace _30ViewModel
             if (true == OpenFileDialog.ShowDialog())
             {
                 string filePath = OpenFileDialog.FileName;
-                string newFileName;
                 string extension = Path.GetExtension(filePath);
-                if (extension == ".jfif")
+                var hashSet = new HashSet<string>()
                 {
-                    newFileName = Path.GetRandomFileName() + ".jfif";
+                    ".jfif", ".pjpeg", ".jpeg", ".pjp", ".tiff", ".bmp", ".jpg", ".png"
+                };
+                if (hashSet.Contains(extension))
+                {
+                    var newFileName = Path.GetRandomFileName() + extension;
                     File.Copy(filePath, newFileName);
                     //PathInsurancePolicieCollection.Add(newFileName);
                     return newFileName;
-                }
-                else if (extension == ".pjpeg")
-                {
-                    newFileName = Path.GetRandomFileName() + ".pjpeg";
-                    File.Copy(filePath, newFileName);
-                    //PathInsurancePolicieCollection.Add(newFileName);
-                    return newFileName;
-                }
-                else if (extension == ".jpeg")
-                {
-                    newFileName = Path.GetRandomFileName() + ".jpeg";
-                    File.Copy(filePath, newFileName);
-                    //PathInsurancePolicieCollection.Add(newFileName);
-                    return newFileName;
-                }
-                else if (extension == ".pjp")
-                {
-                    newFileName = Path.GetRandomFileName() + ".pjp";
-                    File.Copy(filePath, newFileName);
-                    //PathInsurancePolicieCollection.Add(newFileName);
-                    return newFileName;
-                }
-                else if (extension == ".tiff")
-                {
-                    newFileName = Path.GetRandomFileName() + ".tiff";
-                    File.Copy(filePath, newFileName);
-                    //PathInsurancePolicieCollection.Add(newFileName);
-                    return newFileName;
-                }
-                else if (extension == ".bmp")
-                {
-                    newFileName = Path.GetRandomFileName() + ".bmp";
-                    File.Copy(filePath, newFileName);
-                    //PathInsurancePolicieCollection.Add(newFileName);
-                    return newFileName;
-                }
-                else if (extension == ".jpg")
-                {
-                    newFileName = Path.GetRandomFileName() + ".jpg";
-                    File.Copy(filePath, newFileName);
-                    //PathInsurancePolicieCollection.Add(newFileName);
-                    return newFileName;
-                }
-                else if (extension == ".png")
-                {
-                    newFileName = Path.GetRandomFileName() + ".png";
-                    File.Copy(filePath, newFileName);
-                    //PathInsurancePolicieCollection.Add(newFileName);
-                    return newFileName;
-                }
-                else
-                {
-                    return null;
                 }
             }
+            return null;
         }
     }
 }

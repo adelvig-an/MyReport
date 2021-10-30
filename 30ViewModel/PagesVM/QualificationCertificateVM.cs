@@ -1,6 +1,10 @@
 ﻿using _10Model;
 using PeterO.Cbor;
 using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Windows.Input;
 
 namespace _30ViewModel.PagesVM
 {
@@ -36,6 +40,16 @@ namespace _30ViewModel.PagesVM
         { get => pathQualificationCertificateImage;
             set { ValidateProperty(value); SetProperty(ref pathQualificationCertificateImage, value); } }
 
+        public ObservableCollection<string> PathQualificationCertificateCollection { get; set; }
+
+        public QualificationCertificateVM()
+        {
+            PathQualificationCertificateCollection = new ObservableCollection<string>();
+
+            AddQualificationCertificateImageCommand = new RelayCommand(_ => AddQualificationCertificateImage());
+            RemoveQualificationCertificateImageCommand = new RelayCommand(p => RemoveQualificationCertificateImage(p.ToString()));
+        }
+
         public void ToCertificateDateBefore()
         {
             CertificateDateBefore = CertificateDateFrom?.AddDays(-1).AddYears(+3);
@@ -54,8 +68,20 @@ namespace _30ViewModel.PagesVM
             return certificate;
         }
 
+        public ICommand AddQualificationCertificateImageCommand { get; }
+        public void AddQualificationCertificateImage()
+        {
+            PathQualificationCertificateCollection.Add(GetAndCopyImage.CopyImage());
+        }
+        public ICommand RemoveQualificationCertificateImageCommand { get; }
+        public void RemoveQualificationCertificateImage(string s)
+        {
+            PathQualificationCertificateCollection.Remove(s);
+            File.Delete(s);
+        }
+
         #region CBOR
-        static CBORObject ToCBOR(QualificationCertificateVM certificateVM)
+        private static CBORObject ToCBOR(QualificationCertificateVM certificateVM)
         {
             return CBORObject.NewArray()
                 .Add(certificateVM.Id)
@@ -66,9 +92,13 @@ namespace _30ViewModel.PagesVM
                 .Add(certificateVM.CertificateDateBefore.HasValue
                 ? CBORObject.NewArray().Add(true).Add(certificateVM.CertificateDateBefore.Value.ToBinary())
                 : CBORObject.NewArray().Add(false))
-                .Add(certificateVM.Speciality);
+                .Add(certificateVM.Speciality)
+                .Add(CBORObject.FromObject(certificateVM.PathQualificationCertificateCollection
+                    .Select(pip => CBORObject.FromObject(pip)).ToArray()
+                    )
+                );
         }
-        void FromCBOR(CBORObject cbor)
+        private void FromCBOR(CBORObject cbor)
         {
             Id = cbor[0].AsInt32();
             CertificateNumber = cbor[1].IsNull ? "" : cbor[1].AsString();
@@ -79,6 +109,12 @@ namespace _30ViewModel.PagesVM
             ? new DateTime?(DateTime.FromBinary(cbor[3][1].ToObject<long>()))
             : null;
             Speciality = (SpecialityType)Enum.Parse(typeof(SpecialityType), cbor[4].ToString(), true);
+            PathQualificationCertificateCollection = new ObservableCollection<string>(
+                cbor[5].Values.Select(cbor =>
+                {
+                    var pipi = cbor.AsStringSafe();
+                    return pipi;
+                }));
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));

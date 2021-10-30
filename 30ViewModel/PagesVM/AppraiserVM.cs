@@ -136,7 +136,6 @@ namespace _30ViewModel.PagesVM
         public ObservableCollection<string> PathInsurancePolicieCollection { get; set; }
         public ObservableCollection<string> PathSroCertificateCollection { get; set; }
         public ObservableCollection<string> PathDiplomCollection { get; set; }
-        public ObservableCollection<string> PathQualificationCertificateCollection { get; set; }
 
         private readonly ApplicationContext context;
         public AppraiserVM()
@@ -149,14 +148,16 @@ namespace _30ViewModel.PagesVM
             PathInsurancePolicieCollection = new ObservableCollection<string>();
             PathSroCertificateCollection = new ObservableCollection<string>();
             PathDiplomCollection = new ObservableCollection<string>();
-            PathQualificationCertificateCollection = new ObservableCollection<string>();
 
-            AddCommand = new RelayCommand(_ => AddCertificate());
-            RemoveCommand = new RelayCommand(certificate => RemoveCertificate(certificate as QualificationCertificateVM));
+            AddCertificateCommand = new RelayCommand(_ => AddCertificate());
+            RemoveCertificateCommand = new RelayCommand(certificate => RemoveCertificate(certificate as QualificationCertificateVM));
 
             AddInsurancePolicieImageCommand = new RelayCommand(_ => AddInsurancePolicieImage());
             RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));
-
+            AddSroCertificateImageCommand = new RelayCommand(_ => AddSroCertificateImage());
+            RemoveSroCertificateImageCommand = new RelayCommand(p => RemoveSroCertificateImage(p.ToString()));
+            AddDiplomImageCommand = new RelayCommand(_ => AddDiplomImage());
+            RemoveDiplomImageCommand = new RelayCommand(p => RemoveDiplomImage(p.ToString()));
         }
         public void AddCertificate()
         {
@@ -169,83 +170,46 @@ namespace _30ViewModel.PagesVM
         {
             Certificates.Remove(certificate);
         }
-        public ICommand AddCommand { get; }
-        public ICommand RemoveCommand { get; }
+        public ICommand AddCertificateCommand { get; }
+        public ICommand RemoveCertificateCommand { get; }
 
         #region Добавление и удаление файла изображения
+        //Страховой полис
         public ICommand AddInsurancePolicieImageCommand { get; }
         public void AddInsurancePolicieImage()
         {
-            OpenFileDialog OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Filter = "Пользовательские файлы (*.jfif; *.pjpeg; *.jpeg; *.pjp; *.tiff; *.bmp; *.jpg; *.png) |*.jfif; *.pjpeg; *.jpeg; *.pjp; *.tiff; *.bmp; *.jpg; *.png";
-            if (true == OpenFileDialog.ShowDialog())
-            {
-                string filePath = OpenFileDialog.FileName;
-                string extension = Path.GetExtension(filePath);
-                if (extension == ".jfif")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".jfif";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-                }
-                else if (extension == ".pjpeg")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".pjpeg";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".jpeg")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".jpeg";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".pjp")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".pjp";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".tiff")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".tiff";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".bmp")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".bmp";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".jpg")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".jpg";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-
-                }
-                else if (extension == ".png")
-                {
-                    PathInsurancePolicieImage = Path.GetRandomFileName() + ".png";
-                    File.Copy(filePath, PathInsurancePolicieImage);
-                    PathInsurancePolicieCollection.Add(PathInsurancePolicieImage);
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
-            }
+            PathInsurancePolicieCollection.Add(GetAndCopyImage.CopyImage());
         }
         public ICommand RemoveInsurancePolicieImageCommand { get; }
         public void RemoveInsurancePolicieImage(string s)
         {
             PathInsurancePolicieCollection.Remove(s);
+            File.Delete(s);
+        }
+
+        //Свидетельство СРО
+        public ICommand AddSroCertificateImageCommand { get; }
+        public void AddSroCertificateImage()
+        {
+            PathSroCertificateCollection.Add(GetAndCopyImage.CopyImage());
+        }
+        public ICommand RemoveSroCertificateImageCommand { get; }
+        public void RemoveSroCertificateImage(string s)
+        {
+            PathSroCertificateCollection.Remove(s);
+            File.Delete(s);
+        }
+
+        //Диплом
+        public ICommand AddDiplomImageCommand { get; }
+        public void AddDiplomImage()
+        {
+            PathDiplomCollection.Add(GetAndCopyImage.CopyImage());
+        }
+        public ICommand RemoveDiplomImageCommand { get; }
+        public void RemoveDiplomImage(string s)
+        {
+            PathDiplomCollection.Remove(s);
             File.Delete(s);
         }
         #endregion Добавление и удаление файла изображения
@@ -332,7 +296,7 @@ namespace _30ViewModel.PagesVM
         #endregion DataBase
 
         #region CBOR
-        static CBORObject ToCBOR(AppraiserVM appraiserVM)
+        private static CBORObject ToCBOR(AppraiserVM appraiserVM)
         {
             return CBORObject.NewArray()
                 .Add(appraiserVM.Id)
@@ -362,13 +326,25 @@ namespace _30ViewModel.PagesVM
                 .Add(appraiserVM.InsuranceDateBefore.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.InsuranceDateBefore.Value.ToBinary())
                 : CBORObject.NewArray().Add(false))
+                .Add(CBORObject.FromObject(appraiserVM.PathInsurancePolicieCollection
+                    .Select(pip => CBORObject.FromObject(pip)).ToArray()
+                    )
+                )
+                .Add(CBORObject.FromObject(appraiserVM.PathSroCertificateCollection
+                    .Select(pip => CBORObject.FromObject(pip)).ToArray()
+                    )
+                )
+                .Add(CBORObject.FromObject(appraiserVM.PathDiplomCollection
+                    .Select(pip => CBORObject.FromObject(pip)).ToArray()
+                    )
+                )
                 .Add(CBORObject.FromObject(appraiserVM.Certificates
                     .Select(cvm => CBORObject.DecodeFromBytes(cvm.GetCBOR()))
                     .ToArray()
                     )
                 );
         }
-        void FromCBOR(CBORObject cbor)
+        private void FromCBOR(CBORObject cbor)
         {
             Id = cbor[0].AsInt32();
             SecondName = cbor[1].AsStringSafe();
@@ -397,8 +373,26 @@ namespace _30ViewModel.PagesVM
             InsuranceDateBefore = cbor[16][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[16][1].ToObject<long>()))
             : null;
-            Certificates = new ObservableCollection<QualificationCertificateVM>(
+            PathInsurancePolicieCollection = new ObservableCollection<string>(
                 cbor[17].Values.Select(cbor =>
+                {
+                    var pipi = cbor.AsStringSafe();
+                    return pipi;
+                }));
+            PathSroCertificateCollection = new ObservableCollection<string>(
+                cbor[18].Values.Select(cbor =>
+                {
+                    var pipi = cbor.AsStringSafe();
+                    return pipi;
+                }));
+            PathDiplomCollection = new ObservableCollection<string>(
+                cbor[19].Values.Select(cbor =>
+                {
+                    var pipi = cbor.AsStringSafe();
+                    return pipi;
+                }));
+            Certificates = new ObservableCollection<QualificationCertificateVM>(
+                cbor[20].Values.Select(cbor =>
                 {
                     var qcvm = new QualificationCertificateVM();
                     qcvm.SetCBOR(cbor.EncodeToBytes());
