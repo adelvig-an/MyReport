@@ -743,7 +743,7 @@
                                                 Background="White"
                                                 BorderBrush="Black"
                                                 BorderThickness="1"
-                                                ItemsSource="{Binding PathQualificationCertificateCollection}">
+                                                ItemsSource="{Binding PathImageCollection}">
                                                 <ItemsControl.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <WrapPanel VerticalAlignment="Top" />
@@ -761,7 +761,7 @@
                                                                 Width="20"
                                                                 Height="20"
                                                                 Margin="8,0"
-                                                                Command="{Binding RemoveQualificationCertificateImageCommand}"
+                                                                Command="{Binding RemoveImageCommand}"
                                                                 CommandParameter="{Binding}"
                                                                 Content="X" />
                                                         </StackPanel>
@@ -770,7 +770,7 @@
                                             </ItemsControl>
                                         </Border>
                                         <Border Grid.Column="1" Margin="6,0,0,0">
-                                            <Button Command="{Binding AddQualificationCertificateImageCommand}" Content="Выбрать" />
+                                            <Button Command="{Binding AddImageCommand}" Content="Выбрать" />
                                         </Border>
                                     </Grid>
                                 </Border>
