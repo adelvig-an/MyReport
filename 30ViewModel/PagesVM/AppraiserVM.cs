@@ -47,7 +47,7 @@ using System.IO;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////Расчет стажа работы от даты начала оценочной деятельности +
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-////Правила создания директории для хранениия создаваемых/загружаемых файлов: data/IdUser/NameClass or IdEntity/NameProperty/...
+////Правила создания директории для хранения создаваемых/загружаемых файлов: data/IdUser/NameClass or IdEntity/NameProperty/...
 
 namespace _30ViewModel.PagesVM
 {
@@ -159,6 +159,8 @@ namespace _30ViewModel.PagesVM
             AddDiplomImageCommand = new RelayCommand(_ => AddDiplomImage());
             RemoveDiplomImageCommand = new RelayCommand(p => RemoveDiplomImage(p.ToString()));
         }
+
+        #region Добавление Кваллификационного сетификата
         public void AddCertificate()
         {
             if (Certificates.Count < 3)
@@ -172,13 +174,18 @@ namespace _30ViewModel.PagesVM
         }
         public ICommand AddCertificateCommand { get; }
         public ICommand RemoveCertificateCommand { get; }
+        #endregion Добавление Кваллификационного сетификата
 
         #region Добавление и удаление файла изображения
         //Страховой полис
         public ICommand AddInsurancePolicieImageCommand { get; }
         public void AddInsurancePolicieImage()
         {
-            PathInsurancePolicieCollection.Add(GetAndCopyImage.CopyImage());
+            var path = GetAndCopyImage.CopyImage();
+            if (path != null)
+            {
+                PathInsurancePolicieCollection.Add(path);
+            }
         }
         public ICommand RemoveInsurancePolicieImageCommand { get; }
         public void RemoveInsurancePolicieImage(string s)
@@ -191,7 +198,11 @@ namespace _30ViewModel.PagesVM
         public ICommand AddSroCertificateImageCommand { get; }
         public void AddSroCertificateImage()
         {
-            PathSroCertificateCollection.Add(GetAndCopyImage.CopyImage());
+            var path = GetAndCopyImage.CopyImage();
+            if (path != null)
+            {
+                PathSroCertificateCollection.Add(path);
+            }
         }
         public ICommand RemoveSroCertificateImageCommand { get; }
         public void RemoveSroCertificateImage(string s)
@@ -204,7 +215,11 @@ namespace _30ViewModel.PagesVM
         public ICommand AddDiplomImageCommand { get; }
         public void AddDiplomImage()
         {
-            PathDiplomCollection.Add(GetAndCopyImage.CopyImage());
+            var path = GetAndCopyImage.CopyImage();
+            if (path != null)
+            {
+                PathDiplomCollection.Add(path);
+            }
         }
         public ICommand RemoveDiplomImageCommand { get; }
         public void RemoveDiplomImage(string s)

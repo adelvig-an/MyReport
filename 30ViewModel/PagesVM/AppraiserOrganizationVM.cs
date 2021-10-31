@@ -90,7 +90,11 @@ namespace _30ViewModel.PagesVM
         public ICommand AddInsurancePolicieImageCommand { get; }
         public void AddInsurancePolicieImage()
         {
-            PathInsurancePolicieCollection.Add(GetAndCopyImage.CopyImage());
+            var path = GetAndCopyImage.CopyImage();
+            if (path != null)
+            {
+                PathInsurancePolicieCollection.Add(path);
+            }
         }
         public ICommand RemoveInsurancePolicieImageCommand { get; }
         public void RemoveInsurancePolicieImage(string s)

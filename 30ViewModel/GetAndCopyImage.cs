@@ -15,6 +15,7 @@ namespace _30ViewModel
             if (true == OpenFileDialog.ShowDialog())
             {
                 string filePath = OpenFileDialog.FileName;
+                string path = "data";
                 string extension = Path.GetExtension(filePath);
                 var hashSet = new HashSet<string>()
                 {
@@ -22,10 +23,14 @@ namespace _30ViewModel
                 };
                 if (hashSet.Contains(extension))
                 {
-                    var newFileName = Path.GetRandomFileName() + extension;
-                    File.Copy(filePath, newFileName);
-                    //PathInsurancePolicieCollection.Add(newFileName);
-                    return newFileName;
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    string[] paths = {path, Path.GetRandomFileName() + extension };
+                    string newPath = Path.Combine(paths);
+                    File.Copy(filePath, newPath);
+                    return newPath;
                 }
             }
             return null;

@@ -761,7 +761,7 @@
                                                                 Width="20"
                                                                 Height="20"
                                                                 Margin="8,0"
-                                                                Command="{Binding DataContext.RemoveImageCommand, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"
+                                                                Command="{Binding DataContext.RemoveImageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl, Mode=FindAncestor}}"
                                                                 CommandParameter="{Binding}"
                                                                 Content="X" />
                                                         </StackPanel>

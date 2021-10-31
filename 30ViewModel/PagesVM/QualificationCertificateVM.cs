@@ -71,7 +71,11 @@ namespace _30ViewModel.PagesVM
         public ICommand AddImageCommand { get; }
         public void AddImage()
         {
-            PathImageCollection.Add(GetAndCopyImage.CopyImage());
+            var path = GetAndCopyImage.CopyImage();
+            if (path != null)
+            {
+                PathImageCollection.Add(path);
+            }
         }
         public ICommand RemoveImageCommand { get; }
         public void RemoveImage(string s)
