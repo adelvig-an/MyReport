@@ -298,7 +298,7 @@
                                         <StackPanel Margin="4" Orientation="Horizontal">
                                             <TextBlock VerticalAlignment="Center">
                                                 <Hyperlink Command="{Binding DataContext.ShowImageDialog, ElementName=window}" CommandParameter="{Binding}">
-                                                    <TextBlock Text="{Binding Path}" />
+                                                    <TextBlock Text="{Binding}" />
                                                 </Hyperlink>
                                             </TextBlock>
                                             <Button
