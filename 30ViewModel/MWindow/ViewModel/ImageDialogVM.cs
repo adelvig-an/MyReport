@@ -11,11 +11,17 @@ namespace _30ViewModel.MWindow.ViewModel
         private ICommand closeCommand;
         private Action<ImageDialogVM> closeHandler = null;
 
+        private string path = null;
         #endregion fields
 
         public ImageDialogVM(Action<ImageDialogVM> closeHandler)
         {
             this.closeHandler = closeHandler;
+        }
+        public string Path
+        {
+            get => path;
+            set { path = value; RaisePropertyChanged(() => path); }
         }
 
         public override ICommand CloseCommand
