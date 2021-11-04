@@ -4,6 +4,7 @@ using MyReport.MWindow.Ui;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace MyReport.MWindow
@@ -18,14 +19,18 @@ namespace MyReport.MWindow
 
             var imageDialogVM = new ImageDialogVM(instance =>
             {
-                coord.HideMetroDialogAsync(path, customDialog);
+                coord.HideMetroDialogAsync(context, customDialog);
 
-                Debug.WriteLine("FirstName: " + instance.Path);
+                Debug.WriteLine("Path: " + instance.Path);
             });
+
+            var dPath = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+            var cPath = Path.Combine(dPath, path);
+            imageDialogVM.Path = cPath;
 
             customDialog.DataContext = imageDialogVM;
 
-            coord.ShowMetroDialogAsync(path, customDialog);
+            coord.ShowMetroDialogAsync(context, customDialog);
         }
     }
 }
