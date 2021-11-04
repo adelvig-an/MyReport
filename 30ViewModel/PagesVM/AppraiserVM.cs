@@ -244,9 +244,6 @@ namespace _30ViewModel.PagesVM
         }
         #endregion Расчет стажа работы
 
-        #region Вызов диалогового окна для Изображения
-        #endregion Вызов диалогового окна для Изображения
-
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
         public Appraiser ToAppraiser()
         {

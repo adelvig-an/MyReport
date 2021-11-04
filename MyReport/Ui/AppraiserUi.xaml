@@ -443,7 +443,7 @@
                                     <DataTemplate>
                                         <StackPanel Margin="4" Orientation="Horizontal">
                                             <TextBlock VerticalAlignment="Center">
-                                                <Hyperlink NavigateUri="{Binding}">
+                                                <Hyperlink Command="{Binding DataContext.ShowImageDialog, ElementName=window}" CommandParameter="{Binding}">
                                                     <TextBlock Text="{Binding}" />
                                                 </Hyperlink>
                                             </TextBlock>
@@ -573,7 +573,7 @@
                                     <DataTemplate>
                                         <StackPanel Margin="4" Orientation="Horizontal">
                                             <TextBlock VerticalAlignment="Center">
-                                                <Hyperlink NavigateUri="{Binding}">
+                                                <Hyperlink Command="{Binding DataContext.ShowImageDialog, ElementName=window}" CommandParameter="{Binding}">
                                                     <TextBlock Text="{Binding}" />
                                                 </Hyperlink>
                                             </TextBlock>
@@ -753,7 +753,7 @@
                                                     <DataTemplate>
                                                         <StackPanel Margin="4" Orientation="Horizontal">
                                                             <TextBlock VerticalAlignment="Center">
-                                                                <Hyperlink NavigateUri="{Binding}">
+                                                                <Hyperlink Command="{Binding DataContext.ShowImageDialog, ElementName=window}" CommandParameter="{Binding}">
                                                                     <TextBlock Text="{Binding}" />
                                                                 </Hyperlink>
                                                             </TextBlock>
