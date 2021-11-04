@@ -12,8 +12,9 @@ namespace MyReport
         public MainWindow()
         {
             var dialogService = new CustomDialogs();
+            var imageDialogSrvice = new ImageDialogs();
             InitializeComponent();
-            DataContext = new MainViewModel(dialogService);
+            DataContext = new MainViewModel(dialogService, imageDialogSrvice);
         }
     }
 }

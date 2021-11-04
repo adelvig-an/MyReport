@@ -42,7 +42,7 @@ namespace _30ViewModel
         }
 
 
-        public MainViewModel(IDialogService dialogService)
+        public MainViewModel(IDialogService dialogService, IImageDiaolgService imageDiaolgService)
         {
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
@@ -63,6 +63,7 @@ namespace _30ViewModel
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
             ShowDialog = new RelayCommand(_ => dialogService.Show(this));
+            ShowImageDialog = new RelayCommand(p => imageDiaolgService.OpenImage(p.ToString()));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
         }
         /// <summary>
@@ -130,6 +131,7 @@ namespace _30ViewModel
 
         //Test MWindow
         public ICommand ShowDialog { get; }
+        public ICommand ShowImageDialog { get; }
 
     }
 }
