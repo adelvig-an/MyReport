@@ -10,7 +10,7 @@ namespace MyReport.MWindow
 {
     public class ImageDialogs : IImageDiaolgService
     {
-        public void OpenImage(string path)
+        public void OpenImage(object context, string path)
         {
             var coord = MWindowDialogLib.ContentDialogService.Instance.Coordinator;
 

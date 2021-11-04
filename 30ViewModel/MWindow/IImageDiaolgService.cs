@@ -6,6 +6,6 @@ namespace _30ViewModel.MWindow
 {
     public interface IImageDiaolgService
     {
-        public void OpenImage(string path);
+        public void OpenImage(object context, string path);
     }
 }

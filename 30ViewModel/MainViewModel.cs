@@ -63,7 +63,7 @@ namespace _30ViewModel
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
             ShowDialog = new RelayCommand(_ => dialogService.Show(this));
-            ShowImageDialog = new RelayCommand(p => imageDiaolgService.OpenImage(p.ToString()));
+            ShowImageDialog = new RelayCommand(p => imageDiaolgService.OpenImage(this, p.ToString()));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
         }
         /// <summary>

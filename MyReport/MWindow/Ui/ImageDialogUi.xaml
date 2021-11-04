@@ -10,7 +10,7 @@
     mc:Ignorable="d">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Source="{Binding}" />
+            <Image Source="{Binding Path}" />
             <Button
                 Margin="8"
                 Padding="16,8"

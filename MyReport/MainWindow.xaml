@@ -10,6 +10,7 @@
     xmlns:ui="clr-namespace:MyReport.Ui"
     xmlns:uiCust="clr-namespace:MyReport.Ui.CustomerUi"
     xmlns:vm="clr-namespace:_30ViewModel.PagesVM;assembly=30ViewModel"
+    x:Name="window"
     Title="MainWindow"
     Width="800"
     Height="450"
