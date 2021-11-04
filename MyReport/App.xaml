@@ -11,6 +11,7 @@
         <conv:EnumConverter x:Key="EnumConverter" />
         <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         <conv:HideShowConverter x:Key="HideShowConverter" />
+        <conv:StringToImageSourceConverter x:Key="StringToImageSourceConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
         <!--  Подключение провайдеров  -->

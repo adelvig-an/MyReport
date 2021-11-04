@@ -1,11 +1,8 @@
 ﻿using _30ViewModel.MWindow;
 using _30ViewModel.MWindow.ViewModel;
 using MyReport.MWindow.Ui;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 
 namespace MyReport.MWindow
 {

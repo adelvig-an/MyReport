@@ -10,7 +10,7 @@
     mc:Ignorable="d">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Height="350" Source="{Binding Path}" />
+            <Image Height="350" Source="{Binding Path, Converter={StaticResource StringToImageSourceConverter}}" />
             <Button
                 Margin="8"
                 Padding="16,8"
