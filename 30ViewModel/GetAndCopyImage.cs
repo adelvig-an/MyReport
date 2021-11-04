@@ -27,7 +27,7 @@ namespace _30ViewModel
                     {
                         Directory.CreateDirectory(path);
                     }
-                    string[] paths = {path, Path.GetRandomFileName() + extension };
+                    string[] paths = { path, Path.GetRandomFileName() + extension };
                     string newPath = Path.Combine(paths);
                     File.Copy(filePath, newPath);
                     return newPath;
