@@ -169,10 +169,10 @@ namespace _30ViewModel.PagesVM
                 return false;
             }
         }
-        public void ReadAppraiser()
-        {
-           context.Appraisers.Include(appraiser => appraiser.AppraiserOrganization).ToList();
-        }
+        //public void LoadAppraisers()
+        //{
+        //   context.Appraisers.Include(appraiser => appraiser.AppraiserOrganization).ToList();
+        //}
         #endregion DataBase
 
         #region CBOR

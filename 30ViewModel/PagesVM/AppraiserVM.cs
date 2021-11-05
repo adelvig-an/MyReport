@@ -316,9 +316,13 @@ namespace _30ViewModel.PagesVM
         public void LoadAppraiser()
         {
             var appraiser = context.Appraisers.Single(a => a.Id == 0);
+            context.Entry(appraiser)
+                .Reference(ip => ip.InsurancePolicie)
+                .Load();
+            context.Entry(appraiser)
+                .Collection(qc => qc.QualificationCertificates)
+                .Load();
             GetAppraiser(appraiser);
-            context.Entry(appraiser).Reference(ip => ip.InsurancePolicie).Load();
-            context.Entry(appraiser).Collection(qc => qc.QualificationCertificates).Load();
         }
 
         public void GetAppraiser(Appraiser appraiser)
@@ -338,7 +342,7 @@ namespace _30ViewModel.PagesVM
             SroDate = appraiser.SroDate;
             PathSroCertificateCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathSroCertificateImage);
             GetInsurancePolicie(appraiser.InsurancePolicie);
-            //Certificates = appraiser.QualificationCertificates;
+            //Certificates = new ObservableCollection<QualificationCertificateVM>(appraiser.QualificationCertificates);
         }
 
         public void GetInsurancePolicie(InsurancePolicie insurancePolicie)
