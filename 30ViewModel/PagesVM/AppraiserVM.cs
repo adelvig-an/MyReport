@@ -9,6 +9,7 @@ using System.Linq;
 using Microsoft.Win32;
 using System.Windows.Input;
 using System.IO;
+using Newtonsoft.Json;
 
 ////Валидация данных, проверка на корректность внесеных данных пользователем +
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,6 +139,7 @@ namespace _30ViewModel.PagesVM
         public ObservableCollection<string> PathDiplomCollection { get; set; }
 
         private readonly ApplicationContext context;
+        //public QualificationCertificateVM certificateVM;
         public AppraiserVM()
         {
             context = new ApplicationContext();
@@ -257,10 +259,12 @@ namespace _30ViewModel.PagesVM
                 Specialization = Specialization,
                 Number = Number,
                 DiplomDate = DiplomDate,
+                PathDiplomImage = JsonConvert.SerializeObject(PathDiplomCollection),
                 Universety = Universety,
                 Sro = Sro,
                 SroNumber = SroNumber,
                 SroDate = SroDate,
+                PathSroCertificateImage = JsonConvert.SerializeObject(PathInsurancePolicieCollection),
                 InsurancePolicie = ToInsurancePolicie(),
                 QualificationCertificates = (ICollection<QualificationCertificate>)Certificates
                     .Select(cvm => context.Add(cvm.ToQualificationCertificate()))
@@ -276,7 +280,8 @@ namespace _30ViewModel.PagesVM
                 Number = InsuranceNumber,
                 InsuranceMoney = InsuranceMoney,
                 DateFrom = InsuranceDateFrom,
-                DateBefore = InsuranceDateBefore
+                DateBefore = InsuranceDateBefore,
+                PathInsurancePolicieImage = JsonConvert.SerializeObject(PathInsurancePolicieCollection)
             };
             return insurancePolicie;
         }
@@ -306,6 +311,45 @@ namespace _30ViewModel.PagesVM
             {
                 Debug.WriteLine(exp.ToString());
                 return false;
+            }
+        }
+
+        public void GetAppraiser()
+        {
+            var appraisers = context.Appraisers;
+            foreach (Appraiser appraiser in appraisers)
+            {
+                Id = appraiser.Id;
+                SecondName = appraiser.SecondName;
+                FirstName = appraiser.FirstName;
+                MiddleName = appraiser.MiddleName;
+                StartedDate = appraiser.StartedDate;
+                Specialization = appraiser.Specialization;
+                Number = appraiser.Number;
+                DiplomDate = appraiser.DiplomDate;
+                Universety = appraiser.Universety;
+                PathDiplomCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathDiplomImage);
+                Sro = appraiser.Sro;
+                SroNumber = appraiser.SroNumber;
+                SroDate = appraiser.SroDate;
+                PathSroCertificateCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathSroCertificateImage);
+                GetInsurancePolicie();
+                //certificateVM.GetQvalificationCertificate();
+            }
+        }
+
+        public void GetInsurancePolicie()
+        {
+            var insurancePolicies = context.InsurancePolicies;
+            foreach (InsurancePolicie insurancePolicie in insurancePolicies)
+            {
+                Id = insurancePolicie.Id;
+                InsuranceNumber = insurancePolicie.Number;
+                InsuranceCompany = insurancePolicie.InsuranceCompany;
+                InsuranceMoney = insurancePolicie.InsuranceMoney;
+                InsuranceDateFrom = insurancePolicie.DateFrom;
+                InsuranceDateBefore = insurancePolicie.DateBefore;
+                PathInsurancePolicieCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(insurancePolicie.PathInsurancePolicieImage);
             }
         }
         #endregion DataBase

@@ -1,7 +1,10 @@
 ﻿using _10Model;
+using _20DbLayer;
+using Newtonsoft.Json;
 using PeterO.Cbor;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -42,9 +45,11 @@ namespace _30ViewModel.PagesVM
 
         public ObservableCollection<string> PathImageCollection { get; set; }
 
+        private readonly ApplicationContext context;
         public QualificationCertificateVM()
         {
             PathImageCollection = new ObservableCollection<string>();
+            context = new ApplicationContext();
 
             AddImageCommand = new RelayCommand(_ => AddImage());
             RemoveImageCommand = new RelayCommand(p => RemoveImage(p.ToString()));
@@ -63,9 +68,63 @@ namespace _30ViewModel.PagesVM
                 DateFrom = CertificateDateFrom,
                 DateBefore = CertificateDateBefore,
                 Speciality = Speciality,
-                NameInstitution = NameInstitution
+                NameInstitution = NameInstitution,
+                PathQualificationCertificateImage = JsonConvert.SerializeObject(PathImageCollection)
             };
             return certificate;
+        }
+
+        public void AddQvalificationCertificate()
+        {
+            try
+            {
+                QualificationCertificate qualificationCertificate = ToQualificationCertificate();
+                context.Add(qualificationCertificate);
+                context.SaveChanges();
+            }
+            catch (Exception exp)
+            {
+                Debug.WriteLine(exp.ToString());
+            }
+        }
+
+        public bool UpdateQualificationCertificate()
+        {
+            try
+            {
+                var qual = context.QualificationCertificates.First();
+                qual = ToQualificationCertificate();
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception exp)
+            {
+                Debug.WriteLine(exp.ToString());
+                return false;
+            }
+        }
+
+        public void GetQvalificationCertificate()
+        {
+            try
+            {
+                var qualificationCertificates = context.QualificationCertificates;
+                foreach (QualificationCertificate qual in qualificationCertificates)
+                {
+                    Id = qual.Id;
+                    CertificateNumber = qual.Number;
+                    CertificateDateFrom = qual.DateFrom;
+                    CertificateDateBefore = qual.DateBefore;
+                    Speciality = qual.Speciality;
+                    NameInstitution = qual.NameInstitution;
+                    PathImageCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(qual.PathQualificationCertificateImage);
+                }
+            }
+            catch (Exception exp)
+            {
+
+                Debug.WriteLine(exp.ToString());
+            }
         }
 
         public ICommand AddImageCommand { get; }
