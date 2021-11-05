@@ -315,14 +315,21 @@ namespace _30ViewModel.PagesVM
 
         public void LoadAppraiser()
         {
-            var appraiser = context.Appraisers.Single(a => a.Id == 0);
-            context.Entry(appraiser)
-                .Reference(ip => ip.InsurancePolicie)
-                .Load();
-            context.Entry(appraiser)
-                .Collection(qc => qc.QualificationCertificates)
-                .Load();
-            GetAppraiser(appraiser);
+            try
+            {
+                var appraiser = context.Appraisers.Single(a => a.Id == 0);
+                context.Entry(appraiser)
+                    .Reference(ip => ip.InsurancePolicie)
+                    .Load();
+                context.Entry(appraiser)
+                    .Collection(qc => qc.QualificationCertificates)
+                    .Load();
+                GetAppraiser(appraiser);
+            }
+            catch (Exception exp)
+            {
+                Debug.WriteLine(exp.ToString());
+            }
         }
 
         public void GetAppraiser(Appraiser appraiser)
