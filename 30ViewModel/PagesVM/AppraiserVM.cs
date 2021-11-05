@@ -313,43 +313,44 @@ namespace _30ViewModel.PagesVM
             }
         }
 
-        public void GetAppraiser()
+        public void LoadAppraiser()
         {
-            var appraisers = context.Appraisers;
-            foreach (Appraiser appraiser in appraisers)
-            {
-                Id = appraiser.Id;
-                SecondName = appraiser.SecondName;
-                FirstName = appraiser.FirstName;
-                MiddleName = appraiser.MiddleName;
-                StartedDate = appraiser.StartedDate;
-                Specialization = appraiser.Specialization;
-                Number = appraiser.Number;
-                DiplomDate = appraiser.DiplomDate;
-                Universety = appraiser.Universety;
-                PathDiplomCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathDiplomImage);
-                Sro = appraiser.Sro;
-                SroNumber = appraiser.SroNumber;
-                SroDate = appraiser.SroDate;
-                PathSroCertificateCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathSroCertificateImage);
-                GetInsurancePolicie();
-                //Certificates = appraiser.QualificationCertificates;
-            }
+            var appraiser = context.Appraisers.Single(a => a.Id == 0);
+            GetAppraiser(appraiser);
+            context.Entry(appraiser).Reference(ip => ip.InsurancePolicie).Load();
+            context.Entry(appraiser).Collection(qc => qc.QualificationCertificates).Load();
         }
 
-        public void GetInsurancePolicie()
+        public void GetAppraiser(Appraiser appraiser)
         {
-            var insurancePolicies = context.InsurancePolicies;
-            foreach (InsurancePolicie insurancePolicie in insurancePolicies)
-            {
-                Id = insurancePolicie.Id;
-                InsuranceNumber = insurancePolicie.Number;
-                InsuranceCompany = insurancePolicie.InsuranceCompany;
-                InsuranceMoney = insurancePolicie.InsuranceMoney;
-                InsuranceDateFrom = insurancePolicie.DateFrom;
-                InsuranceDateBefore = insurancePolicie.DateBefore;
-                PathInsurancePolicieCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(insurancePolicie.PathInsurancePolicieImage);
-            }
+            Id = appraiser.Id;
+            SecondName = appraiser.SecondName;
+            FirstName = appraiser.FirstName;
+            MiddleName = appraiser.MiddleName;
+            StartedDate = appraiser.StartedDate;
+            Specialization = appraiser.Specialization;
+            Number = appraiser.Number;
+            DiplomDate = appraiser.DiplomDate;
+            Universety = appraiser.Universety;
+            PathDiplomCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathDiplomImage);
+            Sro = appraiser.Sro;
+            SroNumber = appraiser.SroNumber;
+            SroDate = appraiser.SroDate;
+            PathSroCertificateCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathSroCertificateImage);
+            GetInsurancePolicie(appraiser.InsurancePolicie);
+            //Certificates = appraiser.QualificationCertificates;
+        }
+
+        public void GetInsurancePolicie(InsurancePolicie insurancePolicie)
+        {
+            Id = insurancePolicie.Id;
+            InsuranceNumber = insurancePolicie.Number;
+            InsuranceCompany = insurancePolicie.InsuranceCompany;
+            InsuranceMoney = insurancePolicie.InsuranceMoney;
+            InsuranceDateFrom = insurancePolicie.DateFrom;
+            InsuranceDateBefore = insurancePolicie.DateBefore;
+            PathInsurancePolicieCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(insurancePolicie.PathInsurancePolicieImage);
+
         }
         #endregion DataBase
 
