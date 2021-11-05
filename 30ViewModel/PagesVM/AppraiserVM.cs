@@ -139,7 +139,6 @@ namespace _30ViewModel.PagesVM
         public ObservableCollection<string> PathDiplomCollection { get; set; }
 
         private readonly ApplicationContext context;
-        //public QualificationCertificateVM certificateVM;
         public AppraiserVM()
         {
             context = new ApplicationContext();
@@ -334,7 +333,7 @@ namespace _30ViewModel.PagesVM
                 SroDate = appraiser.SroDate;
                 PathSroCertificateCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathSroCertificateImage);
                 GetInsurancePolicie();
-                //certificateVM.GetQvalificationCertificate();
+                //Certificates = appraiser.QualificationCertificates;
             }
         }
 
