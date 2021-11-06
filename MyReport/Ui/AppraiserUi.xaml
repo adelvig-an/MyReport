@@ -804,6 +804,7 @@
                         HorizontalAlignment="Right"
                         Background="Blue"
                         BorderBrush="Blue"
+                        Command="{Binding DataContext.TestSaved, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                         Content="Сохранить"
                         FontFamily="DIN Pro Medium"
                         Foreground="White" />

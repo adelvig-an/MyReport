@@ -65,7 +65,49 @@ namespace _30ViewModel
             ShowDialog = new RelayCommand(_ => dialogService.Show(this));
             ShowImageDialog = new RelayCommand(p => imageDiaolgService.OpenImage(this, p.ToString()));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
+
+
+            //!!!Тестовые команды Удалить!!!!
+            TestSaved = new RelayCommand(_ => TestSavedAction());
+            TestFromCBOR = new RelayCommand(_ => TestFromCBORAction());
+            TestLoadDb = new RelayCommand(_ => TestLoadDbAction());
+            TestNewPage = new RelayCommand(_ => TestNewPageAction());
+
         }
+
+        #region TestCommand Delete!!!
+        public ICommand TestSaved { get; }
+        public void TestSavedAction()
+        {
+            if (CurrentPage is AppraiserVM appraiserVM)
+            {
+                appraiserVM.AddAppraiser();
+            }
+            CurrentPage = new TestPageVM();
+        }
+
+
+        public ICommand TestFromCBOR { get; }
+        public ICommand TestLoadDb { get; }
+        public ICommand TestNewPage { get; }
+        public void TestFromCBORAction()
+        {
+            CurrentPage = new AppraiserVM();
+            CurrentPage?.ReadCBOR();
+        }
+        public void TestLoadDbAction()
+        {
+            CurrentPage = new AppraiserVM();
+            //CurrentPage.LoadAppraiser();
+        }
+        public void TestNewPageAction()
+        {
+            CurrentPage = new AppraiserVM();
+        }
+        #endregion TestCommand Deleted!!!
+
+
+
         /// <summary>
         /// Команда сохранения в БД
         /// </summary>
@@ -132,6 +174,9 @@ namespace _30ViewModel
         //Test MWindow
         public ICommand ShowDialog { get; }
         public ICommand ShowImageDialog { get; }
+
+
+        
 
     }
 }

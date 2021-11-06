@@ -349,7 +349,9 @@ namespace _30ViewModel.PagesVM
             SroDate = appraiser.SroDate;
             PathSroCertificateCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathSroCertificateImage);
             GetInsurancePolicie(appraiser.InsurancePolicie);
-            //Certificates = new ObservableCollection<QualificationCertificateVM>(appraiser.QualificationCertificates);
+            //Certificates = new ObservableCollection<QualificationCertificateVM>(Certificates.Select(cvm => cvm.GetQvalificationCertificate(appraiser.QualificationCertificates.GetType())));
+            //Certificates.Select(cvm => cvm.GetQvalificationCertificate(appraiser.QualificationCertificates.GetType(QualificationCertificate)));
+
         }
 
         public void GetInsurancePolicie(InsurancePolicie insurancePolicie)
