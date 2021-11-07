@@ -525,6 +525,7 @@
                                     Margin="0,4,0,0"
                                     Padding="15,0"
                                     VerticalContentAlignment="Center"
+                                    IsEnabled="True"
                                     Text="" />
                             </StackPanel>
                         </Border>

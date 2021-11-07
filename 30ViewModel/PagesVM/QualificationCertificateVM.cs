@@ -74,38 +74,6 @@ namespace _30ViewModel.PagesVM
             return certificate;
         }
 
-        //public void AddQvalificationCertificate()
-        //{
-        //    try
-        //    {
-        //        QualificationCertificate qualificationCertificate = ToQualificationCertificate();
-        //        context.Add(qualificationCertificate);
-        //        context.SaveChanges();
-        //    }
-        //    catch (Exception exp)
-        //    {
-        //        Debug.WriteLine(exp.ToString());
-        //    }
-        //}
-
-        //public bool UpdateQualificationCertificate()
-        //{
-        //    try
-        //    {
-        //        var qual = context.QualificationCertificates.First();
-        //        qual = ToQualificationCertificate();
-        //        context.SaveChanges();
-        //        return true;
-        //    }
-        //    catch (Exception exp)
-        //    {
-        //        Debug.WriteLine(exp.ToString());
-        //        return false;
-        //    }
-        //}
-
-        
-
         public static QualificationCertificateVM GetQualificationCertificateVM(QualificationCertificate qualificationCertificate)
         {
             var qualificationCertificateVM = new QualificationCertificateVM()

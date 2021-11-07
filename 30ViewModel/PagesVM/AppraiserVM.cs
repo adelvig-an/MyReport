@@ -172,7 +172,7 @@ namespace _30ViewModel.PagesVM
         public void RemoveCertificate(QualificationCertificateVM certificate)
         {
             Certificates.Remove(certificate);
-            DeleteQualificationCertificate();
+            DeleteQualificationCertificate(certificate.Id);
         }
         public ICommand AddCertificateCommand { get; }
         public ICommand RemoveCertificateCommand { get; }
@@ -365,11 +365,11 @@ namespace _30ViewModel.PagesVM
             return appraiserVM;
         }
 
-        public bool DeleteQualificationCertificate()
+        public bool DeleteQualificationCertificate(int i)
         {
             try
             {
-                var qual = context.QualificationCertificates.First();
+                var qual = context.QualificationCertificates.Single(c => c.Id == i);
                 context.QualificationCertificates.Remove(qual);
                 context.SaveChanges();
                 return true;
