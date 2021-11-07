@@ -172,6 +172,7 @@ namespace _30ViewModel.PagesVM
         public void RemoveCertificate(QualificationCertificateVM certificate)
         {
             Certificates.Remove(certificate);
+            DeleteQualificationCertificate();
         }
         public ICommand AddCertificateCommand { get; }
         public ICommand RemoveCertificateCommand { get; }
@@ -362,6 +363,22 @@ namespace _30ViewModel.PagesVM
                         QualificationCertificateVM.GetQualificationCertificateVM(qc)))
             };
             return appraiserVM;
+        }
+
+        public bool DeleteQualificationCertificate()
+        {
+            try
+            {
+                var qual = context.QualificationCertificates.First();
+                context.QualificationCertificates.Remove(qual);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception exp)
+            {
+                Debug.WriteLine(exp.ToString());
+                return false;
+            }
         }
         #endregion DataBase
 
