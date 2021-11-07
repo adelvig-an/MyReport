@@ -97,8 +97,7 @@ namespace _30ViewModel
         }
         public void TestLoadDbAction()
         {
-            CurrentPage = new AppraiserVM();
-            //CurrentPage.LoadAppraiser();
+            CurrentPage = new AppraiserVM().LoadAppraiser();
         }
         public void TestNewPageAction()
         {

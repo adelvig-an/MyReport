@@ -313,7 +313,7 @@ namespace _30ViewModel.PagesVM
             }
         }
 
-        public void LoadAppraiser()
+        public AppraiserVM LoadAppraiser()
         {
             try
             {
@@ -324,11 +324,12 @@ namespace _30ViewModel.PagesVM
                 context.Entry(appraiser)
                     .Collection(qc => qc.QualificationCertificates)
                     .Load();
-                GetAppraiserVM(appraiser);
+                return GetAppraiserVM(appraiser);
             }
             catch (Exception exp)
             {
                 Debug.WriteLine(exp.ToString());
+                return new AppraiserVM();
             }
         }
 
@@ -356,26 +357,12 @@ namespace _30ViewModel.PagesVM
                 InsuranceDateFrom = appraiser.InsurancePolicie.DateFrom,
                 InsuranceDateBefore = appraiser.InsurancePolicie.DateBefore,
                 PathInsurancePolicieCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.InsurancePolicie.PathInsurancePolicieImage),
-                Certificates = appraiser.QualificationCertificates.Select(qc =>
-                {
-                    var cvm = new QualificationCertificateVM();
-                    cvm.Get
-                })
+                Certificates = new ObservableCollection<QualificationCertificateVM>(appraiser
+                    .QualificationCertificates.Select(qc => 
+                        QualificationCertificateVM.GetQualificationCertificateVM(qc)))
             };
             return appraiserVM;
         }
-
-        //public void GetInsurancePolicieVM(InsurancePolicie insurancePolicie)
-        //{
-        //    Id = insurancePolicie.Id;
-        //    InsuranceNumber = insurancePolicie.Number;
-        //    InsuranceCompany = insurancePolicie.InsuranceCompany;
-        //    InsuranceMoney = insurancePolicie.InsuranceMoney;
-        //    InsuranceDateFrom = insurancePolicie.DateFrom;
-        //    InsuranceDateBefore = insurancePolicie.DateBefore;
-        //    PathInsurancePolicieCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(insurancePolicie.PathInsurancePolicieImage);
-
-        //}
         #endregion DataBase
 
         #region CBOR
