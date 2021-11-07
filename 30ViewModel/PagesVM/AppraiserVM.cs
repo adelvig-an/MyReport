@@ -324,7 +324,7 @@ namespace _30ViewModel.PagesVM
                 context.Entry(appraiser)
                     .Collection(qc => qc.QualificationCertificates)
                     .Load();
-                GetAppraiser(appraiser);
+                GetAppraiserVM(appraiser);
             }
             catch (Exception exp)
             {
@@ -332,39 +332,50 @@ namespace _30ViewModel.PagesVM
             }
         }
 
-        public void GetAppraiser(Appraiser appraiser)
+        public static AppraiserVM GetAppraiserVM(Appraiser appraiser)
         {
-            Id = appraiser.Id;
-            SecondName = appraiser.SecondName;
-            FirstName = appraiser.FirstName;
-            MiddleName = appraiser.MiddleName;
-            StartedDate = appraiser.StartedDate;
-            Specialization = appraiser.Specialization;
-            Number = appraiser.Number;
-            DiplomDate = appraiser.DiplomDate;
-            Universety = appraiser.Universety;
-            PathDiplomCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathDiplomImage);
-            Sro = appraiser.Sro;
-            SroNumber = appraiser.SroNumber;
-            SroDate = appraiser.SroDate;
-            PathSroCertificateCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathSroCertificateImage);
-            GetInsurancePolicie(appraiser.InsurancePolicie);
-            //Certificates = new ObservableCollection<QualificationCertificateVM>(Certificates.Select(cvm => cvm.GetQvalificationCertificate(appraiser.QualificationCertificates.GetType())));
-            //Certificates.Select(cvm => cvm.GetQvalificationCertificate(appraiser.QualificationCertificates.GetType(QualificationCertificate)));
-
+            var appraiserVM = new AppraiserVM()
+            {
+                Id = appraiser.Id,
+                SecondName = appraiser.SecondName,
+                FirstName = appraiser.FirstName,
+                MiddleName = appraiser.MiddleName,
+                StartedDate = appraiser.StartedDate,
+                Specialization = appraiser.Specialization,
+                Number = appraiser.Number,
+                DiplomDate = appraiser.DiplomDate,
+                Universety = appraiser.Universety,
+                PathDiplomCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathDiplomImage),
+                Sro = appraiser.Sro,
+                SroNumber = appraiser.SroNumber,
+                SroDate = appraiser.SroDate,
+                PathSroCertificateCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathSroCertificateImage),
+                InsuranceNumber = appraiser.InsurancePolicie.Number,
+                InsuranceCompany = appraiser.InsurancePolicie.InsuranceCompany,
+                InsuranceMoney = appraiser.InsurancePolicie.InsuranceMoney,
+                InsuranceDateFrom = appraiser.InsurancePolicie.DateFrom,
+                InsuranceDateBefore = appraiser.InsurancePolicie.DateBefore,
+                PathInsurancePolicieCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.InsurancePolicie.PathInsurancePolicieImage),
+                Certificates = appraiser.QualificationCertificates.Select(qc =>
+                {
+                    var cvm = new QualificationCertificateVM();
+                    cvm.Get
+                })
+            };
+            return appraiserVM;
         }
 
-        public void GetInsurancePolicie(InsurancePolicie insurancePolicie)
-        {
-            Id = insurancePolicie.Id;
-            InsuranceNumber = insurancePolicie.Number;
-            InsuranceCompany = insurancePolicie.InsuranceCompany;
-            InsuranceMoney = insurancePolicie.InsuranceMoney;
-            InsuranceDateFrom = insurancePolicie.DateFrom;
-            InsuranceDateBefore = insurancePolicie.DateBefore;
-            PathInsurancePolicieCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(insurancePolicie.PathInsurancePolicieImage);
+        //public void GetInsurancePolicieVM(InsurancePolicie insurancePolicie)
+        //{
+        //    Id = insurancePolicie.Id;
+        //    InsuranceNumber = insurancePolicie.Number;
+        //    InsuranceCompany = insurancePolicie.InsuranceCompany;
+        //    InsuranceMoney = insurancePolicie.InsuranceMoney;
+        //    InsuranceDateFrom = insurancePolicie.DateFrom;
+        //    InsuranceDateBefore = insurancePolicie.DateBefore;
+        //    PathInsurancePolicieCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(insurancePolicie.PathInsurancePolicieImage);
 
-        }
+        //}
         #endregion DataBase
 
         #region CBOR

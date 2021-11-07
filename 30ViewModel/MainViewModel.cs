@@ -75,7 +75,7 @@ namespace _30ViewModel
 
         }
 
-        #region TestCommand Delete!!!
+        #region Test Command Delete!!!
         public ICommand TestSaved { get; }
         public void TestSavedAction()
         {
@@ -104,7 +104,7 @@ namespace _30ViewModel
         {
             CurrentPage = new AppraiserVM();
         }
-        #endregion TestCommand Deleted!!!
+        #endregion Test Command Delete!!!
 
 
 

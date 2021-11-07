@@ -104,15 +104,19 @@ namespace _30ViewModel.PagesVM
             }
         }
 
-        public void GetQvalificationCertificate(QualificationCertificate qualificationCertificate)
+        public static QualificationCertificateVM GetQualificationCertificateVM(QualificationCertificate qualificationCertificate)
         {
-            Id = qualificationCertificate.Id;
-            CertificateNumber = qualificationCertificate.Number;
-            CertificateDateFrom = qualificationCertificate.DateFrom;
-            CertificateDateBefore = qualificationCertificate.DateBefore;
-            Speciality = qualificationCertificate.Speciality;
-            NameInstitution = qualificationCertificate.NameInstitution;
-            PathImageCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(qualificationCertificate.PathQualificationCertificateImage);
+            var qualificationCertificateVM = new QualificationCertificateVM()
+            {
+                Id = qualificationCertificate.Id,
+                CertificateNumber = qualificationCertificate.Number,
+                CertificateDateFrom = qualificationCertificate.DateFrom,
+                CertificateDateBefore = qualificationCertificate.DateBefore,
+                Speciality = qualificationCertificate.Speciality,
+                NameInstitution = qualificationCertificate.NameInstitution,
+                PathImageCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(qualificationCertificate.PathQualificationCertificateImage)
+            };
+            return qualificationCertificateVM;
         }
 
         public ICommand AddImageCommand { get; }
