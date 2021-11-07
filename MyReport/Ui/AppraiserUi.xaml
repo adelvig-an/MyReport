@@ -108,7 +108,6 @@
                                     Margin="0,4,0,0"
                                     Padding="15,0"
                                     VerticalContentAlignment="Center"
-                                    IsEnabled="False"
                                     Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                             </StackPanel>
                         </Border>
@@ -120,7 +119,6 @@
                                     Margin="0,4,0,0"
                                     Padding="15,0"
                                     VerticalContentAlignment="Center"
-                                    IsEnabled="False"
                                     Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                             </StackPanel>
                         </Border>
@@ -156,7 +154,6 @@
                                     Margin="0,4,0,0"
                                     Padding="15,0"
                                     VerticalContentAlignment="Center"
-                                    
                                     Text="" />
                             </StackPanel>
                         </Border>

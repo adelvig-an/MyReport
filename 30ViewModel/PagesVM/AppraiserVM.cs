@@ -265,8 +265,8 @@ namespace _30ViewModel.PagesVM
                 SroDate = SroDate,
                 PathSroCertificateImage = JsonConvert.SerializeObject(PathInsurancePolicieCollection),
                 InsurancePolicie = ToInsurancePolicie(),
-                QualificationCertificates = (ICollection<QualificationCertificate>)Certificates
-                    .Select(cvm => context.Add(cvm.ToQualificationCertificate()))
+                QualificationCertificates = new ObservableCollection<QualificationCertificate>(Certificates
+                    .Select(cvm => cvm.ToQualificationCertificate()))
             };
             return appraiser;
         }
@@ -317,7 +317,7 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                var appraiser = context.Appraisers.Single(a => a.Id == 0);
+                var appraiser = context.Appraisers.Single(a => a.Id == 1);
                 context.Entry(appraiser)
                     .Reference(ip => ip.InsurancePolicie)
                     .Load();
