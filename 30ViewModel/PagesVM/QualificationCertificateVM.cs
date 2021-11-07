@@ -114,7 +114,7 @@ namespace _30ViewModel.PagesVM
                 CertificateDateBefore = qualificationCertificate.DateBefore,
                 Speciality = qualificationCertificate.Speciality,
                 NameInstitution = qualificationCertificate.NameInstitution,
-                PathImageCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(qualificationCertificate.PathQualificationCertificateImage)
+                PathImageCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(qualificationCertificate.PathQualificationCertificateImage)
             };
             return qualificationCertificateVM;
         }

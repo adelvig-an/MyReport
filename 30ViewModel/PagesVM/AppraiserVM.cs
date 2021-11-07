@@ -346,19 +346,19 @@ namespace _30ViewModel.PagesVM
                 Number = appraiser.Number,
                 DiplomDate = appraiser.DiplomDate,
                 Universety = appraiser.Universety,
-                PathDiplomCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathDiplomImage),
+                PathDiplomCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathDiplomImage),
                 Sro = appraiser.Sro,
                 SroNumber = appraiser.SroNumber,
                 SroDate = appraiser.SroDate,
-                PathSroCertificateCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.PathSroCertificateImage),
+                PathSroCertificateCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathSroCertificateImage),
                 InsuranceNumber = appraiser.InsurancePolicie.Number,
                 InsuranceCompany = appraiser.InsurancePolicie.InsuranceCompany,
                 InsuranceMoney = appraiser.InsurancePolicie.InsuranceMoney,
                 InsuranceDateFrom = appraiser.InsurancePolicie.DateFrom,
                 InsuranceDateBefore = appraiser.InsurancePolicie.DateBefore,
-                PathInsurancePolicieCollection = (ObservableCollection<string>)JsonConvert.DeserializeObject(appraiser.InsurancePolicie.PathInsurancePolicieImage),
+                PathInsurancePolicieCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.InsurancePolicie.PathInsurancePolicieImage),
                 Certificates = new ObservableCollection<QualificationCertificateVM>(appraiser
-                    .QualificationCertificates.Select(qc => 
+                    .QualificationCertificates.Select(qc =>
                         QualificationCertificateVM.GetQualificationCertificateVM(qc)))
             };
             return appraiserVM;
