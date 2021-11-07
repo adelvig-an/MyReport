@@ -58,7 +58,7 @@ namespace _30ViewModel
             db.InsurancePolicies.Load();
             db.QualificationCertificates.Load();
             db.TempDatas.Load();
-            CurrentPage = new AppraiserVM();
+            CurrentPage = new TestPageVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
@@ -69,6 +69,7 @@ namespace _30ViewModel
 
             //!!!Тестовые команды Удалить!!!!
             TestSaved = new RelayCommand(_ => TestSavedAction());
+            TestUpdate = new RelayCommand(_ => TestUpdateAction());
             TestFromCBOR = new RelayCommand(_ => TestFromCBORAction());
             TestLoadDb = new RelayCommand(_ => TestLoadDbAction());
             TestNewPage = new RelayCommand(_ => TestNewPageAction());
@@ -77,6 +78,7 @@ namespace _30ViewModel
 
         #region Test Command Delete!!!
         public ICommand TestSaved { get; }
+        public ICommand TestUpdate { get; }
         public void TestSavedAction()
         {
             if (CurrentPage is AppraiserVM appraiserVM)
@@ -85,7 +87,14 @@ namespace _30ViewModel
             }
             CurrentPage = new TestPageVM();
         }
-
+        public void TestUpdateAction()
+        {
+            if (CurrentPage is AppraiserVM appraiserVM)
+            {
+                appraiserVM.UpdateAppraiser();
+            }
+            CurrentPage = new TestPageVM();
+        }
 
         public ICommand TestFromCBOR { get; }
         public ICommand TestLoadDb { get; }

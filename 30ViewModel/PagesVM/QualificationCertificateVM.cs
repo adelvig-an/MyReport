@@ -104,6 +104,22 @@ namespace _30ViewModel.PagesVM
             }
         }
 
+        public bool DeleteQualificationCertificate()
+        {
+            try
+            {
+                var qual = context.QualificationCertificates.First();
+                context.QualificationCertificates.Remove(qual);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception exp)
+            {
+                Debug.WriteLine(exp.ToString());
+                return false;
+            }
+        }
+
         public static QualificationCertificateVM GetQualificationCertificateVM(QualificationCertificate qualificationCertificate)
         {
             var qualificationCertificateVM = new QualificationCertificateVM()

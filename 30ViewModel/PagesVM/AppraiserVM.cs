@@ -317,7 +317,7 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                var appraiser = context.Appraisers.Single(a => a.Id == 1);
+                var appraiser = context.Appraisers.Single(a => a.Id == 3);
                 context.Entry(appraiser)
                     .Reference(ip => ip.InsurancePolicie)
                     .Load();
