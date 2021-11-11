@@ -81,7 +81,7 @@ namespace _30ViewModel.PagesVM
             //    new Appraiser { FullName = "Шестаов Денис Александрович" },
             //    new Appraiser { FullName = "Рошка Андрей Ильевич" }
             //};
-            var Appraisers = context.Appraisers.Include(a => a.AppraiserOrganization).Where(a => a.AppraiserOrganizationId == Id);
+            var Appraisers = context.Appraisers.Include(a => a.AppraiserOrganization).ToList();
             PathInsurancePolicieCollection = new ObservableCollection<string>();
             AddInsurancePolicieImageCommand = new RelayCommand(_ => AddInsurancePolicieImage());
             RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));
@@ -106,11 +106,12 @@ namespace _30ViewModel.PagesVM
         #endregion Добавление и удаление файла
 
         #region DataBase (Методы и свойства взаимодействующие с Базой данных)
-        public AppraiserOrganization ToAppraiserOrg()
+        public AppraiserOrganization ToAppraiserOrganization()
         {
-            var appraiserOgr = new AppraiserOrganization
+            var appraiserOrganization = new AppraiserOrganization
             {
                 Id = Id,
+                NameFullOpf = NameFullOpf,
                 NameShortOpf = NameShortOpf,
                 Opf = Opf,
                 Ogrn = Ogrn,
@@ -126,7 +127,7 @@ namespace _30ViewModel.PagesVM
                 AddressRegistration = SelectedAddressRegistration ?? SelectedOrganization?.AddressRegistration,
                 AddressActual = SelectedAddressActual
             };
-            return appraiserOgr;
+            return appraiserOrganization;
         }
         public InsurancePolicie ToInsurancePolicie()
         {
@@ -146,7 +147,7 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                AppraiserOrganization appraiserOrg = ToAppraiserOrg();
+                AppraiserOrganization appraiserOrg = ToAppraiserOrganization();
                 context.Add(appraiserOrg);
                 context.SaveChanges();
             }
@@ -159,8 +160,8 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                var appraiser = context.AppraiserOrganizations.First();
-                appraiser = ToAppraiserOrg();
+                var appraiserOrganization = ToAppraiserOrganization();
+                context.Update(appraiserOrganization);
                 context.SaveChanges();
                 return true;
             }
@@ -170,6 +171,59 @@ namespace _30ViewModel.PagesVM
                 return false;
             }
         }
+        public void AddOrUpdateAppraiserOrganization(AppraiserOrganizationVM appraiserOrganizationVM)
+        {
+            if (context.Appraisers.Any(a => a.Id == appraiserOrganizationVM.Id))
+                UpdateAppraiserOrganization();
+            else
+                AddAppraiserOrganization();
+        }
+        public AppraiserOrganizationVM LoadAppraiserOrganization()
+        {
+            try
+            {
+                var appraiserOrganization = context.AppraiserOrganizations.Single(a => a.Id == 1);
+                context.Entry(appraiserOrganization).Reference(d => d.Director)
+                    .Load();
+                context.Entry(appraiserOrganization)
+                    .Reference(ip => ip.InsurancePolicie)
+                    .Load();
+                return GetAppraiserOrganizationVM(appraiserOrganization);
+            }
+            catch (Exception exp)
+            {
+                Debug.WriteLine(exp.ToString());
+                return new AppraiserOrganizationVM();
+            }
+        }
+        public static AppraiserOrganizationVM GetAppraiserOrganizationVM(AppraiserOrganization appraiserOrganization)
+        {
+            var appraiserOrganizationVM = new AppraiserOrganizationVM()
+            {
+                Id = appraiserOrganization.Id,
+                NameFullOpf = appraiserOrganization.NameFullOpf,
+                NameShortOpf = appraiserOrganization.NameShortOpf,
+                Opf = appraiserOrganization.Opf,
+                Ogrn = appraiserOrganization.Ogrn,
+                OgrnDate = appraiserOrganization.OgrnDate,
+                Inn = appraiserOrganization.Inn,
+                Kpp = appraiserOrganization.Kpp,
+                Bank = appraiserOrganization.Bank,
+                Bik = appraiserOrganization.Bik,
+                PayAccount = appraiserOrganization.PayAccount,
+                CorrAccount = appraiserOrganization.CorrAccount,
+                InsuranceNumber = appraiserOrganization.InsurancePolicie.Number,
+                InsuranceCompany = appraiserOrganization.InsurancePolicie.InsuranceCompany,
+                InsuranceMoney = appraiserOrganization.InsurancePolicie.InsuranceMoney,
+                InsuranceDateFrom = appraiserOrganization.InsurancePolicie.DateFrom,
+                InsuranceDateBefore = appraiserOrganization.InsurancePolicie.DateBefore,
+                PathInsurancePolicieCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiserOrganization.InsurancePolicie.PathInsurancePolicieImage)
+            };
+            return appraiserOrganizationVM;
+        }
+
+
+
         //public void LoadAppraisers()
         //{
         //   context.Appraisers.Include(appraiser => appraiser.AppraiserOrganization).ToList();

@@ -317,7 +317,6 @@ namespace _30ViewModel.PagesVM
                 return false;
             }
         }
-
         public void AddOrUpdateAppraiser(AppraiserVM appraiserVM)
         {
             if (context.Appraisers.Any(a => a.Id == appraiserVM.Id))
@@ -325,7 +324,6 @@ namespace _30ViewModel.PagesVM
             else
                 AddAppraiser();
         }
-
         public AppraiserVM LoadAppraiser()
         {
             try
@@ -345,7 +343,6 @@ namespace _30ViewModel.PagesVM
                 return new AppraiserVM();
             }
         }
-
         public static AppraiserVM GetAppraiserVM(Appraiser appraiser)
         {
             var appraiserVM = new AppraiserVM()
@@ -378,7 +375,6 @@ namespace _30ViewModel.PagesVM
             };
             return appraiserVM;
         }
-
         public bool DeleteQualificationCertificate(int i)
         {
             try

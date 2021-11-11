@@ -76,7 +76,7 @@ namespace _30ViewModel
 
         }
 
-        #region Test Command Delete!!!
+        #region Test Command Удалить!!!
         public ICommand TestSaved { get; }
         public ICommand TestUpdate { get; }
         public void TestSavedAction()
@@ -101,18 +101,18 @@ namespace _30ViewModel
         public ICommand TestNewPage { get; }
         public void TestFromCBORAction()
         {
-            CurrentPage = new AppraiserVM();
+            CurrentPage = new AppraiserOrganizationVM();
             CurrentPage?.ReadCBOR();
         }
         public void TestLoadDbAction()
         {
-            CurrentPage = new AppraiserVM().LoadAppraiser();
+            CurrentPage = new AppraiserOrganizationVM().LoadAppraiserOrganization();
         }
         public void TestNewPageAction()
         {
-            CurrentPage = new AppraiserVM();
+            CurrentPage = new AppraiserOrganizationVM();
         }
-        #endregion Test Command Delete!!!
+        #endregion Test Command Удалить!!!
 
 
 
@@ -131,6 +131,13 @@ namespace _30ViewModel
             if (CurrentPage is AppraiserOrganizationVM appraiserOrg)
             {
                 appraiserOrg.AddAppraiserOrganization();
+                CurrentPage = new TestPageVM();
+            }
+            else if (CurrentPage is AppraiserVM appraiserVM)
+            {
+                appraiserVM.AddOrUpdateAppraiser(appraiserVM);
+                CurrentPage = new AppraiserOrganizationVM();
+                CurrentPage?.ReadCBOR();
             }
             else if (CurrentPage is OrganizationVM organization)
             {
@@ -176,7 +183,6 @@ namespace _30ViewModel
         public void AppraiserPageAction()
         {
             CurrentPage = new AppraiserVM();
-            CurrentPage.ReadCBOR();
         }
 
         //Test MWindow

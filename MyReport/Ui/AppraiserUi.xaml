@@ -803,7 +803,7 @@
                         HorizontalAlignment="Right"
                         Background="Blue"
                         BorderBrush="Blue"
-                        Command="{Binding DataContext.TestSaved, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                        Command="{Binding DataContext.SaveData, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                         Content="Сохранить"
                         FontFamily="DIN Pro Medium"
                         Foreground="White" />
@@ -814,9 +814,9 @@
                         HorizontalAlignment="Left"
                         Background="White"
                         BorderBrush="Blue"
-                        Command="{Binding DataContext.TestUpdate, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                        Command="{Binding DataContext.BackPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                         CommandParameter="{Binding}"
-                        Content="Update"
+                        Content="Отмена"
                         FontFamily="DIN Pro Medium"
                         Foreground="Blue" />
                 </Border>

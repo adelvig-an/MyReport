@@ -8,7 +8,7 @@
     xmlns:local="clr-namespace:MyReport.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:_10Model;assembly=10Model"
-    d:DesignHeight="1500"
+    d:DesignHeight="1550"
     d:DesignWidth="800"
     FontFamily="DIN Pro Regular"
     FontSize="14"
@@ -39,14 +39,6 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="#0d0d0d">
             <DockPanel Margin="0,8">
-                <Button
-                    Margin="8,0"
-                    Padding="16,8"
-                    HorizontalAlignment="Left"
-                    Command="{Binding DataContext.BackPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
-                    Content="Вернуться"
-                    FontFamily="DIN Pro Medium"
-                    FontSize="16" />
                 <TextBlock
                     Margin="8,0"
                     VerticalAlignment="Center"
@@ -697,15 +689,19 @@
             </StackPanel>
         </Border>
         <!--  Только для теста! Удалить!  -->
-        <Button
+        <StackPanel
             Grid.Row="6"
-            Margin="0,16"
-            Padding="16,8"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Command="{Binding DataContext.SaveData, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
-            Content="Сохранить"
-            FontFamily="DIN Pro Medium"
-            FontSize="16" />
+            Orientation="Horizontal">
+            <Button
+                Margin="8,16"
+                Padding="16,8"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding DataContext.SaveData, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                Content="Сохранить"
+                FontFamily="DIN Pro Medium"
+                FontSize="16" />
+        </StackPanel>
     </Grid>
 </UserControl>
