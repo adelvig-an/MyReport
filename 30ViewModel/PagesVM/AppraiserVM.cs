@@ -56,25 +56,25 @@ namespace _30ViewModel.PagesVM
     {
         #region Properties (Нужны для валидации данных)
         //Свойства Оценщика
-        private string secondName = "Фамилия";
-        private string firstName = "Имя";
-        private string middleName = "Отчество";
-        private string email = "e-mail@mail.ru";
-        private string phone = "+7 (999) 654-97-35";
+        private string secondName;
+        private string firstName;
+        private string middleName;
+        private string email;
+        private string phone;
         private DateTime? startedDate = DateTime.Today;
-        private string specialization = "Оценка бизнеса";
-        private string number = "54 АЕ 000346";
+        private string specialization;
+        private string number;
         private DateTime? diplomDate = DateTime.Today;
-        private string universety = "ЧОУ ВО «Сибирская академия финансов и банковского дела»";
+        private string universety;
         private string pathDiplomImage;
-        private string sro = "НП СРО «Деловой Союз Оценщиков»";
+        private string sro;
         private int sroNumber = 1069;
         private DateTime? sroDate = DateTime.Today;
         private string pathSroCertificateImage;
         //Свойства Страхового полиса
-        private string insuranceNumber = "009-073-006214/21";
-        private string insuranceCompany = "ООО «Абсолют Страхование»";
-        private decimal insuranceMoney = 300000;
+        private string insuranceNumber;
+        private string insuranceCompany;
+        private decimal insuranceMoney;
         private DateTime? insuranceDateFrom = DateTime.Today;
         private DateTime? insuranceDateBefore;
         private string pathInsurancePolicieImage;
@@ -298,11 +298,11 @@ namespace _30ViewModel.PagesVM
                 Debug.WriteLine(exp.ToString());
             }
         }
-        public bool UpdateAppraiser()
+        public bool UpdateAppraiser(AppraiserVM appraiserVM)
         {
             try
             {
-                var appraiser = context.Appraisers.First();
+                var appraiser = context.Appraisers.Single(a => a.Id == appraiserVM.Id);
                 appraiser = ToAppraiser();
                 context.SaveChanges();
                 return true;
@@ -318,7 +318,7 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                var appraiser = context.Appraisers.Single(a => a.Id == 5);
+                var appraiser = context.Appraisers.Single(a => a.Id == 3);
                 context.Entry(appraiser)
                     .Reference(ip => ip.InsurancePolicie)
                     .Load();
