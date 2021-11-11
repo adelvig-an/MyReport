@@ -8,7 +8,7 @@ namespace _10Model
     {
         public int InsurancePolicieId { get; set; }
         public virtual InsurancePolicie InsurancePolicie { get; set; }
-        //public virtual ICollection<Appraiser> Appraisers { get; private set; }
-        //    = new ObservableCollection<Appraiser>();
+        public virtual ICollection<Appraiser> Appraisers { get; private set; }
+            = new ObservableCollection<Appraiser>();
     }
 }

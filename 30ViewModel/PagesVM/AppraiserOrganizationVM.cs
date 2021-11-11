@@ -70,17 +70,18 @@ namespace _30ViewModel.PagesVM
         }
 
         private readonly ApplicationContext context;
-        public ObservableCollection<Appraiser> Appraisers { get; set; }
+        //public ObservableCollection<Appraiser> Appraisers { get; set; }
         public ObservableCollection<string> PathInsurancePolicieCollection { get; set; }
         public AppraiserOrganizationVM()
         {
             context = new ApplicationContext();
-            Appraisers = new ObservableCollection<Appraiser>
-            {
-                new Appraiser { FullName = "Дельвиг Антон Денисович" },
-                new Appraiser { FullName = "Шестаов Денис Александрович" },
-                new Appraiser { FullName = "Рошка Андрей Ильевич" }
-            };
+            //Appraisers = new ObservableCollection<Appraiser>
+            //{
+            //    new Appraiser { FullName = "Дельвиг Антон Денисович" },
+            //    new Appraiser { FullName = "Шестаов Денис Александрович" },
+            //    new Appraiser { FullName = "Рошка Андрей Ильевич" }
+            //};
+            var Appraisers = context.Appraisers.Include(a => a.AppraiserOrganization).Where(a => a.AppraiserOrganizationId == Id);
             PathInsurancePolicieCollection = new ObservableCollection<string>();
             AddInsurancePolicieImageCommand = new RelayCommand(_ => AddInsurancePolicieImage());
             RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));

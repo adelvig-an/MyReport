@@ -62,21 +62,21 @@ namespace _30ViewModel.PagesVM
         private string middleName;
         private string email;
         private string phone;
-        private DateTime? startedDate = DateTime.Today;
+        private DateTime? startedDate;
         private string specialization;
         private string number;
-        private DateTime? diplomDate = DateTime.Today;
+        private DateTime? diplomDate;
         private string universety;
         private string pathDiplomImage;
         private string sro;
-        private int sroNumber = 1069;
-        private DateTime? sroDate = DateTime.Today;
+        private int sroNumber;
+        private DateTime? sroDate;
         private string pathSroCertificateImage;
         //Свойства Страхового полиса
         private string insuranceNumber;
         private string insuranceCompany;
         private decimal insuranceMoney;
-        private DateTime? insuranceDateFrom = DateTime.Today;
+        private DateTime? insuranceDateFrom;
         private DateTime? insuranceDateBefore;
         private string pathInsurancePolicieImage;
         //Свойства Квалиффикационного аттестата
@@ -256,6 +256,7 @@ namespace _30ViewModel.PagesVM
                 SecondName = SecondName,
                 FirstName = FirstName,
                 MiddleName = MiddleName,
+                FullName = SecondName + " " + FirstName + " " + MiddleName,
                 Email = Email,
                 Phone = Phone,
                 StartedDate = StartedDate,
@@ -319,7 +320,7 @@ namespace _30ViewModel.PagesVM
 
         public void AddOrUpdateAppraiser(AppraiserVM appraiserVM)
         {
-            if (context.Appraisers.Any(a => a.Id == appraiserVM.Id) == true)
+            if (context.Appraisers.Any(a => a.Id == appraiserVM.Id))
                 UpdateAppraiser();
             else
                 AddAppraiser();
@@ -329,7 +330,7 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                var appraiser = context.Appraisers.Single(a => a.Id == 1);
+                var appraiser = context.Appraisers.Single(a => a.Id == 3);
                 context.Entry(appraiser)
                     .Reference(ip => ip.InsurancePolicie)
                     .Load();
