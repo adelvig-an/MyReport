@@ -317,7 +317,7 @@ namespace _30ViewModel.PagesVM
             }
         }
 
-        public void AddOpUpdateAppraiser(AppraiserVM appraiserVM)
+        public void AddOrUpdateAppraiser(AppraiserVM appraiserVM)
         {
             if (context.Appraisers.Any(a => a.Id == appraiserVM.Id) == true)
                 UpdateAppraiser();

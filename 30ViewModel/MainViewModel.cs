@@ -83,7 +83,7 @@ namespace _30ViewModel
         {
             if (CurrentPage is AppraiserVM appraiserVM)
             {
-                appraiserVM.AddOpUpdateAppraiser(appraiserVM);
+                appraiserVM.AddOrUpdateAppraiser(appraiserVM);
             }
             CurrentPage = new TestPageVM();
         }
