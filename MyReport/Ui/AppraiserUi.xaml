@@ -155,7 +155,7 @@
                                     Padding="15,0"
                                     VerticalContentAlignment="Center"
                                     IsEnabled="True"
-                                    Text="ООО Рога и Копыта" />
+                                    Text="Не используется" />
                             </StackPanel>
                         </Border>
                     </Grid>
@@ -526,7 +526,7 @@
                                     Padding="15,0"
                                     VerticalContentAlignment="Center"
                                     IsEnabled="True"
-                                    Text="" />
+                                    Text="Не использется" />
                             </StackPanel>
                         </Border>
                     </Grid>

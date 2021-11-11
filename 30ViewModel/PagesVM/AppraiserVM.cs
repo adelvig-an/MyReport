@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using System.Windows.Input;
 using System.IO;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 ////Валидация данных, проверка на корректность внесеных данных пользователем +
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -255,6 +256,8 @@ namespace _30ViewModel.PagesVM
                 SecondName = SecondName,
                 FirstName = FirstName,
                 MiddleName = MiddleName,
+                Email = Email,
+                Phone = Phone,
                 StartedDate = StartedDate,
                 Specialization = Specialization,
                 Number = Number,
@@ -298,12 +301,12 @@ namespace _30ViewModel.PagesVM
                 Debug.WriteLine(exp.ToString());
             }
         }
-        public bool UpdateAppraiser(AppraiserVM appraiserVM)
+        public bool UpdateAppraiser()
         {
             try
             {
-                var appraiser = context.Appraisers.Single(a => a.Id == appraiserVM.Id);
-                appraiser = ToAppraiser();
+                var appraiser = ToAppraiser();
+                context.Update(appraiser);
                 context.SaveChanges();
                 return true;
             }
@@ -318,7 +321,7 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                var appraiser = context.Appraisers.Single(a => a.Id == 3);
+                var appraiser = context.Appraisers.Single(a => a.Id == 1);
                 context.Entry(appraiser)
                     .Reference(ip => ip.InsurancePolicie)
                     .Load();
@@ -342,6 +345,8 @@ namespace _30ViewModel.PagesVM
                 SecondName = appraiser.SecondName,
                 FirstName = appraiser.FirstName,
                 MiddleName = appraiser.MiddleName,
+                Email = appraiser.Email,
+                Phone = appraiser.Phone,
                 StartedDate = appraiser.StartedDate,
                 Specialization = appraiser.Specialization,
                 Number = appraiser.Number,
