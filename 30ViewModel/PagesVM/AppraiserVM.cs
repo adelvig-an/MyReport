@@ -316,6 +316,15 @@ namespace _30ViewModel.PagesVM
                 return false;
             }
         }
+
+        public void AddOpUpdateAppraiser(AppraiserVM appraiserVM)
+        {
+            if (context.Appraisers.Any(a => a.Id == appraiserVM.Id) == true)
+                UpdateAppraiser();
+            else
+                AddAppraiser();
+        }
+
         public AppraiserVM LoadAppraiser()
         {
             try
