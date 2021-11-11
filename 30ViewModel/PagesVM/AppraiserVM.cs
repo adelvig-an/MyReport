@@ -305,7 +305,7 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                var appraiser = ToAppraiser();
+                Appraiser appraiser = ToAppraiser();
                 context.Update(appraiser);
                 context.SaveChanges();
                 return true;
@@ -316,7 +316,6 @@ namespace _30ViewModel.PagesVM
                 return false;
             }
         }
-
         public AppraiserVM LoadAppraiser()
         {
             try

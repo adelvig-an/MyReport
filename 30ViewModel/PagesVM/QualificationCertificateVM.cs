@@ -45,11 +45,10 @@ namespace _30ViewModel.PagesVM
 
         public ObservableCollection<string> PathImageCollection { get; set; }
 
-        private readonly ApplicationContext context;
+
         public QualificationCertificateVM()
         {
             PathImageCollection = new ObservableCollection<string>();
-            context = new ApplicationContext();
 
             AddImageCommand = new RelayCommand(_ => AddImage());
             RemoveImageCommand = new RelayCommand(p => RemoveImage(p.ToString()));
