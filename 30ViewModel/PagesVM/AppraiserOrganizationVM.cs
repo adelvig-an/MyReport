@@ -70,18 +70,13 @@ namespace _30ViewModel.PagesVM
         }
 
         private readonly ApplicationContext context;
-        //public ObservableCollection<Appraiser> Appraisers { get; set; }
+        public ObservableCollection<Appraiser> Appraisers { get; set; }
         public ObservableCollection<string> PathInsurancePolicieCollection { get; set; }
         public AppraiserOrganizationVM()
         {
             context = new ApplicationContext();
-            //Appraisers = new ObservableCollection<Appraiser>
-            //{
-            //    new Appraiser { FullName = "Дельвиг Антон Денисович" },
-            //    new Appraiser { FullName = "Шестаов Денис Александрович" },
-            //    new Appraiser { FullName = "Рошка Андрей Ильевич" }
-            //};
-            var Appraisers = context.Appraisers.Include(a => a.AppraiserOrganization).ToList();
+
+            Appraisers = new ObservableCollection<Appraiser>(context.Appraisers.Include(a => a.AppraiserOrganization).ToList());
             PathInsurancePolicieCollection = new ObservableCollection<string>();
             AddInsurancePolicieImageCommand = new RelayCommand(_ => AddInsurancePolicieImage());
             RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));
@@ -212,22 +207,23 @@ namespace _30ViewModel.PagesVM
                 Bik = appraiserOrganization.Bik,
                 PayAccount = appraiserOrganization.PayAccount,
                 CorrAccount = appraiserOrganization.CorrAccount,
+                FullName = appraiserOrganization.Director.FullName,
+                Position = appraiserOrganization.Director.Position,
+                PowerOfAttorney = appraiserOrganization.Director.PowerOfAttorney,
+                PowerOfAttorneyNumber = appraiserOrganization.Director.PowerOfAttorneyNumber,
+                PowerOfAttorneyDate = appraiserOrganization.Director.PowerOfAttorneyDate,
+                PowerOfAttorneyDateBefore = appraiserOrganization.Director.PowerOfAttorneyDateBefore,
                 InsuranceNumber = appraiserOrganization.InsurancePolicie.Number,
                 InsuranceCompany = appraiserOrganization.InsurancePolicie.InsuranceCompany,
                 InsuranceMoney = appraiserOrganization.InsurancePolicie.InsuranceMoney,
                 InsuranceDateFrom = appraiserOrganization.InsurancePolicie.DateFrom,
                 InsuranceDateBefore = appraiserOrganization.InsurancePolicie.DateBefore,
-                PathInsurancePolicieCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiserOrganization.InsurancePolicie.PathInsurancePolicieImage)
+                PathInsurancePolicieCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiserOrganization.InsurancePolicie.PathInsurancePolicieImage),
+                AddressRegistration = appraiserOrganization.AddressRegistration.AddressFull,
+                AddressActual = appraiserOrganization.AddressActual.AddressFull
             };
             return appraiserOrganizationVM;
         }
-
-
-
-        //public void LoadAppraisers()
-        //{
-        //   context.Appraisers.Include(appraiser => appraiser.AppraiserOrganization).ToList();
-        //}
         #endregion DataBase
 
         #region CBOR
