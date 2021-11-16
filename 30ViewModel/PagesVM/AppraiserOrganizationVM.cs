@@ -388,17 +388,17 @@ namespace _30ViewModel.PagesVM
             AddressRegistration = cbor[18].AsStringSafe();
             IsAddressMatch = cbor[63].AsBoolean();
             AddressActual = cbor[65].AsStringSafe();
-            InsuranceNumber = cbor[109].AsStringSafe();
-            InsuranceCompany = cbor[110].AsStringSafe();
-            InsuranceMoney = cbor[111].ToObject<decimal>();
-            InsuranceDateFrom = cbor[112][0].AsBoolean()
-            ? new DateTime?(DateTime.FromBinary(cbor[112][1].ToObject<long>()))
-            : null;
-            InsuranceDateBefore = cbor[113][0].AsBoolean()
+            InsuranceNumber = cbor[110].AsStringSafe();
+            InsuranceCompany = cbor[111].AsStringSafe();
+            InsuranceMoney = cbor[112].ToObject<decimal>();
+            InsuranceDateFrom = cbor[113][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[113][1].ToObject<long>()))
             : null;
+            InsuranceDateBefore = cbor[114][0].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[114][1].ToObject<long>()))
+            : null;
             PathInsurancePolicieCollection = new ObservableCollection<string>(
-                cbor[114].Values.Select(cbor =>
+                cbor[115].Values.Select(cbor =>
                     {
                         var pipi = cbor.AsStringSafe();
                         return pipi;
