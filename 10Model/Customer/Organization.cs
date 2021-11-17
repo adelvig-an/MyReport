@@ -5,9 +5,15 @@ namespace _10Model.Customer
     public class Organization
     {
         public int Id { get; set; }
-        public string NameFullOpf { get; set; } //Полное наименование
-        public string NameShortOpf { get; set; } //Сокращенное наименование
-        public string Opf { get; set; } //Организационно-правовая форма
+        public string NameFullOpf { get; set; } //Полное наименование с ОПФ
+        public string NameShortOpf { get; set; } //Сокращенное наименование с ОПФ
+        public string NameFull { get; set; } //полное наименование без ОПФ
+        public string NameShort { get; set; } //краткое наименование без ОПФ
+        //public string SecondName { get; set; } //Фамилия индивидуального предпринимателя
+        //public string FirstName { get; set; } //Имя индивидуального предпринимателя
+        //public string MiddleName { get; set; } //Отчество индивидуального предпринимателя
+        public string FullOpf { get; set; } //Полное название ОПФ
+        public string ShortOpf { get; set; } //Сокращенное ОПФ
         public string Ogrn { get; set; } //ОГРН
         public DateTime? OgrnDate { get; set; } //Дата регистрации
         public string Inn { get; set; } //ИНН

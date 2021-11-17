@@ -10,8 +10,7 @@
     xmlns:model="clr-namespace:_10Model;assembly=10Model"
     d:DesignHeight="1550"
     d:DesignWidth="800"
-    FontFamily="DIN Pro Regular"
-    FontSize="14"
+    Background="#ffffff"
     mc:Ignorable="d">
     <UserControl.Resources>
         <DataTemplate x:Key="AddressItemTemplate">
@@ -36,13 +35,547 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="#0d0d0d">
             <DockPanel Margin="0,8">
                 <TextBlock
                     Margin="8,0"
                     VerticalAlignment="Center"
-                    FontFamily="DIN Pro Medium"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="#ffffff"
+                    Text="Оценочная компания" />
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="1">
+            <Grid Margin="0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0">
+                    <TextBlock
+                        Margin="8,0"
+                        VerticalAlignment="Center"
+                        Text="Полное наименование" />
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1">
+                    <StackPanel Margin="8,0">
+                        <TextBlock
+                            Margin="0,0,0,4"
+                            FontSize="9"
+                            Text="Поиск по названию, ИНН или адресу" />
+                        <acb:AutoCompleteTextBox
+                            Margin="0,0,0,8"
+                            VerticalContentAlignment="Center"
+                            CharacterCasing="Upper"
+                            DisplayMember="NameShortOpf"
+                            ItemTemplate="{StaticResource ResourceKey=OrganizationItemTemplate}"
+                            Provider="{StaticResource ResourceKey=OrganizationSuggestionProvider}"
+                            SelectedItem="{Binding SelectedOrganization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding NameShortOpf, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="8,0">
+                            <TextBlock Margin="0,0,0,4" Text="ИНН" />
+                            <TextBox
+                                Margin="0,0,0,8"
+                                VerticalContentAlignment="Center"
+                                Text="{Binding Inn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="8,0">
+                            <TextBlock Margin="0,0,0,4" Text="КПП" />
+                            <TextBox
+                                Margin="0,0,0,8"
+                                VerticalContentAlignment="Center"
+                                Text="{Binding Kpp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="8,0">
+                            <TextBlock Margin="0,0,0,4" Text="ОГРН" />
+                            <TextBox
+                                Margin="0,0,0,8"
+                                VerticalContentAlignment="Center"
+                                Text="{Binding Ogrn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="8,0">
+                            <TextBlock Margin="0,0,0,4" Text="Дата регистрации" />
+                            <DatePicker
+                                Margin="0,0,0,8"
+                                VerticalContentAlignment="Center"
+                                SelectedDate="{Binding OgrnDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                    </Grid>
+
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Row="2">
+            <DockPanel Margin="0,8">
+                <TextBlock
+                    Margin="8,0"
+                    FontSize="14"
+                    FontWeight="Medium"
+                    Text="Руководитель" />
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Руководитель" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1">
+                    <TextBox
+                        Margin="8"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                </Border>
+                <Border Grid.Row="1" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Должность руководителья" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1">
+                    <TextBox
+                        Margin="8"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding Position, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                </Border>
+                <Border Grid.Row="2" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Действующий на основании" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1">
+                    <ComboBox
+                        Margin="8"
+                        VerticalContentAlignment="Center"
+                        ItemsSource="{Binding Source={conv:EnumToItemsSource {x:Type model:PowerOfAttorneyType}}}"
+                        SelectedValue="{Binding PowerOfAttorney, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type model:PowerOfAttorneyType}}" />
+                </Border>
+                <Border
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Padding="0,8"
+                    Background="AliceBlue"
+                    Visibility="{Binding IsAttorneyValue, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1" Margin="8,0">
+                            <TextBlock Margin="0,0,0,4" Text="Номер доверенности" />
+                            <TextBox VerticalContentAlignment="Center" Text="{Binding PowerOfAttorneyNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="8,0">
+                            <TextBlock Margin="0,0,0,4" Text="Дата доверения" />
+                            <DatePicker VerticalContentAlignment="Center" SelectedDate="{Binding PowerOfAttorneyDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="3" Margin="8,0">
+                            <TextBlock Margin="0,0,0,4" Text="Дата окончания" />
+                            <DatePicker VerticalContentAlignment="Center" SelectedDate="{Binding PowerOfAttorneyDateBefore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Row="4">
+            <DockPanel Margin="0,8">
+                <TextBlock
+                    Margin="8,0"
+                    FontSize="14"
+                    FontWeight="Medium"
+                    Text="Банковские реквизиты" />
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="БИК" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1">
+                    <TextBox
+                        Margin="8"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding Bik, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                </Border>
+                <Border Grid.Row="1" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Наименование банка" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1">
+                    <TextBox
+                        Margin="8"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding Bank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                </Border>
+                <Border Grid.Row="2" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Расчетный счет" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1">
+                    <TextBox
+                        Margin="8"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding PayAccount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                </Border>
+                <Border Grid.Row="3" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Корреспондесткий счет" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="1">
+                    <TextBox
+                        Margin="8"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding CorrAccount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Row="6">
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="8">
+                <TextBlock Margin="0,0,0,4" Text="Юридический адрес" />
+                <acb:AutoCompleteTextBox
+                    VerticalContentAlignment="Center"
+                    CharacterCasing="Upper"
+                    DisplayMember="AddressFull"
+                    ItemTemplate="{StaticResource ResourceKey=AddressItemTemplate}"
+                    Provider="{StaticResource ResourceKey=AddressSuggestionProvider}"
+                    SelectedItem="{Binding SelectedAddressRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding AddressRegistration, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                <CheckBox
+                    Margin="0,8"
+                    Content="Фактический адрес совподает с юридическим адресом"
+                    IsChecked="{Binding IsAddressMatch}" />
+                <TextBlock Margin="0,0,0,4" Text="Фактический адрес" />
+                <acb:AutoCompleteTextBox
+                    Margin="0,0,0,8"
+                    VerticalContentAlignment="Center"
+                    CharacterCasing="Upper"
+                    DisplayMember="AddressFull"
+                    IsEnabled="{Binding IsAddressMatch, Converter={StaticResource InverseBooleanConverter}}"
+                    ItemTemplate="{StaticResource ResourceKey=AddressItemTemplate}"
+                    Provider="{StaticResource ResourceKey=AddressSuggestionProvider}"
+                    SelectedItem="{Binding SelectedAddressActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding AddressActual, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="7">
+            <DockPanel Margin="0,8">
+                <TextBlock
+                    Margin="8,0"
+                    FontSize="14"
+                    FontWeight="Medium"
+                    Text="Страховние ответственности" />
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Страховая компания" />
+                    </DockPanel>
+                </Border>
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Padding="8">
+                    <TextBox VerticalContentAlignment="Center" Text="{Binding InsuranceCompany, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                </Border>
+                <Border Grid.Row="1" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Лицензия" />
+                    </DockPanel>
+                </Border>
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Padding="8">
+                    <TextBox
+                        VerticalContentAlignment="Center"
+                        IsEnabled="False"
+                        Text="Поле пока отсутствует" />
+                </Border>
+                <Border Grid.Row="2" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Контакты" />
+                    </DockPanel>
+                </Border>
+                <Border
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Padding="8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                            <TextBlock Margin="0,0,0,4" Text="Сайт" />
+                            <TextBox
+                                VerticalContentAlignment="Center"
+                                IsEnabled="False"
+                                Text="Поле пока отсутствует" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="8,0">
+                            <TextBlock Margin="0,0,0,4" Text="Электронная почта" />
+                            <TextBox
+                                VerticalContentAlignment="Center"
+                                IsEnabled="False"
+                                Text="Поле пока отсутствует" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="8,0,0,0">
+                            <TextBlock Margin="0,0,0,4" Text="Телефон" />
+                            <TextBox
+                                VerticalContentAlignment="Center"
+                                IsEnabled="False"
+                                Text="Поле пока отсутствует" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Номер страхового полиса" />
+                    </DockPanel>
+                </Border>
+                <Border
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Padding="8">
+                    <TextBox VerticalContentAlignment="Center" Text="{Binding InsuranceNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                </Border>
+                <Border Grid.Row="4" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Страховая сумма" />
+                    </DockPanel>
+                </Border>
+                <Border
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Padding="8">
+                    <TextBox VerticalContentAlignment="Center" Text="{Binding InsuranceMoney, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                </Border>
+                <Border Grid.Row="5" Grid.Column="0">
+                    <DockPanel Margin="0,8">
+                        <TextBlock Margin="8,0" Text="Срок действия" />
+                    </DockPanel>
+                </Border>
+                <Border
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Padding="8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                            <TextBlock Margin="0,0,0,4" Text="с" />
+                            <DatePicker VerticalContentAlignment="Center" SelectedDate="{Binding InsuranceDateFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                            <TextBlock Margin="0,0,0,4" Text="по" />
+                            <DatePicker VerticalContentAlignment="Center" SelectedDate="{Binding InsuranceDateBefore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Padding="8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock
+                                Margin="0,0,0,4"
+                                VerticalAlignment="Center"
+                                Text="Копия страхового полиса" />
+                            <ItemsControl
+                                Height="68"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                ItemsSource="{Binding PathInsurancePolicieCollection}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel VerticalAlignment="Top" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="4" Orientation="Horizontal">
+                                            <TextBlock VerticalAlignment="Center">
+                                                <Hyperlink NavigateUri="{Binding}">
+                                                    <TextBlock Text="{Binding}" />
+                                                </Hyperlink>
+                                            </TextBlock>
+                                            <Button
+                                                Width="16"
+                                                Height="16"
+                                                Margin="8,0"
+                                                Command="{Binding DataContext.RemoveInsurancePolicieImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                                CommandParameter="{Binding}"
+                                                Content="X" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <Border Grid.Column="1">
+                            <Button
+                                Height="68"
+                                Margin="8,0,0,0"
+                                Padding="16,4"
+                                VerticalAlignment="Bottom"
+                                Command="{Binding DataContext.AddInsurancePolicieImageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+                                Content="Выбрать файл" />
+                        </Border>
+                    </Grid>
+
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Row="9">
+            <StackPanel Margin="8,0">
+                <Button
+                    Margin="0,8"
+                    Padding="16,8"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Command="{Binding DataContext.AppraiserPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                    Content="+ Добавить оценщика" />
+                <ListView Margin="0,8" ItemsSource="{Binding Appraisers}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Оценщик" />
+                            <GridViewColumn DisplayMemberBinding="{Binding}" Header="Стаж работы" />
+                            <GridViewColumn DisplayMemberBinding="{Binding}" Header="Квалификационне аттестаты" />
+                            <GridViewColumn Header="">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding}" Content="Удалить" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="10">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button
+                    Margin="8,16"
+                    Padding="16,8"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Command="{Binding DataContext.SaveData, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                    Content="Сохранить CBOR" />
+                <Button
+                    Margin="8,16"
+                    Padding="16,8"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Command="{Binding DataContext.SaveData, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                    Content="Сохранить DB" />
+            </StackPanel>
+        </Border>
+    </Grid>
+    <!--<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#0d0d0d">
+            <DockPanel Margin="0,8">
+                <TextBlock
+                    Margin="8,0"
+                    VerticalAlignment="Center"
                     FontSize="24"
                     Foreground="White"
                     Text="Данные организации" />
@@ -57,28 +590,6 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0" Margin="0,8">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock
-                            Grid.Column="0"
-                            Margin="8,0"
-                            Text="Организационно-правовая форма"
-                            TextWrapping="Wrap" />
-                        <TextBox
-                            Grid.Column="1"
-                            Height="32"
-                            MinWidth="240"
-                            Margin="8,0"
-                            VerticalContentAlignment="Center"
-                            FontFamily="DIN Pro Regular"
-                            FontSize="14"
-                            Text="{Binding Opf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
-                    </Grid>
-                </Border>
-                <Border Grid.Row="1" Margin="0,8">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200" />
@@ -110,11 +621,11 @@
                                 ItemTemplate="{StaticResource ResourceKey=OrganizationItemTemplate}"
                                 Provider="{StaticResource ResourceKey=OrganizationSuggestionProvider}"
                                 SelectedItem="{Binding SelectedOrganization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Text="{Binding NameShortOpf, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                Text="{Binding NameFull, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                         </StackPanel>
                     </Grid>
                 </Border>
-                <Border Grid.Row="2" Margin="0,8">
+                <Border Grid.Row="1" Margin="0,8">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200" />
@@ -145,7 +656,7 @@
                         </StackPanel>
                     </Grid>
                 </Border>
-                <Border Grid.Row="3" Margin="0,8">
+                <Border Grid.Row="2" Margin="0,8">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200" />
@@ -688,7 +1199,9 @@
                     FontSize="16" />
             </StackPanel>
         </Border>
-        <!--  Только для теста! Удалить!  -->
+    -->
+    <!--  Только для теста! Удалить!  -->
+    <!--
         <StackPanel
             Grid.Row="6"
             HorizontalAlignment="Center"
@@ -703,5 +1216,5 @@
                 FontFamily="DIN Pro Medium"
                 FontSize="16" />
         </StackPanel>
-    </Grid>
+    </Grid>-->
 </UserControl>

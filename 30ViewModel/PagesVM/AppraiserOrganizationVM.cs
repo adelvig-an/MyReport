@@ -108,7 +108,10 @@ namespace _30ViewModel.PagesVM
                 Id = Id,
                 NameFullOpf = NameFullOpf,
                 NameShortOpf = NameShortOpf,
-                Opf = Opf,
+                NameFull = NameFull,
+                NameShort = NameShort,
+                FullOpf = FullOpf,
+                ShortOpf = ShortOpf,
                 Ogrn = Ogrn,
                 OgrnDate = OgrnDate,
                 Inn = Inn,
@@ -195,32 +198,34 @@ namespace _30ViewModel.PagesVM
         {
             var appraiserOrganizationVM = new AppraiserOrganizationVM()
             {
-                Id = appraiserOrganization.Id,
-                NameFullOpf = appraiserOrganization.NameFullOpf,
-                NameShortOpf = appraiserOrganization.NameShortOpf,
-                Opf = appraiserOrganization.Opf,
-                Ogrn = appraiserOrganization.Ogrn,
-                OgrnDate = appraiserOrganization.OgrnDate,
-                Inn = appraiserOrganization.Inn,
-                Kpp = appraiserOrganization.Kpp,
-                Bank = appraiserOrganization.Bank,
-                Bik = appraiserOrganization.Bik,
-                PayAccount = appraiserOrganization.PayAccount,
-                CorrAccount = appraiserOrganization.CorrAccount,
-                FullName = appraiserOrganization.Director.FullName,
-                Position = appraiserOrganization.Director.Position,
+                NameFullOpf = appraiserOrganization?.NameFullOpf,
+                NameShortOpf = appraiserOrganization?.NameShortOpf,
+                NameFull = appraiserOrganization?.NameFull,
+                NameShort = appraiserOrganization?.NameShort,
+                FullOpf = appraiserOrganization?.FullOpf,
+                ShortOpf = appraiserOrganization?.ShortOpf,
+                Ogrn = appraiserOrganization?.Ogrn,
+                OgrnDate = appraiserOrganization?.OgrnDate,
+                Inn = appraiserOrganization?.Inn,
+                Kpp = appraiserOrganization?.Kpp,
+                Bank = appraiserOrganization?.Bank,
+                Bik = appraiserOrganization?.Bik,
+                PayAccount = appraiserOrganization?.PayAccount,
+                CorrAccount = appraiserOrganization?.CorrAccount,
+                FullName = appraiserOrganization?.Director?.FullName,
+                Position = appraiserOrganization?.Director?.Position,
                 PowerOfAttorney = appraiserOrganization.Director.PowerOfAttorney,
-                PowerOfAttorneyNumber = appraiserOrganization.Director.PowerOfAttorneyNumber,
-                PowerOfAttorneyDate = appraiserOrganization.Director.PowerOfAttorneyDate,
-                PowerOfAttorneyDateBefore = appraiserOrganization.Director.PowerOfAttorneyDateBefore,
-                InsuranceNumber = appraiserOrganization.InsurancePolicie.Number,
-                InsuranceCompany = appraiserOrganization.InsurancePolicie.InsuranceCompany,
+                PowerOfAttorneyNumber = appraiserOrganization?.Director?.PowerOfAttorneyNumber,
+                PowerOfAttorneyDate = appraiserOrganization?.Director?.PowerOfAttorneyDate,
+                PowerOfAttorneyDateBefore = appraiserOrganization?.Director?.PowerOfAttorneyDateBefore,
+                InsuranceNumber = appraiserOrganization?.InsurancePolicie?.Number,
+                InsuranceCompany = appraiserOrganization?.InsurancePolicie?.InsuranceCompany,
                 InsuranceMoney = appraiserOrganization.InsurancePolicie.InsuranceMoney,
-                InsuranceDateFrom = appraiserOrganization.InsurancePolicie.DateFrom,
-                InsuranceDateBefore = appraiserOrganization.InsurancePolicie.DateBefore,
-                PathInsurancePolicieCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiserOrganization.InsurancePolicie.PathInsurancePolicieImage),
-                AddressRegistration = appraiserOrganization.AddressRegistration.AddressFull,
-                AddressActual = appraiserOrganization.AddressActual.AddressFull
+                InsuranceDateFrom = appraiserOrganization?.InsurancePolicie?.DateFrom,
+                InsuranceDateBefore = appraiserOrganization?.InsurancePolicie?.DateBefore,
+                PathInsurancePolicieCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiserOrganization?.InsurancePolicie?.PathInsurancePolicieImage),
+                AddressRegistration = appraiserOrganization?.AddressRegistration?.AddressFull,
+                AddressActual = appraiserOrganization?.AddressActual?.AddressFull
             };
             return appraiserOrganizationVM;
         }
@@ -231,8 +236,12 @@ namespace _30ViewModel.PagesVM
         {
             return CBORObject.NewArray()
                 .Add(appraiserOrgVM.Id)
+                .Add(appraiserOrgVM.NameFullOpf)
                 .Add(appraiserOrgVM.NameShortOpf)
-                .Add(appraiserOrgVM.Opf)
+                .Add(appraiserOrgVM.NameFull)
+                .Add(appraiserOrgVM.NameShort)
+                .Add(appraiserOrgVM.FullOpf)
+                .Add(appraiserOrgVM.ShortOpf)
                 .Add(appraiserOrgVM.Ogrn)
                 .Add(appraiserOrgVM.OgrnDate.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserOrgVM.OgrnDate.Value.ToBinary())
@@ -363,144 +372,148 @@ namespace _30ViewModel.PagesVM
         void FromCBOR(CBORObject cbor)
         {
             Id = cbor[0].AsInt32();
-            NameShortOpf = cbor[1].AsStringSafe();
-            Opf = cbor[2].AsStringSafe();
-            Ogrn = cbor[3].AsStringSafe();
-            OgrnDate = cbor[4][0].AsBoolean()
-            ? new DateTime?(DateTime.FromBinary(cbor[4][1].ToObject<long>()))
+            NameFullOpf = cbor[1].AsString();
+            NameShortOpf = cbor[2].AsString();
+            NameFull = cbor[3].AsString();
+            NameShort = cbor[4].AsString();
+            FullOpf = cbor[5].AsString();
+            ShortOpf = cbor[6].AsString();
+            Ogrn = cbor[7].AsString();
+            OgrnDate = cbor[8][0].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[8][1].ToObject<long>()))
             : null;
-            Inn = cbor[5].AsStringSafe();
-            Kpp = cbor[6].AsStringSafe();
-            Bank = cbor[7].AsStringSafe();
-            Bik = cbor[8].AsStringSafe();
-            PayAccount = cbor[9].AsStringSafe();
-            CorrAccount = cbor[10].AsStringSafe();
-            FullName = cbor[11].AsStringSafe();
-            Position = cbor[12].AsStringSafe();
-            PowerOfAttorney = (PowerOfAttorneyType)Enum.Parse(typeof(PowerOfAttorneyType), cbor[13].ToString(), true);
-            PowerOfAttorneyNumber = cbor[14].AsStringSafe();
-            PowerOfAttorneyDate = cbor[15][0].AsBoolean()
-            ? new DateTime?(DateTime.FromBinary(cbor[15][1].ToObject<long>()))
+            Inn = cbor[9].AsString();
+            Kpp = cbor[10].AsString();
+            Bank = cbor[11].AsString();
+            Bik = cbor[12].AsString();
+            PayAccount = cbor[13].AsString();
+            CorrAccount = cbor[14].AsString();
+            FullName = cbor[15].AsString();
+            Position = cbor[16].AsString();
+            PowerOfAttorney = (PowerOfAttorneyType)Enum.Parse(typeof(PowerOfAttorneyType), cbor[17].ToString(), true);
+            PowerOfAttorneyNumber = cbor[18].AsString();
+            PowerOfAttorneyDate = cbor[19][0].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[19][1].ToObject<long>()))
             : null;
-            PowerOfAttorneyDateBefore = cbor[16][0].AsBoolean()
-            ? new DateTime?(DateTime.FromBinary(cbor[16][1].ToObject<long>()))
+            PowerOfAttorneyDateBefore = cbor[20][0].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[20][1].ToObject<long>()))
             : null;
-            AddressRegistration = cbor[18].AsStringSafe();
-            IsAddressMatch = cbor[63].AsBoolean();
-            AddressActual = cbor[65].AsStringSafe();
-            InsuranceNumber = cbor[110].AsStringSafe();
-            InsuranceCompany = cbor[111].AsStringSafe();
-            InsuranceMoney = cbor[112].ToObject<decimal>();
-            InsuranceDateFrom = cbor[113][0].AsBoolean()
-            ? new DateTime?(DateTime.FromBinary(cbor[113][1].ToObject<long>()))
-            : null;
-            InsuranceDateBefore = cbor[114][0].AsBoolean()
-            ? new DateTime?(DateTime.FromBinary(cbor[114][1].ToObject<long>()))
-            : null;
-            PathInsurancePolicieCollection = new ObservableCollection<string>(
-                cbor[115].Values.Select(cbor =>
-                    {
-                        var pipi = cbor.AsStringSafe();
-                        return pipi;
-                    }));
+            AddressRegistration = cbor[22].AsString();
+            IsAddressMatch = cbor[67].AsBoolean();
+            AddressActual = cbor[69].AsString();
             SelectedAddressRegistration = new Address()
             {
-                Id = cbor[17].AsInt32(),
-                AddressFull = cbor[18].AsStringSafe(),
-                Index = cbor[19].AsStringSafe(),
-                Country = cbor[20].AsStringSafe(),
-                FederalDistrict = cbor[21].AsStringSafe(),
-                RegionKladrId = cbor[22].AsStringSafe(),
-                RegionWthType = cbor[23].AsStringSafe(),
-                RegionType = cbor[24].AsStringSafe(),
-                RegionTypeFull = cbor[25].AsStringSafe(),
-                Region = cbor[26].AsStringSafe(),
-                AreaKladrId = cbor[27].AsStringSafe(),
-                AreaWithType = cbor[28].AsStringSafe(),
-                AreaType = cbor[29].AsStringSafe(),
-                AreaTypeFull = cbor[30].AsStringSafe(),
-                Area = cbor[31].AsStringSafe(),
-                CityKladrId = cbor[32].AsStringSafe(),
-                CityWithType = cbor[33].AsStringSafe(),
-                CityType = cbor[34].AsStringSafe(),
-                CityTypeFull = cbor[35].AsStringSafe(),
-                City = cbor[36].AsStringSafe(),
-                CityDistrictWithType = cbor[37].AsStringSafe(),
-                CityDistrictType = cbor[38].AsStringSafe(),
-                CityDistrictTypeFull = cbor[39].AsStringSafe(),
-                CityDistrict = cbor[40].AsStringSafe(),
-                SettlementKladrId = cbor[41].AsStringSafe(),
-                SettlemenWithType = cbor[42].AsStringSafe(),
-                SettlemenType = cbor[43].AsStringSafe(),
-                SettlemenTypeFull = cbor[44].AsStringSafe(),
-                Settlemen = cbor[45].AsStringSafe(),
-                StreetKladrId = cbor[46].AsStringSafe(),
-                StreetWithType = cbor[47].AsStringSafe(),
-                StreetType = cbor[48].AsStringSafe(),
-                StreetTypeFull = cbor[49].AsStringSafe(),
-                Street = cbor[50].AsStringSafe(),
-                HouseKladrId = cbor[51].AsStringSafe(),
-                HouseType = cbor[52].AsStringSafe(),
-                HouseTypeFull = cbor[53].AsStringSafe(),
-                House = cbor[54].AsStringSafe(),
-                BlockType = cbor[55].AsStringSafe(),
-                BloctTypeFull = cbor[56].AsStringSafe(),
-                Block = cbor[57].AsStringSafe(),
-                Entrance = cbor[58].AsStringSafe(),
-                Floor = cbor[59].AsStringSafe(),
-                FlatType = cbor[60].AsStringSafe(),
-                FlatTypeFull = cbor[61].AsStringSafe(),
-                Flat = cbor[62].AsStringSafe()
+                Id = cbor[21].AsInt32(),
+                AddressFull = cbor[22].AsString(),
+                Index = cbor[23].AsString(),
+                Country = cbor[24].AsString(),
+                FederalDistrict = cbor[25].AsString(),
+                RegionKladrId = cbor[26].AsString(),
+                RegionWthType = cbor[27].AsString(),
+                RegionType = cbor[28].AsString(),
+                RegionTypeFull = cbor[29].AsString(),
+                Region = cbor[30].AsString(),
+                AreaKladrId = cbor[31].AsString(),
+                AreaWithType = cbor[32].AsString(),
+                AreaType = cbor[33].AsString(),
+                AreaTypeFull = cbor[34].AsString(),
+                Area = cbor[35].AsString(),
+                CityKladrId = cbor[36].AsString(),
+                CityWithType = cbor[37].AsString(),
+                CityType = cbor[38].AsString(),
+                CityTypeFull = cbor[39].AsString(),
+                City = cbor[40].AsString(),
+                CityDistrictWithType = cbor[41].AsString(),
+                CityDistrictType = cbor[42].AsString(),
+                CityDistrictTypeFull = cbor[43].AsString(),
+                CityDistrict = cbor[44].AsString(),
+                SettlementKladrId = cbor[45].AsString(),
+                SettlemenWithType = cbor[46].AsString(),
+                SettlemenType = cbor[47].AsString(),
+                SettlemenTypeFull = cbor[48].AsString(),
+                Settlemen = cbor[49].AsString(),
+                StreetKladrId = cbor[50].AsString(),
+                StreetWithType = cbor[51].AsString(),
+                StreetType = cbor[52].AsString(),
+                StreetTypeFull = cbor[53].AsString(),
+                Street = cbor[54].AsString(),
+                HouseKladrId = cbor[55].AsString(),
+                HouseType = cbor[56].AsString(),
+                HouseTypeFull = cbor[57].AsString(),
+                House = cbor[58].AsString(),
+                BlockType = cbor[59].AsString(),
+                BloctTypeFull = cbor[60].AsString(),
+                Block = cbor[61].AsString(),
+                Entrance = cbor[62].AsString(),
+                Floor = cbor[63].AsString(),
+                FlatType = cbor[64].AsString(),
+                FlatTypeFull = cbor[65].AsString(),
+                Flat = cbor[66].AsString()
             };
             SelectedAddressActual = new Address()
             {
-                Id = cbor[64].AsInt32(),
-                AddressFull = cbor[65].AsStringSafe(),
-                Index = cbor[66].AsStringSafe(),
-                Country = cbor[67].AsStringSafe(),
-                FederalDistrict = cbor[68].AsStringSafe(),
-                RegionKladrId = cbor[69].AsStringSafe(),
-                RegionWthType = cbor[70].AsStringSafe(),
-                RegionType = cbor[71].AsStringSafe(),
-                RegionTypeFull = cbor[72].AsStringSafe(),
-                Region = cbor[73].AsStringSafe(),
-                AreaKladrId = cbor[74].AsStringSafe(),
-                AreaWithType = cbor[75].AsStringSafe(),
-                AreaType = cbor[76].AsStringSafe(),
-                AreaTypeFull = cbor[77].AsStringSafe(),
-                Area = cbor[78].AsStringSafe(),
-                CityKladrId = cbor[79].AsStringSafe(),
-                CityWithType = cbor[80].AsStringSafe(),
-                CityType = cbor[81].AsStringSafe(),
-                CityTypeFull = cbor[82].AsStringSafe(),
-                City = cbor[83].AsStringSafe(),
-                CityDistrictWithType = cbor[84].AsStringSafe(),
-                CityDistrictType = cbor[85].AsStringSafe(),
-                CityDistrictTypeFull = cbor[86].AsStringSafe(),
-                CityDistrict = cbor[87].AsStringSafe(),
-                SettlementKladrId = cbor[88].AsStringSafe(),
-                SettlemenWithType = cbor[89].AsStringSafe(),
-                SettlemenType = cbor[90].AsStringSafe(),
-                SettlemenTypeFull = cbor[91].AsStringSafe(),
-                Settlemen = cbor[92].AsStringSafe(),
-                StreetKladrId = cbor[93].AsStringSafe(),
-                StreetWithType = cbor[94].AsStringSafe(),
-                StreetType = cbor[95].AsStringSafe(),
-                StreetTypeFull = cbor[96].AsStringSafe(),
-                Street = cbor[97].AsStringSafe(),
-                HouseKladrId = cbor[98].AsStringSafe(),
-                HouseType = cbor[99].AsStringSafe(),
-                HouseTypeFull = cbor[100].AsStringSafe(),
-                House = cbor[101].AsStringSafe(),
-                BlockType = cbor[102].AsStringSafe(),
-                BloctTypeFull = cbor[103].AsStringSafe(),
-                Block = cbor[104].AsStringSafe(),
-                Entrance = cbor[105].AsStringSafe(),
-                Floor = cbor[106].AsStringSafe(),
-                FlatType = cbor[107].AsStringSafe(),
-                FlatTypeFull = cbor[108].AsStringSafe(),
-                Flat = cbor[109].AsStringSafe()
+                Id = cbor[68].AsInt32(),
+                AddressFull = cbor[69].AsString(),
+                Index = cbor[70].AsString(),
+                Country = cbor[71].AsString(),
+                FederalDistrict = cbor[72].AsString(),
+                RegionKladrId = cbor[73].AsString(),
+                RegionWthType = cbor[74].AsString(),
+                RegionType = cbor[75].AsString(),
+                RegionTypeFull = cbor[76].AsString(),
+                Region = cbor[77].AsString(),
+                AreaKladrId = cbor[78].AsString(),
+                AreaWithType = cbor[79].AsString(),
+                AreaType = cbor[80].AsString(),
+                AreaTypeFull = cbor[81].AsString(),
+                Area = cbor[82].AsString(),
+                CityKladrId = cbor[83].AsString(),
+                CityWithType = cbor[84].AsString(),
+                CityType = cbor[85].AsString(),
+                CityTypeFull = cbor[86].AsString(),
+                City = cbor[87].AsString(),
+                CityDistrictWithType = cbor[88].AsString(),
+                CityDistrictType = cbor[89].AsString(),
+                CityDistrictTypeFull = cbor[90].AsString(),
+                CityDistrict = cbor[91].AsString(),
+                SettlementKladrId = cbor[92].AsString(),
+                SettlemenWithType = cbor[93].AsString(),
+                SettlemenType = cbor[94].AsString(),
+                SettlemenTypeFull = cbor[95].AsString(),
+                Settlemen = cbor[96].AsString(),
+                StreetKladrId = cbor[97].AsString(),
+                StreetWithType = cbor[98].AsString(),
+                StreetType = cbor[99].AsString(),
+                StreetTypeFull = cbor[100].AsString(),
+                Street = cbor[101].AsString(),
+                HouseKladrId = cbor[102].AsString(),
+                HouseType = cbor[103].AsString(),
+                HouseTypeFull = cbor[104].AsString(),
+                House = cbor[105].AsString(),
+                BlockType = cbor[106].AsString(),
+                BloctTypeFull = cbor[107].AsString(),
+                Block = cbor[108].AsString(),
+                Entrance = cbor[109].AsString(),
+                Floor = cbor[110].AsString(),
+                FlatType = cbor[111].AsString(),
+                FlatTypeFull = cbor[112].AsString(),
+                Flat = cbor[113].AsString()
             };
+            InsuranceNumber = cbor[114].AsString();
+            InsuranceCompany = cbor[115].AsString();
+            InsuranceMoney = cbor[116].ToObject<decimal>();
+            InsuranceDateFrom = cbor[117][0].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[117][1].ToObject<long>()))
+            : null;
+            InsuranceDateBefore = cbor[118][0].AsBoolean()
+            ? new DateTime?(DateTime.FromBinary(cbor[118][1].ToObject<long>()))
+            : null;
+            PathInsurancePolicieCollection = new ObservableCollection<string>(
+                cbor[119].Values.Select(cbor =>
+                    {
+                        var pipi = cbor.AsString();
+                        return pipi;
+                    }));
             SelectedOrganization = ToOrganization(); //Восстановление SelectedOrganization
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();

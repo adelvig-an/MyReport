@@ -116,7 +116,10 @@ namespace _10Model.Helper.Dadata_ru
             {
                 NameFullOpf = party.name.full_with_opf,
                 NameShortOpf = party.name.short_with_opf,
-                Opf = party.opf.@short,
+                NameFull = party.name.full,
+                NameShort = party.name.@short,
+                FullOpf = party.opf.full,
+                ShortOpf = party.opf.@short,
                 Ogrn = party.ogrn,
                 OgrnDate = party.ogrn_date,
                 Inn = party.inn,
