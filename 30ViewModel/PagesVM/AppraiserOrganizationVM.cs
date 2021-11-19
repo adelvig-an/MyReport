@@ -413,7 +413,6 @@ namespace _30ViewModel.PagesVM
                 }));
             SelectedAddressRegistration = new Address()
             {
-                Id = cbor[21].AsInt32(),
                 AddressFull = cbor[22].AsStringSafe(),
                 Index = cbor[23].AsStringSafe(),
                 Country = cbor[24].AsStringSafe(),
@@ -462,7 +461,6 @@ namespace _30ViewModel.PagesVM
             };
             SelectedAddressActual = new Address()
             {
-                Id = cbor[68].AsInt32(),
                 AddressFull = cbor[69].AsStringSafe(),
                 Index = cbor[70].AsStringSafe(),
                 Country = cbor[71].AsStringSafe(),
