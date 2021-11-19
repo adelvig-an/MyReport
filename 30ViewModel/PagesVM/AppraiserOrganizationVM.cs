@@ -204,9 +204,7 @@ namespace _30ViewModel.PagesVM
                 InsuranceMoney = appraiserOrganization.InsurancePolicie.InsuranceMoney,
                 InsuranceDateFrom = appraiserOrganization?.InsurancePolicie?.DateFrom,
                 InsuranceDateBefore = appraiserOrganization?.InsurancePolicie?.DateBefore,
-                PathInsurancePolicieCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiserOrganization?.InsurancePolicie?.PathInsurancePolicieImage),
-                SelectedAddressRegistration = appraiserOrganization?.AddressRegistration,
-                SelectedAddressActual = appraiserOrganization?.AddressActual,
+                PathInsurancePolicieCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiserOrganization?.InsurancePolicie?.PathInsurancePolicieImage)
             };
             return appraiserOrganizationVM;
         }
