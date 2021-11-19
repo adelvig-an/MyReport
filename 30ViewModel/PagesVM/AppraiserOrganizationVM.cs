@@ -145,7 +145,7 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                AppraiserOrganization appraiserOrg = ToAppraiserOrganization();
+                var appraiserOrg = ToAppraiserOrganization();
                 context.Add(appraiserOrg);
                 context.SaveChanges();
             }
@@ -171,7 +171,7 @@ namespace _30ViewModel.PagesVM
         }
         public void AddOrUpdateAppraiserOrganization(AppraiserOrganizationVM appraiserOrganizationVM)
         {
-            if (context.Appraisers.Any(a => a.Id == appraiserOrganizationVM.Id))
+            if (context.AppraiserOrganizations.Any(ao => ao.Id == appraiserOrganizationVM.Id))
                 UpdateAppraiserOrganization();
             else
                 AddAppraiserOrganization();
@@ -180,12 +180,21 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                var appraiserOrganization = context.AppraiserOrganizations.Single(a => a.Id == 1);
+                var appraiserOrganization = context.AppraiserOrganizations.Single(ao => ao.Id == 1);
                 context.Entry(appraiserOrganization).Reference(d => d.Director)
                     .Load();
                 context.Entry(appraiserOrganization)
                     .Reference(ip => ip.InsurancePolicie)
                     .Load();
+                context.Entry(appraiserOrganization)
+                    .Reference(ar => ar.AddressRegistration)
+                    .Load();
+                context.Entry(appraiserOrganization)
+                    .Reference(ac => ac.AddressActual)
+                    .Load();
+                //context.Entry(appraiserOrganization)
+                //    .Reference(a => a.Appraisers)
+                //    .Load();
                 return GetAppraiserOrganizationVM(appraiserOrganization);
             }
             catch (Exception exp)
@@ -198,13 +207,20 @@ namespace _30ViewModel.PagesVM
         {
             var appraiserOrganizationVM = new AppraiserOrganizationVM()
             {
+                Id = appraiserOrganization.Id,
                 SelectedOrganization = appraiserOrganization,
+                Bik = appraiserOrganization?.Bik,
+                Bank = appraiserOrganization?.Bank,
+                PayAccount = appraiserOrganization?.PayAccount,
+                CorrAccount = appraiserOrganization?.CorrAccount,
                 InsuranceNumber = appraiserOrganization?.InsurancePolicie?.Number,
                 InsuranceCompany = appraiserOrganization?.InsurancePolicie?.InsuranceCompany,
                 InsuranceMoney = appraiserOrganization.InsurancePolicie.InsuranceMoney,
                 InsuranceDateFrom = appraiserOrganization?.InsurancePolicie?.DateFrom,
                 InsuranceDateBefore = appraiserOrganization?.InsurancePolicie?.DateBefore,
-                PathInsurancePolicieCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiserOrganization?.InsurancePolicie?.PathInsurancePolicieImage)
+                PathInsurancePolicieCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiserOrganization?.InsurancePolicie?.PathInsurancePolicieImage),
+                SelectedAddressRegistration = appraiserOrganization?.AddressRegistration,
+                SelectedAddressActual = appraiserOrganization?.AddressActual
             };
             return appraiserOrganizationVM;
         }

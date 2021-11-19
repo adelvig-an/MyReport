@@ -130,12 +130,12 @@ namespace _30ViewModel
         {
             if (CurrentPage is AppraiserOrganizationVM appraiserOrg)
             {
-                appraiserOrg.AddAppraiserOrganization();
+                appraiserOrg.AddOrUpdateAppraiserOrganization(appraiserOrg);
                 CurrentPage = new TestPageVM();
             }
             else if (CurrentPage is AppraiserVM appraiserVM)
             {
-                appraiserVM.AddOrUpdateAppraiser(appraiserVM);
+                //appraiserVM.AddOrUpdateAppraiser(appraiserVM);
                 CurrentPage = new AppraiserOrganizationVM();
                 CurrentPage?.ReadCBOR();
             }
