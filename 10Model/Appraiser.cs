@@ -23,6 +23,6 @@ namespace _10Model
         public int InsurancePolicieId { get; set; }
         public virtual InsurancePolicie InsurancePolicie { get; set; }
         //public int AppraiserOrganizationId { get; set; }
-        public virtual AppraiserOrganization AppraiserOrganization { get; set; }
+        public virtual ICollection<AppraiserOrganization> AppraiserOrganizations { get; set; }
     }
 }

@@ -76,7 +76,7 @@ namespace _30ViewModel.PagesVM
         {
             context = new ApplicationContext();
 
-            Appraisers = new ObservableCollection<Appraiser>(context.Appraisers.Include(a => a.AppraiserOrganization).ToList());
+            Appraisers = new ObservableCollection<Appraiser>();
             PathInsurancePolicieCollection = new ObservableCollection<string>();
             AddInsurancePolicieImageCommand = new RelayCommand(_ => AddInsurancePolicieImage());
             RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));
@@ -184,7 +184,7 @@ namespace _30ViewModel.PagesVM
                 context.Entry(appraiserOrganization).Reference(d => d.Director)
                     .Load();
                 context.Entry(appraiserOrganization)
-                    .Reference(ip => ip.InsurancePolicie)
+                    .Reference(ipolicie => ipolicie.InsurancePolicie)
                     .Load();
                 context.Entry(appraiserOrganization)
                     .Reference(ar => ar.AddressRegistration)
