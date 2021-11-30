@@ -138,11 +138,15 @@ namespace _30ViewModel.PagesVM
         public ObservableCollection<string> PathInsurancePolicieCollection { get; set; }
         public ObservableCollection<string> PathSroCertificateCollection { get; set; }
         public ObservableCollection<string> PathDiplomCollection { get; set; }
+        public ObservableCollection<SelfRegulatingOrganization> SelfRegulatingOrganizations { get; set; }
 
         private readonly ApplicationContext context;
         public AppraiserVM()
         {
             context = new ApplicationContext();
+            
+            context.SRO.Load();
+            SelfRegulatingOrganizations = new ObservableCollection<SelfRegulatingOrganization>(context.SRO.Local.ToBindingList());
 
             Certificates = new ObservableCollection<QualificationCertificateVM>()
             { new QualificationCertificateVM() };
@@ -265,10 +269,11 @@ namespace _30ViewModel.PagesVM
                 DiplomDate = DiplomDate,
                 PathDiplomImage = JsonConvert.SerializeObject(PathDiplomCollection),
                 Universety = Universety,
-                Sro = Sro,
+                //Sro = Sro,
                 SroNumber = SroNumber,
                 SroDate = SroDate,
                 PathSroCertificateImage = JsonConvert.SerializeObject(PathInsurancePolicieCollection),
+                //SelfRegulatingOrganizations = ToSRO(),
                 InsurancePolicie = ToInsurancePolicie(),
                 QualificationCertificates = new ObservableCollection<QualificationCertificate>(Certificates
                     .Select(cvm => cvm.ToQualificationCertificate()))
@@ -288,6 +293,15 @@ namespace _30ViewModel.PagesVM
                 PathInsurancePolicieImage = JsonConvert.SerializeObject(PathInsurancePolicieCollection)
             };
             return insurancePolicie;
+        }
+        public SelfRegulatingOrganization ToSRO()
+        {
+            var sro = new SelfRegulatingOrganization
+            {
+                Id = Id,
+                NameFull = Sro
+            };
+            return sro;
         }
         public void AddAppraiser()
         {
@@ -359,7 +373,7 @@ namespace _30ViewModel.PagesVM
                 DiplomDate = appraiser.DiplomDate,
                 Universety = appraiser.Universety,
                 PathDiplomCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathDiplomImage),
-                Sro = appraiser.Sro,
+                //Sro = appraiser.SelfRegulatingOrganizations.Sro,
                 SroNumber = appraiser.SroNumber,
                 SroDate = appraiser.SroDate,
                 PathSroCertificateCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathSroCertificateImage),

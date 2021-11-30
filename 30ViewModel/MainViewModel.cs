@@ -54,11 +54,12 @@ namespace _30ViewModel
             db.Organizations.Load();
             db.AppraiserOrganizations.Load();
             db.Appraisers.Load();
+            db.SRO.Load();
             db.Addresses.Load();
             db.InsurancePolicies.Load();
             db.QualificationCertificates.Load();
             db.TempDatas.Load();
-            CurrentPage = new TestPageVM();
+            CurrentPage = new AppraiserVM();
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());

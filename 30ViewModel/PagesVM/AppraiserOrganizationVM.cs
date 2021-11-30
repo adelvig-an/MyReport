@@ -75,7 +75,7 @@ namespace _30ViewModel.PagesVM
         public AppraiserOrganizationVM()
         {
             context = new ApplicationContext();
-
+            //context.Appraisers.Include(a => a.AppraiserOrganization).ToList()
             Appraisers = new ObservableCollection<Appraiser>();
             PathInsurancePolicieCollection = new ObservableCollection<string>();
             AddInsurancePolicieImageCommand = new RelayCommand(_ => AddInsurancePolicieImage());

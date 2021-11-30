@@ -14,7 +14,7 @@ namespace _10Model
         public string Universety { get; set; } //Название Университета
         public string PathDiplomImage { get; set; } //Путь к изображениям диплома в JSON
         //Информация о СРО
-        public string Sro { get; set; } //Название СРО
+        //public string Sro { get; set; } //Название СРО
         public int SroNumber { get; set; } //Регистрационный номер
         public DateTime? SroDate { get; set; } //Дата регистрации в СРО
         public string PathSroCertificateImage { get; set; } //Путь к изображениям свидетельства СРО в JSON
@@ -24,5 +24,6 @@ namespace _10Model
         public virtual InsurancePolicie InsurancePolicie { get; set; }
         //public int AppraiserOrganizationId { get; set; }
         public virtual ICollection<AppraiserOrganization> AppraiserOrganizations { get; set; }
+        public virtual SelfRegulatingOrganization SelfRegulatingOrganizations { get; set; }
     }
 }

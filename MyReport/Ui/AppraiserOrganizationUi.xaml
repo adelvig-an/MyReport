@@ -8,7 +8,7 @@
     xmlns:local="clr-namespace:MyReport.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:_10Model;assembly=10Model"
-    d:DesignHeight="1550"
+    d:DesignHeight="1250"
     d:DesignWidth="800"
     Background="#ffffff"
     mc:Ignorable="d">
@@ -484,7 +484,7 @@
                                     <DataTemplate>
                                         <StackPanel Margin="4" Orientation="Horizontal">
                                             <TextBlock VerticalAlignment="Center">
-                                                <Hyperlink NavigateUri="{Binding}">
+                                                <Hyperlink Command="{Binding DataContext.ShowImageDialog, ElementName=window}" CommandParameter="{Binding}">
                                                     <TextBlock Text="{Binding}" />
                                                 </Hyperlink>
                                             </TextBlock>

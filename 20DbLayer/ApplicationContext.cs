@@ -18,7 +18,9 @@ namespace _20DbLayer
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<AppraiserOrganization> AppraiserOrganizations { get; set; }
+        public DbSet<SelfRegulatingOrganization> SRO { get; set; }
         public DbSet<Appraiser> Appraisers { get; set; }
+        
         public DbSet<InsurancePolicie> InsurancePolicies { get; set; }
         public DbSet<QualificationCertificate> QualificationCertificates { get; set; }
 
