@@ -12,6 +12,7 @@ namespace _10Model
         public int NumberRegistration { get; set; }
         public string Telephone { get; set; }
         public string Email { get; set; }
+        public string Site { get; set; }
         public string AddressRegistration { get; set; }
         public string AddressActual { get; set; }
         public virtual ICollection<Appraiser> Appraisers { get; set; }

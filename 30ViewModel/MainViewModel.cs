@@ -44,7 +44,7 @@ namespace _30ViewModel
 
         public MainViewModel(IDialogService dialogService, IImageDiaolgService imageDiaolgService)
         {
-            //db.Database.EnsureDeleted();
+            db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
             db.Reports.Load();
             db.Contracts.Load();
