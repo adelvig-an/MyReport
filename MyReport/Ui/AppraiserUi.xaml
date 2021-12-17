@@ -334,8 +334,8 @@
                                 <TextBlock Margin="0,0,0,4" Text="Наименование саморегулируемой организации" />
                                 <ComboBox
                                     DisplayMemberPath="NameShort"
-                                    ItemsSource="{Binding SelfRegulatingOrganizations}"
-                                    SelectedItem="{Binding SelfRegulatingOrganization, Mode=TwoWay}" />
+                                    ItemsSource="{Binding SROCollection}"
+                                    SelectedItem="{Binding SRO, Mode=TwoWay}" />
                             </StackPanel>
                         </Border>
 

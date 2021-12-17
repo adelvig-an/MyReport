@@ -68,7 +68,6 @@ namespace _30ViewModel.PagesVM
         private DateTime? diplomDate;
         private string universety;
         private string pathDiplomImage;
-        private string sro;
         private int sroNumber;
         private DateTime? sroDate;
         private string pathSroCertificateImage;
@@ -105,8 +104,6 @@ namespace _30ViewModel.PagesVM
             set { ValidateProperty(value); SetProperty(ref universety, value); } }
         public string PatnDiplomImage { get => pathDiplomImage;
             set { ValidateProperty(value); SetProperty(ref pathDiplomImage, value); } }
-        public string Sro { get => sro;
-            set { ValidateProperty(value); SetProperty(ref sro, value); } }
         public int SroNumber { get => sroNumber;
             set { ValidateProperty(value); SetProperty(ref sroNumber, value); } }
         public DateTime? SroDate { get => sroDate;
@@ -138,10 +135,10 @@ namespace _30ViewModel.PagesVM
         public ObservableCollection<string> PathInsurancePolicieCollection { get; set; }
         public ObservableCollection<string> PathSroCertificateCollection { get; set; }
         public ObservableCollection<string> PathDiplomCollection { get; set; }
-        private SelfRegulatingOrganization selfRegulatingOrganization;
-        public SelfRegulatingOrganization SelfRegulatingOrganization { get => selfRegulatingOrganization;
-            set { SetProperty(ref selfRegulatingOrganization, value); } }
-        public ObservableCollection<SelfRegulatingOrganization> SelfRegulatingOrganizations { get; set; }
+        private SelfRegulatingOrganization sro;
+        public SelfRegulatingOrganization SRO { get => sro;
+            set { SetProperty(ref sro, value); } }
+        public ObservableCollection<SelfRegulatingOrganization> SROCollection { get; set; }
 
         private readonly ApplicationContext context;
         public AppraiserVM()
@@ -149,7 +146,7 @@ namespace _30ViewModel.PagesVM
             context = new ApplicationContext();
             
             context.SRO.Load();
-            SelfRegulatingOrganizations = new ObservableCollection<SelfRegulatingOrganization>(context.SRO.Local.ToBindingList());
+            SROCollection = new ObservableCollection<SelfRegulatingOrganization>(context.SRO.Local.ToBindingList());
 
             Certificates = new ObservableCollection<QualificationCertificateVM>()
             { new QualificationCertificateVM() };
@@ -275,7 +272,7 @@ namespace _30ViewModel.PagesVM
                 SroNumber = SroNumber,
                 SroDate = SroDate,
                 PathSroCertificateImage = JsonConvert.SerializeObject(PathInsurancePolicieCollection),
-                SelfRegulatingOrganizations = SelfRegulatingOrganization,
+                SelfRegulatingOrganizations = SRO,
                 InsurancePolicie = ToInsurancePolicie(),
                 QualificationCertificates = new ObservableCollection<QualificationCertificate>(Certificates
                     .Select(cvm => cvm.ToQualificationCertificate()))
@@ -369,7 +366,7 @@ namespace _30ViewModel.PagesVM
                 DiplomDate = appraiser.DiplomDate,
                 Universety = appraiser.Universety,
                 PathDiplomCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathDiplomImage),
-                SelfRegulatingOrganization = appraiser.SelfRegulatingOrganizations,
+                SRO = appraiser.SelfRegulatingOrganizations,
                 SroNumber = appraiser.SroNumber,
                 SroDate = appraiser.SroDate,
                 PathSroCertificateCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathSroCertificateImage),
@@ -419,7 +416,7 @@ namespace _30ViewModel.PagesVM
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.DiplomDate.Value.ToBinary())
                 : CBORObject.NewArray().Add(false))
                 .Add(appraiserVM.Universety)
-                .Add(appraiserVM.SelfRegulatingOrganization.Id)
+                .Add(appraiserVM.SRO.Id)
                 .Add(appraiserVM.SroNumber)
                 .Add(appraiserVM.SroDate.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.SroDate.Value.ToBinary())
@@ -466,7 +463,7 @@ namespace _30ViewModel.PagesVM
             ? new DateTime?(DateTime.FromBinary(cbor[7][1].ToObject<long>()))
             : null;
             Universety = cbor[8].AsStringSafe();
-            SelfRegulatingOrganization = new SelfRegulatingOrganization() { Id = cbor[9].AsInt32() };
+            var sroId = cbor[9].AsInt32();
             SroNumber = cbor[10].AsInt32();
             SroDate = cbor[11][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[11][1].ToObject<long>()))
@@ -510,7 +507,7 @@ namespace _30ViewModel.PagesVM
             {
                 Certificates.Add(new QualificationCertificateVM());
             }
-            SelfRegulatingOrganizations.FirstOrDefault(sro => sro.Id == SelfRegulatingOrganization.Id);
+            SRO = SROCollection.FirstOrDefault(sro => sro.Id == sroId);
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
