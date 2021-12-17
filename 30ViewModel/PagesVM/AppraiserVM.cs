@@ -294,15 +294,6 @@ namespace _30ViewModel.PagesVM
             };
             return insurancePolicie;
         }
-        public SelfRegulatingOrganization ToSRO()
-        {
-            var sro = new SelfRegulatingOrganization
-            {
-                Id = Id,
-                NameFull = Sro
-            };
-            return sro;
-        }
         public void AddAppraiser()
         {
             try
@@ -373,7 +364,7 @@ namespace _30ViewModel.PagesVM
                 DiplomDate = appraiser.DiplomDate,
                 Universety = appraiser.Universety,
                 PathDiplomCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathDiplomImage),
-                //SelfRegulatingOrganizations = new ObservableCollection<SelfRegulatingOrganization>(SelfRegulatingOrganizations.Select(sro => sro.Id)),
+                SelfRegulatingOrganization = appraiser.SelfRegulatingOrganizations,
                 SroNumber = appraiser.SroNumber,
                 SroDate = appraiser.SroDate,
                 PathSroCertificateCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathSroCertificateImage),
@@ -423,7 +414,7 @@ namespace _30ViewModel.PagesVM
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.DiplomDate.Value.ToBinary())
                 : CBORObject.NewArray().Add(false))
                 .Add(appraiserVM.Universety)
-                .Add(appraiserVM.SelfRegulatingOrganizations)
+                .Add(appraiserVM.SelfRegulatingOrganization.Id)
                 .Add(appraiserVM.SroNumber)
                 .Add(appraiserVM.SroDate.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.SroDate.Value.ToBinary())
@@ -470,7 +461,7 @@ namespace _30ViewModel.PagesVM
             ? new DateTime?(DateTime.FromBinary(cbor[7][1].ToObject<long>()))
             : null;
             Universety = cbor[8].AsStringSafe();
-            Sro = cbor[9].AsStringSafe();
+            SelfRegulatingOrganization.Id = cbor[9].AsInt32();
             SroNumber = cbor[10].AsInt32();
             SroDate = cbor[11][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[11][1].ToObject<long>()))
