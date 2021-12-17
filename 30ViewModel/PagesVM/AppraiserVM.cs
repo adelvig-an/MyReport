@@ -138,6 +138,7 @@ namespace _30ViewModel.PagesVM
         public ObservableCollection<string> PathInsurancePolicieCollection { get; set; }
         public ObservableCollection<string> PathSroCertificateCollection { get; set; }
         public ObservableCollection<string> PathDiplomCollection { get; set; }
+        public SelfRegulatingOrganization SelfRegulatingOrganization { get; set; }
         public ObservableCollection<SelfRegulatingOrganization> SelfRegulatingOrganizations { get; set; }
 
         private readonly ApplicationContext context;
@@ -269,11 +270,10 @@ namespace _30ViewModel.PagesVM
                 DiplomDate = DiplomDate,
                 PathDiplomImage = JsonConvert.SerializeObject(PathDiplomCollection),
                 Universety = Universety,
-                //Sro = Sro,
                 SroNumber = SroNumber,
                 SroDate = SroDate,
                 PathSroCertificateImage = JsonConvert.SerializeObject(PathInsurancePolicieCollection),
-                //SelfRegulatingOrganizations = ToSRO(),
+                SelfRegulatingOrganizations = SelfRegulatingOrganization,
                 InsurancePolicie = ToInsurancePolicie(),
                 QualificationCertificates = new ObservableCollection<QualificationCertificate>(Certificates
                     .Select(cvm => cvm.ToQualificationCertificate()))
@@ -373,7 +373,7 @@ namespace _30ViewModel.PagesVM
                 DiplomDate = appraiser.DiplomDate,
                 Universety = appraiser.Universety,
                 PathDiplomCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathDiplomImage),
-                //Sro = appraiser.SelfRegulatingOrganizations.Sro,
+                //SelfRegulatingOrganizations = new ObservableCollection<SelfRegulatingOrganization>(SelfRegulatingOrganizations.Select(sro => sro.Id)),
                 SroNumber = appraiser.SroNumber,
                 SroDate = appraiser.SroDate,
                 PathSroCertificateCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathSroCertificateImage),
@@ -423,7 +423,7 @@ namespace _30ViewModel.PagesVM
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.DiplomDate.Value.ToBinary())
                 : CBORObject.NewArray().Add(false))
                 .Add(appraiserVM.Universety)
-                .Add(appraiserVM.Sro)
+                .Add(appraiserVM.SelfRegulatingOrganizations)
                 .Add(appraiserVM.SroNumber)
                 .Add(appraiserVM.SroDate.HasValue
                 ? CBORObject.NewArray().Add(true).Add(appraiserVM.SroDate.Value.ToBinary())

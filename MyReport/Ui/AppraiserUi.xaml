@@ -335,7 +335,7 @@
                                 <ComboBox
                                     DisplayMemberPath="NameShort"
                                     ItemsSource="{Binding SelfRegulatingOrganizations}"
-                                    SelectedValue="NameShort" />
+                                    SelectedItem="{Binding SelfRegulatingOrganization, Mode=TwoWay}" />
                             </StackPanel>
                         </Border>
 

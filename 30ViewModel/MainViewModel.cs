@@ -137,6 +137,7 @@ namespace _30ViewModel
             else if (CurrentPage is AppraiserVM appraiserVM)
             {
                 //appraiserVM.AddOrUpdateAppraiser(appraiserVM);
+                appraiserVM.AddOrUpdateAppraiser(appraiserVM);
                 CurrentPage = new AppraiserOrganizationVM();
                 CurrentPage?.ReadCBOR();
             }
