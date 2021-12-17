@@ -342,6 +342,7 @@ namespace _30ViewModel.PagesVM
                 context.Entry(appraiser)
                     .Reference(sro => sro.SelfRegulatingOrganizations)
                     .Load();
+                SRO = SROCollection.FirstOrDefault(sro => sro.Id == appraiser.SelfRegulatingOrganizations.Id);
                 return GetAppraiserVM(appraiser);
             }
             catch (Exception exp)
@@ -366,7 +367,7 @@ namespace _30ViewModel.PagesVM
                 DiplomDate = appraiser.DiplomDate,
                 Universety = appraiser.Universety,
                 PathDiplomCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathDiplomImage),
-                SRO = appraiser.SelfRegulatingOrganizations,
+                //SRO = appraiser.SelfRegulatingOrganizations,
                 SroNumber = appraiser.SroNumber,
                 SroDate = appraiser.SroDate,
                 PathSroCertificateCollection = JsonConvert.DeserializeObject<ObservableCollection<string>>(appraiser.PathSroCertificateImage),
