@@ -102,16 +102,16 @@ namespace _30ViewModel
         public ICommand TestNewPage { get; }
         public void TestFromCBORAction()
         {
-            CurrentPage = new AppraiserOrganizationVM();
+            CurrentPage = new AppraiserVM();
             CurrentPage?.ReadCBOR();
         }
         public void TestLoadDbAction()
         {
-            CurrentPage = new AppraiserOrganizationVM().LoadAppraiserOrganization();
+            CurrentPage = new AppraiserVM().LoadAppraiser();
         }
         public void TestNewPageAction()
         {
-            CurrentPage = new AppraiserOrganizationVM();
+            CurrentPage = new AppraiserVM();
         }
         #endregion Test Command Удалить!!!
 

@@ -138,7 +138,9 @@ namespace _30ViewModel.PagesVM
         public ObservableCollection<string> PathInsurancePolicieCollection { get; set; }
         public ObservableCollection<string> PathSroCertificateCollection { get; set; }
         public ObservableCollection<string> PathDiplomCollection { get; set; }
-        public SelfRegulatingOrganization SelfRegulatingOrganization { get; set; }
+        private SelfRegulatingOrganization selfRegulatingOrganization;
+        public SelfRegulatingOrganization SelfRegulatingOrganization { get => selfRegulatingOrganization;
+            set { SetProperty(ref selfRegulatingOrganization, value); } }
         public ObservableCollection<SelfRegulatingOrganization> SelfRegulatingOrganizations { get; set; }
 
         private readonly ApplicationContext context;
@@ -333,12 +335,15 @@ namespace _30ViewModel.PagesVM
         {
             try
             {
-                var appraiser = context.Appraisers.Single(a => a.Id == 3);
+                var appraiser = context.Appraisers.Single(a => a.Id == 1);
                 context.Entry(appraiser)
                     .Reference(ip => ip.InsurancePolicie)
                     .Load();
                 context.Entry(appraiser)
                     .Collection(qc => qc.QualificationCertificates)
+                    .Load();
+                context.Entry(appraiser)
+                    .Reference(sro => sro.SelfRegulatingOrganizations)
                     .Load();
                 return GetAppraiserVM(appraiser);
             }
@@ -461,7 +466,7 @@ namespace _30ViewModel.PagesVM
             ? new DateTime?(DateTime.FromBinary(cbor[7][1].ToObject<long>()))
             : null;
             Universety = cbor[8].AsStringSafe();
-            SelfRegulatingOrganization.Id = cbor[9].AsInt32();
+            SelfRegulatingOrganization = new SelfRegulatingOrganization() { Id = cbor[9].AsInt32() };
             SroNumber = cbor[10].AsInt32();
             SroDate = cbor[11][0].AsBoolean()
             ? new DateTime?(DateTime.FromBinary(cbor[11][1].ToObject<long>()))
@@ -505,6 +510,7 @@ namespace _30ViewModel.PagesVM
             {
                 Certificates.Add(new QualificationCertificateVM());
             }
+            SelfRegulatingOrganizations.FirstOrDefault(sro => sro.Id == SelfRegulatingOrganization.Id);
         }
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));

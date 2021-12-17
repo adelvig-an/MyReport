@@ -792,7 +792,7 @@
                     <Button
                         Padding="16,8"
                         HorizontalAlignment="Right"
-                        Command="{Binding DataContext.SaveData, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                        Command="{Binding DataContext.TestSaved, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                         Content="Сохранить" />
                 </Border>
                 <Border Grid.Column="1" Margin="8,0">
