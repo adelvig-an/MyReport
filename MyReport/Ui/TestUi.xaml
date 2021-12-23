@@ -29,17 +29,17 @@
             <Button
                 Margin="5"
                 Padding="8,6"
-                Command="{Binding DataContext.TestNewPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                Command="{Binding DataContext.NewAOVM, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                 Content="Новый объект" />
             <Button
                 Margin="5"
                 Padding="8,6"
-                Command="{Binding DataContext.TestFromCBOR, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                Command="{Binding DataContext.CborAOVM, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                 Content="Восстановить из CBOR" />
             <Button
                 Margin="5"
                 Padding="8,6"
-                Command="{Binding DataContext.TestLoadDb, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                Command="{Binding DataContext.LoadAOVM, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                 Content="Восстановить из БД" />
         </StackPanel>
     </Grid>

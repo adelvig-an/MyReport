@@ -44,7 +44,7 @@ namespace _30ViewModel
 
         public MainViewModel(IDialogService dialogService, IImageDiaolgService imageDiaolgService)
         {
-            db.Database.EnsureDeleted();
+            //db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
             db.Reports.Load();
             db.Contracts.Load();
@@ -59,7 +59,9 @@ namespace _30ViewModel
             db.InsurancePolicies.Load();
             db.QualificationCertificates.Load();
             db.TempDatas.Load();
-            CurrentPage = new AppraiserVM();
+            
+            CurrentPage = new TestPageVM(); //Стартовая страница
+            
             SaveData = new RelayCommand(_ => SaveDataAction());
             NextPage = new RelayCommand(_ => NextPageAction());
             BackPage = new RelayCommand(_ => BackPageAction());
@@ -67,55 +69,10 @@ namespace _30ViewModel
             ShowImageDialog = new RelayCommand(p => imageDiaolgService.OpenImage(this, p.ToString()));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
 
-
-            //!!!Тестовые команды Удалить!!!!
-            TestSaved = new RelayCommand(_ => TestSavedAction());
-            TestUpdate = new RelayCommand(_ => TestUpdateAction());
-            TestFromCBOR = new RelayCommand(_ => TestFromCBORAction());
-            TestLoadDb = new RelayCommand(_ => TestLoadDbAction());
-            TestNewPage = new RelayCommand(_ => TestNewPageAction());
-
+            NewAOVM = new RelayCommand(_ => NewAOVMAction());
+            CborAOVM = new RelayCommand(_ => CborAOVMAction());
+            LoadAOVM = new RelayCommand(_ => LoadAOVMAction());
         }
-
-        #region Test Command Удалить!!!
-        public ICommand TestSaved { get; }
-        public ICommand TestUpdate { get; }
-        public void TestSavedAction()
-        {
-            if (CurrentPage is AppraiserVM appraiserVM)
-            {
-                appraiserVM.AddOrUpdateAppraiser(appraiserVM);
-            }
-            CurrentPage = new TestPageVM();
-        }
-        public void TestUpdateAction()
-        {
-            if (CurrentPage is AppraiserVM appraiserVM)
-            {
-                appraiserVM.UpdateAppraiser();
-            }
-            CurrentPage = new TestPageVM();
-        }
-
-        public ICommand TestFromCBOR { get; }
-        public ICommand TestLoadDb { get; }
-        public ICommand TestNewPage { get; }
-        public void TestFromCBORAction()
-        {
-            CurrentPage = new AppraiserVM();
-            CurrentPage?.ReadCBOR();
-        }
-        public void TestLoadDbAction()
-        {
-            CurrentPage = new AppraiserVM().LoadAppraiser();
-        }
-        public void TestNewPageAction()
-        {
-            CurrentPage = new AppraiserVM();
-        }
-        #endregion Test Command Удалить!!!
-
-
 
         /// <summary>
         /// Команда сохранения в БД
@@ -129,70 +86,58 @@ namespace _30ViewModel
         /// </summary>
         public void SaveDataAction()
         {
+            if (CurrentPage is AppraiserVM appraiserVM)
+            {
+                appraiserVM.AddOrUpdateAppraiser(appraiserVM);
+                CurrentPage = new AppraiserOrganizationVM();
+                CurrentPage?.ReadCBOR();
+            }
+        }
+        public void NextPageAction()
+        {
             if (CurrentPage is AppraiserOrganizationVM appraiserOrg)
             {
                 appraiserOrg.AddOrUpdateAppraiserOrganization(appraiserOrg);
                 CurrentPage = new TestPageVM();
             }
-            else if (CurrentPage is AppraiserVM appraiserVM)
-            {
-                //appraiserVM.AddOrUpdateAppraiser(appraiserVM);
-                appraiserVM.AddOrUpdateAppraiser(appraiserVM);
-                CurrentPage = new AppraiserOrganizationVM();
-                CurrentPage?.ReadCBOR();
-            }
-            else if (CurrentPage is OrganizationVM organization)
-            {
-                organization.AddOrganization();
-            }
-        }
-        public void NextPageAction()
-        {
-            if (CurrentPage is ReportVM)
-            {
-                CurrentPage = new AppraiserVM();
-                CurrentPage?.ReadCBOR();
-            }
-            else if (CurrentPage is AppraiserVM)
-            {
-                CurrentPage = new AppraiserOrganizationVM();
-                CurrentPage?.ReadCBOR(); //Чтение из CBOR
-            }
         }
         public void BackPageAction()
         {
-            if (CurrentPage is ContractVM)
-            {
-                CurrentPage = new ReportVM();
-                CurrentPage.ReadCBOR(); //Чтение из CBOR
-            }
-            else if (CurrentPage is PrivatePersonVM)
-            {
-                CurrentPage = new ContractVM();
-                CurrentPage.ReadCBOR(); //Чтение из CBOR
-            }
-            else if (CurrentPage is AppraiserVM)
+            if (CurrentPage is AppraiserVM)
             {
                 CurrentPage = new AppraiserOrganizationVM();
-                CurrentPage.ReadCBOR(); //Чтение из CBOR
-            }
-            else if (CurrentPage is AppraiserOrganizationVM)
-            {
-                CurrentPage = new AppraiserVM();
-                CurrentPage.ReadCBOR(); //Чтение из CBOR
+                CurrentPage?.ReadCBOR(); //Чтение из CBOR
             }
         }
         public void AppraiserPageAction()
         {
             CurrentPage = new AppraiserVM();
         }
-
-        //Test MWindow
+        //MWindow
         public ICommand ShowDialog { get; }
         public ICommand ShowImageDialog { get; }
 
 
-        
 
+
+
+
+        //
+        public ICommand NewAOVM { get; }
+        public void NewAOVMAction()
+        {
+            CurrentPage = new AppraiserOrganizationVM();
+        }
+        public ICommand CborAOVM { get; }
+        public void CborAOVMAction()
+        {
+            CurrentPage = new AppraiserOrganizationVM();
+            CurrentPage?.ReadCBOR();
+        }
+        public ICommand LoadAOVM { get; }
+        public void LoadAOVMAction()
+        {
+            CurrentPage = new AppraiserOrganizationVM().LoadAppraiserOrganization();
+        }
     }
 }

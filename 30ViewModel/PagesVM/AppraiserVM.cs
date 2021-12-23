@@ -135,6 +135,7 @@ namespace _30ViewModel.PagesVM
         public ObservableCollection<string> PathInsurancePolicieCollection { get; set; }
         public ObservableCollection<string> PathSroCertificateCollection { get; set; }
         public ObservableCollection<string> PathDiplomCollection { get; set; }
+        
         private SelfRegulatingOrganization sro;
         public SelfRegulatingOrganization SRO { get => sro;
             set { SetProperty(ref sro, value); } }
