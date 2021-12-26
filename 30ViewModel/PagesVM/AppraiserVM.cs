@@ -513,5 +513,11 @@ namespace _30ViewModel.PagesVM
         public override byte[] GetCBOR() => ToCBOR(this).EncodeToBytes();
         public override void SetCBOR(byte[] b) => FromCBOR(CBORObject.DecodeFromBytes(b));
         #endregion CBOR
+
+        public int ReturnIdAppraiser()
+        {
+            var id = Id;
+            return id;
+        }
     }
 }

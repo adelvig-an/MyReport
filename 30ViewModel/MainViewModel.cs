@@ -89,6 +89,7 @@ namespace _30ViewModel
             if (CurrentPage is AppraiserVM appraiserVM)
             {
                 appraiserVM.AddOrUpdateAppraiser(appraiserVM);
+                //appraiserVM.ReturnIdAppraiser();
                 CurrentPage = new AppraiserOrganizationVM();
                 CurrentPage?.ReadCBOR();
             }

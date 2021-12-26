@@ -82,6 +82,8 @@ namespace _30ViewModel.PagesVM
             RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));
         }
 
+
+
         #region Добавление и удаление файла
         public ICommand AddInsurancePolicieImageCommand { get; }
         public void AddInsurancePolicieImage()

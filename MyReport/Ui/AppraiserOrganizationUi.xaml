@@ -527,8 +527,8 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Оценщик" />
-                            <GridViewColumn DisplayMemberBinding="{Binding}" Header="Стаж работы" />
-                            <GridViewColumn DisplayMemberBinding="{Binding}" Header="Квалификационне аттестаты" />
+                            <GridViewColumn DisplayMemberBinding="{Binding SelfRegulatingOrganizations}" Header="СРО" />
+                            <GridViewColumn DisplayMemberBinding="{Binding QualificationCertificates}" Header="Квалификационне аттестаты" />
                             <GridViewColumn Header="">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
