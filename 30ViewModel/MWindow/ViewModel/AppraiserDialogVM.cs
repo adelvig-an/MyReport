@@ -2,6 +2,7 @@
 using _20DbLayer;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
@@ -20,20 +21,21 @@ namespace _30ViewModel.MWindow.ViewModel
 
         public AppraiserDialogVM(Action<AppraiserDialogVM> closeHandler)
         {
-            Appraisers = (IObservable<Appraiser>)context.Appraisers.Include(a => a.Id).ToList();
+            Appraisers = new ObservableCollection<Appraiser>(context.Appraisers.ToList());
             this.closeHandler = closeHandler;
+            Search = new RelayCommand(_ => SearchAppraiser());
         }
 
-        private ICommand newApptaiser;
-        private ICommand search;
+        public ICommand NewApptaiser { get; }
+        public ICommand Search { get; }
         private int searchText;
         public int SearchText
         { get => searchText; set => searchText = value; }
-        public IObservable<Appraiser> Appraisers;
+        public ObservableCollection<Appraiser> Appraisers { get; set; };
 
-        public void SearchAppraiser(int s)
+        public void SearchAppraiser()
         {
-            Appraisers = (IObservable<Appraiser>)context.Appraisers.Include(a => a.SroNumber == s).ToList();
+            Appraisers = new ObservableCollection<Appraiser>(context.Appraisers.Include(a => a.SroNumber == searchText).ToList());
         }
 
         public override ICommand CloseCommand
