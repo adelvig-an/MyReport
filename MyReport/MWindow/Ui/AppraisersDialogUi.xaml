@@ -27,7 +27,7 @@
                         Margin="8,16"
                         Padding="16,8"
                         HorizontalAlignment="Left"
-                        Content="Создать нового" />
+                        Content="Создать оценщика" />
                 </Border>
 
                 <Border Grid.Column="2">
@@ -59,39 +59,39 @@
                         <Border>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Border Grid.Column="0">
-                                    <TextBlock Text="{Binding FullName}"/>
+                                    <TextBlock Text="{Binding FullName}" />
                                 </Border>
 
                                 <Border Grid.Column="1">
                                     <WrapPanel>
-                                        <TextBlock Text="Регистрационный номер:" TextWrapping="Wrap"/>
-                                        <TextBlock Text="{Binding SroNumber}"/>
+                                        <TextBlock Text="Регистрационный номер:" TextWrapping="Wrap" />
+                                        <TextBlock Text="{Binding SroNumber}" />
                                     </WrapPanel>
                                 </Border>
 
                                 <Border Grid.Column="2">
-                                    <TextBlock Text="{Binding SelfRegulatingOrganizations.NameFull}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding SelfRegulatingOrganizations.NameFull}" TextWrapping="Wrap" />
                                 </Border>
 
                                 <Border Grid.Column="3">
-                                    <TextBlock Text="Список квал аттестатов" TextWrapping="Wrap"/>
+                                    <TextBlock Text="Список квал аттестатов" TextWrapping="Wrap" />
                                 </Border>
 
                                 <Border Grid.Column="4">
-                                    <TextBlock Text="с 2007 года"/>
+                                    <TextBlock Text="с 2007 года" />
                                 </Border>
 
                                 <Border Grid.Column="5">
-                                    <TextBlock Text="Наименование организации ранее добавленной если есть" TextWrapping="Wrap"/>
+                                    <TextBlock Text="Наименование организации ранее добавленной если есть" TextWrapping="Wrap" />
                                 </Border>
 
                             </Grid>

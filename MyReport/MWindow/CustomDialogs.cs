@@ -13,7 +13,7 @@ namespace MyReport.MWindow
 
             var customDialog = new MWindowDialogLib.Dialogs.CustomDialog(new CustomDialogUi());
 
-            var customDialogViewModel = new CustomDialogViewModel(instance =>
+            var customDialogViewModal = new CustomDialogViewModel(instance =>
             {
                 coord.HideMetroDialogAsync(context, customDialog);
 
@@ -26,7 +26,7 @@ namespace MyReport.MWindow
                 FirstName = "Тест открытия и закрытия Модального окна"
             };
 
-            customDialog.DataContext = customDialogViewModel;
+            customDialog.DataContext = customDialogViewModal;
 
             coord.ShowMetroDialogAsync(context, customDialog);
         }

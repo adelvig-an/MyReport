@@ -1,4 +1,6 @@
 ﻿using _30ViewModel.MWindow;
+using _30ViewModel.MWindow.ViewModel;
+using MyReport.MWindow.Ui;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +11,21 @@ namespace MyReport.MWindow
     {
         public void Show(object context)
         {
-            throw new NotImplementedException();
+            var coord = MWindowDialogLib.ContentDialogService.Instance.Coordinator;
+
+            var appraiserDialog = new MWindowDialogLib.Dialogs.CustomDialog(new AppraisersDialogUi());
+
+            var appraiserDialogViewModal = new AppraiserDialogVM(instance =>
+            {
+                coord.HideMetroDialogAsync(context, appraiserDialog);
+
+
+            });
+
+            appraiserDialog.DataContext = appraiserDialogViewModal;
+
+            coord.ShowMetroDialogAsync(context, appraiserDialog);
+
         }
     }
 }

@@ -6,5 +6,9 @@ namespace _30ViewModel.MWindow.ViewModel
 {
     public class AppraiserDialogVM : MsgViewModel
     {
+        public AppraiserDialogVM(Action<AppraiserDialogVM> closeHander)
+        {
+
+        }
     }
 }
