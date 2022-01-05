@@ -521,7 +521,7 @@
                     Padding="16,8"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Command="{Binding DataContext.AppraiserPage, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                    Command="{Binding DataContext.ShowAppraiserDialog, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                     Content="+ Добавить оценщика" />
                 <ListView Margin="0,8" ItemsSource="{Binding Appraisers}">
                     <ListView.View>

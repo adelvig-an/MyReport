@@ -30,7 +30,7 @@ namespace _30ViewModel.MWindow.ViewModel
         public ICommand NewApptaiser { get; }
         public ICommand Search { get; }
         public ICommand SelectAppraiser { get; }
-        private int selectedId = -1;
+        public int selectedId = -1;
         private int searchText;
         public int SearchText
         { get => searchText; set => searchText = value; }

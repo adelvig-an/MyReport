@@ -42,7 +42,7 @@ namespace _30ViewModel
         }
 
 
-        public MainViewModel(IDialogService dialogService, IImageDiaolgService imageDiaolgService)
+        public MainViewModel(IDialogService dialogService, IImageDiaolgService imageDiaolgService, IAppraiserDialogService appraiserDialogService)
         {
             //db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
@@ -67,7 +67,7 @@ namespace _30ViewModel
             BackPage = new RelayCommand(_ => BackPageAction());
             ShowDialog = new RelayCommand(_ => dialogService.Show(this));
             ShowImageDialog = new RelayCommand(p => imageDiaolgService.OpenImage(this, p.ToString()));
-            ShowAppraiserDialog = new RelayCommand(_ => dialogService.Show(this));
+            ShowAppraiserDialog = new RelayCommand(_ => appraiserDialogService.Show(this));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
 
             NewAOVM = new RelayCommand(_ => NewAOVMAction());

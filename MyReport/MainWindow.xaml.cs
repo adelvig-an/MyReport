@@ -13,8 +13,9 @@ namespace MyReport
         {
             var dialogService = new CustomDialogs();
             var imageDialogSrvice = new ImageDialogs();
+            var appraiserDialogService = new AppraisersDialogs();
             InitializeComponent();
-            DataContext = new MainViewModel(dialogService, imageDialogSrvice);
+            DataContext = new MainViewModel(dialogService, imageDialogSrvice, appraiserDialogService);
         }
     }
 }

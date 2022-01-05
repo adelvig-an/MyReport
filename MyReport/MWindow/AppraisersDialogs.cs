@@ -4,7 +4,7 @@ using MyReport.MWindow.Ui;
 
 namespace MyReport.MWindow
 {
-    public class AppraisersDialogs : IDialogService
+    public class AppraisersDialogs : IAppraiserDialogService
     {
         public void Show(object context)
         {

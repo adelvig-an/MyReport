@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0">
@@ -99,6 +100,14 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+        </Border>
+
+        <Border Grid.Row="2">
+            <Button
+                Margin="8"
+                Padding="16,8"
+                Command="{Binding CloseCommand}"
+                Content="Close" />
         </Border>
     </Grid>
 </UserControl>
