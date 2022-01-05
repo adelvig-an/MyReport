@@ -45,6 +45,7 @@
                             <Button
                                 Margin="8,16"
                                 Padding="16,8"
+                                Command="{Binding Search}"
                                 Content="Найти" />
                         </Border>
 
@@ -72,26 +73,26 @@
                                     <TextBlock Text="{Binding FullName}" />
                                 </Border>
 
-                                <Border Grid.Column="1">
+                                <Border Grid.Column="1" Margin="2">
                                     <WrapPanel>
                                         <TextBlock Text="Регистрационный номер:" TextWrapping="Wrap" />
                                         <TextBlock Text="{Binding SroNumber}" />
                                     </WrapPanel>
                                 </Border>
 
-                                <Border Grid.Column="2">
+                                <Border Grid.Column="2" Margin="2">
                                     <TextBlock Text="{Binding SelfRegulatingOrganizations.NameFull}" TextWrapping="Wrap" />
                                 </Border>
 
-                                <Border Grid.Column="3">
+                                <Border Grid.Column="3" Margin="2">
                                     <TextBlock Text="Список квал аттестатов" TextWrapping="Wrap" />
                                 </Border>
 
-                                <Border Grid.Column="4">
+                                <Border Grid.Column="4" Margin="2">
                                     <TextBlock Text="с 2007 года" />
                                 </Border>
 
-                                <Border Grid.Column="5">
+                                <Border Grid.Column="5" Margin="2">
                                     <TextBlock Text="Наименование организации ранее добавленной если есть" TextWrapping="Wrap" />
                                 </Border>
 

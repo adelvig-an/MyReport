@@ -13,15 +13,15 @@ namespace _30ViewModel.MWindow.ViewModel
         #region fields
         private ICommand closeCommand;
         private Action<AppraiserDialogVM> closeHandler = null;
-
-        private string path = null;
         #endregion fields
 
         private readonly ApplicationContext context;
 
         public AppraiserDialogVM(Action<AppraiserDialogVM> closeHandler)
         {
-            Appraisers = new ObservableCollection<Appraiser>(context.Appraisers.ToList());
+            context = new ApplicationContext();
+            Appraisers = new ObservableCollection<Appraiser>();
+            //Appraisers = new ObservableCollection<Appraiser>(context.Appraisers.ToList());
             this.closeHandler = closeHandler;
             Search = new RelayCommand(_ => SearchAppraiser());
             SelectAppraiser = new RelayCommand(_ => SelectedAppraiser());
@@ -41,7 +41,7 @@ namespace _30ViewModel.MWindow.ViewModel
         public void SearchAppraiser()
         {
             Appraisers.Clear();
-            foreach (var item in context.Appraisers.Include(a => a.SroNumber == searchText))
+            foreach (var item in context.Appraisers.Where(a => a.SroNumber == searchText))
             {
                 Appraisers.Add(item);
             }
