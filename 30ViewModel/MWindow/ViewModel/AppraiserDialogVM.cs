@@ -1,5 +1,8 @@
 ﻿using _10Model;
+using _20DbLayer;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Windows.Input;
 
 namespace _30ViewModel.MWindow.ViewModel
@@ -13,22 +16,25 @@ namespace _30ViewModel.MWindow.ViewModel
         private string path = null;
         #endregion fields
 
+        private readonly ApplicationContext context;
+
         public AppraiserDialogVM(Action<AppraiserDialogVM> closeHandler)
         {
+            Appraisers = (IObservable<Appraiser>)context.Appraisers.Include(a => a.Id).ToList();
             this.closeHandler = closeHandler;
         }
 
         private ICommand newApptaiser;
         private ICommand search;
-        private string searchText;
-        public string SearchText
-        { get => searchText;}
+        private int searchText;
+        public int SearchText
+        { get => searchText; set => searchText = value; }
         public IObservable<Appraiser> Appraisers;
-        public ICommand Search
-        {
-            
-        };
 
+        public void SearchAppraiser(int s)
+        {
+            Appraisers = (IObservable<Appraiser>)context.Appraisers.Include(a => a.SroNumber == s).ToList();
+        }
 
         public override ICommand CloseCommand
         {
