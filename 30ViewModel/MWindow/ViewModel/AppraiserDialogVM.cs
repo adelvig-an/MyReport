@@ -24,18 +24,33 @@ namespace _30ViewModel.MWindow.ViewModel
             Appraisers = new ObservableCollection<Appraiser>(context.Appraisers.ToList());
             this.closeHandler = closeHandler;
             Search = new RelayCommand(_ => SearchAppraiser());
+            SelectAppraiser = new RelayCommand(_ => SelectedAppraiser());
         }
 
         public ICommand NewApptaiser { get; }
         public ICommand Search { get; }
+        public ICommand SelectAppraiser { get; }
+        private int selectedId = -1;
         private int searchText;
         public int SearchText
         { get => searchText; set => searchText = value; }
-        public ObservableCollection<Appraiser> Appraisers { get; set; };
+        private Appraiser appraiser;
+        public Appraiser Appraiser { get => appraiser; set => appraiser = value; }
+        public ObservableCollection<Appraiser> Appraisers { get; set; }
 
         public void SearchAppraiser()
         {
-            Appraisers = new ObservableCollection<Appraiser>(context.Appraisers.Include(a => a.SroNumber == searchText).ToList());
+            Appraisers.Clear();
+            foreach (var item in context.Appraisers.Include(a => a.SroNumber == searchText))
+            {
+                Appraisers.Add(item);
+            }
+        }
+
+        public void SelectedAppraiser()
+        {
+            selectedId = Appraiser.Id;
+            closeHandler(this);
         }
 
         public override ICommand CloseCommand

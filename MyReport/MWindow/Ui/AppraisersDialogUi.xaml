@@ -53,7 +53,7 @@
         </Border>
 
         <Border Grid.Row="1" Margin="5">
-            <ListBox ItemsSource="{Binding Appraisers}">
+            <ListBox ItemsSource="{Binding Appraisers}" SelectedItem="{Binding Appraiser}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border>

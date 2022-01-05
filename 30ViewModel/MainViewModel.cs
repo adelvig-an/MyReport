@@ -67,6 +67,7 @@ namespace _30ViewModel
             BackPage = new RelayCommand(_ => BackPageAction());
             ShowDialog = new RelayCommand(_ => dialogService.Show(this));
             ShowImageDialog = new RelayCommand(p => imageDiaolgService.OpenImage(this, p.ToString()));
+            ShowAppraiserDialog = new RelayCommand(_ => dialogService.Show(this));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
 
             NewAOVM = new RelayCommand(_ => NewAOVMAction());
@@ -117,7 +118,7 @@ namespace _30ViewModel
         //MWindow
         public ICommand ShowDialog { get; }
         public ICommand ShowImageDialog { get; }
-
+        public ICommand ShowAppraiserDialog { get; }
 
 
 
