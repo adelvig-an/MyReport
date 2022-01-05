@@ -1,10 +1,6 @@
 ﻿using _30ViewModel.MWindow;
 using _30ViewModel.MWindow.ViewModel;
 using MyReport.MWindow.Ui;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 namespace MyReport.MWindow
 {
@@ -19,8 +15,6 @@ namespace MyReport.MWindow
             var appraiserDialogViewModal = new AppraiserDialogVM(instance =>
             {
                 coord.HideMetroDialogAsync(context, appraiserDialog);
-
-                Debug.WriteLine("");
             })
 
             {
