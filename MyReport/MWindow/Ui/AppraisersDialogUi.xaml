@@ -38,7 +38,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0">
-                            <TextBox VerticalAlignment="Center" />
+                            <TextBox VerticalAlignment="Center" Text="{Binding SearchText}" />
                         </Border>
 
                         <Border Grid.Column="1">
