@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace _30ViewModel.MWindow.ViewModel
@@ -33,7 +34,10 @@ namespace _30ViewModel.MWindow.ViewModel
         public int selectedId = -1;
         private int searchText;
         public int SearchText
-        { get => searchText; set => searchText = value; }
+        {
+            get => searchText;
+            set => searchText = value; 
+        }
         private Appraiser appraiser;
         public Appraiser Appraiser { get => appraiser; set => appraiser = value; }
         public ObservableCollection<Appraiser> Appraisers { get; set; }
@@ -47,10 +51,11 @@ namespace _30ViewModel.MWindow.ViewModel
             }
         }
 
-        public void SelectedAppraiser()
+        public async Task<int> SelectedAppraiser()
         {
             selectedId = Appraiser.Id;
             closeHandler(this);
+            return await Task.FromResult(selectedId);
         }
 
         public override ICommand CloseCommand

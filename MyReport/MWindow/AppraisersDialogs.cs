@@ -1,12 +1,17 @@
 ﻿using _30ViewModel.MWindow;
 using _30ViewModel.MWindow.ViewModel;
 using MyReport.MWindow.Ui;
+using System.Threading.Tasks;
 
 namespace MyReport.MWindow
 {
+    //1) изменить интерфейс чтобы он возвращал Task<int> а не void
+    //2) команду сделать асинхронной
+    //3) возвращать значение Id из диалоговой VM
+
     public class AppraisersDialogs : IAppraiserDialogService
     {
-        public void Show(object context)
+        public async Task<int> Show(object context)
         {
             var coord = MWindowDialogLib.ContentDialogService.Instance.Coordinator;
 
@@ -23,8 +28,11 @@ namespace MyReport.MWindow
 
             appraiserDialog.DataContext = appraiserDialogViewModal;
 
-            coord.ShowMetroDialogAsync(context, appraiserDialog);
+            await coord.ShowMetroDialogAsync(context, appraiserDialog);
 
+            return appraiserDialogViewModal.selectedId;
         }
     }
 }
+
+
