@@ -11,13 +11,13 @@ namespace MyReport.MWindow
 
     public class AppraisersDialogs : IAppraiserDialogService
     {
-        public async Task<int> Show(object context)
+        public async Task<int> ShowAsync(object context)
         {
             var coord = MWindowDialogLib.ContentDialogService.Instance.Coordinator;
 
             var appraiserDialog = new MWindowDialogLib.Dialogs.CustomDialog(new AppraisersDialogUi());
 
-            var appraiserDialogViewModal = new AppraiserDialogVM(instance =>
+            var appraiserDialogViewModel = new AppraiserDialogVM(instance =>
             {
                 coord.HideMetroDialogAsync(context, appraiserDialog);
             })
@@ -26,11 +26,11 @@ namespace MyReport.MWindow
                 Title = "Поиск оценщика"
             };
 
-            appraiserDialog.DataContext = appraiserDialogViewModal;
+            appraiserDialog.DataContext = appraiserDialogViewModel;
 
             await coord.ShowMetroDialogAsync(context, appraiserDialog);
 
-            return appraiserDialogViewModal.SelectedAppraiser();
+            return appraiserDialogViewModel.SelectedAppraiser();
         }
     }
 }
