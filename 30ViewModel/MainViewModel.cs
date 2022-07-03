@@ -32,7 +32,9 @@ namespace _30ViewModel
         }
         private readonly ApplicationContext db = new ApplicationContext();
         private bool isVisibl;
-        public bool IsVisibl { get => isVisibl;
+        public bool IsVisibl
+        {
+            get => isVisibl;
             set
             {
                 SetProperty(ref isVisibl, value);
@@ -115,14 +117,11 @@ namespace _30ViewModel
         {
             CurrentPage = new AppraiserVM();
         }
+
         //MWindow
         public ICommand ShowDialog { get; }
         public ICommand ShowImageDialog { get; }
         public ICommand ShowAppraiserDialog { get; }
-
-
-
-
 
         //
         public ICommand NewAOVM { get; }

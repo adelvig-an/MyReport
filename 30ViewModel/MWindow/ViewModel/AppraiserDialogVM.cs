@@ -51,11 +51,11 @@ namespace _30ViewModel.MWindow.ViewModel
             }
         }
 
-        public async Task<int> SelectedAppraiser()
+        public int SelectedAppraiser()
         {
             selectedId = Appraiser.Id;
             closeHandler(this);
-            return await Task.FromResult(selectedId);
+            return selectedId;
         }
 
         public override ICommand CloseCommand

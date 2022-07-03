@@ -30,7 +30,7 @@ namespace MyReport.MWindow
 
             await coord.ShowMetroDialogAsync(context, appraiserDialog);
 
-            return appraiserDialogViewModal.selectedId;
+            return appraiserDialogViewModal.SelectedAppraiser();
         }
     }
 }
