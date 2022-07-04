@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using PeterO.Cbor;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 
 namespace _30ViewModel
@@ -43,7 +44,6 @@ namespace _30ViewModel
             }
         }
 
-
         public MainViewModel(IDialogService dialogService, IImageDiaolgService imageDiaolgService, IAppraiserDialogService appraiserDialogService)
         {
             //db.Database.EnsureDeleted();
@@ -69,7 +69,7 @@ namespace _30ViewModel
             BackPage = new RelayCommand(_ => BackPageAction());
             ShowDialog = new RelayCommand(_ => dialogService.Show(this));
             ShowImageDialog = new RelayCommand(p => imageDiaolgService.OpenImage(this, p.ToString()));
-            ShowAppraiserDialog = new RelayCommand(_ => appraiserDialogService.ShowAsync(this));
+            ShowAppraiserDialog = new AsyncRelayCommand(_ => appraiserDialogService.ShowAsync(this));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
 
             NewAOVM = new RelayCommand(_ => NewAOVMAction());
@@ -84,6 +84,7 @@ namespace _30ViewModel
         public ICommand NextPage { get; }
         public ICommand BackPage { get; }
         public ICommand AppraiserPage { get; }
+
         /// <summary>
         /// Метод реализации сохранения данных в БД
         /// </summary>
