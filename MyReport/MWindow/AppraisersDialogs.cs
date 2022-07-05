@@ -11,7 +11,7 @@ namespace MyReport.MWindow
 
     public class AppraisersDialogs : IAppraiserDialogService
     {
-        public void ShowAsync(object context)
+        public Task<int> ShowAsync(object context)
         {
             var coord = MWindowDialogLib.ContentDialogService.Instance.Coordinator;
 
@@ -28,7 +28,7 @@ namespace MyReport.MWindow
 
             appraiserDialog.DataContext = appraiserDialogViewModel;
 
-            coord.ShowMetroDialogAsync(context, appraiserDialog);
+            return coord.ShowMetroDialogAsync(context, appraiserDialog);
         }
     }
 }
