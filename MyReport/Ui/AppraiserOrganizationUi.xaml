@@ -526,10 +526,19 @@
                 <ListView Margin="0,8" ItemsSource="{Binding Appraisers}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding FullName}" Header="Оценщик" />
-                            <GridViewColumn DisplayMemberBinding="{Binding SelfRegulatingOrganizations}" Header="СРО" />
-                            <GridViewColumn DisplayMemberBinding="{Binding QualificationCertificates}" Header="Квалификационне аттестаты" />
-                            <GridViewColumn Header="">
+                            <GridViewColumn
+                                Width="100"
+                                DisplayMemberBinding="{Binding FullName}"
+                                Header="Оценщик" />
+                            <GridViewColumn
+                                Width="100"
+                                DisplayMemberBinding="{Binding SelfRegulatingOrganizations}"
+                                Header="СРО" />
+                            <GridViewColumn
+                                Width="100"
+                                DisplayMemberBinding="{Binding QualificationCertificates}"
+                                Header="Квалификационне аттестаты" />
+                            <GridViewColumn Width="100" Header="">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Command="{Binding}" Content="Удалить" />

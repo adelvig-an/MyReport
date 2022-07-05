@@ -84,7 +84,7 @@ namespace _30ViewModel.PagesVM
 
         public void AppraiserAdd(int id)
         {
-            foreach (var item in Appraisers.Where(a => a.Id == id))
+            foreach (var item in context.Appraisers.Where(a => a.Id == id))
             {
                 Appraisers.Add(item);
             }

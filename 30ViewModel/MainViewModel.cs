@@ -1,5 +1,6 @@
 ﻿using _20DbLayer;
 using _30ViewModel.MWindow;
+using _30ViewModel.MWindow.ViewModel;
 using _30ViewModel.PagesVM;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
@@ -17,6 +18,7 @@ namespace _30ViewModel
             return cbor.IsNull ? "" : cbor.AsString();
         }
     }
+
     public class MainViewModel : ViewModelBase
     {
         private PageViewModel currentPage;
@@ -69,7 +71,7 @@ namespace _30ViewModel
             BackPage = new RelayCommand(_ => BackPageAction());
             ShowDialog = new RelayCommand(_ => dialogService.Show(this));
             ShowImageDialog = new RelayCommand(p => imageDiaolgService.OpenImage(this, p.ToString()));
-            ShowAppraiserDialog = new AsyncRelayCommand(_ => appraiserDialogService.ShowAsync(this));
+            ShowAppraiserDialog = new RelayCommand(_ => appraiserDialogService.ShowAsync(this));
             AppraiserPage = new RelayCommand(_ => AppraiserPageAction());
 
             NewAOVM = new RelayCommand(_ => NewAOVMAction());

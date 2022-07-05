@@ -52,11 +52,12 @@ namespace _30ViewModel.MWindow.ViewModel
             }
         }
 
-        public int SelectedAppraiser()
+        public void SelectedAppraiser()
         {
             selectedId = Appraiser.Id;
             closeHandler(this);
-            return selectedId;
+            AppraiserOrganizationVM appraiserOrganizationVM = new AppraiserOrganizationVM();
+            appraiserOrganizationVM.AppraiserAdd(selectedId);
         }
 
         public override ICommand CloseCommand

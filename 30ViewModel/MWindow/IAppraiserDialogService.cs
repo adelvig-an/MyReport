@@ -7,6 +7,6 @@ namespace _30ViewModel.MWindow
 {
     public interface IAppraiserDialogService
     {
-        public Task<int> ShowAsync(object context);
+        public void ShowAsync(object context);
     }
 }
