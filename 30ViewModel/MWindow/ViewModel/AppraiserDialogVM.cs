@@ -54,8 +54,9 @@ namespace _30ViewModel.MWindow.ViewModel
 
         public void SelectedAppraiser()
         {
+            AppraiserOrganizationVM appraiserOrganization = new AppraiserOrganizationVM();
             selectedId = Appraiser.Id;
-            AppraiserOrganizationVM.AppraiserAdd(selectedId);
+            MainViewModel.ReturnIdAppraiser(selectedId, appraiserOrganization);
             closeHandler(this);
         }
 

@@ -80,6 +80,18 @@ namespace _30ViewModel
             LoadAOVM = new RelayCommand(_ => LoadAOVMAction());
         }
 
+
+        public static void ReturnIdAppraiser(int id, PageViewModel currentPage)
+        {
+            if (id >= 0)
+            {
+                if (currentPage is AppraiserOrganizationVM appraiserOrg)
+                {
+                    appraiserOrg.AppraiserAdd(id);
+                }
+            }
+        }
+
         /// <summary>
         /// Команда сохранения в БД
         /// </summary>
