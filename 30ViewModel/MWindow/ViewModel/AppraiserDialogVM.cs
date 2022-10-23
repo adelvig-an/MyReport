@@ -56,8 +56,6 @@ namespace _30ViewModel.MWindow.ViewModel
         {
             selectedId = Appraiser.Id;
             closeHandler(this);
-            AppraiserOrganizationVM appraiserOrganizationVM = new AppraiserOrganizationVM();
-            appraiserOrganizationVM.AppraiserAdd(selectedId);
         }
 
         public override ICommand CloseCommand

@@ -82,6 +82,19 @@ namespace _30ViewModel.PagesVM
             RemoveInsurancePolicieImageCommand = new RelayCommand(p => RemoveInsurancePolicieImage(p.ToString()));
         }
 
+        private Appraiser appraiser;
+        public Appraiser Appraiser
+        {
+            get => appraiser; set
+            {
+                SetProperty(ref appraiser, value);
+                if (appraiser != null)
+                {
+                    AppraiserAdd(appraiser.Id);
+                }
+            }
+        }
+
         public void AppraiserAdd(int id)
         {
             foreach (var item in context.Appraisers.Where(a => a.Id == id))
